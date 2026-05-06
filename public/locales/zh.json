@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "home": "首页",
+    "counselor": "AI 咨询师",
+    "hypnotist": "AI 催眠师",
+    "science": "科学依据"
+  },
+  "hero": {
+    "badge": "全公益免费 · 心理健康与睡眠助力",
+    "title": "今夜，你不需要独自承受",
+    "subtitle": "DeepCalm AI 提供免费的 AI 心理疏导与科学睡眠指导。北欧极简风格，温暖的陪伴。",
+    "cta_counselor": "开始心理疏导",
+    "cta_sleep": "计算睡眠时间"
+  },
+  "counselor": {
+    "title": "AI 心理补导师",
+    "subtitle": "识别灾难化思维模式，提供即时情绪补给与可执行的小步骤",
+    "placeholder": "写下此刻困扰你的事情...",
+    "analyze": "分析我的焦虑",
+    "analyzing": "正在认真倾听...",
+    "encouragement": "情绪补给 · 鼓励语录",
+    "steps_title": "3 个可执行的小步骤",
+    "error": "分析暂时不可用，请稍后再试",
+    "disclaimer": "本工具为公益辅助，不能替代专业心理咨询。紧急情况请联系当地心理热线。",
+    "thinking_patterns": "识别到的思维模式"
+  },
+  "hypnotist": {
+    "title": "AI 催眠师",
+    "subtitle": "基于 90 分钟 REM 睡眠周期，计算最佳入睡与唤醒时间",
+    "wake_time": "期望醒来的时间",
+    "calculate": "计算最佳入睡时间",
+    "results_title": "推荐入睡时间",
+    "cycles_label": "睡眠周期",
+    "sleep_time_label": "入睡时间",
+    "wake_feeling": "醒来感受",
+    "refreshed": "精力充沛",
+    "good": "休息充足",
+    "okay": "感觉一般",
+    "bedtime_ready": "准备入睡",
+    "audio_title": "3D 环境音 · 即将上线",
+    "audio_desc": "正在接入 SiliconFlow 沉浸式音频引擎，届时将根据你的情绪状态，动态生成助眠环境音。",
+    "brief_title": "每日健康简报 · 即将上线",
+    "brief_desc": "接入可穿戴设备后，每日早晨将为你生成睡眠质量分析与个性化健康建议。"
+  },
+  "seo": {
+    "title": "睡眠与焦虑的科学依据",
+    "intro": "了解焦虑与睡眠背后的科学机制，是迈向身心健康的第一步。以下是来自神经科学与睡眠医学的最新研究。",
+    "section1_title": "焦虑的本质：过载的警报系统",
+    "section1": "焦虑不是性格缺陷，而是杏仁核过度活跃的结果。当慢性压力持续存在，前额叶皮层会逐渐失去对杏仁核的调控能力，使我们陷入灾难化思维的循环。研究表明，每天 10-15 分钟的认知重构练习可以显著改善前额叶的调控能力。",
+    "section2_title": "睡眠周期：90 分钟的修复节律",
+    "section2": "人类的睡眠由 4-6 个约 90 分钟的周期组成。每个周期包含 NREM 和 REM 阶段。深睡眠（NREM 第 3 阶段）对身体的修复至关重要，而 REM 睡眠则负责情绪调节和记忆巩固。在周期结束时醒来会让你感觉神清气爽。",
+    "section3_title": "焦虑与失眠的恶性循环",
+    "section3": "焦虑导致失眠，失眠加重焦虑——这是经典的恶性循环。根据 2025 年《睡眠医学评论》的荟萃分析，约 67% 的慢性失眠患者同时伴有焦虑症状。打破这一循环需要：保持规律的作息时间、睡前避免蓝光暴露、以及刺激控制技术。",
+    "section4_title": "昼夜节律：你体内的生物钟",
+    "section4": "下丘脑中的视交叉上核（SCN）是人体主要的昼夜节律起搏器，调控褪黑素的分泌。夜间蓝光暴露会抑制褪黑素产生，延迟入睡时间。理想的卧室温度为 18-22°C。",
+    "section5_title": "呼吸与正念：即时焦虑缓解工具",
+    "section5": "4-7-8 呼吸法：用鼻子吸气 4 秒 → 屏住呼吸 7 秒 → 用嘴缓慢呼气 8 秒。重复 4 次。这种方法可以激活副交感神经系统，在 2 分钟内降低心率。",
+    "section6_title": "AI 在心理健康支持中的应用",
+    "section6": "大语言模型（LLM）在心理健康支持领域展现出巨大潜力。研究表明，AI 辅助的认知重构可以帮助用户识别非理性信念并进行重新框架。DeepCalm AI 采用 GPT-4o-mini 进行语义分析。",
+    "cta": "立即体验 DeepCalm AI 心理疏导",
+    "references": "参考来源包括：Sleep Medicine Reviews (2025), Nature Reviews Neuroscience (2024), Journal of Consulting and Clinical Psychology (2025), Harvard Medical School 公众指南, WHO 睡眠健康建议。"
+  },
+  "footer": {
+    "tagline": "DeepCalm AI —— 给焦虑者以慰藉，给失眠者以安眠。永远免费。",
+    "copyright": "© 2026 DeepCalm AI. All rights reserved.",
+    "disclaimer": "本项目为公益项目，不提供任何医疗诊断或治疗。如有紧急情况，请立即联系当地心理健康专业人士。",
+    "privacy": "隐私政策",
+    "terms": "服务条款"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English",
+    "ms": "Bahasa Melayu"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "home": "Laman Utama",
+    "counselor": "Kaunselor AI",
+    "hypnotist": "Hipnotis AI",
+    "science": "Sains"
+  },
+  "hero": {
+    "badge": "Kebajikan Awam Percuma · Kesihatan Mental & Bantuan Tidur",
+    "title": "Anda Tidak Perlu Menderita Sendiri Malam Ini",
+    "subtitle": "DeepCalm AI menyediakan kaunseling psikologi AI percuma dan panduan tidur berasaskan sains. Minimalisme Nordic, teman yang mesra.",
+    "cta_counselor": "Mulakan Kaunseling",
+    "cta_sleep": "Kira Waktu Tidur"
+  },
+  "counselor": {
+    "title": "Kaunselor Psikologi AI",
+    "subtitle": "Kenal pasti corak pemikiran bencana, berikan sokongan emosi segera dan langkah boleh laku",
+    "placeholder": "Tulis apa yang mengganggu anda sekarang...",
+    "analyze": "Analisis Kebimbangan Saya",
+    "analyzing": "Mendengar dengan teliti...",
+    "encouragement": "Sokongan Emosi",
+    "steps_title": "3 Langkah Boleh Laku",
+    "error": "Analisis tidak tersedia buat sementara waktu. Sila cuba sebentar lagi.",
+    "disclaimer": "Alat ini adalah bantuan awam dan tidak boleh menggantikan kaunseling psikologi profesional. Dalam kecemasan, sila hubungi talian hotline kesihatan mental tempatan.",
+    "thinking_patterns": "Corak Pemikiran Yang Dikenal Pasti"
+  },
+  "hypnotist": {
+    "title": "Hipnotis AI",
+    "subtitle": "Berdasarkan kitaran tidur REM 90 minit, kira waktu tidur dan bangun yang optimum",
+    "wake_time": "Waktu Bangun Yang Diingini",
+    "calculate": "Kira Waktu Tidur Optimum",
+    "results_title": "Waktu Tidur Disyorkan",
+    "cycles_label": "Kitaran Tidur",
+    "sleep_time_label": "Waktu Tidur",
+    "wake_feeling": "Perasaan Bangun",
+    "refreshed": "Bertenaga Penuh",
+    "good": "Cukup Rehat",
+    "okay": "Sederhana",
+    "bedtime_ready": "Bersedia Untuk Tidur",
+    "audio_title": "Bunyi Ambien 3D · Akan Datang",
+    "audio_desc": "Enjin audio immersif SiliconFlow sedang disepadukan. Ia akan menjana bunyi ambien bantuan tidur dinamik berdasarkan keadaan emosi anda.",
+    "brief_title": "Ringkasan Kesihatan Harian · Akan Datang",
+    "brief_desc": "Selepas menyambung peranti boleh pakai anda, analisis kualiti tidur dan cadangan kesihatan peribadi akan dijana setiap pagi."
+  },
+  "seo": {
+    "title": "Sains Tidur & Kebimbangan",
+    "intro": "Memahami sains di sebalik kebimbangan dan tidur adalah langkah pertama untuk kesihatan mental dan fizikal yang lebih baik. Berikut adalah penyelidikan terkini dari neurosains dan perubatan tidur.",
+    "section1_title": "Sifat Kebimbangan: Sistem Penggera Yang Terlebih Beban",
+    "section1": "Kebimbangan bukan kelemahan peribadi — ia adalah hasil amygdala yang terlalu aktif. Apabila tekanan kronik berterusan, korteks prefrontal kehilangan keupayaan untuk mengawal amygdala, memerangkap kita dalam kitaran pemikiran bencana. Kajian menunjukkan 10-15 minit senaman penyusunan semula kognitif setiap hari dapat meningkatkan kawalan prefrontal dengan ketara.",
+    "section2_title": "Kitaran Tidur: Irama Pembaikan 90 Minit",
+    "section2": "Tidur manusia terdiri daripada 4-6 kitaran kira-kira 90 minit setiap satu. Setiap kitaran termasuk peringkat NREM dan REM. Tidur nyenyak (NREM Tahap 3) penting untuk pembaikan fizikal, manakala tidur REM mengawal emosi dan menyatukan ingatan. Bangun di akhir kitaran membuatkan anda berasa segar.",
+    "section3_title": "Kitaran Ganas Kebimbangan dan Insomnia",
+    "section3": "Kebimbangan menyebabkan insomnia, dan insomnia memburukkan kebimbangan — kitaran ganas klasik. Menurut meta-analisis 2025 dalam Sleep Medicine Reviews, kira-kira 67% pesakit insomnia kronik juga mengalami gejala kebimbangan. Memecahkan kitaran ini memerlukan jadual tidur yang konsisten, mengelakkan cahaya biru sebelum tidur, dan teknik kawalan rangsangan.",
+    "section4_title": "Irama Sirkadian: Jam Badan Dalaman Anda",
+    "section4": "Nukleus suprachiasmatic (SCN) dalam hipotalamus berfungsi sebagai jam sirkadian utama, mengawal rembesan melatonin. Pendedahan cahaya biru pada waktu malam menekan pengeluaran melatonin dan melambatkan permulaan tidur. Suhu bilik tidur yang ideal ialah 18-22°C.",
+    "section5_title": "Pernafasan & Kesedaran: Alat Melegakan Kebimbangan Segera",
+    "section5": "Teknik pernafasan 4-7-8: Tarik nafas 4 saat → Tahan 7 saat → Hembus perlahan 8 saat. Ulang 4 kali. Kaedah ini mengaktifkan sistem saraf parasimpatetik, menurunkan kadar denyutan jantung dalam 2 minit.",
+    "section6_title": "AI dalam Sokongan Kesihatan Mental",
+    "section6": "Model Bahasa Besar (LLM) menunjukkan potensi luar biasa dalam sokongan kesihatan mental. Penyelidikan menunjukkan penyusunan semula kognitif berbantukan AI membantu pengguna mengenal pasti dan membingkai semula kepercayaan tidak rasional. DeepCalm AI menggunakan GPT-4o-mini untuk analisis semantik.",
+    "cta": "Cuba Kaunselor DeepCalm AI Sekarang",
+    "references": "Sumber yang dirujuk termasuk: Sleep Medicine Reviews (2025), Nature Reviews Neuroscience (2024), Journal of Consulting and Clinical Psychology (2025), panduan awam Harvard Medical School, dan cadangan kesihatan tidur WHO."
+  },
+  "footer": {
+    "tagline": "DeepCalm AI — Penghiburan untuk yang cemas, rehat untuk yang tidak dapat tidur. Percuma selama-lamanya.",
+    "copyright": "© 2026 DeepCalm AI. All rights reserved.",
+    "disclaimer": "Ini adalah projek kebajikan awam dan tidak menyediakan diagnosis atau rawatan perubatan. Dalam kecemasan, sila hubungi profesional kesihatan mental tempatan.",
+    "privacy": "Dasar Privasi",
+    "terms": "Terma Perkhidmatan"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English",
+    "ms": "Bahasa Melayu"
+  }
+}

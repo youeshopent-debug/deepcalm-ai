@@ -1,0 +1,17 @@
+export type Locale = "zh" | "en" | "ms"
+
+export type NestedKeyOf<T> = T extends object
+  ? { [K in keyof T]: K extends string ? `${K}.${NestedKeyOf<T[K]>}` | K : never }[keyof T]
+  : ""
+
+export interface SleepResult {
+  cycles: number
+  bedtime: string
+  feelLabel: string
+}
+
+export interface AnxietyAnalysis {
+  thinkingPatterns: string
+  encouragement: string
+  steps: string[]
+}
