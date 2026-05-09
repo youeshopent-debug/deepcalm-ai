@@ -1,6 +1,7 @@
 "use client"
 
 import { useLanguage } from "@/context/LanguageContext"
+import { useRouter, usePathname } from "next/navigation"
 import { Globe } from "lucide-react"
 import type { Locale } from "@/types"
 
@@ -12,6 +13,19 @@ const locales: { code: Locale; label: string }[] = [
 
 export default function LanguageSwitcher() {
   const { locale, setLocale } = useLanguage()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const switchTo = (code: Locale) => {
+    setLocale(code)
+    const segments = pathname.split("/").filter(Boolean)
+    if (segments.length > 0 && ["zh", "en", "ms"].includes(segments[0])) {
+      segments[0] = code
+    } else {
+      segments.unshift(code)
+    }
+    router.replace(`/${segments.join("/")}`)
+  }
 
   return (
     <div className="flex items-center gap-1.5">
@@ -20,7 +34,7 @@ export default function LanguageSwitcher() {
         {locales.map((l) => (
           <button
             key={l.code}
-            onClick={() => setLocale(l.code)}
+            onClick={() => switchTo(l.code)}
             className={`px-2 py-1 text-xs rounded-md transition-all duration-200 ${
               locale === l.code
                 ? "bg-nord-accent/20 text-nord-accent font-medium"

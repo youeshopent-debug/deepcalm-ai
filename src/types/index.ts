@@ -11,7 +11,7 @@ export interface SleepResult {
 }
 
 export interface AnxietyAnalysis {
-  thinkingPatterns: string
+  thinkingPattern: string
   encouragement: string
   steps: string[]
 }

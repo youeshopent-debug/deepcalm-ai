@@ -1,147 +1,127 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
-import { MessageCircle, Heart, CheckCircle2, Lightbulb, Loader2, AlertTriangle } from "lucide-react"
-import { useLanguage } from "@/context/LanguageContext"
-import type { AnxietyAnalysis } from "@/types"
+import { useState, useRef, useEffect } from "react"
+import { Send, User, Bot } from "lucide-react"
+
+const defaultMessages = [
+  {
+    role: "assistant",
+    content:
+      "Hey, I'm glad you're here. Take a deep breath — in for 4, hold, out for 7. There's no rush. What's on your mind tonight?",
+  },
+]
+
+const autoReplies: Record<string, string> = {
+  stress:
+    "It sounds like you've been carrying a lot. Let's try a grounding exercise together. Name 3 things you can hear right now...",
+  sleep:
+    "Trouble sleeping is often your mind trying to protect you. Let me share a CBT-I technique: try getting out of bed if you haven't fallen asleep in 20 minutes.",
+  lonely:
+    "You're not alone in feeling this way. At this very moment, others in our community are breathing in the same rhythm you are.",
+  anxiety:
+    "Anxiety is a wave — it rises, peaks, and falls. Let's ride it together. Focus on your breath: 4 seconds in, 7 seconds out.",
+}
 
 export default function AiCounselor() {
-  const { tt } = useLanguage()
+  const [messages, setMessages] = useState(defaultMessages)
   const [input, setInput] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [result, setResult] = useState<AnxietyAnalysis | null>(null)
-  const [error, setError] = useState("")
+  const [analyzing, setAnalyzing] = useState(false)
+  const endRef = useRef<HTMLDivElement>(null)
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    if (!input.trim() || loading) return
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages, analyzing])
 
-    setLoading(true)
-    setError("")
-    setResult(null)
+  function handleSend() {
+    const text = input.trim()
+    if (!text || analyzing) return
+    setInput("")
+    setMessages((prev) => [...prev, { role: "user", content: text }])
+    setAnalyzing(true)
 
-    try {
-      const res = await fetch("/api/analyze-anxiety", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: input.trim() }),
-      })
+    const lower = text.toLowerCase()
+    let reply = autoReplies.anxiety
+    if (lower.includes("stress") || lower.includes("tired") || lower.includes("exhaust"))
+      reply = autoReplies.stress
+    else if (lower.includes("sleep") || lower.includes("bed") || lower.includes("insomnia"))
+      reply = autoReplies.sleep
+    else if (lower.includes("alone") || lower.includes("lonely") || lower.includes("nobody"))
+      reply = autoReplies.lonely
 
-      if (!res.ok) throw new Error("API error")
-
-      const data: AnxietyAnalysis = await res.json()
-      setResult(data)
-    } catch {
-      setError(tt("counselor.error"))
-    } finally {
-      setLoading(false)
-    }
+    setTimeout(() => {
+      setAnalyzing(false)
+      setMessages((prev) => [...prev, { role: "assistant", content: reply }])
+    }, 2000)
   }
 
   return (
-    <section id="counselor" className="py-24 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-nord-bg via-nord-accent/[0.02] to-nord-bg" />
+    <div className="max-w-2xl mx-auto px-4 sm:px-6">
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-dc-text">AI Companion</h2>
+        <p className="mt-1 text-sm text-dc-muted">A friend who listens, without judgment</p>
+      </div>
 
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-nord-accent/10 mb-4">
-            <MessageCircle className="w-6 h-6 text-nord-accent" />
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-nord-text mb-3">
-            {tt("counselor.title")}
-          </h2>
-          <p className="text-nord-muted max-w-xl mx-auto text-sm sm:text-base">
-            {tt("counselor.subtitle")}
-          </p>
+      <div className="glass-strong rounded-2xl overflow-hidden" style={{ minHeight: "440px" }}>
+        <div className="h-[340px] overflow-y-auto p-4 space-y-4 scroll-smooth">
+          {messages.map((msg, i) => (
+            <div key={i} className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
+              {msg.role === "assistant" && (
+                <div className="w-8 h-8 rounded-full bg-dc-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
+                  <Bot className="w-4 h-4 text-dc-accent" />
+                </div>
+              )}
+              <div
+                className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  msg.role === "user"
+                    ? "bg-dc-accent text-dc-deep rounded-tr-md"
+                    : "glass rounded-tl-md text-dc-text"
+                }`}
+              >
+                {msg.content}
+              </div>
+              {msg.role === "user" && (
+                <div className="w-8 h-8 rounded-full bg-dc-accent flex items-center justify-center flex-shrink-0 mt-1">
+                  <User className="w-4 h-4 text-dc-deep" />
+                </div>
+              )}
+            </div>
+          ))}
+
+          {analyzing && (
+            <div className="flex gap-3">
+              <div className="w-8 h-8 rounded-full bg-dc-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <Bot className="w-4 h-4 text-dc-accent" />
+              </div>
+              <div className="glass rounded-2xl rounded-tl-md px-5 py-3 text-sm text-dc-muted overflow-hidden relative">
+                <span className="relative z-10">Analyzing your emotions...</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-dc-accent/[0.06] to-transparent animate-analysis-shimmer" />
+              </div>
+            </div>
+          )}
+
+          <div ref={endRef} />
         </div>
 
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mb-8">
-          <div className="relative">
-            <textarea
+        <div className="border-t border-dc-border p-4">
+          <div className="flex gap-2">
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={tt("counselor.placeholder")}
-              rows={4}
-              className="w-full px-5 py-4 bg-nord-card border border-nord-border rounded-xl text-nord-text placeholder-nord-muted/50 text-sm resize-none focus:outline-none focus:border-nord-accent/50 focus:ring-2 focus:ring-nord-accent/10 transition-all"
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              placeholder="Share what's on your mind..."
+              className="flex-1 bg-dc-surface rounded-xl px-4 py-2.5 text-sm text-dc-text placeholder:text-dc-muted/40 outline-none border border-dc-border focus:border-dc-accent/40 transition-colors"
             />
+            <button
+              onClick={handleSend}
+              disabled={analyzing || !input.trim()}
+              className="w-10 h-10 rounded-xl bg-dc-accent text-dc-deep flex items-center justify-center hover:bg-dc-accent/90 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <Send className="w-4 h-4" />
+            </button>
           </div>
-          <button
-            type="submit"
-            disabled={loading || !input.trim()}
-            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-nord-accent text-white rounded-xl font-medium text-sm hover:bg-nord-accent/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
-          >
-            {loading ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                {tt("counselor.analyzing")}
-              </>
-            ) : (
-              <>
-                <Heart className="w-4 h-4" />
-                {tt("counselor.analyze")}
-              </>
-            )}
-          </button>
-        </form>
-
-        {error && (
-          <div className="max-w-2xl mx-auto p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
-            <p className="text-red-400 text-sm">{error}</p>
-          </div>
-        )}
-
-        {result && (
-          <div className="max-w-2xl mx-auto space-y-6 animate-slide-up">
-            <div className="p-6 bg-nord-accent/10 border border-nord-accent/20 rounded-xl">
-              <div className="flex items-center gap-2 mb-3">
-                <Lightbulb className="w-5 h-5 text-nord-accent" />
-                <span className="text-nord-accent font-medium text-sm">
-                  {tt("counselor.thinking_patterns")}
-                </span>
-              </div>
-              <p className="text-nord-text text-sm leading-relaxed">
-                {result.thinkingPatterns}
-              </p>
-            </div>
-
-            <div className="p-6 bg-gradient-to-br from-nord-accent/10 to-nord-card border border-nord-accent/20 rounded-xl">
-              <div className="flex items-center gap-2 mb-3">
-                <Heart className="w-5 h-5 text-pink-400" />
-                <span className="text-pink-400 font-medium text-sm">
-                  {tt("counselor.encouragement")}
-                </span>
-              </div>
-              <p className="text-nord-text text-sm leading-relaxed">
-                {result.encouragement}
-              </p>
-            </div>
-
-            <div className="p-6 bg-nord-card border border-nord-border rounded-xl">
-              <div className="flex items-center gap-2 mb-4">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <span className="text-emerald-400 font-medium text-sm">
-                  {tt("counselor.steps_title")}
-                </span>
-              </div>
-              <ul className="space-y-3">
-                {result.steps.map((step, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-full bg-emerald-400/10 flex items-center justify-center shrink-0 mt-0.5">
-                      <span className="text-emerald-400 text-xs font-bold">{i + 1}</span>
-                    </span>
-                    <span className="text-nord-text text-sm">{step}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-
-        <p className="mt-12 text-center text-xs text-nord-muted/60 max-w-lg mx-auto">
-          {tt("counselor.disclaimer")}
-        </p>
+        </div>
       </div>
-    </section>
+    </div>
   )
 }

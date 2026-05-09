@@ -1,60 +1,75 @@
 "use client"
 
-import { Sparkles, Moon, ArrowDown } from "lucide-react"
-import { useLanguage } from "@/context/LanguageContext"
+import { useEffect, useState } from "react"
+import { ArrowDown } from "lucide-react"
 
-export default function HeroSection() {
-  const { tt } = useLanguage()
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
-  }
+export default function HeroSection({
+  title,
+  subtitle,
+  ctaText,
+}: {
+  title: string
+  subtitle: string
+  ctaText: string
+}) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-nord-accent/5 via-transparent to-nord-bg" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-nord-accent/5 rounded-full blur-3xl" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="aurora-gradient pointer-events-none absolute inset-0" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-nord-accent/10 border border-nord-accent/20 text-nord-accent text-xs sm:text-sm mb-8 animate-fade-in">
-          <Sparkles className="w-3.5 h-3.5" />
-          {tt("hero.badge")}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[600px] h-[600px] rounded-full animate-breathing-halo"
+          style={{
+            background: "radial-gradient(circle, rgba(126,184,255,0.12) 0%, rgba(106,90,205,0.08) 40%, transparent 65%)",
+            filter: "blur(60px)",
+          }}
+        />
+        <div className="absolute w-[400px] h-[400px] rounded-full animate-breathe-inner"
+          style={{
+            background: "radial-gradient(circle, rgba(126,184,255,0.1) 0%, rgba(78,205,196,0.06) 35%, transparent 60%)",
+            filter: "blur(80px)",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
+        <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs text-dc-muted tracking-wide">
+          <span className="w-1.5 h-1.5 rounded-full bg-dc-accent animate-pulse-soft" />
+          Midnight Sanctuary
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-nord-text leading-tight mb-6 animate-slide-up">
-          {tt("hero.title")}
+        <h1 className={`text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-dc-text text-glow transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          {title}
         </h1>
 
-        <p className="text-lg sm:text-xl text-nord-muted max-w-2xl mx-auto mb-10 animate-slide-up">
-          {tt("hero.subtitle")}
+        <p className={`mt-5 text-base sm:text-lg text-dc-muted leading-relaxed max-w-xl mx-auto transition-all duration-1000 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          {subtitle}
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up">
-          <button
-            onClick={() => scrollTo("counselor")}
-            className="group inline-flex items-center gap-2 px-8 py-3.5 bg-nord-accent text-white rounded-xl font-medium text-sm hover:bg-nord-accent/90 transition-all duration-300 shadow-lg shadow-nord-accent/20 hover:shadow-nord-accent/30 hover:-translate-y-0.5"
+        <div className={`mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <a
+            href="#ai-counselor"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-dc-accent text-dc-deep font-semibold text-sm hover:bg-dc-accent/90 transition-all duration-300 shadow-lg shadow-dc-accent/20"
           >
-            <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-            {tt("hero.cta_counselor")}
-          </button>
-          <button
-            onClick={() => scrollTo("hypnotist")}
-            className="group inline-flex items-center gap-2 px-8 py-3.5 bg-nord-surface text-nord-text rounded-xl font-medium text-sm border border-nord-border hover:bg-nord-card transition-all duration-300 hover:-translate-y-0.5"
+            {ctaText}
+          </a>
+          <a
+            href="#resonance-wall"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl glass text-dc-text text-sm font-medium hover:bg-dc-accent/10 transition-all duration-300"
           >
-            <Moon className="w-4 h-4 text-nord-accent group-hover:rotate-12 transition-transform" />
-            {tt("hero.cta_sleep")}
-          </button>
+            Listen to Others
+          </a>
         </div>
       </div>
 
-      <button
-        onClick={() => scrollTo("counselor")}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-nord-muted hover:text-nord-accent transition-colors animate-bounce"
-      >
-        <ArrowDown className="w-5 h-5" />
-      </button>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+        <ArrowDown className="w-5 h-5 text-dc-muted/40" />
+      </div>
     </section>
   )
 }

@@ -1,10 +1,11 @@
 "use client"
 
-import { Heart } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
+import { Heart } from "lucide-react"
+import Link from "next/link"
 
 export default function Footer() {
-  const { tt } = useLanguage()
+  const { locale, tt } = useLanguage()
 
   return (
     <footer className="bg-nord-card border-t border-nord-border/50">
@@ -18,9 +19,21 @@ export default function Footer() {
             {tt("footer.disclaimer")}
           </p>
           <div className="flex items-center gap-4 text-xs text-nord-muted">
-            <span>{tt("footer.privacy")}</span>
+            <Link href={`/${locale}/privacy`} className="hover:text-nord-accent transition-colors">
+              {tt("footer.privacy")}
+            </Link>
             <span className="w-px h-3 bg-nord-border" />
-            <span>{tt("footer.terms")}</span>
+            <Link href={`/${locale}/terms`} className="hover:text-nord-accent transition-colors">
+              {tt("footer.terms")}
+            </Link>
+            <span className="w-px h-3 bg-nord-border" />
+            <Link href={`/${locale}/guide`} className="hover:text-nord-accent transition-colors">
+              {tt("footer.guide")}
+            </Link>
+            <span className="w-px h-3 bg-nord-border" />
+            <Link href={`/${locale}/about`} className="hover:text-nord-accent transition-colors">
+              {tt("footer.about")}
+            </Link>
             <span className="w-px h-3 bg-nord-border" />
             <span>{tt("footer.copyright")}</span>
           </div>

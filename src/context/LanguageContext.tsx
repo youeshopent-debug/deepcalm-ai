@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react"
 import type { Locale } from "@/types"
-import { getDictionary, t } from "@/lib/i18n"
+import { getDict, tt as t } from "@/lib/getDict"
 
 interface LanguageContextType {
   locale: Locale
@@ -13,13 +13,19 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | null>(null)
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("zh")
-  const [dict, setDict] = useState<Record<string, unknown>>(getDictionary("zh"))
+export function LanguageProvider({
+  children,
+  initialLocale,
+}: {
+  children: ReactNode
+  initialLocale?: Locale
+}) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale || "zh")
+  const [dict, setDict] = useState<Record<string, unknown>>(getDict(initialLocale || "zh"))
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale)
-    setDict(getDictionary(newLocale))
+    setDict(getDict(newLocale))
     if (typeof window !== "undefined") {
       localStorage.setItem("deepcalm-locale", newLocale)
     }
@@ -32,10 +38,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem("deepcalm-locale") as Locale | null
-    if (stored && ["zh", "en", "ms"].includes(stored)) {
+    if (stored && ["zh", "en", "ms"].includes(stored) && stored !== locale) {
       setLocale(stored)
     }
-  }, [setLocale])
+  }, [setLocale, locale])
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale, dict, tt }}>
