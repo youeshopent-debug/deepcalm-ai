@@ -202,6 +202,7 @@
     "emailButton": "送信",
     "emailSuccess": "✅ 登録完了！チェックイン結果をメールでお届けします。",
     "emailError": "メールアドレスが正しくありません。もう一度入力してください。",
+    "subscribing": "購読中...",
     "checkinButton": "今日の気持ちを記録する",
     "checkinDone": "✅ 今日のチェックインが完了しました！"
   },

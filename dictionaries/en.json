@@ -271,6 +271,7 @@
     "emailButton": "Subscribe",
     "emailSuccess": "✅ Subscribed! Your personal healing brief will arrive tomorrow morning.",
     "emailError": "Please enter a valid email address",
+    "subscribing": "Subscribing...",
     "checkinButton": "Check In Today",
     "checkinDone": "✓ Checked in today"
   },

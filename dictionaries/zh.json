@@ -271,6 +271,7 @@
     "emailButton": "订阅",
     "emailSuccess": "✅ 订阅成功！明早你会收到专属治愈简报。",
     "emailError": "请填写有效的邮箱地址",
+    "subscribing": "订阅中...",
     "checkinButton": "记录今日状态",
     "checkinDone": "✓ 今日已打卡"
   },

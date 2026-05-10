@@ -202,6 +202,7 @@
     "emailButton": "Enviar",
     "emailSuccess": "Registro exitoso! Te enviaremos los resultados por correo.",
     "emailError": "El correo electronico no es valido. Intentalo de nuevo.",
+    "subscribing": "Suscribiendo...",
     "checkinButton": "Registrar mi estado de animo hoy",
     "checkinDone": "Registro de hoy completado!"
   },

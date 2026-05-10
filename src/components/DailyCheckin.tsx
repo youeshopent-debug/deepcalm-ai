@@ -16,6 +16,7 @@ export default function DailyCheckin() {
   const [email, setEmail] = useState("")
   const [emailSubscribed, setEmailSubscribed] = useState(false)
   const [emailError, setEmailError] = useState(false)
+  const [subscribing, setSubscribing] = useState(false)
   const [comment, setComment] = useState("")
   const [commentLoading, setCommentLoading] = useState(false)
 
@@ -85,7 +86,7 @@ export default function DailyCheckin() {
     }
   }
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!re.test(email)) {
@@ -93,8 +94,25 @@ export default function DailyCheckin() {
       return
     }
     setEmailError(false)
-    localStorage.setItem("deepcalm_email", email)
-    setEmailSubscribed(true)
+    setSubscribing(true)
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, lang: locale }),
+      })
+      const json = await res.json()
+      if (json.ok) {
+        localStorage.setItem("deepcalm_email", email)
+        setEmailSubscribed(true)
+      } else {
+        setEmailError(true)
+      }
+    } catch {
+      setEmailError(true)
+    } finally {
+      setSubscribing(false)
+    }
   }
 
   if (checkedIn) {
@@ -142,10 +160,11 @@ export default function DailyCheckin() {
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2.5 bg-dc-accent hover:bg-dc-accent/90 text-dc-deep text-sm font-medium rounded-xl transition-colors flex items-center gap-2"
+                    disabled={subscribing}
+                    className="px-4 py-2.5 bg-dc-accent hover:bg-dc-accent/90 disabled:opacity-50 text-dc-deep text-sm font-medium rounded-xl transition-colors flex items-center gap-2"
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    {tt("dailyCheckin.emailButton")}
+                    <Send className={`w-3.5 h-3.5 ${subscribing ? "animate-pulse" : ""}`} />
+                    {subscribing ? tt("dailyCheckin.subscribing") || "..." : tt("dailyCheckin.emailButton")}
                   </button>
                 </div>
                 {emailError && (

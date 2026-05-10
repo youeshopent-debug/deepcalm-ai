@@ -3,6 +3,7 @@
 import BackgroundCanvas from "./BackgroundCanvas"
 import AiCounselor from "./AiCounselor"
 import DailyCheckin from "./DailyCheckin"
+import SleepCalculator from "./SleepCalculator"
 import SeoContent from "./SeoContent"
 import SitemapFooter from "./SitemapFooter"
 import AudioFloatingTray from "./AudioFloatingTray"
@@ -31,15 +32,27 @@ export default function SanctuaryPage() {
       </div>
 
       <main className="relative z-10">
+        {/* AI Counselor — main interaction */}
         <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16">
           <AiCounselor />
         </section>
 
+        {/* Daily Check-in */}
+        <section id="daily-checkin" className="w-full py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-2xl mx-auto">
+            <DailyCheckin />
+          </div>
+        </section>
+
+        {/* Sleep Calculator */}
+        <section id="sleep-calculator" className="w-full py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-2xl mx-auto">
+            <SleepCalculator />
+          </div>
+        </section>
+
         {/* SEO Content — hidden visually, indexed by crawlers */}
         <div className="sr-only">
-          <section id="daily-checkin">
-            <DailyCheckin />
-          </section>
           <section id="seo-content">
             <SeoContent />
           </section>
