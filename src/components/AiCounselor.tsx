@@ -1,180 +1,389 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Bot, User, Loader2 } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
+import {
+  MessageCircleHeart, Send, Sparkles, Heart, X, ImageDown,
+} from "lucide-react"
+import { toPng } from "html-to-image"
+
+type Topic =
+  | "stress" | "sleep" | "lonely" | "anxiety"
+  | "selfWorth" | "grief" | "relationship" | "identity"
 
 interface Message {
-  role: "user" | "ai"
+  role: "user" | "counselor"
   content: string
+  topic?: Topic
+}
+
+const TOPIC_KEYWORDS: Record<Topic, string[]> = {
+  stress: ["stress", "overwhelmed", "burnout", "pressure", "tired", "exhausted", "疲惫", "压力", "焦虑"],
+  sleep: ["sleep", "insomnia", "can't sleep", "night", "bed", "失眠", "睡眠", "熬夜"],
+  lonely: ["lonely", "alone", "isolated", "nobody", "孤独", "一个人", "寂寞"],
+  anxiety: ["anxious", "worry", "panic", "nervous", "fear", "害怕", "紧张", "担心"],
+  selfWorth: ["worthless", "not good enough", "impostor", "failure", "没用", "不够好", "失败"],
+  grief: ["grief", "loss", "miss", "gone", "died", "失去", "离开", "想念"],
+  relationship: ["relationship", "breakup", "fight", "argue", "分手", "吵架", "感情"],
+  identity: ["who am i", "purpose", "lost", "meaning", "方向", "意义", "迷茫"],
+}
+
+const TOPIC_RESPONSES: Record<Topic, string[]> = {
+  stress: [
+    "I hear how heavy things feel right now. Let's take a slow breath together. In for 4 counts… hold for 7… out for 8. You're safe here.",
+    "You've been carrying a lot. What if we set down just one thing for now? One small burden you don't need to hold today.",
+  ],
+  sleep: [
+    "Sleep trouble can feel like the world gets louder at night. Try this: place your hand on your chest, feel the warmth, and breathe slowly. You don't have to fall asleep — just rest.",
+    "Your body knows how to rest. Let's quiet the mind first. Close your eyes and imagine a gentle fog rolling in, softly covering everything.",
+  ],
+  lonely: [
+    "Loneliness is a kind of hunger. Not for food, but for connection. I'm here with you right now. You're not invisible.",
+    "The feeling of being alone, even in a crowded room, is real and painful. But your presence matters. You are seen here.",
+  ],
+  anxiety: [
+    "Anxiety lives in the 'what ifs'. Let's come back to now. Look around and name three things you can see. You are here. You are safe.",
+    "Your mind is trying to protect you by scanning for danger. But right now, at this moment, you are okay. Breathe with me.",
+  ],
+  selfWorth: [
+    "You don't have to earn your worth. It's not a grade or a performance. It's simply true — you are enough, not because of what you do, but because you are.",
+    "What would you say to a dear friend who felt the way you do? Try saying those same words to yourself. You deserve your own kindness.",
+  ],
+  grief: [
+    "Grief is love with nowhere to go. It's not a problem to solve — it's a feeling to honor. Take your time. I'm not going anywhere.",
+    "There is no right way to grieve. Some days are heavier. Some moments catch you off guard. Let yourself feel whatever comes — tears, silence, anger. All of it belongs.",
+  ],
+  relationship: [
+    "Relationships can leave us feeling raw and exposed. Whatever happened, your feelings are valid. You don't need to have all the answers right now.",
+    "It's okay to feel hurt, confused, or angry. Give yourself space to sit with these feelings without judging them. Healing isn't linear.",
+  ],
+  identity: [
+    "Not knowing who you are can feel like floating in a vast ocean. But maybe that's okay — discovery doesn't need a fixed destination.",
+    "You are not lost. You're in transition. And transitions, though uncomfortable, are where growth finds its way in.",
+  ],
+}
+
+function detectTopic(input: string): Topic | undefined {
+  const lower = input.toLowerCase()
+  for (const [topic, keywords] of Object.entries(TOPIC_KEYWORDS)) {
+    if (keywords.some((kw) => lower.includes(kw))) return topic as Topic
+  }
+  return undefined
+}
+
+function getFallbackResponse(tt: (s: string) => string): string {
+  const fallbacks = [
+    "Thank you for trusting me with your thoughts. I want you to know that whatever you're feeling, it's valid. Take a gentle breath and give yourself permission to just be.",
+    "I'm glad you're here. Sometimes the bravest thing we can do is speak our truth into the open. Would you like to tell me more about what's on your heart?",
+  ]
+  return fallbacks[Math.floor(Math.random() * fallbacks.length)]
 }
 
 export default function AiCounselor() {
+  const { tt, locale } = useLanguage()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [showWelcome, setShowWelcome] = useState(true)
-  const chatRef = useRef<HTMLDivElement>(null)
-  const { tt, locale } = useLanguage()
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [showShareSuccess, setShowShareSuccess] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const shareRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (chatRef.current) {
-      chatRef.current.scrollTop = chatRef.current.scrollHeight
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
-  function getKeywords(key: string): string[] {
-    const raw = tt(`aiCounselor.${key}`)
-    return raw.split(",").map((k: string) => k.trim().toLowerCase()).filter(Boolean)
-  }
-
-  function detectTopic(inputText: string): string {
-    const lower = inputText.toLowerCase()
-    const topics = [
-      { key: "stressKeywords", replyKey: "replyStress" },
-      { key: "sleepKeywords", replyKey: "replySleep" },
-      { key: "lonelyKeywords", replyKey: "replyLonely" },
-      { key: "anxietyKeywords", replyKey: "replyAnxiety" },
-      { key: "selfWorthKeywords", replyKey: "replySelfWorth" },
-      { key: "griefKeywords", replyKey: "replyGrief" },
-      { key: "relationshipKeywords", replyKey: "replyRelationship" },
-      { key: "identityKeywords", replyKey: "replyIdentity" },
-    ]
-    let matched: { key: string; count: number } | null = null
-    for (const topic of topics) {
-      const keywords = getKeywords(topic.key)
-      const hitCount = keywords.filter((kw: string) => lower.includes(kw)).length
-      if (hitCount > 0 && (!matched || hitCount > matched.count)) {
-        matched = { key: topic.replyKey, count: hitCount }
-      }
-    }
-    return matched ? tt(`aiCounselor.${matched.key}`) : ""
-  }
-
-  async function handleSend() {
-    const trimmed = input.trim()
-    if (!trimmed) return
-
-    setShowWelcome(false)
-    setMessages((prev) => [...prev, { role: "user", content: trimmed }])
+  const handleSend = async () => {
+    const text = input.trim()
+    if (!text || isAnalyzing) return
     setInput("")
+    setShowWelcome(false)
+    setShowShareSuccess(false)
+
+    const userMsg: Message = { role: "user", content: text }
+    setMessages((prev) => [...prev, userMsg])
     setIsAnalyzing(true)
+
+    const topic = detectTopic(text)
 
     await new Promise((r) => setTimeout(r, 800 + Math.random() * 1200))
 
-    const reply = detectTopic(trimmed)
+    const pool = topic ? TOPIC_RESPONSES[topic] : null
+    const response = pool
+      ? pool[Math.floor(Math.random() * pool.length)]
+      : getFallbackResponse(tt)
+
     setMessages((prev) => [
       ...prev,
-      {
-        role: "ai",
-        content: reply || tt("aiCounselor.welcome"),
-      },
+      { role: "counselor", content: response, topic },
     ])
     setIsAnalyzing(false)
   }
 
-  function handleKeyDown(e: React.KeyboardEvent) {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleSend()
     }
   }
 
+  const handleShare = async () => {
+    const lastCounselorMsg = [...messages].reverse().find((m) => m.role === "counselor")
+    if (!lastCounselorMsg) return
+
+    if (!shareRef.current) return
+
+    try {
+      shareRef.current.style.display = "block"
+      await new Promise((r) => setTimeout(r, 100))
+
+      const dataUrl = await toPng(shareRef.current, {
+        quality: 0.95,
+        pixelRatio: 2,
+        backgroundColor: "#0a0e1a",
+      })
+
+      shareRef.current.style.display = "none"
+
+      const link = document.createElement("a")
+      link.download = `deepcalm-healing-${Date.now()}.png`
+      link.href = dataUrl
+      link.click()
+
+      setShowShareSuccess(true)
+      setTimeout(() => setShowShareSuccess(false), 3000)
+    } catch {
+      shareRef.current!.style.display = "none"
+    }
+  }
+
+  const lastCounselorMsg = [...messages].reverse().find((m) => m.role === "counselor")
+
   return (
-    <div className="max-w-2xl mx-auto px-4">
-      <div className="glass-strong rounded-2xl overflow-hidden">
-        <div className="flex items-center gap-3 p-4 border-b border-dc-border">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-dc-accent to-dc-mint flex items-center justify-center">
-            <Bot className="w-5 h-5 text-white" />
+    <>
+      <div
+        className={`
+          relative z-10 flex flex-col
+          w-full h-full
+          ${drawerOpen
+            ? "fixed inset-0 z-50 bg-dc-deep/95 backdrop-blur-xl"
+            : "max-w-5xl mx-auto h-full"
+          }
+        `}
+      >
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 shrink-0">
+          <div className="flex items-center gap-3">
+            <MessageCircleHeart className="w-5 h-5 text-dc-accent" />
+            <h2 className="text-base sm:text-lg font-semibold text-dc-text">
+              {tt("aiCounselor.title")}
+            </h2>
           </div>
-          <div>
-            <h3 className="font-semibold text-dc-text">{tt("aiCounselor.title")}</h3>
-            <p className="text-xs text-dc-muted">{tt("aiCounselor.subtitle")}</p>
-            <span className="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full bg-dc-accent/10 text-dc-accent/70 border border-dc-accent/20">
-              {tt("aiCounselor.badge")}
-            </span>
-          </div>
-        </div>
-
-        <div ref={chatRef} className="h-80 overflow-y-auto p-4 space-y-4 scroll-smooth">
-          {showWelcome && (
-            <div className="flex gap-3 animate-fade-in-up">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-dc-accent to-dc-mint flex items-center justify-center flex-shrink-0">
-                <Bot className="w-4 h-4 text-white" />
-              </div>
-              <div className="glass rounded-2xl rounded-tl-sm px-4 py-3 max-w-[85%]">
-                <p className="text-sm text-dc-text leading-relaxed">
-                  {tt("aiCounselor.welcome")}
-                </p>
-              </div>
-            </div>
-          )}
-
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""} animate-fade-in-up`}
+          {drawerOpen && (
+            <button
+              onClick={() => setDrawerOpen(false)}
+              className="p-2 rounded-full hover:bg-dc-accent/10 transition-colors"
             >
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                  msg.role === "user"
-                    ? "bg-dc-accent"
-                    : "bg-gradient-to-br from-dc-accent to-dc-mint"
-                }`}
-              >
-                {msg.role === "user" ? (
-                  <User className="w-4 h-4 text-white" />
-                ) : (
-                  <Bot className="w-4 h-4 text-white" />
-                )}
-              </div>
-              <div
-                className={`rounded-2xl px-4 py-3 max-w-[85%] ${
-                  msg.role === "user"
-                    ? "bg-dc-accent/20 rounded-tr-sm"
-                    : "glass rounded-tl-sm"
-                }`}
-              >
-                <p className="text-sm text-dc-text leading-relaxed whitespace-pre-wrap">
-                  {msg.content}
-                </p>
-              </div>
-            </div>
-          ))}
-
-          {isAnalyzing && (
-            <div className="flex gap-3 animate-fade-in-up">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-dc-accent to-dc-mint flex items-center justify-center flex-shrink-0">
-                <Bot className="w-4 h-4 text-white" />
-              </div>
-              <div className="glass rounded-2xl rounded-tl-sm px-4 py-3">
-                <div className="flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 text-dc-accent animate-spin" />
-                  <span className="text-sm text-dc-muted">{tt("aiCounselor.analyzing")}</span>
-                </div>
-              </div>
-            </div>
+              <X className="w-5 h-5 text-dc-muted" />
+            </button>
           )}
         </div>
 
-        <div className="p-4 border-t border-dc-border">
-          <div className="flex gap-2">
+        <div
+          className="flex-1 overflow-y-auto px-4 sm:px-6 pb-2 space-y-4 scrollbar-thin"
+          style={{ scrollBehavior: "smooth" }}
+        >
+          {showWelcome && messages.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-full text-center space-y-6 py-12">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-dc-accent/20 to-transparent flex items-center justify-center animate-breath-orb-4-7">
+                <Heart className="w-8 h-8 text-dc-accent" />
+              </div>
+              <div className="space-y-2">
+                <p className="text-xl sm:text-2xl font-medium text-dc-text">
+                  {tt("aiCounselor.greeting")}
+                </p>
+                <p className="text-base sm:text-lg text-dc-muted/80 max-w-md leading-relaxed">
+                  {tt("aiCounselor.subtitle")}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-2 w-full max-w-sm">
+                {["stress", "sleep", "anxiety", "lonely"].map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => {
+                      setInput(tt(`aiCounselor.topic_${t}` as any))
+                      setDrawerOpen(true)
+                    }}
+                    className="px-4 py-2.5 text-sm bg-dc-surface/60 hover:bg-dc-accent/10 border border-dc-border hover:border-dc-accent/30 text-dc-muted hover:text-dc-text rounded-xl transition-all duration-300"
+                  >
+                    {tt(`aiCounselor.topic_${t}` as any)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <>
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} animate-fade-in-glow`}
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <div
+                    className={`
+                      max-w-[85%] sm:max-w-[75%] px-5 py-4
+                      text-xl leading-relaxed
+                      ${
+                        msg.role === "user"
+                          ? "bg-dc-accent/15 border border-dc-accent/20 text-dc-text rounded-2xl rounded-br-md"
+                          : "glass-strong text-dc-text rounded-2xl rounded-bl-md"
+                      }
+                    `}
+                  >
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
+              {isAnalyzing && (
+                <div className="flex justify-start animate-fade-in-glow">
+                  <div className="glass-strong rounded-2xl rounded-bl-md px-5 py-4">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-dc-accent/60 rounded-full animate-pulse-soft" />
+                      <span className="w-2 h-2 bg-dc-accent/60 rounded-full animate-pulse-soft" style={{ animationDelay: "0.3s" }} />
+                      <span className="w-2 h-2 bg-dc-accent/60 rounded-full animate-pulse-soft" style={{ animationDelay: "0.6s" }} />
+                      <span className="text-sm text-dc-muted ml-2">{tt("aiCounselor.analyzing")}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </>
+          )}
+        </div>
+
+        {!showWelcome && lastCounselorMsg && (
+          <div className="px-4 sm:px-6 pb-1 shrink-0">
+            <div className="flex items-center gap-2 justify-center">
+              <button
+                onClick={handleShare}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-dc-muted hover:text-dc-accent bg-dc-surface/40 hover:bg-dc-accent/10 rounded-full transition-all duration-300"
+              >
+                <ImageDown className="w-3.5 h-3.5" />
+                <span>{tt("common.healPoster")}</span>
+              </button>
+              {showShareSuccess && (
+                <span className="text-xs text-emerald-400 animate-fade-in-glow">
+                  ✅ {tt("common.healPosterSaved")}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        <div className="shrink-0 px-4 sm:px-6 py-4">
+          <div className="flex items-center gap-2 sm:gap-3 bg-dc-surface/60 backdrop-blur-md border border-dc-border rounded-2xl px-4 py-2 focus-within:border-dc-accent/40 transition-all duration-300">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={tt("aiCounselor.placeholder")}
-              className="flex-1 bg-dc-surface/50 border border-dc-border rounded-xl px-4 py-2.5 text-sm text-dc-text placeholder:text-dc-muted/60 outline-none focus:border-dc-accent/50 transition-colors"
+              className="flex-1 bg-transparent text-xl text-dc-text placeholder:text-dc-muted/50 outline-none"
+              onClick={() => setDrawerOpen(true)}
             />
-            <button onClick={handleSend} disabled={!input.trim() || isAnalyzing}
-            className="px-5 py-2.5 rounded-xl bg-dc-accent hover:bg-dc-accent/80 disabled:opacity-40 disabled:cursor-not-allowed text-sm text-white font-medium transition-all"
-          >
-            {tt("aiCounselor.submit")}
-          </button>
+            <button
+              onClick={handleSend}
+              disabled={!input.trim() || isAnalyzing}
+              className="p-2.5 rounded-xl bg-dc-accent text-dc-deep disabled:opacity-30 disabled:cursor-not-allowed hover:bg-dc-accent/90 transition-all duration-300 shrink-0"
+            >
+              <Send className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>
-    </div>
+
+      <div
+        ref={shareRef}
+        className="hidden fixed"
+        style={{
+          width: "480px",
+          padding: "32px",
+          background: "linear-gradient(135deg, #0a0e1a 0%, #111827 50%, #1a2238 100%)",
+          borderRadius: "24px",
+          left: "-9999px",
+          top: "0",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse at 50% 0%, rgba(126,184,255,0.06), transparent 70%)",
+            borderRadius: "24px",
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              marginBottom: "24px",
+            }}
+          >
+            <div
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(126,184,255,0.3), transparent)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span style={{ fontSize: "20px" }}>🌙</span>
+            </div>
+            <span style={{ color: "#7EB8FF", fontSize: "14px", fontWeight: 600, letterSpacing: "0.5px" }}>
+              DeepCalm · Healing
+            </span>
+          </div>
+          <p
+            style={{
+              color: "#E8EDF5",
+              fontSize: "22px",
+              lineHeight: 1.7,
+              fontWeight: 400,
+              fontStyle: "italic",
+              marginBottom: "32px",
+            }}
+          >
+            &ldquo;{lastCounselorMsg?.content || ""}&rdquo;
+          </p>
+          <div
+            style={{
+              width: "48px",
+              height: "3px",
+              background: "linear-gradient(90deg, #7EB8FF, transparent)",
+              borderRadius: "2px",
+              marginBottom: "20px",
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span style={{ color: "rgba(180,200,230,0.5)", fontSize: "13px" }}>
+              deepcalm-ai.com/{locale}
+            </span>
+            <span style={{ color: "rgba(126,184,255,0.4)", fontSize: "20px" }}>✦</span>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }

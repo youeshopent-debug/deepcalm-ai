@@ -175,23 +175,44 @@
     ]
   },
   "dailyCheckin": {
-    "title": "Registro diario",
-    "subtitle": "Registra tu estado de ánimo y haz seguimiento a los cambios en tu salud mental",
-    "moodLabels": ["Muy bien", "Bien", "Normal", "Regular", "Mal"],
-    "submit": "Registrar",
-    "streak": "Racha",
-    "days": "días",
-    "historyTitle": "Historial de estado de ánimo"
+    "title": "Registro Diario",
+    "subtitle": "Registra tu sueño y estado de ánimo cada día para monitorear los cambios en tu salud mental",
+    "sleepLabel": "Como ha sido la calidad de tu sueno esta noche?",
+    "sleepGreat": "Dormi muy bien",
+    "sleepOkay": "Dormi mas o menos",
+    "sleepPoor": "Dormi mal",
+    "moodLabel": "Como te sientes ahora?",
+    "moodCalm": "Tranquilo",
+    "moodAnxious": "Ansioso",
+    "moodTired": "Cansado",
+    "moodHappy": "Feliz",
+    "moodSad": "Triste",
+    "moodEnergetic": "Lleno de energia",
+    "aiResponse_great": "Has dormido muy bien! Que tengas un excelente dia.",
+    "aiResponse_okay": "Has dormido aceptablemente. No te exijas demasiado, ve a tu propio ritmo.",
+    "aiResponse_poor": "Hoy puedes sentirte un poco cansado. No te esfuerces, tomate un tiempo para descansar.",
+    "aiResponse_calm": "Una mente tranquila es hermosa. Conserva esta calma contigo.",
+    "aiResponse_anxious": "Te sientes ansioso? Respira hondo primero. No estas solo.",
+    "aiResponse_tired": "Has tenido un dia largo? Toma un momento para descansar. Dormir bien te dara energia para manana.",
+    "aiResponse_happy": "Que alegria! Conserva esa energia positiva el mayor tiempo posible.",
+    "aiResponse_sad": "Comprendo tu tristeza. No hace falta que finjas una sonrisa. Si necesitas llorar, esta bien.",
+    "aiResponse_energetic": "Rebosas energia! Usa ese impulso para crear un dia maravilloso.",
+    "emailPlaceholder": "Recibe los resultados por correo",
+    "emailInputPlaceholder": "Ingresa tu correo electronico",
+    "emailButton": "Enviar",
+    "emailSuccess": "Registro exitoso! Te enviaremos los resultados por correo.",
+    "emailError": "El correo electronico no es valido. Intentalo de nuevo.",
+    "checkinButton": "Registrar mi estado de animo hoy",
+    "checkinDone": "Registro de hoy completado!"
   },
   "healingReport": {
-    "title": "Informe de sanación",
-    "subtitle": "Tu progreso y análisis de bienestar mental",
-    "totalSessions": "Sesiones totales",
-    "totalMinutes": "Tiempo total",
-    "averageMood": "Estado de ánimo promedio",
-    "recommendation": "Recomendación",
-    "noData": "Aún no hay datos. Comienza a registrar tu estado de ánimo.",
-    "weeklyTrend": "Tendencia semanal"
+    "title": "🌙 Informe de Sanación Nocturna",
+    "sleepGreat": "La buena calidad del sueño indica que tu ritmo circadiano se está recuperando. Durante los ciclos REM, tu cerebro organiza los recuerdos emocionales del día. Mantener una hora de despertar constante es la forma más efectiva de regular tu reloj biológico.",
+    "sleepOkay": "La calidad de sueño moderada indica margen de mejora. Prueba el audio inmersivo de DeepCalm (ritmos binaurales + ruido blanco) esta noche. Estas pistas guiadas por frecuencia ayudan a tu cerebro a alcanzar el estado de ondas theta — el patrón característico del descanso profundo.",
+    "sleepPoor": "La dificultad para dormir a menudo proviene de una Red de Modo Predeterminado (DMN) hiperactiva. Prueba la técnica 4-7-8: inhala por la nariz 4 segundos → retén 7 → exhala por la boca 8. Repite 4 ciclos. Las investigaciones muestran que este ritmo reduce significativamente la actividad del sistema nervioso simpático.",
+    "moodHeader": "Estado de Ánimo de Hoy",
+    "sharePrompt": "Comparte este informe en redes sociales para recordar a otras almas nocturnas que encuentren refugio en DeepCalm.",
+    "subscribeCta": "Suscríbete a los boletines diarios de sanación y recibe análisis personalizados del sueño con información de tus ciclos REM en tu bandeja de entrada mañana por la mañana."
   },
   "aiCounselor": {
     "title": "Acompañante Psicológico AI",
@@ -255,12 +276,51 @@
     "done": "Hecho",
     "search": "Buscar",
     "noResults": "Sin resultados",
-    "viewMore": "Ver más"
+    "viewMore": "Ver más",
+    "healPoster": "Generar Póster Sanador",
+    "healPosterSaved": "✅ Póster sanador guardado"
   },
   "seoContent": {
-    "home": {
-      "title": "DeepCalm — Consejería Psicológica AI & Optimización del Sueño | Plataforma de Bienestar Mental",
-      "description": "DeepCalm es una plataforma de bienestar mental impulsada por IA de última generación. Ofrece consejería psicológica AI gratuita, optimización del sueño basada en ciencia, hipnosis guiada y ejercicios de respiración. Apoya tu salud mental las 24 horas."
-    }
+    "title": "Guia de Optimizacion del Sueno con IA | DeepCalm — Sueno de Calidad Cientifico",
+    "p1": "En la sociedad moderna, muchas personas sufren de problemas de calidad del sueno. La luz azul de los telefonos inteligentes, el estres laboral y los ritmos de vida irregulares afectan negativamente nuestro ciclo de sueno. DeepCalm combina la inteligencia artificial con la neurociencia mas avanzada para ofrecer una solucion integral que mejora la calidad de tu sueno desde la raiz. El sueno de calidad no es solo descanso, sino un proceso fisiologico esencial para mantener la salud cerebral, fortalecer el sistema inmunologico y estabilizar las emociones.",
+    "rem_title": "La Importancia del Sueno REM y su Mecanismo",
+    "p2": "El sueno REM (Rapid Eye Movement) es una de las fases del sueno mas fascinantes. Durante esta etapa, el cerebro muestra una actividad casi identica a la vigilia, mientras el cuerpo permanece completamente relajado. Es en la fase REM donde solemos tener suenos vividos, y este proceso juega un papel crucial en la consolidacion de la memoria y el procesamiento emocional. Investigaciones demuestran que la falta de sueno REM puede causar deterioro cognitivo, inestabilidad emocional y disminucion de la creatividad. Las herramientas de optimizacion del sueno de DeepCalm analizan cientificamente tu calidad de sueno REM y ofrecen recomendaciones personalizadas para mejorarla.",
+    "p3": "El sueno REM se repite cada 90 minutos aproximadamente, de 4 a 6 veces por noche, y su duracion se alarga hacia la manana. El primer ciclo REM dura solo unos 10 minutos, pero el ultimo puede llegar a 1 hora. Por eso, dormir las horas suficientes (7-9 horas) es la condicion basica para obtener sueno REM de calidad. Ademas, el alcohol y la cafeina inhiben el sueno REM, por lo que se recomienda evitarlos antes de acostarse.",
+    "nrem_title": "Sueno NREM y la Recuperacion del Cuerpo",
+    "p4": "El sueno NREM se divide en 3 etapas: sueno ligero, sueno intermedio y sueno profundo (Slow Wave Sleep), que es cuando el cuerpo repara tejidos, fortalece el sistema inmunologico y libera hormonas de crecimiento. DeepCalm utiliza sensores de movimiento y sonido para analizar la proporcion de sueno NREM en tu noche y te ofrece recomendaciones conductuales para aumentar el tiempo de sueno profundo.",
+    "cortisol_title": "Cortisol: La Hormona del Estres que Roba tu Sueno",
+    "cortisol1": "El cortisol, conocido como la 'hormona del estres', deberia disminuir naturalmente durante la noche. Sin embargo, el estres cronico del trabajo y el estilo de vida acelerado elevan el cortisol de forma anormal por la noche, causando insomnio, despertares nocturnos y sueno no reparador. Reducir el cortisol nocturno requiere multiples cambios de comportamiento: establecer limites claros con el trabajo, evitar revisar correos electronicos antes de dormir y limitar el consumo de cafeina despues del mediodia. Las herramientas de IA de DeepCalm te recomendaran horarios personalizados segun tu estilo de vida para reducir el cortisol nocturno.",
+    "cortisol2": "Un estudio de Harvard Medical School encontro que las personas que practican la respiracion 4-7-8 durante 5 minutos antes de dormir pueden reducir los niveles de cortisol salival hasta en un 30% en una semana. DeepCalm incluye una funcion de ejercicios de respiracion integrada que puedes usar antes de acostarte para activar el sistema nervioso parasimpatico, ayudando a tu cuerpo a entrar en un estado de relajacion profunda.",
+    "circadian_title": "Ritmo Circadiano y el Reloj Biologico",
+    "circadian1": "El ritmo circadiano es el reloj interno del cuerpo que regula el ciclo de sueno-vigilia en un periodo de 24 horas. La exposicion a la luz es el factor principal que afecta este ritmo. La luz azul de las pantallas inhibe la secrecion de melatonina, haciendo que el cerebro piense que 'todavia es de dia' y dificultando conciliar el sueno. DeepCalm cuenta con un modo nocturno que ajusta automaticamente el color de la pantalla y recomienda rutinas adecuadas para mantener un ritmo circadiano equilibrado.",
+    "melatonin_title": "Melatonina: La Clave para un Ciclo de Sueno Saludable",
+    "melatonin1": "La melatonina, conocida como la 'hormona del sueno', es secretada por la glandula pineal cuando el entorno se oscurece, enviando la senal al cuerpo de que es hora de prepararse para dormir. La produccion de melatonina aumenta durante la tarde, alcanza su punto maximo en medio de la noche y disminuye hacia la manana. El uso de dispositivos electronicos antes de dormir es el principal factor que interrumpe la produccion de melatonina. DeepCalm te avisara cuando sea momento de dejar las pantallas y te sugerira actividades relajantes alternativas.",
+    "cbt_deep_title": "TCC-I: Terapia Cognitivo-Conductual para el Insomnio",
+    "cbt_deep1": "La TCC-I (Terapia Cognitivo-Conductual para el Insomnio) es un enfoque terapeutico reconocido como el tratamiento de primera linea para el insomnio cronico. A diferencia de los medicamentos para dormir, la TCC-I se enfoca en corregir los pensamientos y comportamientos que afectan negativamente el sueno. Los principios clave incluyen: restriccion del tiempo en cama para fortalecer la asociacion positiva entre la cama y el sueno, control de estimulos (si no duermes en 20 minutos, levantate de la cama) y reestructuracion de pensamientos disfuncionales sobre el sueno.",
+    "sleep_hygiene_title": "Higiene del Sueno: Los Fundamentos que a Menudo se Pasan por Alto",
+    "sleep_hygiene1": "La higiene del sueno es el conjunto de comportamientos y condiciones ambientales que promueven un sueno de calidad. Los principios basicos incluyen: mantener horarios regulares para acostarse y levantarse incluso los fines de semana, mantener el dormitorio oscuro, silencioso y fresco (18-22 C), evitar comidas pesadas, cafeina y alcohol 4 horas antes de dormir, y hacer ejercicio regularmente pero no intensamente en las 3 horas previas a acostarse.",
+    "anxiety_title": "Ansiedad y Sueno: El Circulo que Hay que Romper",
+    "p8": "La ansiedad y el insomnio tienen una relacion bidireccional: la ansiedad causa insomnio y el insomnio empeora la ansiedad. Un estudio de Sleep Medicine Reviews encontro que las personas con trastornos de ansiedad tienen 3.5 veces mas probabilidades de sufrir insomnio. Romper este circulo requiere abordar ambos problemas simultaneamente. DeepCalm ofrece un Consejero AI basado en principios de TCC que te ayuda a identificar y modificar patrones de pensamiento ansiosos, mientras que sus herramientas de optimizacion del sueno mejoran tu descanso nocturno.",
+    "p9": "Construir habitos de sueno saludables requiere tiempo: en promedio, de 3 a 6 semanas para que un nuevo habito de sueno se vuelva automatico. DeepCalm te acompanara en todo este viaje. Con analisis de datos de sueno, registro diario y recomendaciones personalizadas de IA, te ayudaremos a descubrir el patron de sueno que mejor se adapta a tu cuerpo y estilo de vida. No importa que tipo de problema de sueno tengas, DeepCalm esta listo para ayudarte a dormir mejor, despertar mas renovado y disfrutar de una mejor salud mental cada dia.",
+    "micro_habits_title": "Micro-Habitos: Pequenos Cambios que Transforman tu Sueno",
+    "micro_habits1": "Los micro-habitos son cambios de comportamiento tan pequenos que es 'imposible resistirse' a hacerlos. Crear buenos habitos de sueno no requiere cambios radicales. Empieza con: (1) beber un vaso de agua tibia antes de dormir, (2) apagar las pantallas 10 minutos antes de acostarte, (3) escribir 3 cosas por las que estas agradecido hoy, (4) respirar profundamente 5 veces antes de dormir. Estos pequenos habitos, cuando se practican de forma constante, mejoraran notablemente tu calidad de sueno.",
+    "disclaimer": "El contenido de esta pagina es solo para fines informativos y no sustituye el consejo medico profesional. Si tienes problemas cronicos de sueno o salud mental, consulta a un medico o especialista en salud mental."
+  },
+  "sitemap": {
+    "categories": {
+      "sleep": "Sueño",
+      "anxiety": "Ansiedad",
+      "grief_loss": "Duelo y Pérdida",
+      "loneliness": "Soledad",
+      "self_worth": "Autoestima",
+      "relationships": "Relaciones",
+      "identity": "Identidad",
+      "mindfulness": "Atención Plena",
+      "emotional_health": "Salud Emocional"
+    },
+    "home": "Inicio",
+    "dailyCheckin": "Registro Diario",
+    "privacy": "Privacidad",
+    "terms": "Términos"
   }
 }

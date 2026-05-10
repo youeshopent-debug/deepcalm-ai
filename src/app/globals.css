@@ -375,8 +375,11 @@ body {
 }
 
 .animate-breathing-halo-4-7 {
-  animation: breathing-halo-4-7 11s ease-in-out infinite;
-}
+    animation: breathing-halo-4-7 7s ease-in-out infinite;
+  }
+  .animate-breath-orb-4-7 {
+    animation: breathing-halo-4-7 7s ease-in-out infinite;
+  }
 
 .animate-breathe-inner-4-7 {
   animation: breathe-inner-4-7 11s ease-in-out infinite;

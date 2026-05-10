@@ -137,7 +137,7 @@ export default function DailyCheckin() {
                     type="email"
                     value={email}
                     onChange={(e) => { setEmail(e.target.value); setEmailError(false) }}
-                    placeholder={tt("dailyCheckin.emailPlaceholder")}
+                    placeholder={tt("dailyCheckin.emailInputPlaceholder")}
                     className="flex-1 px-4 py-2.5 bg-dc-surface border border-dc-border rounded-xl text-sm text-dc-text placeholder:text-dc-muted/50 focus:outline-none focus:border-dc-accent/40 transition-colors"
                   />
                   <button

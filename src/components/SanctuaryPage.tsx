@@ -1,0 +1,57 @@
+"use client"
+
+import BackgroundCanvas from "./BackgroundCanvas"
+import AiCounselor from "./AiCounselor"
+import DailyCheckin from "./DailyCheckin"
+import SeoContent from "./SeoContent"
+import SitemapFooter from "./SitemapFooter"
+import AudioFloatingTray from "./AudioFloatingTray"
+
+export default function SanctuaryPage() {
+  return (
+    <div className="relative min-h-screen">
+      <BackgroundCanvas />
+
+      {/* 4s/7s Breathing Halo — guides user to breathe in sync */}
+      <div className="fixed inset-0 z-[1] flex items-center justify-center pointer-events-none">
+        <div
+          className="w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] rounded-full animate-breathing-halo-4-7"
+          style={{
+            background: "radial-gradient(circle, rgba(126,184,255,0.12) 0%, rgba(106,90,205,0.08) 40%, transparent 65%)",
+            filter: "blur(60px)",
+          }}
+        />
+        <div
+          className="absolute w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] rounded-full animate-breathe-inner-4-7"
+          style={{
+            background: "radial-gradient(circle, rgba(126,184,255,0.1) 0%, rgba(78,205,196,0.06) 35%, transparent 60%)",
+            filter: "blur(80px)",
+          }}
+        />
+      </div>
+
+      <main className="relative z-10">
+        <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16">
+          <AiCounselor />
+        </section>
+
+        {/* SEO Content — hidden visually, indexed by crawlers */}
+        <div className="sr-only">
+          <section id="daily-checkin">
+            <DailyCheckin />
+          </section>
+          <section id="seo-content">
+            <SeoContent />
+          </section>
+        </div>
+      </main>
+
+      <SitemapFooter />
+
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 text-xs text-dc-muted/40 pointer-events-none">
+        DeepCalm AI · Midnight Sanctuary
+      </div>
+      <AudioFloatingTray />
+    </div>
+  )
+}
