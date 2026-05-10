@@ -3,11 +3,19 @@ import type { Locale } from "@/types"
 import zh from "../../dictionaries/zh.json"
 import en from "../../dictionaries/en.json"
 import ms from "../../dictionaries/ms.json"
+import ja from "../../dictionaries/ja.json"
+import ko from "../../dictionaries/ko.json"
+import th from "../../dictionaries/th.json"
+import es from "../../dictionaries/es.json"
 
 const dictionaries: Record<Locale, any> = {
   zh,
   en,
   ms,
+  ja,
+  ko,
+  th,
+  es,
 }
 
 export function getDict(locale: Locale): any {

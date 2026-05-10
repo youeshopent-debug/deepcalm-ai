@@ -1,0 +1,266 @@
+{
+  "nav": {
+    "heroTitle": "DeepCalm",
+    "features": "Características",
+    "pricing": "Precios",
+    "faq": "Preguntas Frecuentes",
+    "blog": "Blog",
+    "guide": "Guía",
+    "about": "Nosotros",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Tu consejero psicológico AI & guía de sueño",
+    "subtitle": "Consejería psicológica con IA, hipnosis guiada, optimización del sueño basada en ciencia — apoyando tu bienestar mental las 24 horas",
+    "cta": "Empieza gratis",
+    "secondaryCta": "Ver funciones",
+    "counter": "Más de {count} usuarios ya han comenzado su viaje de bienestar mental",
+    "badges": {
+      "counseling": "Consejería con IA",
+      "privacy": "Privacidad garantizada",
+      "sleep": "Sueño basado en ciencia"
+    },
+    "stats": {
+      "users": "Usuarios activos",
+      "sessions": "Sesiones completadas",
+      "countries": "Países disponibles"
+    }
+  },
+  "counselor": {
+    "title": "Consejero Psicológico AI",
+    "subtitle": "Un consejero AI que siempre te escucha, sin juzgar y con empatía",
+    "startButton": "Iniciar consejería",
+    "thinking": "Pensando...",
+    "analyzing": "Analizando...",
+    "suggestion": "Sugerencia",
+    "questionPrefix": "Consejero",
+    "questions": [
+      "¿Has sentido estrés o ansiedad últimamente?",
+      "¿Cómo te sientes hoy?",
+      "¿Hay algo de lo que te gustaría hablar?",
+      "¿Cómo está la calidad de tu sueño?",
+      "¿Ha ocurrido algo que te preocupe recientemente?",
+      "¿Estás satisfecho con tu vida diaria?",
+      "¿Tienes dificultades en tus relaciones personales?"
+    ],
+    "disclaimer": "Este consejero AI no sustituye el consejo médico profesional. Si tienes problemas graves de salud mental, por favor consulta a un especialista."
+  },
+  "hypnotist": {
+    "title": "Hipnosis Guiada",
+    "subtitle": "Audios de hipnosis supervisados por expertos para lograr una relajación profunda y acceso al subconsciente",
+    "benefits": {
+      "stress": "Reducción de estrés",
+      "sleep": "Mejora del sueño",
+      "focus": "Mayor concentración",
+      "confidence": "Aumento de confianza"
+    },
+    "startSession": "Iniciar sesión de hipnosis",
+    "duration": "Duración",
+    "difficulty": "Dificultad"
+  },
+  "sleepCalculator": {
+    "title": "Calculadora de Sueño",
+    "subtitle": "Calcula la hora óptima para acostarte o despertarte",
+    "bedtime": "Calcular hora de acostarse",
+    "wakeTime": "Calcular hora de despertar",
+    "calculate": "Calcular",
+    "result": "Resultado",
+    "recommendBedtime": "Si deseas despertar a las {wakeTime}, la hora recomendada para acostarte es:",
+    "recommendWakeTime": "Si te acuestas a las {bedtime}, la hora recomendada para despertar es:",
+    "cycleDuration": "Ciclo de sueño",
+    "cycleUnit": "horas",
+    "minutes": "minutos",
+    "wakeUpGoal": "Hora objetivo para despertar",
+    "bedtimeGoal": "Hora objetivo para acostarse",
+    "fallAsleepTime": "Tiempo en quedarse dormido",
+    "options": {
+      "remCycle": "90 min (ciclo estándar)",
+      "lightSleep": "Despertar en sueño ligero"
+    }
+  },
+  "audio": {
+    "tabs": {
+      "meditation": "Meditación",
+      "nature": "Sonidos de la naturaleza",
+      "binaural": "Ritmos binaurales",
+      "whitenoise": "Ruido blanco"
+    }
+  },
+  "audioPlayer": {
+    "play": "Reproducir",
+    "stop": "Detener",
+    "playing": "Reproduciendo",
+    "download": "Descargar",
+    "loading": "Cargando..."
+  },
+  "resonanceWall": {
+    "title": "Muro de Resonancia",
+    "subtitle": "Mensajes cálidos y experiencias compartidas por otros usuarios",
+    "placeholder": "Comparte tus sentimientos o experiencias...",
+    "submit": "Publicar",
+    "delete": "Eliminar",
+    "empty": "Aún no hay publicaciones. ¡Sé el primero en compartir un mensaje!",
+    "loadMore": "Ver más",
+    "likes": "Me gusta",
+    "comments": "Comentarios",
+    "report": "Reportar",
+    "reported": "Reportado",
+    "confirmDelete": "¿Estás seguro de que deseas eliminar?"
+  },
+  "seo": {
+    "title": "DeepCalm — Consejero Psicológico AI & Optimización del Sueño",
+    "description": "DeepCalm es una plataforma de bienestar mental impulsada por IA. Ofrece consejería psicológica AI gratuita, hipnosis guiada y herramientas de optimización del sueño basadas en ciencia."
+  },
+  "footer": {
+    "brand": "DeepCalm AI",
+    "tagline": "Apoyo Mental AI Minimalista · Siempre Gratis · Siempre Anónimo",
+    "tools_title": "Herramientas",
+    "sleep_calculator": "Calculadora de Sueño",
+    "ai_counselor": "Consejero AI",
+    "daily_checkin": "Registro Diario",
+    "support_title": "Apoyo",
+    "scenario_workplace_burnout": "Agotamiento Laboral",
+    "scenario_student_exam": "Ansiedad por Exámenes",
+    "scenario_public_speaking": "Miedo a Hablar en Público",
+    "scenario_social_anxiety": "Ansiedad Social",
+    "scenario_health_anxiety": "Ansiedad por la Salud",
+    "scenario_impostor_syndrome": "Síndrome del Impostor",
+    "legal_title": "Legal",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "guide": "Guía de Usuario",
+    "about": "Nosotros",
+    "copyright": "© 2026 DeepCalm AI. Todos los derechos reservados.",
+    "madeWith": "Hecho con ❤️ y Minimalismo Nórdico"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "guide": {
+    "title": "Guía de usuario",
+    "description": "Aprende a usar DeepCalm y comienza tu viaje de bienestar mental"
+  },
+  "about": {
+    "title": "Sobre DeepCalm",
+    "description": "La misión y el equipo de DeepCalm"
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "description": "Política de privacidad de DeepCalm"
+  },
+  "terms": {
+    "title": "Términos de uso",
+    "description": "Términos de uso de DeepCalm"
+  },
+  "scientificGuide": {
+    "title": "Guía Científica",
+    "intro": "Nuestro enfoque de bienestar mental se basa en las últimas investigaciones científicas y la práctica clínica.",
+    "sections": [
+      {
+        "title": "La ciencia de la consejería con IA",
+        "content": "La consejería con IA de DeepCalm integra la Terapia Cognitivo-Conductual (TCC) y la Reducción del Estrés Basada en Mindfulness (REBM). Los estudios demuestran que las intervenciones de salud mental con IA son efectivas para reducir los síntomas de ansiedad y depresión leve a moderada. Nuestra IA está entrenada con millones de datos clínicos para brindar un apoyo seguro y efectivo."
+      },
+      {
+        "title": "Ciclo del sueño y optimización",
+        "content": "El sueño humano se repite en ciclos de aproximadamente 90 minutos. Cada ciclo incluye fases de sueño ligero, sueño profundo y sueño REM. La calculadora de sueño utiliza este conocimiento para calcular la hora óptima de acostarse o despertarse, permitiéndote despertar naturalmente al final de un ciclo. Esto reduce significativamente la fatiga y la somnolencia al despertar."
+      },
+      {
+        "title": "Efectividad de la hipnosis guiada",
+        "content": "La hipnosis guiada facilita el acceso al subconsciente induciendo atención concentrada y un estado de relajación. Estudios clínicos muestran que la hipnosis es efectiva para reducir la ansiedad, mejorar la calidad del sueño y manejar el dolor. Los audios de hipnosis de DeepCalm están supervisados por hipnoterapeutas certificados."
+      },
+      {
+        "title": "Ritmos binaurales y ondas cerebrales",
+        "content": "Los ritmos binaurales son un fenómeno auditivo que ocurre cuando se presentan sonidos de diferentes frecuencias en cada oído, haciendo que el cerebro perciba una tercera frecuencia. Los ritmos binaurales de frecuencias específicas pueden ayudar a inducir diferentes estados de ondas cerebrales, como la relajación (ondas theta 4-8Hz) o el sueño profundo (ondas delta 1-4Hz)."
+      }
+    ]
+  },
+  "dailyCheckin": {
+    "title": "Registro diario",
+    "subtitle": "Registra tu estado de ánimo y haz seguimiento a los cambios en tu salud mental",
+    "moodLabels": ["Muy bien", "Bien", "Normal", "Regular", "Mal"],
+    "submit": "Registrar",
+    "streak": "Racha",
+    "days": "días",
+    "historyTitle": "Historial de estado de ánimo"
+  },
+  "healingReport": {
+    "title": "Informe de sanación",
+    "subtitle": "Tu progreso y análisis de bienestar mental",
+    "totalSessions": "Sesiones totales",
+    "totalMinutes": "Tiempo total",
+    "averageMood": "Estado de ánimo promedio",
+    "recommendation": "Recomendación",
+    "noData": "Aún no hay datos. Comienza a registrar tu estado de ánimo.",
+    "weeklyTrend": "Tendencia semanal"
+  },
+  "aiCounselor": {
+    "title": "Acompañante Psicológico AI",
+    "subtitle": "Un amigo que escucha, sin juzgar",
+    "placeholder": "Comparte lo que sientes ahora...",
+    "submit": "Enviar",
+    "analyzing": "Analizando tus emociones...",
+    "welcome": "Hola, me alegra que estés aquí. Toma una respiración profunda — inhala 4 segundos, sostén, exhala 7 segundos. Sin prisas. ¿Qué estás pensando esta noche?",
+    "replyStress": "Parece que has estado cargando mucho últimamente. Hagamos un ejercicio de conexión — nombra 3 sonidos que puedas escuchar ahora mismo...",
+    "replySleep": "La dificultad para dormir suele ser la mente tratando de protegerte. Comparto una técnica CBT-I: si no te duermes en 20 minutos, levántate y vuelve a la cama cuando tengas sueño.",
+    "replyLonely": "No estás solo. En este mismo momento, hay otros en la comunidad respirando al mismo ritmo que tú.",
+    "replyAnxiety": "La ansiedad es como una ola — sube, llega a su punto máximo y luego se retira. Naveguemos juntos. Concéntrate en la respiración: 4 segundos inhalando, 7 exhalando.",
+    "replySelfWorth": "Te exiges mucho a ti mismo, y eso demuestra que eres una persona que se toma la vida en serio. Pero quiero preguntarte — ¿te estás midiendo con la regla de otra persona? Tu valor no necesita demostrarse a través de la perfección.",
+    "replyGrief": "El dolor de la pérdida no es comparable — cada pérdida es real. No necesitas apresurarte a 'sentirte mejor'. El duelo tiene su propio ritmo.",
+    "replyRelationship": "La fricción en las relaciones no suele ser cuestión de quién tiene razón o no — es que dos personas tienen mapas diferentes. El hecho de que estés aquí para hablar demuestra que realmente te importa esta relación.",
+    "replyIdentity": "Estar en una encrucijada es desconcertante. Pero esa confusión en sí misma es una señal — estás creciendo, te estás preguntando qué es lo que realmente quieres.",
+    "stressKeywords": "estrés,cansado,agotado,abrumado,quemado",
+    "sleepKeywords": "sueño,insomnio,no dormir,desvelo",
+    "lonelyKeywords": "solo,soledad,nadie,solitario",
+    "anxietyKeywords": "ansiedad,nervioso,preocupado,pánico,temor",
+    "selfWorthKeywords": "sin valor,no suficiente,inferior,fracaso,no merezco,duda de mí",
+    "griefKeywords": "duelo,pérdida,tristeza,llorar,extrañar,separación",
+    "relationshipKeywords": "pelea,amigo,familia,pareja,compañero,discusión",
+    "identityKeywords": "confundido,dirección,futuro,significado,no sé,elección,incierto",
+    "badge": "Basado en Psicología Clínica"
+  },
+  "breathingCounter": {
+    "title": "Ejercicio de respiración",
+    "subtitle": "Relájate rápidamente con ejercicios de respiración guiada",
+    "startButton": "Iniciar",
+    "stopButton": "Detener",
+    "inhale": "Inhalar",
+    "hold": "Mantener",
+    "exhale": "Exhalar",
+    "pattern": "Patrón",
+    "pattern_4_7_8": "4-7-8 (Relajación)",
+    "pattern_4_4_4": "4-4-4 (Respiración cuadrada)",
+    "pattern_4_2_4": "4-2-4 (Diario)",
+    "cycles": "Ciclos",
+    "completed": "{count} ciclos completados",
+    "settings": {
+      "inhale": "Tiempo de inhalación",
+      "hold": "Tiempo de retención",
+      "exhale": "Tiempo de exhalación",
+      "seconds": "segundos"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "retry": "Reintentar",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "skip": "Saltar",
+    "done": "Hecho",
+    "search": "Buscar",
+    "noResults": "Sin resultados",
+    "viewMore": "Ver más"
+  },
+  "seoContent": {
+    "home": {
+      "title": "DeepCalm — Consejería Psicológica AI & Optimización del Sueño | Plataforma de Bienestar Mental",
+      "description": "DeepCalm es una plataforma de bienestar mental impulsada por IA de última generación. Ofrece consejería psicológica AI gratuita, optimización del sueño basada en ciencia, hipnosis guiada y ejercicios de respiración. Apoya tu salud mental las 24 horas."
+    }
+  }
+}

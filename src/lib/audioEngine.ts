@@ -1,4 +1,4 @@
-export type ChannelId = 'rain' | 'wind' | 'fire'
+export type ChannelId = 'rain' | 'wind' | 'fire' | 'stream' | 'birds'
 
 export interface AudioExtension {
   name: string
@@ -11,6 +11,7 @@ export class AudioEngine {
   private channelGains = new Map<ChannelId, GainNode>()
   private activeChannels = new Set<ChannelId>()
   private crackleTimer: ReturnType<typeof setTimeout> | null = null
+  private birdTimer: ReturnType<typeof setTimeout> | null = null
   private extension: AudioExtension | null = null
   private _volume = 0.6
 
@@ -62,6 +63,7 @@ export class AudioEngine {
       }, 2100)
     }
     if (channel === 'fire') this.stopCrackles()
+    if (channel === 'birds') this.stopBirdChirps()
     this.activeChannels.delete(channel)
   }
 
@@ -71,14 +73,29 @@ export class AudioEngine {
       case 'rain': this.createRain(output); break
       case 'wind': this.createWind(output); break
       case 'fire': this.createFire(output); break
+      case 'stream': this.createStream(output); break
+      case 'birds': this.createBirds(output); break
     }
   }
 
   private createRain(output: AudioNode) {
     if (!this.ctx) return
-    this.createNoiseLayer(output, { type: 'bandpass', freq: 1200, Q: 0.4, gain: 0.35 })
-    this.createNoiseLayer(output, { type: 'bandpass', freq: 3000, Q: 0.6, gain: 0.25 })
-    this.createNoiseLayer(output, { type: 'highpass', freq: 6000, Q: 1, gain: 0.15 })
+    this.createNoiseLayer(output, { type: 'bandpass', freq: 200, Q: 0.3, gain: 0.18 })
+    this.createNoiseLayer(output, { type: 'bandpass', freq: 1200, Q: 0.4, gain: 0.4 })
+    this.createNoiseLayer(output, { type: 'bandpass', freq: 3500, Q: 0.7, gain: 0.3 })
+    this.createNoiseLayer(output, { type: 'highpass', freq: 7000, Q: 1, gain: 0.2 })
+    const glide = this.ctx.createOscillator()
+    glide.frequency.value = 0.12
+    const glideGain = this.ctx.createGain()
+    glideGain.gain.value = 0.06
+    const glideFilter = this.ctx.createBiquadFilter()
+    glideFilter.type = 'bandpass'
+    glideFilter.frequency.value = 1200
+    glideFilter.Q.value = 2
+    glide.connect(glideGain)
+    glideGain.connect(glideFilter.frequency)
+    glideFilter.connect(output)
+    glide.start()
   }
 
   private createWind(output: AudioNode) {
@@ -110,15 +127,40 @@ export class AudioEngine {
     const src = this.createNoiseSource()
     const filter = this.ctx.createBiquadFilter()
     filter.type = 'lowpass'
-    filter.frequency.value = 180
+    filter.frequency.value = 120
+    const gain = this.ctx.createGain()
+    gain.gain.value = 0.5
+    const lfo = this.ctx.createOscillator()
+    lfo.frequency.value = 0.25
+    const lfoGain = this.ctx.createGain()
+    lfoGain.gain.value = 0.15
+    lfo.connect(lfoGain)
+    lfoGain.connect(gain.gain)
+    lfo.start()
+
+    this.createNoiseLayer(output, { type: 'bandpass', freq: 700, Q: 0.5, gain: 0.2 })
+
+    src.connect(filter)
+    filter.connect(gain)
+    gain.connect(output)
+    this.startCrackles(output)
+  }
+
+  private createStream(output: AudioNode) {
+    if (!this.ctx) return
+    const src = this.createNoiseSource()
+    const filter = this.ctx.createBiquadFilter()
+    filter.type = 'bandpass'
+    filter.frequency.value = 800
+    filter.Q.value = 0.5
 
     const gain = this.ctx.createGain()
-    gain.gain.value = 0.45
+    gain.gain.value = 0.3
 
     const lfo = this.ctx.createOscillator()
-    lfo.frequency.value = 0.3
+    lfo.frequency.value = 0.05
     const lfoGain = this.ctx.createGain()
-    lfoGain.gain.value = 0.1
+    lfoGain.gain.value = 0.12
 
     lfo.connect(lfoGain)
     lfoGain.connect(gain.gain)
@@ -127,8 +169,31 @@ export class AudioEngine {
     src.connect(filter)
     filter.connect(gain)
     gain.connect(output)
+  }
 
-    this.startCrackles(output)
+  private createBirds(output: AudioNode) {
+    if (!this.ctx) return
+    const src = this.createNoiseSource()
+    const filter = this.ctx.createBiquadFilter()
+    filter.type = 'highpass'
+    filter.frequency.value = 3000
+
+    const gain = this.ctx.createGain()
+    gain.gain.value = 0.08
+
+    const lfo = this.ctx.createOscillator()
+    lfo.frequency.value = 4
+    const lfoGain = this.ctx.createGain()
+    lfoGain.gain.value = 0.06
+    lfo.connect(lfoGain)
+    lfoGain.connect(gain.gain)
+    lfo.start()
+
+    src.connect(filter)
+    filter.connect(gain)
+    gain.connect(output)
+
+    this.startBirdChirps(output)
   }
 
   private createNoiseSource() {
@@ -198,6 +263,42 @@ export class AudioEngine {
     }
   }
 
+  private startBirdChirps(output: AudioNode) {
+    const chirp = () => {
+      if (!this.ctx || !this.activeChannels.has('birds')) return
+      this.playBirdChirp(output)
+      this.birdTimer = setTimeout(chirp, 2000 + Math.random() * 4000)
+    }
+    chirp()
+  }
+
+  private playBirdChirp(output: AudioNode) {
+    if (!this.ctx) return
+    const dur = 0.08 + Math.random() * 0.12
+    const sr = this.ctx.sampleRate
+    const len = Math.floor(sr * dur)
+    const buf = this.ctx.createBuffer(1, len, sr)
+    const d = buf.getChannelData(0)
+    for (let i = 0; i < len; i++) {
+      const t = i / sr
+      d[i] = Math.sin(2 * Math.PI * (2000 + Math.random() * 1500) * t) * Math.exp(-t * 12)
+    }
+    const src = this.ctx.createBufferSource()
+    src.buffer = buf
+    const gain = this.ctx.createGain()
+    gain.gain.value = 0.15 + Math.random() * 0.2
+    src.connect(gain)
+    gain.connect(output)
+    src.start()
+  }
+
+  private stopBirdChirps() {
+    if (this.birdTimer) {
+      clearTimeout(this.birdTimer)
+      this.birdTimer = null
+    }
+  }
+
   setMasterVolume(value: number) {
     this._volume = value
     if (this.masterGain) {
@@ -208,6 +309,7 @@ export class AudioEngine {
 
   destroy() {
     this.stopCrackles()
+    this.stopBirdChirps()
     this.activeChannels.clear()
     this.channelGains.forEach(g => g.disconnect())
     this.channelGains.clear()

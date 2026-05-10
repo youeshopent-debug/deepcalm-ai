@@ -1,124 +1,177 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Send, User, Bot } from "lucide-react"
+import { Bot, User, Loader2 } from "lucide-react"
+import { useLanguage } from "@/context/LanguageContext"
 
-const defaultMessages = [
-  {
-    role: "assistant",
-    content:
-      "Hey, I'm glad you're here. Take a deep breath — in for 4, hold, out for 7. There's no rush. What's on your mind tonight?",
-  },
-]
-
-const autoReplies: Record<string, string> = {
-  stress:
-    "It sounds like you've been carrying a lot. Let's try a grounding exercise together. Name 3 things you can hear right now...",
-  sleep:
-    "Trouble sleeping is often your mind trying to protect you. Let me share a CBT-I technique: try getting out of bed if you haven't fallen asleep in 20 minutes.",
-  lonely:
-    "You're not alone in feeling this way. At this very moment, others in our community are breathing in the same rhythm you are.",
-  anxiety:
-    "Anxiety is a wave — it rises, peaks, and falls. Let's ride it together. Focus on your breath: 4 seconds in, 7 seconds out.",
+interface Message {
+  role: "user" | "ai"
+  content: string
 }
 
 export default function AiCounselor() {
-  const [messages, setMessages] = useState(defaultMessages)
+  const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
-  const [analyzing, setAnalyzing] = useState(false)
-  const endRef = useRef<HTMLDivElement>(null)
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
+  const chatRef = useRef<HTMLDivElement>(null)
+  const { tt, locale } = useLanguage()
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [messages, analyzing])
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight
+    }
+  }, [messages])
 
-  function handleSend() {
-    const text = input.trim()
-    if (!text || analyzing) return
+  function getKeywords(key: string): string[] {
+    const raw = tt(`aiCounselor.${key}`)
+    return raw.split(",").map((k: string) => k.trim().toLowerCase()).filter(Boolean)
+  }
+
+  function detectTopic(inputText: string): string {
+    const lower = inputText.toLowerCase()
+    const topics = [
+      { key: "stressKeywords", replyKey: "replyStress" },
+      { key: "sleepKeywords", replyKey: "replySleep" },
+      { key: "lonelyKeywords", replyKey: "replyLonely" },
+      { key: "anxietyKeywords", replyKey: "replyAnxiety" },
+      { key: "selfWorthKeywords", replyKey: "replySelfWorth" },
+      { key: "griefKeywords", replyKey: "replyGrief" },
+      { key: "relationshipKeywords", replyKey: "replyRelationship" },
+      { key: "identityKeywords", replyKey: "replyIdentity" },
+    ]
+    let matched: { key: string; count: number } | null = null
+    for (const topic of topics) {
+      const keywords = getKeywords(topic.key)
+      const hitCount = keywords.filter((kw: string) => lower.includes(kw)).length
+      if (hitCount > 0 && (!matched || hitCount > matched.count)) {
+        matched = { key: topic.replyKey, count: hitCount }
+      }
+    }
+    return matched ? tt(`aiCounselor.${matched.key}`) : ""
+  }
+
+  async function handleSend() {
+    const trimmed = input.trim()
+    if (!trimmed) return
+
+    setShowWelcome(false)
+    setMessages((prev) => [...prev, { role: "user", content: trimmed }])
     setInput("")
-    setMessages((prev) => [...prev, { role: "user", content: text }])
-    setAnalyzing(true)
+    setIsAnalyzing(true)
 
-    const lower = text.toLowerCase()
-    let reply = autoReplies.anxiety
-    if (lower.includes("stress") || lower.includes("tired") || lower.includes("exhaust"))
-      reply = autoReplies.stress
-    else if (lower.includes("sleep") || lower.includes("bed") || lower.includes("insomnia"))
-      reply = autoReplies.sleep
-    else if (lower.includes("alone") || lower.includes("lonely") || lower.includes("nobody"))
-      reply = autoReplies.lonely
+    await new Promise((r) => setTimeout(r, 800 + Math.random() * 1200))
 
-    setTimeout(() => {
-      setAnalyzing(false)
-      setMessages((prev) => [...prev, { role: "assistant", content: reply }])
-    }, 2000)
+    const reply = detectTopic(trimmed)
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "ai",
+        content: reply || tt("aiCounselor.welcome"),
+      },
+    ])
+    setIsAnalyzing(false)
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault()
+      handleSend()
+    }
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-dc-text">AI Companion</h2>
-        <p className="mt-1 text-sm text-dc-muted">A friend who listens, without judgment</p>
-      </div>
+    <div className="max-w-2xl mx-auto px-4">
+      <div className="glass-strong rounded-2xl overflow-hidden">
+        <div className="flex items-center gap-3 p-4 border-b border-dc-border">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-dc-accent to-dc-mint flex items-center justify-center">
+            <Bot className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-dc-text">{tt("aiCounselor.title")}</h3>
+            <p className="text-xs text-dc-muted">{tt("aiCounselor.subtitle")}</p>
+            <span className="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full bg-dc-accent/10 text-dc-accent/70 border border-dc-accent/20">
+              {tt("aiCounselor.badge")}
+            </span>
+          </div>
+        </div>
 
-      <div className="glass-strong rounded-2xl overflow-hidden" style={{ minHeight: "440px" }}>
-        <div className="h-[340px] overflow-y-auto p-4 space-y-4 scroll-smooth">
-          {messages.map((msg, i) => (
-            <div key={i} className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
-              {msg.role === "assistant" && (
-                <div className="w-8 h-8 rounded-full bg-dc-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Bot className="w-4 h-4 text-dc-accent" />
-                </div>
-              )}
-              <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                  msg.role === "user"
-                    ? "bg-dc-accent text-dc-deep rounded-tr-md"
-                    : "glass rounded-tl-md text-dc-text"
-                }`}
-              >
-                {msg.content}
+        <div ref={chatRef} className="h-80 overflow-y-auto p-4 space-y-4 scroll-smooth">
+          {showWelcome && (
+            <div className="flex gap-3 animate-fade-in-up">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-dc-accent to-dc-mint flex items-center justify-center flex-shrink-0">
+                <Bot className="w-4 h-4 text-white" />
               </div>
-              {msg.role === "user" && (
-                <div className="w-8 h-8 rounded-full bg-dc-accent flex items-center justify-center flex-shrink-0 mt-1">
-                  <User className="w-4 h-4 text-dc-deep" />
-                </div>
-              )}
-            </div>
-          ))}
-
-          {analyzing && (
-            <div className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-dc-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
-                <Bot className="w-4 h-4 text-dc-accent" />
-              </div>
-              <div className="glass rounded-2xl rounded-tl-md px-5 py-3 text-sm text-dc-muted overflow-hidden relative">
-                <span className="relative z-10">Analyzing your emotions...</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-dc-accent/[0.06] to-transparent animate-analysis-shimmer" />
+              <div className="glass rounded-2xl rounded-tl-sm px-4 py-3 max-w-[85%]">
+                <p className="text-sm text-dc-text leading-relaxed">
+                  {tt("aiCounselor.welcome")}
+                </p>
               </div>
             </div>
           )}
 
-          <div ref={endRef} />
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""} animate-fade-in-up`}
+            >
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                  msg.role === "user"
+                    ? "bg-dc-accent"
+                    : "bg-gradient-to-br from-dc-accent to-dc-mint"
+                }`}
+              >
+                {msg.role === "user" ? (
+                  <User className="w-4 h-4 text-white" />
+                ) : (
+                  <Bot className="w-4 h-4 text-white" />
+                )}
+              </div>
+              <div
+                className={`rounded-2xl px-4 py-3 max-w-[85%] ${
+                  msg.role === "user"
+                    ? "bg-dc-accent/20 rounded-tr-sm"
+                    : "glass rounded-tl-sm"
+                }`}
+              >
+                <p className="text-sm text-dc-text leading-relaxed whitespace-pre-wrap">
+                  {msg.content}
+                </p>
+              </div>
+            </div>
+          ))}
+
+          {isAnalyzing && (
+            <div className="flex gap-3 animate-fade-in-up">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-dc-accent to-dc-mint flex items-center justify-center flex-shrink-0">
+                <Bot className="w-4 h-4 text-white" />
+              </div>
+              <div className="glass rounded-2xl rounded-tl-sm px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <Loader2 className="w-4 h-4 text-dc-accent animate-spin" />
+                  <span className="text-sm text-dc-muted">{tt("aiCounselor.analyzing")}</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        <div className="border-t border-dc-border p-4">
+        <div className="p-4 border-t border-dc-border">
           <div className="flex gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Share what's on your mind..."
-              className="flex-1 bg-dc-surface rounded-xl px-4 py-2.5 text-sm text-dc-text placeholder:text-dc-muted/40 outline-none border border-dc-border focus:border-dc-accent/40 transition-colors"
+              onKeyDown={handleKeyDown}
+              placeholder={tt("aiCounselor.placeholder")}
+              className="flex-1 bg-dc-surface/50 border border-dc-border rounded-xl px-4 py-2.5 text-sm text-dc-text placeholder:text-dc-muted/60 outline-none focus:border-dc-accent/50 transition-colors"
             />
-            <button
-              onClick={handleSend}
-              disabled={analyzing || !input.trim()}
-              className="w-10 h-10 rounded-xl bg-dc-accent text-dc-deep flex items-center justify-center hover:bg-dc-accent/90 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              <Send className="w-4 h-4" />
-            </button>
+            <button onClick={handleSend} disabled={!input.trim() || isAnalyzing}
+            className="px-5 py-2.5 rounded-xl bg-dc-accent hover:bg-dc-accent/80 disabled:opacity-40 disabled:cursor-not-allowed text-sm text-white font-medium transition-all"
+          >
+            {tt("aiCounselor.submit")}
+          </button>
           </div>
         </div>
       </div>

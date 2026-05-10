@@ -1,19 +1,25 @@
+"use client"
+
 import HeroSection from "@/components/HeroSection"
 import AiCounselor from "@/components/AiCounselor"
-import AmbientAudio from "@/components/AmbientAudio"
+import AudioMixer from "@/components/AudioMixer"
 import BreathingCounter from "@/components/BreathingCounter"
-import SleepCalculator from "@/components/SleepCalculator"
 import DailyCheckin from "@/components/DailyCheckin"
+import AiHypnotist from "@/components/AiHypnotist"
 import ResonanceWall from "@/components/ResonanceWall"
 import SeoContent from "@/components/SeoContent"
+import { useLanguage } from "@/context/LanguageContext"
 
 export default function Home() {
+  const { tt } = useLanguage()
+
   return (
     <main className="relative">
+      <div className="biophilic-bg fixed inset-0 z-0 pointer-events-none" />
       <HeroSection
-        title="Your Midnight Sanctuary"
-        subtitle="AI-powered emotional support & sleep guidance. You are not alone in the quiet hours."
-        ctaText="Begin Your Journey"
+        title={tt("hero.title")}
+        subtitle={tt("hero.subtitle")}
+        ctaText={tt("hero.cta")}
       />
 
       <div className="relative">
@@ -24,21 +30,25 @@ export default function Home() {
           </section>
 
           <section id="ambient-audio">
-            <AmbientAudio />
+            <AudioMixer />
           </section>
 
           <section id="tools" className="px-4 sm:px-6">
-            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass rounded-2xl p-6">
+            <div className="max-w-6xl mx-auto">
+              <div className="glass rounded-2xl p-6 max-w-md mx-auto">
                 <BreathingCounter />
               </div>
-              <div className="glass rounded-2xl p-6">
-                <SleepCalculator />
-              </div>
-              <div className="glass rounded-2xl p-6">
-                <DailyCheckin />
-              </div>
             </div>
+          </section>
+
+          <section id="daily-checkin" className="px-4 sm:px-6">
+            <div className="max-w-lg mx-auto">
+              <DailyCheckin />
+            </div>
+          </section>
+
+          <section id="hypnotist">
+            <AiHypnotist />
           </section>
 
           <section id="resonance-wall">
@@ -51,12 +61,10 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="border-t border-dc-border py-8 text-center text-sm text-dc-muted">
+      <footer className="py-8 text-center text-sm text-dc-muted">
         <div className="max-w-4xl mx-auto px-4">
-          <p>DeepCalm AI &copy; {new Date().getFullYear()} &mdash; Midnight Sanctuary</p>
-          <p className="mt-1">
-            This is not a substitute for professional medical advice. If you are in crisis, please contact your local emergency services.
-          </p>
+          <p>{tt("footer.copyright")}</p>
+          <p className="mt-1">{tt("footer.tagline")}</p>
         </div>
       </footer>
     </main>

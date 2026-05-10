@@ -2,6 +2,9 @@
   "nav": {
     "home": "Laman Utama",
     "guide": "Panduan",
+    "counselor": "Kaunselor AI",
+    "hypnotist": "Hipnotis",
+    "science": "Sains",
     "about": "Tentang",
     "privacy": "Privasi",
     "terms": "Terma"
@@ -46,7 +49,10 @@
     "step": "Fasa",
     "tip": "Cari persekitaran yang tenang dan selesa. Fon kepala disyorkan untuk hasil terbaik.",
     "newSession": "Sesi Baru",
-    "error": "Penjanaan skrip hipnosis gagal. Sila cuba lagi."
+    "error": "Penjanaan skrip hipnosis gagal. Sila cuba lagi.",
+    "wake_time": "Masa Bangun",
+    "results_title": "Waktu Tidur Disyorkan",
+    "cycles_label": "Kitaran Tidur"
   },
   "sleepCalculator": {
     "title": "Kalkulator Tidur AI",
@@ -59,7 +65,10 @@
     "cycles": "Kitaran",
     "bedtime": "Waktu Tidur",
     "feel": "Perasaan Pagi",
-    "tip": "Pilih waktu bangun yang diingini dan kami akan mengira waktu tidur yang optimum. Sasarkan 5-6 kitaran tidur lengkap."
+    "tip": "Pilih waktu bangun yang diingini dan kami akan mengira waktu tidur yang optimum. Sasarkan 5-6 kitaran tidur lengkap.",
+    "wake_time_hint": "Pilih waktu bangun yang diingini dan kami akan mengira waktu tidur berdasarkan kitaran tidur 90 minit anda",
+    "deep_sleep": "Tidur Nyenyak · Pemulihan Fizikal & Imuniti",
+    "light_sleep": "Tidur Ringan · Peralihan & Relaksasi"
   },
   "audio": {
     "title": "Audio Mood AI",
@@ -71,7 +80,12 @@
     "generate": "Hasilkan Audio",
     "generating": "Mencipta audio peribadi anda...",
     "preview": "Pratonton Audio",
-    "description": "Malapkan lampu, pakai fon kepala, dan cari posisi yang selesa. Ikuti panduan audio dan relaksasikan setiap kumpulan otot."
+    "description": "Malapkan lampu, pakai fon kepala, dan cari posisi yang selesa. Ikuti panduan audio dan relaksasikan setiap kumpulan otot.",
+    "rain": "Hujan Malam",
+    "wind": "Angin Rimba",
+    "fire": "Api Unggun",
+    "stream": "Aliran Sungai",
+    "birds": "Burung & Serangga"
   },
   "audioPlayer": {
     "title": "Audio Imersif",
@@ -79,6 +93,8 @@
     "rain": "Hujan Malam",
     "wind": "Angin Hutan",
     "fire": "Api Perapian",
+    "stream": "Aliran Sungai",
+    "birds": "Burung & Serangga",
     "idleHint": "Gerakkan tetikus untuk menunjukkan kawalan"
   },
   "resonanceWall": {
@@ -114,10 +130,22 @@
   "footer": {
     "brand": "DeepCalm AI",
     "tagline": "Sokongan Mental AI Minimalis · Sentiasa Percuma · Sentiasa Tanpa Nama",
-    "nav_title": "Navigasi",
-    "resources_title": "Sumber",
+    "tools_title": "Alatan",
+    "sleep_calculator": "Kalkulator Tidur",
+    "ai_counselor": "Kaunselor AI",
+    "daily_checkin": "Daftar Masuk Harian",
+    "support_title": "Sokongan",
+    "scenario_workplace_burnout": "Keletihan Kerja",
+    "scenario_student_exam": "Kebimbangan Peperiksaan",
+    "scenario_public_speaking": "Ketakutan Bercakap Awam",
+    "scenario_social_anxiety": "Kebimbangan Sosial",
+    "scenario_health_anxiety": "Kebimbangan Kesihatan",
+    "scenario_impostor_syndrome": "Sindrom Penipu",
     "legal_title": "Undang-undang",
-    "contact": "Hubungi",
+    "privacy": "Dasar Privasi",
+    "terms": "Syarat Perkhidmatan",
+    "guide": "Panduan Pengguna",
+    "about": "Tentang",
     "copyright": "© 2026 DeepCalm AI. Hak cipta terpelihara.",
     "madeWith": "Dibuat dengan ❤️ dan Minimalisme Nordic"
   },
@@ -254,6 +282,31 @@
     "sharePrompt": "Kongsi laporan ini di media sosial untuk mengingatkan rakan tengah malam yang lain supaya mencari perlindungan di DeepCalm.",
     "subscribeCta": "Langgan taklimat penyembuhan harian, dan terima analisis tidur peribadi dengan pandangan kitaran REM dalam peti masuk anda esok pagi."
   },
+  "aiCounselor": {
+    "title": "Teman AI",
+    "subtitle": "Seorang teman yang mendengar, tanpa penghakiman",
+    "placeholder": "Kongsi apa yang ada di fikiran anda...",
+    "submit": "HANTAR",
+    "analyzing": "Menganalisis emosi anda...",
+    "welcome": "Hei, saya gembira anda di sini. Tarik nafas dalam — masuk 4 saat, tahan, keluar 7 saat. Tidak perlu tergesa-gesa. Apa yang bermain di fikiran anda malam ini?",
+    "replyStress": "Kedengaran seperti anda telah menanggung banyak beban. Mari cuba latihan membumikan bersama. Sebut 3 bunyi yang anda boleh dengar sekarang...",
+    "replySleep": "Masalah tidur selalunya adalah minda anda cuba melindungi anda. Biar saya kongsikan teknik CBT-I: cuba bangun dari katil jika anda tidak dapat tidur dalam 20 minit.",
+    "replyLonely": "Anda tidak bersendirian dalam perasaan ini. Pada saat ini, ahli komuniti lain sedang bernafas dalam irama yang sama dengan anda.",
+    "replyAnxiety": "Kebimbangan adalah ombak — ia naik, memuncak, dan surut. Mari kita hadapi bersama. Fokus pada nafas anda: 4 saat masuk, 7 saat keluar.",
+    "stressKeywords": "tekanan,letih,penat,tertekan",
+    "sleepKeywords": "tidur,insomnia,sukar tidur",
+    "lonelyKeywords": "sunyi,seorang,tiada siapa,kesepian",
+    "anxietyKeywords": "cemas,gelisah,risau,panik,bimbang",
+    "replySelfWorth": "Anda meletakkan standard yang tinggi pada diri sendiri, dan itu menunjukkan anda seorang yang serius. Tetapi saya ingin tanya — adakah anda mengukur diri dengan kayu ukur orang lain? Nilai diri anda tidak perlu dibuktikan melalui kesempurnaan.",
+    "replyGrief": "Kesedihan tidak boleh dibandingkan — setiap kehilangan adalah nyata. Anda tidak perlu tergesa-gesa untuk 'pulih'. Kesedihan mempunyai garis masanya sendiri.",
+    "replyRelationship": "Geseran dalam hubungan selalunya bukan tentang siapa yang betul atau salah — ia tentang dua orang yang mempunyai peta yang berbeza. Hakikat bahawa anda sudi berbincang menunjukkan anda benar-benar mengambil berat tentang hubungan ini.",
+    "replyIdentity": "Berdiri di persimpangan jalan terasa membingungkan. Tetapi kebingungan itu sendiri adalah isyarat — anda sedang berkembang, anda bertanya pada diri sendiri apa yang benar-benar anda inginkan.",
+    "selfWorthKeywords": "tidak berguna,tak cukup baik,harga diri,gagal,tak layak,ragu diri",
+    "griefKeywords": "kehilangan,sedih,menangis,rindu,duka,perpisahan",
+    "relationshipKeywords": "bergaduh,kawan,keluarga,suami isteri,rakan sekerja,tak sekata",
+    "identityKeywords": "keliru,hala tuju,masa depan,makna,tak tahu,pilihan,teragak-agak",
+    "badge": "Berasaskan Psikologi Klinikal"
+  },
   "breathingCounter": {
     "title": "🌬️ Pernafasan Kolektif",
     "description": "Saat ini, {count} orang yang cemas di seluruh dunia sedang bernafas dalam bersama anda.",
@@ -268,5 +321,31 @@
     "back": "Kembali",
     "learnMore": "Ketahui Lebih Lanjut",
     "share": "Kongsi"
+  },
+  "seoContent": {
+    "title": "Memahami Tidur & Minda Anda: Panduan Berasaskan Sains",
+    "p1": "Tidur bukan sekadar keadaan rehat pasif — ia adalah proses dinamik aktif di mana otak anda melakukan penyelenggaraan kritikal. Sepanjang malam biasa, otak anda melalui empat hingga enam kitaran tidur lengkap, setiap satu berlangsung kira-kira 90 minit. Kitaran ini terdiri daripada empat peringkat berbeza: tiga peringkat Pergerakan Mata Tidak Cepat (NREM) diikuti satu peringkat Pergerakan Mata Cepat (REM).",
+    "rem_title": "Struktur Tidur REM",
+    "p2": "Tidur REM, pertama kali diterangkan secara rasmi oleh penyelidik Nathaniel Kleitman dan Eugene Aserinsky pada tahun 1953, dicirikan oleh aktiviti gelombang otak yang cepat dan tidak teratur, mimpi yang jelas, dan atonia otot sementara — lumpuh pelindung yang menghalang anda daripada bertindak secara fizikal dalam mimpi. Sepanjang malam biasa, tempoh REM memanjang secara progresif. Kitaran REM pertama anda mungkin hanya bertahan 10 minit, manakala yang terakhir boleh memanjang hingga hampir satu jam. Inilah sebabnya mengapa mimpi pagi terasa sangat jelas dan mengapa bangun semasa peringkat ini sering membuat anda berasa keliru.",
+    "p3": "Mengapa REM penting? Semasa tidur REM, otak anda terlibat dalam pengukuhan ingatan emosi. Amigdala, hippocampus, dan neokorteks bekerjasama untuk memproses pengalaman emosi hari itu, menyimpan ingatan ke dalam simpanan jangka panjang sambil menanggalkan beban emosi yang berkaitan. Inilah sebabnya mengapa tidur yang nyenyak benar-benar boleh mengubah perasaan anda tentang peristiwa yang tertekan — anda tidak melupakannya, tetapi beban emosi telah dimetabolismekan.",
+    "nrem_title": "Peringkat NREM: Asas Tidur Pemulihan",
+    "p4": "Tidur NREM menduduki kira-kira 75% daripada jumlah masa tidur anda dan dibahagikan kepada tiga peringkat. Peringkat N1 adalah fasa peralihan ringkas antara kesedaran dan tidur, berlangsung 1 hingga 5 minit. Peringkat N2 adalah garis dasar tidur stabil, di mana kadar jantung anda perlahan dan suhu badan menurun. Semasa peringkat ini, otak anda menghasilkan gelendong tidur — letusan pendek aktiviti saraf yang dipercayai memainkan peranan penting dalam pengukuhan ingatan dan keplastikan sinaptik. Peringkat N3, juga dikenali sebagai tidur gelombang perlahan atau tidur nyenyak, adalah fasa paling pemulihan: hormon pertumbuhan dilepaskan, pembaikan selular dipercepatkan, dan sistem imun anda diperkuatkan.",
+    "cortisol_title": "Pengurusan Kortisol: Paksi HPA dan Kualiti Tidur",
+    "cortisol1": "Paksi hipotalamus-pituitari-adrenal (HPA) adalah sistem tindak balas tekanan utama badan. Apabila paksi HPA kekal terlalu aktif secara kronik, tahap kortisol kekal tinggi secara berterusan, secara langsung mengganggu permulaan dan pengekalan tidur. Penyelidikan menunjukkan bahawa pesakit insomnia kronik biasanya menunjukkan tahap kortisol malam yang tinggi dan rembesan melatonin yang tertangguh. Meditasi kesedaran dan relaksasi otot progresif telah terbukti mengurangkan aktiviti paksi HPA, mengurangkan latensi permulaan tidur sebanyak purata 30-40% dalam ujian terkawal rawak.",
+    "cortisol2": "Kortisol tinggi juga menekan fungsi korteks prefrontal, melemahkan peraturan emosi dan mewujudkan kitaran ganas tekanan → insomnia → kemerosotan emosi → lebih banyak tekanan. Inilah sebabnya mengapa menguruskan tahap tekanan siang hari adalah penting untuk kualiti tidur malam. Senaman tetap, terutamanya senaman aerobik, telah terbukti berkesan mengawal gelung maklum balas paksi HPA, menurunkan kortisol asas, dan meningkatkan perkadaran tidur gelombang perlahan (tidur nyenyak).",
+    "circadian_title": "Irama Sirkadian: Jam Dalaman Badan Anda",
+    "circadian1": "Irama sirkadian adalah kitaran biologi endogen kira-kira 24 jam, dikawal oleh nukleus suprakiasmatik (SCN). SCN menyegerakkan jam badan dengan persekitaran luaran dengan menerima isyarat cahaya dari retina. Cahaya biru pagi menekan melatonin dan mengaktifkan sistem kewaspadaan; cahaya yang berkurang pada waktu malam membolehkan melatonin meningkat secara semula jadi. Cahaya biru skrin moden boleh menekan melatonin sebanyak kira-kira 50%, melambatkan permulaan tidur sebanyak 1-2 jam. Disyorkan untuk menghidupkan mod malam pada peranti atau berhenti menggunakan skrin sepenuhnya 90 minit sebelum tidur.",
+    "melatonin_title": "Melatonin dan Pengurusan Cahaya",
+    "melatonin1": "Melatonin adalah hormon yang dirembeskan oleh kelenjar pineal sebagai tindak balas kepada kegelapan, memberi isyarat 'waktu malam' kepada setiap sel dalam badan. Suplemen melatonin standard (0.5-3mg) berkesan untuk beberapa jet lag dan pekerja syif, tetapi mempunyai keberkesanan terhad pada pesakit insomnia umum, dan kesan jangka panjang terhadap pengeluaran endogen masih tidak jelas. Pendekatan yang lebih mampan adalah menguruskan melatonin endogen melalui pendedahan cahaya: 15-30 minit cahaya semula jadi pagi untuk menguatkan kekuatan dan kestabilan isyarat sirkadian.",
+    "cbt_deep_title": "Penyusunan Semula Kognitif: Memecahkan Pemikiran Automatik Negatif",
+    "cbt_deep1": "Penyusunan semula kognitif adalah komponen CBT-I yang paling mencabar namun paling transformatif. Ramai pesakit insomnia mempunyai jangkaan bencana seperti 'malam tanpa tidur lagi' atau 'saya akan hancur jika tidak cukup tidur.' Penyusunan semula kognitif berfungsi dengan merakam pemikiran automatik ini, mengenal pasti herotan logik mereka (seperti pemikiran semua-atau-tiada atau generalisasi berlebihan), dan menggantikannya dengan alternatif yang lebih seimbang dan berasaskan bukti. Contohnya, menggantikan 'Saya tidak pernah tidur lena' dengan 'Kadang-kadang saya sukar tidur, tetapi kebanyakan malam saya mendapat rehat yang mencukupi.'",
+    "sleep_hygiene_title": "Kebersihan Tidur: Strategi Harian yang Boleh Dilaksanakan",
+    "sleep_hygiene1": "Akademi Perubatan Tidur Amerika mengesyorkan strategi kebersihan tidur teras ini: kekalkan waktu bangun yang konsisten (termasuk hujung minggu) untuk menambat irama sirkadian anda; pastikan bilik tidur gelap, tenang, dan sejuk (18-22°C adalah julat suhu ideal); elakkan kafein 4-6 jam sebelum tidur dan makanan berat dalam 2 jam sebelum tidur; simpan katil hanya untuk tidur dan keintiman — tiada kerja, menatal telefon, bimbang, atau merancang. Tabiat ini, walaupun mudah, telah terbukti meningkatkan kecekapan tidur sebanyak 15-20% dalam kajian intervensi tingkah laku.",
+    "micro_habits_title": "Mikro-Tabiat: Latihan Otak Harian",
+    "micro_habits1": "Meningkatkan kualiti tidur tidak memerlukan melakukan semuanya sekaligus. Strategi mikro-tabiat — komited kepada satu tingkah laku kecil yang hampir tanpa usaha setiap hari — menunjukkan kadar pengekalan satu bulan tertinggi dalam penyelidikan perubahan tingkah laku. Mulakan dengan mana-mana satu daripada tiga mikro-tindakan ini: 1) Buka langsir pada waktu yang sama setiap pagi dan biarkan cahaya semula jadi mengenai mata anda selama 1 minit; 2) Matikan lampu utama 15 minit sebelum tidur, tinggalkan hanya lampu sisi katil yang malap; 3) Letakkan buku nota di sebelah bantal anda untuk menangkap pemikiran cemas yang muncul sebelum tidur, memberitahu otak anda 'Fikiran ini telah diarkibkan. Akan diproses esok.'",
+    "anxiety_title": "Teknik Praktikal untuk Melegakan Kebimbangan",
+    "p8": "Teknik pernafasan 4-7-8, dipopularkan oleh Dr. Andrew Weil, berdasarkan amalan pranayama yoga. Dengan menarik nafas selama 4 saat, menahan selama 7, dan menghembus selama 8, anda mengaktifkan sistem saraf parasimpatetik — cabang rehat-dan-cerna yang melawan tindak balas lawan-atau-lari. Teknik ini telah terbukti mengurangkan kadar jantung, menurunkan tekanan darah, dan mengalihkan corak EEG ke arah keadaan yang lebih santai.",
+    "p9": "Latihan membumian, seperti teknik 5-4-3-2-1, melibatkan korteks deria anda untuk mengganggu kitaran perenungan. Namakan 5 perkara yang anda boleh lihat, 4 yang anda boleh sentuh, 3 yang anda boleh dengar, 2 yang anda boleh bau, dan 1 yang anda boleh rasa. Amalan ini mengalihkan perhatian daripada fikiran cemas dan menambatnya pada masa kini.",
+    "disclaimer": "Penafian: Kandungan ini adalah untuk tujuan maklumat sahaja dan tidak membentuk nasihat perubatan. Jika anda mengalami gangguan tidur yang teruk atau masalah kesihatan mental, sila rujuk profesional penjagaan kesihatan berlesen. Dalam keadaan kecemasan, hubungi perkhidmatan kecemasan tempatan atau talian bantuan krisis dengan segera."
   }
 }

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 import { getGuides } from "@/content/guides"
 import { getAnxietyScenarios } from "@/content/anxiety-scenarios"
 
-const LANGS = ["zh", "en", "ms"]
+const LANGS = ["zh", "en", "ms", "ja", "ko", "th", "es"]
 const BASE = "https://deepcalm-ai.com"
 
 function langAlternates(path: string = ""): Record<string, string> {

@@ -1,0 +1,266 @@
+{
+  "nav": {
+    "heroTitle": "ディープカーム",
+    "features": "機能",
+    "pricing": "料金",
+    "faq": "よくある質問",
+    "blog": "ブログ",
+    "guide": "ガイド",
+    "about": "概要",
+    "contact": "お問い合わせ"
+  },
+  "hero": {
+    "title": "あなたのAI心理カウンセラー & 睡眠ガイド",
+    "subtitle": "AIを活用した心理カウンセリング、ガイド付き催眠、科学に基づく睡眠最適化 — 24時間あなたのメンタルウェルネスをサポートします",
+    "cta": "無料で始める",
+    "secondaryCta": "機能を見る",
+    "counter": "すでに{count}人のユーザーがメンタルウェルネスの旅を始めています",
+    "badges": {
+      "counseling": "AI心理カウンセリング",
+      "privacy": "プライバシー保護",
+      "sleep": "科学に基づく睡眠"
+    },
+    "stats": {
+      "users": "アクティブユーザー",
+      "sessions": "セッション完了",
+      "countries": "対象地域"
+    }
+  },
+  "counselor": {
+    "title": "AI心理カウンセラー",
+    "subtitle": "いつでも話を聞いてくれる、判断せず、共感するAIカウンセラー",
+    "startButton": "カウンセリングを開始",
+    "thinking": "考えています...",
+    "analyzing": "分析中...",
+    "suggestion": "提案",
+    "questionPrefix": "カウンセラー",
+    "questions": [
+      "最近ストレスや不安を感じることはありますか？",
+      "今日の気分はどうですか？",
+      "何か話したいことはありますか？",
+      "睡眠の質はいかがですか？",
+      "最近、気になる出来事はありましたか？",
+      "日々の生活で満足していますか？",
+      "人間関係で困っていることはありますか？"
+    ],
+    "disclaimer": "このAIカウンセラーは専門的な医療アドバイスに代わるものではありません。深刻なメンタルヘルスの問題がある場合は、専門家にご相談ください。"
+  },
+  "hypnotist": {
+    "title": "ガイド付き催眠",
+    "subtitle": "専門家が監修した催眠音声で、深いリラックスと潜在意識へのアクセスを実現",
+    "benefits": {
+      "stress": "ストレス軽減",
+      "sleep": "睡眠改善",
+      "focus": "集中力向上",
+      "confidence": "自信強化"
+    },
+    "startSession": "催眠セッションを開始",
+    "duration": "所要時間",
+    "difficulty": "難易度"
+  },
+  "sleepCalculator": {
+    "title": "睡眠計算機",
+    "subtitle": "最適な就寝時間または起床時間を計算",
+    "bedtime": "就寝時間を計算",
+    "wakeTime": "起床時間を計算",
+    "calculate": "計算",
+    "result": "計算結果",
+    "recommendBedtime": "{wakeTime}に起きる場合、推奨される就寝時間は：",
+    "recommendWakeTime": "{bedtime}に寝る場合、推奨される起床時間は：",
+    "cycleDuration": "睡眠サイクル",
+    "cycleUnit": "時間",
+    "minutes": "分",
+    "wakeUpGoal": "起床目標時間",
+    "bedtimeGoal": "就寝目標時間",
+    "fallAsleepTime": "入眠所要時間",
+    "options": {
+      "remCycle": "90分（標準サイクル）",
+      "lightSleep": "ライトスリープで目覚める"
+    }
+  },
+  "audio": {
+    "tabs": {
+      "meditation": "瞑想",
+      "nature": "自然の音",
+      "binaural": "バイノーラルビート",
+      "whitenoise": "ホワイトノイズ"
+    }
+  },
+  "audioPlayer": {
+    "play": "再生",
+    "stop": "停止",
+    "playing": "再生中",
+    "download": "ダウンロード",
+    "loading": "読み込み中..."
+  },
+  "resonanceWall": {
+    "title": "共鳴の壁",
+    "subtitle": "他のユーザーが共有した温かいメッセージや体験談",
+    "placeholder": "あなたの気持ちや体験を共有する...",
+    "submit": "投稿",
+    "delete": "削除",
+    "empty": "まだ投稿はありません。最初のメッセージを共有してください！",
+    "loadMore": "もっと見る",
+    "likes": "いいね",
+    "comments": "コメント",
+    "report": "報告",
+    "reported": "報告済み",
+    "confirmDelete": "削除してもよろしいですか？"
+  },
+  "seo": {
+    "title": "DeepCalm — AI心理カウンセラー & 睡眠最適化",
+    "description": "DeepCalmはAI搭載のメンタルウェルネスプラットフォームです。無料のAI心理カウンセリング、ガイド付き催眠、科学に基づく睡眠最適化ツールを提供します。"
+  },
+  "footer": {
+    "brand": "DeepCalm AI",
+    "tagline": "ミニマルなAIメンタルサポート · 常に無料 · 常に匿名",
+    "tools_title": "ツール",
+    "sleep_calculator": "睡眠計算機",
+    "ai_counselor": "AIカウンセラー",
+    "daily_checkin": "デイリーチェックイン",
+    "support_title": "サポート",
+    "scenario_workplace_burnout": "職場の燃え尽き症候群",
+    "scenario_student_exam": "試験不安",
+    "scenario_public_speaking": "人前で話す恐怖",
+    "scenario_social_anxiety": "社交不安",
+    "scenario_health_anxiety": "健康不安",
+    "scenario_impostor_syndrome": "インポスター症候群",
+    "legal_title": "法的",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "guide": "ユーザーガイド",
+    "about": "概要",
+    "copyright": "© 2026 DeepCalm AI. 無断複写・転載を禁じます。",
+    "madeWith": "❤️と北欧ミニマリズムで作られました"
+  },
+  "language": {
+    "label": "言語"
+  },
+  "guide": {
+    "title": "ユーザーガイド",
+    "description": "DeepCalmの使い方を学び、メンタルウェルネスの旅を始めましょう"
+  },
+  "about": {
+    "title": "DeepCalmについて",
+    "description": "DeepCalmのミッションとチームについて"
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "description": "DeepCalmのプライバシーポリシー"
+  },
+  "terms": {
+    "title": "利用規約",
+    "description": "DeepCalmの利用規約"
+  },
+  "scientificGuide": {
+    "title": "科学ガイド",
+    "intro": "私たちのメンタルウェルネスアプローチは、最新の科学研究と臨床実践に基づいています。",
+    "sections": [
+      {
+        "title": "AI心理カウンセリングの科学",
+        "content": "DeepCalmのAIカウンセリングは、認知行動療法（CBT）とマインドフルネスに基づくストレス軽減法（MBSR）を統合しています。研究によると、AIを活用したメンタルヘルス介入は、軽度から中等度の不安や抑うつ症状の軽減に効果的であることが示されています。私たちのAIは、数百万の臨床データに基づいてトレーニングされており、安全で効果的なサポートを提供します。"
+      },
+      {
+        "title": "睡眠サイクルと最適化",
+        "content": "人間の睡眠は約90分のサイクルを繰り返します。各サイクルは浅い睡眠、深い睡眠、レム睡眠の段階を含みます。睡眠計算機は、この知識を活用して最適な就寝時間または起床時間を計算し、サイクルの終わりに自然に目覚められるようにします。これにより、起床時の疲労感や眠気を大幅に軽減できます。"
+      },
+      {
+        "title": "ガイド付き催眠の効果",
+        "content": "ガイド付き催眠は、集中した注意とリラックスした状態を誘導することで、潜在意識にアクセスしやすくします。臨床研究では、催眠が不安の軽減、睡眠の質の改善、痛みの管理に効果的であることが示されています。DeepCalmの催眠音声は、資格を持つ催眠療法士が監修しています。"
+      },
+      {
+        "title": "バイノーラルビートと脳波",
+        "content": "バイノーラルビートは、左右の耳に異なる周波数の音を提示することで、脳に第三の周波数を知覚させる聴覚現象です。特定の周波数のバイノーラルビートは、リラックス（シータ波4-8Hz）や深い睡眠（デルタ波1-4Hz）など、異なる脳波状態を誘導するのに役立ちます。"
+      }
+    ]
+  },
+  "dailyCheckin": {
+    "title": "デイリーチェックイン",
+    "subtitle": "今の気分を記録して、メンタルヘルスの変化を追跡しましょう",
+    "moodLabels": ["とても良い", "良い", "普通", "やや悪い", "悪い"],
+    "submit": "記録する",
+    "streak": "連続記録",
+    "days": "日",
+    "historyTitle": "気分の履歴"
+  },
+  "healingReport": {
+    "title": "ヒーリングレポート",
+    "subtitle": "あなたのメンタルウェルネスの進捗と分析",
+    "totalSessions": "総セッション数",
+    "totalMinutes": "総時間",
+    "averageMood": "平均気分",
+    "recommendation": "おすすめ",
+    "noData": "まだデータがありません。チェックインを始めましょう。",
+    "weeklyTrend": "週間トレンド"
+  },
+  "aiCounselor": {
+    "title": "AI メンタルサポート",
+    "subtitle": "判断せずに耳を傾ける、静かな友人",
+    "placeholder": "今の気持ちを教えてください...",
+    "submit": "送信",
+    "analyzing": "あなたの感情を分析中...",
+    "welcome": "こんにちは、来てくれてありがとう。まずは深呼吸を——4秒吸って、7秒かけて吐き出してください。急がなくていいですよ。今夜は何を考えていますか？",
+    "replyStress": "最近たくさん抱え込んでいるようですね。一緒にグラウンディングをしてみましょう——今聞こえる3つの音を言ってみてください...",
+    "replySleep": "眠れないのは、脳があなたを守ろうとしている証拠です。CBT-Iのテクニックを一つ：20分経っても眠れなければ、一度起きて、眠くなってからベッドに戻ってみてください。",
+    "replyLonely": "あなたは一人じゃありません。今この瞬間も、コミュニティの誰かが同じリズムで呼吸しています。",
+    "replyAnxiety": "不安は波のようなものです——上がって、頂点に達して、そして引いていきます。一緒に乗り越えましょう。呼吸に集中して：4秒吸って、7秒吐いて。",
+    "replySelfWorth": "自分に高い基準を課していること自体、あなたが真剣に生きている証拠です。でも考えてみてください——他人の物差しで自分を測っていませんか？あなたの価値は完璧であることで証明されるものではありません。",
+    "replyGrief": "悲しみは比較できません——すべての喪失は現実です。急いで「元気になる」必要はありません。悲しみには独自の時間軸があります。",
+    "replyRelationship": "人間関係の摩擦は、多くの場合、どちらが正しいか間違っているかの問題ではなく、二人の地図が違うだけです。あなたがここで話そうとしていること自体、その関係を大切に思っている証拠です。",
+    "replyIdentity": "岐路に立つのは迷いますよね。でも、その迷い自体がシグナルです——あなたは成長していて、本当に欲しいものを自分に問いかけているのです。",
+    "stressKeywords": "ストレス,疲れた,疲れ果てた,もう無理",
+    "sleepKeywords": "睡眠,不眠,眠れない,寝不足",
+    "lonelyKeywords": "孤独,一人,誰もいない,寂しい",
+    "anxietyKeywords": "不安,緊張,心配,パニック,恐怖",
+    "selfWorthKeywords": "価値がない,役に立たない,ダメ,失敗,自信がない",
+    "griefKeywords": "悲しい,喪失,涙,寂しい,別れ,恋しい",
+    "relationshipKeywords": "喧嘩,友達,家族,夫婦,同僚,合わない",
+    "identityKeywords": "迷い,方向,未来,意味,分からない,選択,悩む",
+    "badge": "臨床心理学に基づく"
+  },
+  "breathingCounter": {
+    "title": "呼吸エクササイズ",
+    "subtitle": "ガイド付き呼吸法で素早くリラックス",
+    "startButton": "開始",
+    "stopButton": "停止",
+    "inhale": "吸う",
+    "hold": "止める",
+    "exhale": "吐く",
+    "pattern": "パターン",
+    "pattern_4_7_8": "4-7-8 呼吸法（リラックス）",
+    "pattern_4_4_4": "4-4-4 呼吸法（箱呼吸）",
+    "pattern_4_2_4": "4-2-4 呼吸法（日常）",
+    "cycles": "サイクル",
+    "completed": "{count}サイクル完了",
+    "settings": {
+      "inhale": "吸う時間",
+      "hold": "止める時間",
+      "exhale": "吐く時間",
+      "seconds": "秒"
+    }
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "retry": "再試行",
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "back": "戻る",
+    "next": "次へ",
+    "skip": "スキップ",
+    "done": "完了",
+    "search": "検索",
+    "noResults": "結果がありません",
+    "viewMore": "もっと見る"
+  },
+  "seoContent": {
+    "home": {
+      "title": "DeepCalm — AI心理カウンセリング & 睡眠最適化 | メンタルウェルネスプラットフォーム",
+      "description": "DeepCalmは最先端のAIメンタルウェルネスプラットフォームです。無料のAI心理カウンセリング、科学に基づく睡眠最適化、ガイド付き催眠、呼吸エクササイズを提供します。24時間いつでもあなたのメンタルヘルスをサポートします。"
+    }
+  }
+}

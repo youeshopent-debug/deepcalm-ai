@@ -71,7 +71,6 @@ body {
     background: var(--dc-card);
     backdrop-filter: blur(24px) saturate(1.2);
     -webkit-backdrop-filter: blur(24px) saturate(1.2);
-    border: 1px solid var(--dc-border);
     box-shadow:
       0 0 0 0.5px var(--dc-border-glow),
       0 8px 32px rgba(0, 0, 0, 0.3),
@@ -82,11 +81,32 @@ body {
     background: rgba(15, 23, 41, 0.85);
     backdrop-filter: blur(32px) saturate(1.4);
     -webkit-backdrop-filter: blur(32px) saturate(1.4);
-    border: 1px solid var(--dc-border-glow);
     box-shadow:
       0 0 0 0.5px rgba(126, 184, 255, 0.2),
       0 8px 40px rgba(0, 0, 0, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .biophilic-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 90% 70% at 50% 0%, rgba(126, 184, 255, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(78, 205, 196, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(126, 184, 255, 0.03) 0%, transparent 50%),
+      var(--dc-deep);
+  }
+
+  .biophilic-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 40% 30% at 30% 60%, rgba(78, 205, 196, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 35% 25% at 70% 40%, rgba(126, 184, 255, 0.05) 0%, transparent 50%);
+    animation: stream-glow 8s ease-in-out infinite;
   }
 
   .aurora-gradient {
@@ -167,6 +187,62 @@ body {
   50% { background-position: -200% center; }
 }
 
+@keyframes leaf-sway {
+  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0.15; }
+  25% { transform: translateX(8px) translateY(-4px) rotate(3deg); opacity: 0.2; }
+  50% { transform: translateX(-4px) translateY(2px) rotate(-2deg); opacity: 0.12; }
+  75% { transform: translateX(6px) translateY(-2px) rotate(1deg); opacity: 0.18; }
+}
+
+@keyframes float-particle {
+  0% { transform: translateY(100vh) translateX(0) scale(0.8); opacity: 0; }
+  10% { opacity: 0.15; }
+  90% { opacity: 0.1; }
+  100% { transform: translateY(-10vh) translateX(30px) scale(1.2); opacity: 0; }
+}
+
+@keyframes stream-glow {
+  0%, 100% { opacity: 0.04; transform: translateX(-2%) scaleY(1); }
+  25% { opacity: 0.07; transform: translateX(1%) scaleY(1.02); }
+  50% { opacity: 0.05; transform: translateX(2%) scaleY(0.98); }
+  75% { opacity: 0.08; transform: translateX(-1%) scaleY(1.01); }
+}
+
+@keyframes breathing-halo-4-7 {
+  0% { transform: scale(0.85); opacity: 0.04; }
+  36% { transform: scale(1.2); opacity: 0.1; }
+  100% { transform: scale(0.85); opacity: 0.04; }
+}
+
+@keyframes breathe-inner-4-7 {
+  0% { transform: scale(0.9); opacity: 0.06; }
+  36% { transform: scale(1.1); opacity: 0.14; }
+  100% { transform: scale(0.9); opacity: 0.06; }
+}
+
+@keyframes breathing-circle-expand {
+  0% { transform: scale(0.85); opacity: 0.5; }
+  36% { transform: scale(1.15); opacity: 0.9; }
+  100% { transform: scale(0.85); opacity: 0.5; }
+}
+
+@keyframes breathing-circle-4-7-8 {
+  0%, 5% { transform: scale(0.85); opacity: 0.5; }
+  21% { transform: scale(1.15); opacity: 0.9; }
+  58% { transform: scale(1.15); opacity: 0.9; }
+  100% { transform: scale(0.85); opacity: 0.5; }
+}
+
+@keyframes fade-in-glow {
+  from { opacity: 0; filter: blur(8px); transform: translateY(8px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@keyframes fade-out-glow {
+  from { opacity: 1; filter: blur(0); transform: translateY(0); }
+  to { opacity: 0; filter: blur(6px); transform: translateY(-6px); }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
@@ -180,6 +256,17 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fade-out-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
   }
 }
 
@@ -287,6 +374,18 @@ body {
   animation: breathe-inner 11s ease-in-out infinite;
 }
 
+.animate-breathing-halo-4-7 {
+  animation: breathing-halo-4-7 11s ease-in-out infinite;
+}
+
+.animate-breathe-inner-4-7 {
+  animation: breathe-inner-4-7 11s ease-in-out infinite;
+}
+
+.animate-breathing-circle {
+  animation: breathing-circle-expand 11s ease-in-out infinite;
+}
+
 .animate-aurora-drift {
   animation: aurora-drift 20s ease-in-out infinite;
 }
@@ -295,16 +394,54 @@ body {
   animation: analysis-shimmer 2s ease-in-out infinite;
 }
 
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up-slow {
+  animation: fade-in-up 2.5s ease-out forwards;
+}
+
+.animate-fade-out-down-slow {
+  animation: fade-out-down 2.5s ease-in forwards;
+}
+
 .animate-meteor-trail {
   animation: meteor-trail 4s ease-out forwards;
+}
+
+.animate-leaf-sway {
+  animation: leaf-sway 12s ease-in-out infinite;
+}
+
+.animate-float-particle {
+  animation: float-particle 18s linear infinite;
+}
+
+.animate-fade-in-glow {
+  animation: fade-in-glow 1.5s ease-out forwards;
+}
+
+.animate-fade-out-glow {
+  animation: fade-out-glow 2s ease-in forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-breathing-halo,
   .animate-breathe-inner,
+  .animate-breathing-halo-4-7,
+  .animate-breathe-inner-4-7,
+  .animate-breathing-circle,
   .animate-aurora-drift,
   .animate-analysis-shimmer,
-  .animate-meteor-trail {
+  .animate-fade-in-up,
+  .animate-fade-in-up-slow,
+  .animate-fade-out-down-slow,
+  .animate-meteor-trail,
+  .animate-leaf-sway,
+  .animate-float-particle,
+  .animate-fade-in-glow,
+  .animate-fade-out-glow {
     animation: none;
   }
 }

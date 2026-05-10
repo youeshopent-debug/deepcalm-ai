@@ -23,13 +23,13 @@ export default function HeroSection({
       <div className="aurora-gradient pointer-events-none absolute inset-0" />
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[600px] h-[600px] rounded-full animate-breathing-halo"
+        <div className="w-[600px] h-[600px] rounded-full animate-breathing-halo-4-7"
           style={{
             background: "radial-gradient(circle, rgba(126,184,255,0.12) 0%, rgba(106,90,205,0.08) 40%, transparent 65%)",
             filter: "blur(60px)",
           }}
         />
-        <div className="absolute w-[400px] h-[400px] rounded-full animate-breathe-inner"
+        <div className="absolute w-[400px] h-[400px] rounded-full animate-breathe-inner-4-7"
           style={{
             background: "radial-gradient(circle, rgba(126,184,255,0.1) 0%, rgba(78,205,196,0.06) 35%, transparent 60%)",
             filter: "blur(80px)",

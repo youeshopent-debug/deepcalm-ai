@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react"
+import { createContext, useContext, useState, useCallback, type ReactNode } from "react"
 import type { Locale } from "@/types"
 import { getDict, tt as t } from "@/lib/getDict"
 
@@ -35,13 +35,6 @@ export function LanguageProvider({
     (path: string): string => t(dict, path),
     [dict]
   )
-
-  useEffect(() => {
-    const stored = localStorage.getItem("deepcalm-locale") as Locale | null
-    if (stored && ["zh", "en", "ms"].includes(stored) && stored !== locale) {
-      setLocale(stored)
-    }
-  }, [setLocale, locale])
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale, dict, tt }}>

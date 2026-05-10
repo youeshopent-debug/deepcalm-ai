@@ -13,7 +13,7 @@ const PHASE_DURATION: Record<BreathPhase, number> = {
   inhale: 4000,
   hold: 7000,
   exhale: 8000,
-  rest: 1000,
+  rest: 0,
 }
 
 const PHASE_LABEL: Record<BreathPhase, { zh: string; en: string; ms: string }> = {
@@ -28,13 +28,6 @@ const PHASE_COLOR: Record<BreathPhase, string> = {
   hold: 'border-amber-400/60 shadow-amber-400/20',
   exhale: 'border-sky-400/60 shadow-sky-400/20',
   rest: 'border-dc-accent/40 shadow-dc-accent/10',
-}
-
-const PHASE_SCALE: Record<BreathPhase, string> = {
-  inhale: 'scale-110',
-  hold: 'scale-110',
-  exhale: 'scale-90',
-  rest: 'scale-100',
 }
 
 export default function BreathingCounter({ className = '' }: BreathingCounterProps) {
@@ -105,7 +98,7 @@ export default function BreathingCounter({ className = '' }: BreathingCounterPro
 
         <div className="mt-10 flex flex-col items-center gap-6">
           <div
-            className={`w-36 h-36 rounded-full border-[3px] ${PHASE_COLOR[phase]} ${PHASE_SCALE[phase]} transition-all duration-[1000ms] ease-in-out flex items-center justify-center bg-dc-card/40 shadow-lg backdrop-blur-sm`}
+            className={`w-36 h-36 rounded-full border-[3px] ${PHASE_COLOR[phase]} animate-breathing-circle flex items-center justify-center bg-dc-card/40 shadow-lg backdrop-blur-sm`}
           >
             <div className="text-center">
               <div className="text-3xl font-bold text-dc-text tabular-nums">{breathCount}</div>

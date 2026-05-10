@@ -2,6 +2,9 @@
   "nav": {
     "home": "Home",
     "guide": "Guide",
+    "counselor": "AI Counselor",
+    "hypnotist": "Hypnotist",
+    "science": "Science",
     "about": "About",
     "privacy": "Privacy",
     "terms": "Terms"
@@ -46,7 +49,10 @@
     "step": "Phase",
     "tip": "Find a quiet, comfortable environment. Headphones recommended for best results.",
     "newSession": "New Session",
-    "error": "Hypnosis script generation failed. Please try again."
+    "error": "Hypnosis script generation failed. Please try again.",
+    "wake_time": "Wake-up Time",
+    "results_title": "Recommended Bedtimes",
+    "cycles_label": "Sleep Cycles"
   },
   "sleepCalculator": {
     "title": "AI Sleep Calculator",
@@ -59,7 +65,10 @@
     "cycles": "Cycles",
     "bedtime": "Bedtime",
     "feel": "Morning Feel",
-    "tip": "Choose your desired wake-up time and we'll calculate the optimal bedtimes. Aim for 5-6 complete sleep cycles."
+    "tip": "Choose your desired wake-up time and we'll calculate the optimal bedtimes. Aim for 5-6 complete sleep cycles.",
+    "wake_time_hint": "Select your desired wake-up time and we'll calculate the optimal bedtimes based on your 90-minute sleep cycle",
+    "deep_sleep": "Deep Sleep · Physical Restoration & Immunity",
+    "light_sleep": "Light Sleep · Transition & Relaxation"
   },
   "audio": {
     "title": "AI Mood Audio",
@@ -71,7 +80,12 @@
     "generate": "Generate Audio",
     "generating": "Creating your personalized audio...",
     "preview": "Preview Audio",
-    "description": "Dim the lights, put on headphones, and find a comfortable position. Follow the audio guidance and relax each muscle group."
+    "description": "Dim the lights, put on headphones, and find a comfortable position. Follow the audio guidance and relax each muscle group.",
+    "rain": "Night Rain",
+    "wind": "Forest Wind",
+    "fire": "Crackling Fire",
+    "stream": "Babbling Stream",
+    "birds": "Birds & Insects"
   },
   "audioPlayer": {
     "title": "Immersive Audio",
@@ -79,6 +93,8 @@
     "rain": "Night Rain",
     "wind": "Forest Wind",
     "fire": "Crackling Fire",
+    "stream": "Babbling Brook",
+    "birds": "Crickets & Birds",
     "idleHint": "Move mouse to show controls"
   },
   "resonanceWall": {
@@ -114,10 +130,22 @@
   "footer": {
     "brand": "DeepCalm AI",
     "tagline": "Minimalist AI Mental Support · Always Free · Always Anonymous",
-    "nav_title": "Navigation",
-    "resources_title": "Resources",
+    "tools_title": "Tools",
+    "sleep_calculator": "Sleep Calculator",
+    "ai_counselor": "AI Counselor",
+    "daily_checkin": "Daily Check-in",
+    "support_title": "Support",
+    "scenario_workplace_burnout": "Workplace Burnout",
+    "scenario_student_exam": "Exam Anxiety",
+    "scenario_public_speaking": "Public Speaking Fear",
+    "scenario_social_anxiety": "Social Anxiety",
+    "scenario_health_anxiety": "Health Anxiety",
+    "scenario_impostor_syndrome": "Impostor Syndrome",
     "legal_title": "Legal",
-    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "guide": "User Guide",
+    "about": "About",
     "copyright": "© 2026 DeepCalm AI. All rights reserved.",
     "madeWith": "Made with ❤️ and Nordic Minimalism"
   },
@@ -254,6 +282,31 @@
     "sharePrompt": "Share this report on social media to remind other late-night souls to find shelter at DeepCalm.",
     "subscribeCta": "Subscribe to daily healing briefs, and receive personalized sleep analysis with REM cycle insights in your inbox tomorrow morning."
   },
+  "aiCounselor": {
+    "title": "AI Companion",
+    "subtitle": "A friend who listens, without judgment",
+    "placeholder": "Share what's on your mind...",
+    "submit": "SEND",
+    "analyzing": "Analyzing your emotions...",
+    "welcome": "Hey, I'm glad you're here. Take a deep breath — in for 4, hold, out for 7. There's no rush. What's on your mind tonight?",
+    "replyStress": "It sounds like you've been carrying a lot. Let's try a grounding exercise together. Name 3 things you can hear right now...",
+    "replySleep": "Trouble sleeping is often your mind trying to protect you. Let me share a CBT-I technique: try getting out of bed if you haven't fallen asleep in 20 minutes.",
+    "replyLonely": "You're not alone in feeling this way. At this very moment, others in our community are breathing in the same rhythm you are.",
+    "replyAnxiety": "Anxiety is a wave — it rises, peaks, and falls. Let's ride it together. Focus on your breath: 4 seconds in, 7 seconds out.",
+    "stressKeywords": "stress,tired,exhausted,overwhelmed,burnt out",
+    "sleepKeywords": "sleep,bed,insomnia,can't sleep",
+    "lonelyKeywords": "alone,lonely,nobody,solo",
+    "anxietyKeywords": "anxiety,anxious,panic,worried,nervous",
+    "replySelfWorth": "You hold yourself to high standards, and that alone shows you care deeply. But I want to ask — are you measuring yourself with someone else's ruler? Your worth doesn't need to be proven through perfection.",
+    "replyGrief": "Grief can't be compared — every loss is real. You don't need to rush to 'get better.' Grief has its own timeline.",
+    "replyRelationship": "Friction in relationships is often not about who's right or wrong — it's that two people have different maps. The fact that you're here to talk shows you truly care about this relationship.",
+    "replyIdentity": "Standing at a crossroads feels confusing. But that confusion itself is a signal — you're growing, you're asking yourself what you truly want.",
+    "selfWorthKeywords": "worthless,not good enough,inferior,failure,unworthy,self-doubt,impostor",
+    "griefKeywords": "grief,lost,sad,cry,miss,bereavement,departure",
+    "relationshipKeywords": "fight,friend,family,couple,partner,relationship,argument",
+    "identityKeywords": "confused,direction,future,meaning,unsure,choice,uncertain",
+    "badge": "Based on Clinical Psychology"
+  },
   "breathingCounter": {
     "title": "🌬️ Collective Breathing",
     "description": "Right now, {count} anxious souls around the world are deep breathing with you.",
@@ -268,5 +321,31 @@
     "back": "Back",
     "learnMore": "Learn More",
     "share": "Share"
+  },
+  "seoContent": {
+    "title": "Understanding Your Sleep & Mind: A Science-Based Guide",
+    "p1": "Sleep is not merely a passive state of rest — it is an active, dynamic process during which your brain performs critical maintenance. Over the course of a typical night, your brain cycles through four to six complete sleep cycles, each lasting approximately 90 minutes. These cycles are composed of four distinct stages: three Non-Rapid Eye Movement (NREM) stages followed by one Rapid Eye Movement (REM) stage.",
+    "rem_title": "The Architecture of REM Sleep",
+    "p2": "REM sleep, first formally described by researchers Nathaniel Kleitman and Eugene Aserinsky in 1953, is characterized by fast, irregular brainwave activity, vivid dreaming, and temporary muscle atonia — a protective paralysis that prevents you from physically acting out your dreams. During a typical night, REM periods lengthen progressively. Your first REM cycle may last only 10 minutes, while your final one can extend to nearly an hour. This is why morning dreams feel especially vivid and why waking during this stage often leaves you disoriented.",
+    "p3": "Why does REM matter? During REM sleep, your brain engages in emotional memory consolidation. The amygdala, hippocampus, and neocortex work in concert to process the day's emotional experiences, filing memories into long-term storage while stripping away the associated emotional charge. This is why a good night's sleep can literally change how you feel about a stressful event — you haven't forgotten it, but the emotional weight has been metabolized.",
+    "nrem_title": "NREM Stages: The Foundation of Restorative Sleep",
+    "p4": "NREM sleep occupies approximately 75% of your total sleep time and is divided into three stages. Stage N1 is the brief transitional phase between wakefulness and sleep, lasting 1 to 5 minutes. Stage N2 is the baseline of stable sleep, where your heart rate slows and body temperature drops. During this stage, your brain produces sleep spindles — short bursts of neural activity believed to play a crucial role in memory consolidation and synaptic plasticity. Stage N3, also known as slow-wave sleep or deep sleep, is the most restorative phase. Growth hormone is released, cellular repair accelerates, and your immune system is strengthened.",
+    "cortisol_title": "Cortisol Management: The HPA Axis and Sleep Quality",
+    "cortisol1": "The hypothalamic-pituitary-adrenal (HPA) axis is the body's primary stress response system. When the HPA axis remains chronically overactive, cortisol levels stay persistently elevated, directly interfering with sleep onset and maintenance. Research shows that chronic insomnia patients typically exhibit elevated nighttime cortisol levels and delayed melatonin secretion. Mindfulness meditation and progressive muscle relaxation have been shown to reduce HPA axis activity, reducing sleep onset latency by an average of 30-40% in randomized controlled trials.",
+    "cortisol2": "Elevated cortisol also suppresses prefrontal cortex function, weakening emotional regulation and creating a vicious cycle of stress → insomnia → emotional deterioration → more stress. This is why managing daytime stress levels is crucial for nighttime sleep quality. Regular exercise, particularly aerobic exercise, has been proven to effectively regulate HPA axis feedback loops, lower baseline cortisol, and increase the proportion of slow-wave (deep) sleep.",
+    "circadian_title": "Circadian Rhythm: Your Body's Internal Clock",
+    "circadian1": "The circadian rhythm is an endogenous biological cycle of approximately 24 hours, regulated by the suprachiasmatic nucleus (SCN). The SCN synchronizes the body's clock with the external environment by receiving light signals from the retina. Morning blue light suppresses melatonin and activates the alertness system; reduced light at night allows melatonin to rise naturally. Modern screen blue light can suppress melatonin by approximately 50%, delaying sleep onset by 1-2 hours. It is recommended to enable night mode on devices or stop screen use entirely 90 minutes before bed.",
+    "melatonin_title": "Melatonin and Light Management",
+    "melatonin1": "Melatonin is a hormone secreted by the pineal gland in response to darkness, signaling 'nighttime' to every cell in the body. Standard melatonin supplements (0.5-3mg) are effective for some jet lag and shift workers, but have limited efficacy in general insomnia patients, and long-term effects on endogenous production remain unclear. A more sustainable approach is managing endogenous melatonin through light exposure: 15-30 minutes of natural morning light to strengthen circadian signal intensity and stability.",
+    "cbt_deep_title": "Cognitive Restructuring: Breaking Negative Automatic Thoughts",
+    "cbt_deep1": "Cognitive restructuring is the most challenging yet transformative component of CBT-I. Many insomniacs hold catastrophic expectations like 'another sleepless night ahead' or 'I'll be ruined if I don't get enough sleep.' Cognitive restructuring works by recording these automatic thoughts, identifying their logical distortions (such as all-or-nothing thinking or overgeneralization), and replacing them with more balanced, evidence-based alternatives. For example, replacing 'I never sleep well' with 'Sometimes I struggle to sleep, but most nights I get adequate rest.'",
+    "sleep_hygiene_title": "Sleep Hygiene: Actionable Daily Strategies",
+    "sleep_hygiene1": "The American Academy of Sleep Medicine recommends these core sleep hygiene strategies: maintain a consistent wake-up time (including weekends) to anchor your circadian rhythm; ensure your bedroom is dark, quiet, and cool (18-22°C is the ideal temperature range); avoid caffeine 4-6 hours before bed and heavy meals within 2 hours of sleep; reserve bed for sleep and intimacy only — no work, phone scrolling, worrying, or planning. These habits, while simple, have been shown to improve sleep efficiency by 15-20% in behavioral intervention studies.",
+    "anxiety_title": "Practical Techniques for Anxiety Relief",
+    "p8": "The 4-7-8 breathing technique, popularized by Dr. Andrew Weil, is based on the yogic practice of pranayama. By inhaling for 4 seconds, holding for 7, and exhaling for 8, you activate the parasympathetic nervous system — the rest-and-digest branch that counteracts the fight-or-flight response. This technique has been shown to reduce heart rate, lower blood pressure, and shift EEG patterns toward a more relaxed state.",
+    "p9": "Grounding exercises, such as the 5-4-3-2-1 technique, engage your sensory cortex to interrupt the cycle of rumination. Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste. This practice recruits attention away from anxious thoughts and anchors it in the present moment.",
+    "micro_habits_title": "Micro-Habits: Daily Brain Training",
+    "micro_habits1": "Improving sleep quality doesn't require doing everything at once. The micro-habits strategy — committing to one tiny, almost effortless behavior daily — shows the highest one-month retention rates in behavior change research. Start with any one of these three micro-actions: 1) Open your curtains at the same time each morning and let natural light hit your eyes for 1 minute; 2) Turn off the main overhead light 15 minutes before bed, leaving only a dim bedside lamp; 3) Place a notebook by your pillow to capture anxious thoughts that surface before sleep, telling your brain 'These thoughts are archived. Will process tomorrow.'",
+    "disclaimer": "Disclaimer: This content is for informational purposes only and does not constitute medical advice. If you are experiencing severe sleep disturbances or mental health concerns, please consult a licensed healthcare professional. In crisis situations, contact your local emergency services or a crisis helpline immediately."
   }
 }

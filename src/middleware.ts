@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
-const LOCALES = ["zh", "en", "ms"] as const
+const LOCALES = ["zh", "en", "ms", "ja", "ko", "th", "es"] as const
 const LOCALE_COOKIE = "deepcalm-locale"
-const LOCALE_PATTERN = /^\/(zh|en|ms)(\/|$)/
+const LOCALE_PATTERN = /^\/(zh|en|ms|ja|ko|th|es)(\/|$)/
 const SKIP_PATTERN = /^\/(_next|api|favicon\.ico|sitemap|robots|images)/
 const DEFAULT_LOCALE = "zh"
 
@@ -36,7 +36,7 @@ export function middleware(request: NextRequest) {
     if (cookieLocale && LOCALES.includes(cookieLocale as typeof LOCALES[number])) {
       const currentLocale = pathname.match(LOCALE_PATTERN)?.[1]
       if (currentLocale !== cookieLocale) {
-        const newPath = pathname.replace(/^\/(zh|en|ms)/, `/${cookieLocale}`)
+        const newPath = pathname.replace(/^\/(zh|en|ms|ja|ko|th|es)/, `/${cookieLocale}`)
         const url = request.nextUrl.clone()
         url.pathname = newPath
         return NextResponse.redirect(url)
@@ -51,7 +51,7 @@ export function middleware(request: NextRequest) {
     : getPreferredLocale(request.headers.get("Accept-Language") || "")
 
   const url = request.nextUrl.clone()
-  url.pathname = `/${detected}${pathname === "/" ? "" : pathname}`
+  url.pathname = `/${detected}${pathname}`
   const response = NextResponse.redirect(url)
   response.cookies.set(LOCALE_COOKIE, detected, {
     path: "/",

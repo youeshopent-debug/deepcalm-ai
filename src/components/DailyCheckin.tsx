@@ -203,7 +203,7 @@ export default function DailyCheckin() {
   }
 
   return (
-    <section id="daily-checkin" className="py-24">
+    <section id="daily-checkin" className="py-8">
       <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-6 sm:p-8 glass rounded-2xl">
           <div className="text-center mb-8">
