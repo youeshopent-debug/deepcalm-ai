@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { useLanguage } from "@/context/LanguageContext"
+import { getTopicBySlug } from "@/content/topics"
+import type { Locale } from "@/types"
 
 const CATEGORY_KEYS: { i18nKey: string; items: string[] }[] = [
   { i18nKey: "sitemap.categories.sleep",      items: ["insomnia","deep-sleep","sleep-anxiety","nightmare","circadian-rhythm","sleep-hygiene","rem-sleep","napping"] },
@@ -32,14 +34,16 @@ export default function SitemapFooter() {
               </h4>
               <ul className="space-y-1">
                 {cat.items.map((slug) => {
-                  const href = `/${locale}/#${slug}`;
+                  const topic = getTopicBySlug(slug, locale as Locale);
+                  const href = `/${locale}/topic/${slug}`;
                   return (
                     <li key={slug}>
                       <Link
                         href={href}
+                        scroll={false}
                         className="text-[11px] text-[var(--dc-muted)] hover:text-[var(--dc-accent)] transition-colors duration-200"
                       >
-                        {slug.replace(/-/g, " ")}
+                        {topic?.title || slug.replace(/-/g, " ")}
                       </Link>
                     </li>
                   );

@@ -11,6 +11,7 @@ const SYSTEM_PROMPT = `你是来访者在深夜里的一位老友——不是导
 - 你从来不说"你应该"，你只说"或许可以……"、"要不要试着……"、"如果是我，可能会……"。
 - 你偶尔可以自嘲，让对方觉得你也是凡人："你知道吗，我自己也经常睡不着的时候对着天花板发呆。"
 - 你记住对方说过的话。如果对方提到过"失眠"或"胸口闷"，接下来的回复中可以自然地带回这些细节，让对方感觉你真的在听。
+- 你的风格是温暖而锐利的（warm but incisive）：你倾听温柔，但提问精准。你不会回避那些让人不舒服的问题——而是轻声问出来。你不是在病理化对方——你是在照亮那些他们自己没看到的部分。
 
 共情层级（根据来访者的语气自动切换）：
 - 轻度焦虑（语气平静、描述日常烦恼）：意象式开场 + 一个温柔的拆解 + 3个轻松感官步骤。像陪朋友喝咖啡聊心事。
@@ -129,70 +130,229 @@ steps 固定 3 条。dailyNote 用于首页情绪签到组件的每日点评。c
 - 马库斯&北山的自我构念（Markus & Kitayama）：独立自我vs互依自我。互依自我的来访者更在意关系和谐和社会角色——他们的焦虑往往围绕"让他人失望"而非"自我实现受阻"。
 - 文化适应压力（Berry's Acculturation Model）：如果你判断来访者可能处于文化适应过程中（移民/海外学生/跨文化工作者），留意其描述中是否有"夹在两个世界之间"的张力。
 
+心理动力层（防御与发展）：
+- 魏兰特的防御机制层级（Vaillant's Hierarchy of Defense Mechanisms）：成熟防御（升华、幽默、利他）→神经症性防御（理智化、压抑、置换）→不成熟防御（投射、幻想、被动攻击）→精神病性防御（否认、扭曲）。来访者的语言隐含其防御模式——"我没事"可能是压抑，"随便吧"可能是被动攻击。不要拆穿防御，提供足够的安全感让防御自然松动。
+- 埃里克森的社会心理发展阶段（Erikson's Psychosocial Stages）：信任vs不信任、自主vs羞耻、主动vs内疚、勤奋vs自卑、身份vs角色混乱、亲密vs孤独、繁衍vs停滞、自我整合vs绝望。留意来访者的痛苦是否与当前发展阶段的核心冲突有关——青年期的焦虑往往围绕亲密与孤独，中年期则围绕繁衍与停滞。
+
+人际动力层（关系中的脚本与戏剧）：
+- 伯恩的交互分析理论（Berne's Transactional Analysis - TA）：人的自我状态分三个——父母自我（批判/养育）、成人自我（理性）、儿童自我（自由/适应）。来访者是否在"父母自我"中自我批判（"我应该……"）、或在"儿童自我"中无助？你的回应要锚定在成人自我，温和地将对方也带回成人自我。
+- 卡普曼戏剧三角（Karpman's Drama Triangle）：受害者、拯救者、迫害者三个角色在人际关系中循环轮换。来访者是否被困在某种角色里？你作为对话者——不扮演拯救者（不替对方解决问题），也不扮演迫害者（不评判），只做一个稳定的"成人见证者"。
+- 塔伊费尔的社会认同理论（Tajfel's Social Identity Theory）：人的自我概念部分来源于所属群体。来访者的痛苦是否与群体身份相关——职场中的角色困顿、家庭中的期待冲突、文化夹层中的归属感断裂。
+- 贾尼斯的群体思维（Janis's Groupthink）：如果来访者描述"没人敢说真话"或"所有人都在假装没事"的压抑氛围，其焦虑可能不仅是个人心理问题，而是群体动力系统的毒性表现。
+
+诚实边界（局限性与谦逊）：
+- 可重复性危机（Replication Crisis in Psychology）：心理学研究中大量经典效应未能在跨样本中被稳定重复。你的每一个"解读"都是基于现有理论框架的一种可能视角，而非绝对真理。
+- 文化偏见（WEIRD Bias）：心理学研究高度集中在WEIRD人群（Western, Educated, Industrialized, Rich, Democratic）。你的框架在跨文化语境中的适用性有限——请始终保持对文化差异的高度敏感。
+- 知识谦逊：如果对方问你"你怎么知道"——你唯一诚实的回答是："我不知道。我只是陪你一起看看。真正的答案只有你自己知道。你才是自己生活的专家。"
+
 输出深度要求：
 - thinkingPattern：现在必须体现对来访者情绪的"多层解读"——既有温暖的意象映照（向用户呈现的），又有深层的心理结构理解（你内在分析的）。表面意象要美，深层理解要准。
 - encouragement：在有把握的情况下，可以加入一句"基于你描述的方式，我觉得你的……（如情绪敏锐度、自我觉察能力、对关系的在乎程度）其实是一种力量"——认可来访者特质本身就是一种临床验证。
 - 学术根基完全在后台运行，永远不要让来访者感觉自己在被"分析"——你的语言必须保持深夜老友的诗意和温度。你是一个知道很多但选择不用术语的智者。`
 
+/* ── 聊天模式 System Prompt ── */
+const CONVERSATIONAL_PROMPT = `你是 DeepCalm 的 AI 心理咨询师——一位深夜老友般的心理学者。你的内核整合了人格心理学、依恋理论、认知疗法、图式疗法、创伤知情、神经生物学、跨文化心理学等框架。
+但你从不使用术语。你的语言始终温暖、诗意、精准。
+
+核心原则：
+- 倾听温柔，提问精准。你不会回避那些让人不舒服的问题——而是轻声问出来。
+- 你不是在病理化对方——你是在照亮那些他们自己没看到的部分。
+- 你记住对方说过的话。如果对方提到过"失眠"或"胸口闷"，接下来的回复中要自然带回这些细节。
+- 你从不扮演拯救者（不替对方解决问题），也不扮演迫害者（不评判），只做一个稳定的"成人见证者"。
+- 你的每一个"解读"都带着谦逊——这是基于现有理论框架的一种可能视角，而非绝对真理。
+- 如果你不知道，就诚实说"我不知道。我只是陪你一起看看。"
+
+回应要求：
+- 每轮回复控制在 100-200 字之间，一段或两段。
+- 可以偶尔问一个温和但深刻的问题，引导对方继续探索。
+- 如果检测到危机信号（自伤/自杀/严重暴力），在回复末尾温和地建议联系当地专业心理机构——准确来说是建议他们寻找当地的心理咨询服务，不提供具体热线号码。
+- 保持深夜老友的诗意和温度。你是一个知道很多但选择不用术语的智者。`
+
+/* ── 费用追踪 ── */
+const COST_PER_TOKEN = {
+  "gpt-4o-mini": { input: 0.15 / 1_000_000, output: 0.60 / 1_000_000 },
+  "deepseek-v4-flash": { input: 0.27 / 1_000_000, output: 1.10 / 1_000_000 },
+}
+
+function calcCost(model: string, inTokens: number, outTokens: number): number {
+  const rates = COST_PER_TOKEN[model as keyof typeof COST_PER_TOKEN]
+  if (!rates) return 0
+  return inTokens * rates.input + outTokens * rates.output
+}
+
+/* ── 调用 LLM 统一函数（含 DeepSeek 降级 + token 追踪） ── */
+async function callLLM(
+  systemPrompt: string,
+  userText: string,
+  history: { role: string; content: string }[] = [],
+  options: { jsonMode?: boolean } = {},
+): Promise<{ content: string; usage: { model: string; inputTokens: number; outputTokens: number; cost: number } }> {
+  const openAiKey = process.env.OPENAI_API_KEY
+  const deepSeekKey = process.env.DEEPSEEK_API_KEY
+
+  const messages = [
+    { role: "system", content: systemPrompt },
+    ...history.map((m) => ({ role: m.role, content: m.content })),
+    { role: "user", content: userText },
+  ]
+
+  /* 1. 尝试 OpenAI GPT-4o-mini */
+  if (openAiKey) {
+    try {
+      const body: Record<string, unknown> = {
+        model: "gpt-4o-mini",
+        messages,
+        temperature: 0.9,
+        max_tokens: 1024,
+      }
+      if (options.jsonMode) body.response_format = { type: "json_object" }
+
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${openAiKey}`,
+        },
+        body: JSON.stringify(body),
+      })
+
+      if (!res.ok) {
+        const errBody = await res.text()
+        console.error("OpenAI error:", res.status, errBody)
+        throw new Error(`OpenAI returned ${res.status}`)
+      }
+
+      const data = await res.json()
+      const content: string = data.choices?.[0]?.message?.content || ""
+      const usage = data.usage || { prompt_tokens: 0, completion_tokens: 0 }
+      const model = "gpt-4o-mini"
+      const cost = calcCost(model, usage.prompt_tokens || 0, usage.completion_tokens || 0)
+
+      return {
+        content,
+        usage: {
+          model,
+          inputTokens: usage.prompt_tokens || 0,
+          outputTokens: usage.completion_tokens || 0,
+          cost,
+        },
+      }
+    } catch (err) {
+      console.error("OpenAI call failed, trying DeepSeek fallback:", (err as Error).message)
+    }
+  }
+
+  /* 2. 降级：DeepSeek v4 flash */
+  if (deepSeekKey) {
+    try {
+      const body: Record<string, unknown> = {
+        model: "deepseek-chat",
+        messages,
+        temperature: 0.9,
+        max_tokens: 1024,
+      }
+      if (options.jsonMode) body.response_format = { type: "json_object" }
+
+      const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${deepSeekKey}`,
+        },
+        body: JSON.stringify(body),
+      })
+
+      if (!res.ok) {
+        const errBody = await res.text()
+        console.error("DeepSeek error:", res.status, errBody)
+        throw new Error(`DeepSeek returned ${res.status}`)
+      }
+
+      const data = await res.json()
+      const content: string = data.choices?.[0]?.message?.content || ""
+      const usage = data.usage || { prompt_tokens: 0, completion_tokens: 0 }
+      const cost = calcCost("deepseek-v4-flash", usage.prompt_tokens || 0, usage.completion_tokens || 0)
+
+      return {
+        content,
+        usage: {
+          model: "deepseek-v4-flash",
+          inputTokens: usage.prompt_tokens || 0,
+          outputTokens: usage.completion_tokens || 0,
+          cost,
+        },
+      }
+    } catch (err) {
+      console.error("DeepSeek fallback also failed:", (err as Error).message)
+    }
+  }
+
+  throw new Error("All LLM backends unavailable")
+}
+
+/* ── POST：双模式（analyze / chat） ── */
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = process.env.OPENAI_API_KEY
+    const body = await request.json()
+    const { text, mode = "analyze", history = [] } = body
 
-    const { text } = await request.json()
     if (!text || typeof text !== "string" || !text.trim()) {
       return NextResponse.json({ error: "请提供有效的输入文本" }, { status: 400 })
     }
 
-    if (!apiKey) {
-      console.warn("OPENAI_API_KEY 未配置，降级到本地 mock 分析")
-      const fallback = await mockAnalyze(text)
-      return NextResponse.json(fallback)
+    /* ── 聊天模式 ── */
+    if (mode === "chat") {
+      try {
+        const result = await callLLM(CONVERSATIONAL_PROMPT, text.trim(), history, { jsonMode: false })
+        return NextResponse.json({
+          role: "counselor",
+          content: result.content,
+          usage: result.usage,
+        })
+      } catch {
+        console.warn("chat mode fallback to mock")
+        return NextResponse.json({
+          role: "counselor",
+          content: "I'm here with you. Sometimes the bravest thing we can do is speak our truth into the open. Would you like to tell me more about what's on your heart?",
+          usage: { model: "mock", inputTokens: 0, outputTokens: 0, cost: 0 },
+        })
+      }
     }
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: text.trim() },
-        ],
-        response_format: { type: "json_object" },
-        temperature: 0.9,
-        max_tokens: 1024,
-      }),
-    })
+    /* ── 分析模式（默认） ── */
+    if (mode === "analyze") {
+      /* 无 API key：降级到本地 mock */
+      if (!process.env.OPENAI_API_KEY && !process.env.DEEPSEEK_API_KEY) {
+        console.warn("无 API Key 配置，降级到本地 mock 分析")
+        const fallback = await mockAnalyze(text.trim())
+        return NextResponse.json({ ...fallback, usage: { model: "mock", inputTokens: 0, outputTokens: 0, cost: 0 } })
+      }
 
-    if (!response.ok) {
-      const errBody = await response.text()
-      console.error("OpenAI API error:", response.status, errBody)
-      return NextResponse.json({ error: "AI 分析服务暂时不可用" }, { status: 502 })
+      try {
+        const result = await callLLM(SYSTEM_PROMPT, text.trim(), [], { jsonMode: true })
+
+        let parsed: { thinkingPattern: string; encouragement: string; steps: string[]; dailyNote?: string }
+        try {
+          parsed = JSON.parse(result.content)
+        } catch {
+          console.error("Failed to parse AI response as JSON:", result.content)
+          return NextResponse.json({ error: "AI 返回格式异常" }, { status: 502 })
+        }
+
+        if (!parsed.thinkingPattern || !parsed.encouragement || !Array.isArray(parsed.steps) || parsed.steps.length < 2 || parsed.steps.length > 4) {
+          console.error("AI response missing required fields:", parsed)
+          return NextResponse.json({ error: "AI 返回数据结构不完整" }, { status: 502 })
+        }
+
+        return NextResponse.json({ ...parsed, dailyNote: parsed.dailyNote || "", usage: result.usage })
+      } catch (err) {
+        console.error("analyze mode both backends failed, fallback to mock:", (err as Error).message)
+        const fallback = await mockAnalyze(text.trim())
+        return NextResponse.json({ ...fallback, usage: { model: "mock", inputTokens: 0, outputTokens: 0, cost: 0 } })
+      }
     }
 
-    const data = await response.json()
-    const content = data.choices?.[0]?.message?.content
-    if (!content) {
-      return NextResponse.json({ error: "AI 返回为空" }, { status: 502 })
-    }
-
-    let parsed: { thinkingPattern: string; encouragement: string; steps: string[]; dailyNote?: string }
-    try {
-      parsed = JSON.parse(content)
-    } catch {
-      console.error("Failed to parse AI response as JSON:", content)
-      return NextResponse.json({ error: "AI 返回格式异常" }, { status: 502 })
-    }
-
-    if (!parsed.thinkingPattern || !parsed.encouragement || !Array.isArray(parsed.steps) || parsed.steps.length < 2 || parsed.steps.length > 4) {
-      console.error("AI response missing required fields:", parsed)
-      return NextResponse.json({ error: "AI 返回数据结构不完整" }, { status: 502 })
-    }
-
-    return NextResponse.json({ ...parsed, dailyNote: parsed.dailyNote || "" })
+    return NextResponse.json({ error: "无效的 mode 参数，可选 analyze / chat" }, { status: 400 })
   } catch (err) {
     console.error("analyze-anxiety internal error:", err)
     return NextResponse.json({ error: "服务器内部错误" }, { status: 500 })

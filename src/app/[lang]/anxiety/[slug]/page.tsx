@@ -3,6 +3,7 @@ import { getDict } from "@/lib/getDict"
 import { getAnxietyScenarios, getAnxietyScenarioBySlug, getLocalizedField } from "@/content/anxiety-scenarios"
 import AiCounselor from "@/components/AiCounselor"
 import ScientificGuide from "@/components/ScientificGuide"
+import SitemapFooter from "@/components/SitemapFooter"
 import { ArrowLeft, Brain, CheckCircle2, Lightbulb, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -38,6 +39,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         zh: `/zh/anxiety/${slug}`,
         en: `/en/anxiety/${slug}`,
         ms: `/ms/anxiety/${slug}`,
+        ja: `/ja/anxiety/${slug}`,
+        ko: `/ko/anxiety/${slug}`,
+        th: `/th/anxiety/${slug}`,
+        es: `/es/anxiety/${slug}`,
       },
     },
     openGraph: {
@@ -195,11 +200,7 @@ export default async function AnxietyScenarioPage({ params }: { params: Promise<
         </section>
       )}
 
-      <footer className="py-8 border-t border-nord-border bg-nord-bg">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs text-nord-muted/60">{t("counselor.disclaimer")}</p>
-        </div>
-      </footer>
+      <SitemapFooter />
     </>
   )
 }

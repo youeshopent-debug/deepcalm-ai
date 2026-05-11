@@ -1,25 +1,25 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Music, Volume2, VolumeX } from "lucide-react"
+import { Volume2, Music } from "lucide-react"
+import { audioEngine, type ChannelId } from "@/lib/audioEngine"
 
-const TRACKS = [
+const TRACKS: { id: ChannelId; label: string; emoji: string }[] = [
   { id: "rain", label: "Rain", emoji: "🌧" },
-  { id: "crickets", label: "Crickets", emoji: "🦗" },
+  { id: "wind", label: "Wind", emoji: "💨" },
   { id: "stream", label: "Stream", emoji: "🌊" },
   { id: "birds", label: "Birds", emoji: "🐦" },
-  { id: "brownNoise", label: "Brown Noise", emoji: "🌫" },
+  { id: "fire", label: "Fire", emoji: "🔥" },
 ]
-
-const AudioIcon = Music
 
 export default function AudioFloatingTray() {
   const [expanded, setExpanded] = useState(false)
-  const [volumes, setVolumes] = useState<Record<string, number>>(
-    Object.fromEntries(TRACKS.map((t) => [t.id, 0]))
+  const [channelStates, setChannelStates] = useState<Record<ChannelId, boolean>>(
+    { rain: false, wind: false, fire: false, stream: false, birds: false }
   )
+  const [masterVolume, setMasterVolume] = useState(audioEngine.volume)
   const trayRef = useRef<HTMLDivElement>(null)
-  const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({})
+  const hasInitRef = useRef(false)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -31,26 +31,34 @@ export default function AudioFloatingTray() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
-  const isAnyPlaying = Object.values(volumes).some((v) => v > 0)
-
-  function handleVolumeChange(id: string, vol: number) {
-    setVolumes((prev) => ({ ...prev, [id]: vol }))
-    const audio = audioRefs.current[id]
-    if (audio) {
-      audio.volume = vol
-      if (vol > 0 && audio.paused) {
-        audio.loop = true
-        audio.play().catch(() => {})
-      } else if (vol === 0 && !audio.paused) {
-        audio.pause()
-      }
+  useEffect(() => {
+    if (hasInitRef.current) return
+    const handler = () => {
+      if (hasInitRef.current) return
+      hasInitRef.current = true
+      audioEngine.startAmbient()
+      setChannelStates((prev) => ({ ...prev, rain: true }))
     }
+    document.addEventListener("click", handler, { once: true })
+    return () => document.removeEventListener("click", handler)
+  }, [])
+
+  useEffect(() => {
+    audioEngine.loadAudioBuffer('birds', '/audio/birds-nature.mp3')
+  }, [])
+
+  const isAnyPlaying = Object.values(channelStates).some((v) => v)
+
+  function handleChannelToggle(id: ChannelId) {
+    const next = !channelStates[id]
+    setChannelStates((prev) => ({ ...prev, [id]: next }))
+    audioEngine.toggleChannel(id, next)
   }
 
-  function setAudioRef(id: string, el: HTMLAudioElement | null) {
-    if (el && !audioRefs.current[id]) {
-      audioRefs.current[id] = el
-    }
+  function handleMasterVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const vol = parseFloat(e.target.value)
+    setMasterVolume(vol)
+    audioEngine.setMasterVolume(vol)
   }
 
   return (
@@ -62,7 +70,7 @@ export default function AudioFloatingTray() {
         {isAnyPlaying ? (
           <Volume2 className="w-4 h-4 text-dc-accent" />
         ) : (
-          <AudioIcon className="w-4 h-4" />
+          <Music className="w-4 h-4" />
         )}
         <span className="text-xs hidden sm:inline">
           {isAnyPlaying ? "Playing" : "Ambient"}
@@ -70,62 +78,36 @@ export default function AudioFloatingTray() {
       </button>
 
       {expanded && (
-        <div className="absolute bottom-full left-0 mb-2 w-56 py-3 px-4 bg-dc-surface/90 backdrop-blur-xl border border-dc-border/60 rounded-xl shadow-2xl">
-          <p className="text-xs text-dc-text/40 mb-2">Ambient Sound</p>
-          <div className="space-y-3">
+        <div className="absolute bottom-full left-0 mb-2 w-64 py-4 px-4 bg-dc-surface/90 backdrop-blur-xl border border-dc-border/60 rounded-xl shadow-2xl">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs text-dc-text/40">Ambient Sound</p>
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={masterVolume}
+              onChange={handleMasterVolumeChange}
+              className="w-20 h-1 accent-dc-accent bg-white/10 rounded-full appearance-none cursor-pointer"
+            />
+          </div>
+          <div className="space-y-1">
             {TRACKS.map((track) => (
-              <div key={track.id} className="flex items-center gap-3">
-                <span className="text-sm w-5 text-center">{track.emoji}</span>
-                <span className="text-xs text-dc-text/70 w-16 shrink-0">
-                  {track.label}
-                </span>
-                <input
-                  type="range"
-                  min={0}
-                  max={1}
-                  step={0.01}
-                  value={volumes[track.id]}
-                  onChange={(e) =>
-                    handleVolumeChange(track.id, parseFloat(e.target.value))
-                  }
-                  className="flex-1 h-1 accent-dc-accent bg-white/10 rounded-full appearance-none cursor-pointer"
-                />
-                {track.id === "rain" && (
-                  <audio
-                    ref={(el) => setAudioRef(track.id, el)}
-                    src="/audio/rain.mp3"
-                    preload="none"
-                  />
+              <button
+                key={track.id}
+                onClick={() => handleChannelToggle(track.id)}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all ${
+                  channelStates[track.id]
+                    ? "bg-dc-accent/15 text-dc-accent"
+                    : "text-dc-text/60 hover:bg-dc-surface/60 hover:text-dc-text"
+                }`}
+              >
+                <span className="text-base w-6 text-center">{track.emoji}</span>
+                <span className="text-xs font-medium">{track.label}</span>
+                {channelStates[track.id] && (
+                  <span className="ml-auto text-[10px] text-dc-accent/60">ON</span>
                 )}
-                {track.id === "crickets" && (
-                  <audio
-                    ref={(el) => setAudioRef(track.id, el)}
-                    src="/audio/crickets.mp3"
-                    preload="none"
-                  />
-                )}
-                {track.id === "stream" && (
-                  <audio
-                    ref={(el) => setAudioRef(track.id, el)}
-                    src="/audio/stream.mp3"
-                    preload="none"
-                  />
-                )}
-                {track.id === "birds" && (
-                  <audio
-                    ref={(el) => setAudioRef(track.id, el)}
-                    src="/audio/birds.mp3"
-                    preload="none"
-                  />
-                )}
-                {track.id === "brownNoise" && (
-                  <audio
-                    ref={(el) => setAudioRef(track.id, el)}
-                    src="/audio/brown-noise.mp3"
-                    preload="none"
-                  />
-                )}
-              </div>
+              </button>
             ))}
           </div>
         </div>

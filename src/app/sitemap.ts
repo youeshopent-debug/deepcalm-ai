@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { getGuides } from "@/content/guides"
 import { getAnxietyScenarios } from "@/content/anxiety-scenarios"
+import { getAllSlugs } from "@/content/topics"
 
 const LANGS = ["zh", "en", "ms", "ja", "ko", "th", "es"]
 const BASE = "https://deepcalm-ai.com"
@@ -70,6 +71,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: "weekly",
         priority: 0.8,
         alternates: { languages: langAlternates(`/anxiety/${scenario.slug}`) },
+      })
+    }
+  }
+
+  for (const slug of getAllSlugs()) {
+    for (const lang of LANGS) {
+      entries.push({
+        url: `${BASE}/${lang}/topic/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.7,
+        alternates: { languages: langAlternates(`/topic/${slug}`) },
       })
     }
   }

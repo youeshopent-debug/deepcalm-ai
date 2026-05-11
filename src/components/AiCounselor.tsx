@@ -3,80 +3,20 @@
 import { useState, useRef, useEffect } from "react"
 import { useLanguage } from "@/context/LanguageContext"
 import {
-  MessageCircleHeart, Send, Sparkles, Heart, X, ImageDown,
+  MessageCircleHeart, Heart, X, ImageDown,
 } from "lucide-react"
 import { toPng } from "html-to-image"
-
-type Topic =
-  | "stress" | "sleep" | "lonely" | "anxiety"
-  | "selfWorth" | "grief" | "relationship" | "identity"
 
 interface Message {
   role: "user" | "counselor"
   content: string
-  topic?: Topic
 }
 
-const TOPIC_KEYWORDS: Record<Topic, string[]> = {
-  stress: ["stress", "overwhelmed", "burnout", "pressure", "tired", "exhausted", "疲惫", "压力", "焦虑"],
-  sleep: ["sleep", "insomnia", "can't sleep", "night", "bed", "失眠", "睡眠", "熬夜"],
-  lonely: ["lonely", "alone", "isolated", "nobody", "孤独", "一个人", "寂寞"],
-  anxiety: ["anxious", "worry", "panic", "nervous", "fear", "害怕", "紧张", "担心"],
-  selfWorth: ["worthless", "not good enough", "impostor", "failure", "没用", "不够好", "失败"],
-  grief: ["grief", "loss", "miss", "gone", "died", "失去", "离开", "想念"],
-  relationship: ["relationship", "breakup", "fight", "argue", "分手", "吵架", "感情"],
-  identity: ["who am i", "purpose", "lost", "meaning", "方向", "意义", "迷茫"],
-}
-
-const TOPIC_RESPONSES: Record<Topic, string[]> = {
-  stress: [
-    "I hear how heavy things feel right now. Let's take a slow breath together. In for 4 counts… hold for 7… out for 8. You're safe here.",
-    "You've been carrying a lot. What if we set down just one thing for now? One small burden you don't need to hold today.",
-  ],
-  sleep: [
-    "Sleep trouble can feel like the world gets louder at night. Try this: place your hand on your chest, feel the warmth, and breathe slowly. You don't have to fall asleep — just rest.",
-    "Your body knows how to rest. Let's quiet the mind first. Close your eyes and imagine a gentle fog rolling in, softly covering everything.",
-  ],
-  lonely: [
-    "Loneliness is a kind of hunger. Not for food, but for connection. I'm here with you right now. You're not invisible.",
-    "The feeling of being alone, even in a crowded room, is real and painful. But your presence matters. You are seen here.",
-  ],
-  anxiety: [
-    "Anxiety lives in the 'what ifs'. Let's come back to now. Look around and name three things you can see. You are here. You are safe.",
-    "Your mind is trying to protect you by scanning for danger. But right now, at this moment, you are okay. Breathe with me.",
-  ],
-  selfWorth: [
-    "You don't have to earn your worth. It's not a grade or a performance. It's simply true — you are enough, not because of what you do, but because you are.",
-    "What would you say to a dear friend who felt the way you do? Try saying those same words to yourself. You deserve your own kindness.",
-  ],
-  grief: [
-    "Grief is love with nowhere to go. It's not a problem to solve — it's a feeling to honor. Take your time. I'm not going anywhere.",
-    "There is no right way to grieve. Some days are heavier. Some moments catch you off guard. Let yourself feel whatever comes — tears, silence, anger. All of it belongs.",
-  ],
-  relationship: [
-    "Relationships can leave us feeling raw and exposed. Whatever happened, your feelings are valid. You don't need to have all the answers right now.",
-    "It's okay to feel hurt, confused, or angry. Give yourself space to sit with these feelings without judging them. Healing isn't linear.",
-  ],
-  identity: [
-    "Not knowing who you are can feel like floating in a vast ocean. But maybe that's okay — discovery doesn't need a fixed destination.",
-    "You are not lost. You're in transition. And transitions, though uncomfortable, are where growth finds its way in.",
-  ],
-}
-
-function detectTopic(input: string): Topic | undefined {
-  const lower = input.toLowerCase()
-  for (const [topic, keywords] of Object.entries(TOPIC_KEYWORDS)) {
-    if (keywords.some((kw) => lower.includes(kw))) return topic as Topic
-  }
-  return undefined
-}
-
-function getFallbackResponse(tt: (s: string) => string): string {
-  const fallbacks = [
-    "Thank you for trusting me with your thoughts. I want you to know that whatever you're feeling, it's valid. Take a gentle breath and give yourself permission to just be.",
-    "I'm glad you're here. Sometimes the bravest thing we can do is speak our truth into the open. Would you like to tell me more about what's on your heart?",
-  ]
-  return fallbacks[Math.floor(Math.random() * fallbacks.length)]
+interface UsageInfo {
+  model: string
+  inputTokens: number
+  outputTokens: number
+  cost: number
 }
 
 export default function AiCounselor() {
@@ -87,6 +27,8 @@ export default function AiCounselor() {
   const [showWelcome, setShowWelcome] = useState(true)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [showShareSuccess, setShowShareSuccess] = useState(false)
+  const [lastUsage, setLastUsage] = useState<UsageInfo | null>(null)
+  const [totalCost, setTotalCost] = useState(0)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const shareRef = useRef<HTMLDivElement>(null)
 
@@ -105,19 +47,33 @@ export default function AiCounselor() {
     setMessages((prev) => [...prev, userMsg])
     setIsAnalyzing(true)
 
-    const topic = detectTopic(text)
+    try {
+      const history = messages.map((m) => ({ role: m.role, content: m.content }))
+      const res = await fetch("/api/analyze-anxiety", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, mode: "chat", history }),
+      })
 
-    await new Promise((r) => setTimeout(r, 800 + Math.random() * 1200))
+      if (!res.ok) throw new Error(`API returned ${res.status}`)
 
-    const pool = topic ? TOPIC_RESPONSES[topic] : null
-    const response = pool
-      ? pool[Math.floor(Math.random() * pool.length)]
-      : getFallbackResponse(tt)
+      const data = await res.json()
 
-    setMessages((prev) => [
-      ...prev,
-      { role: "counselor", content: response, topic },
-    ])
+      const counselorMsg: Message = { role: "counselor", content: data.content }
+      setMessages((prev) => [...prev, counselorMsg])
+
+      if (data.usage) {
+        setLastUsage(data.usage)
+        setTotalCost((prev) => prev + (data.usage.cost || 0))
+      }
+    } catch {
+      const fallback: Message = {
+        role: "counselor",
+        content: "I'm here with you. Sometimes the bravest thing we can do is speak our truth into the open. Would you like to tell me more about what's on your heart?",
+      }
+      setMessages((prev) => [...prev, fallback])
+    }
+
     setIsAnalyzing(false)
   }
 
@@ -165,10 +121,10 @@ export default function AiCounselor() {
       <div
         className={`
           relative z-10 flex flex-col
-          w-full h-full
+          w-full min-h-[70vh] max-h-[85vh]
           ${drawerOpen
             ? "fixed inset-0 z-50 bg-dc-deep/95 backdrop-blur-xl"
-            : "max-w-5xl mx-auto h-full"
+            : "max-w-5xl mx-auto min-h-[70vh] max-h-[85vh]"
           }
         `}
       >
@@ -179,14 +135,25 @@ export default function AiCounselor() {
               {tt("aiCounselor.title")}
             </h2>
           </div>
-          {drawerOpen && (
-            <button
-              onClick={() => setDrawerOpen(false)}
-              className="p-2 rounded-full hover:bg-dc-accent/10 transition-colors"
-            >
-              <X className="w-5 h-5 text-dc-muted" />
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            {lastUsage && (
+              <div className="flex items-center gap-2 px-2.5 py-1 bg-dc-surface/50 border border-dc-border rounded-full text-xs">
+                <span className="text-dc-accent/70 font-medium">{lastUsage.model}</span>
+                <span className="text-dc-muted/50">|</span>
+                <span className="text-dc-muted">${lastUsage.cost.toFixed(6)}</span>
+                <span className="text-dc-muted/50">|</span>
+                <span className="text-dc-muted">∑ ${totalCost.toFixed(6)}</span>
+              </div>
+            )}
+            {drawerOpen && (
+              <button
+                onClick={() => setDrawerOpen(false)}
+                className="p-2 rounded-full hover:bg-dc-accent/10 transition-colors"
+              >
+                <X className="w-5 h-5 text-dc-muted" />
+              </button>
+            )}
+          </div>
         </div>
 
         <div
@@ -202,7 +169,7 @@ export default function AiCounselor() {
                 <p className="text-xl sm:text-2xl font-medium text-dc-text">
                   {tt("aiCounselor.greeting")}
                 </p>
-                <p className="text-base sm:text-lg text-dc-muted/80 max-w-md leading-relaxed">
+                <p className="text-xl sm:text-2xl text-dc-muted/80 max-w-lg leading-relaxed">
                   {tt("aiCounselor.subtitle")}
                 </p>
               </div>
@@ -280,8 +247,8 @@ export default function AiCounselor() {
           </div>
         )}
 
-        <div className="shrink-0 px-4 sm:px-6 py-4">
-          <div className="flex items-center gap-2 sm:gap-3 bg-dc-surface/60 backdrop-blur-md border border-dc-border rounded-2xl px-4 py-2 focus-within:border-dc-accent/40 transition-all duration-300">
+        <div className="shrink-0 px-4 sm:px-6 py-4 sm:py-5">
+          <div className="flex items-center gap-2 sm:gap-3 bg-dc-surface/60 backdrop-blur-md border border-dc-border rounded-2xl px-4 sm:px-6 py-3 sm:py-4 focus-within:border-dc-accent/40 transition-all duration-300">
             <input
               type="text"
               value={input}
@@ -294,9 +261,9 @@ export default function AiCounselor() {
             <button
               onClick={handleSend}
               disabled={!input.trim() || isAnalyzing}
-              className="p-2.5 rounded-xl bg-dc-accent text-dc-deep disabled:opacity-30 disabled:cursor-not-allowed hover:bg-dc-accent/90 transition-all duration-300 shrink-0"
+              className="px-4 sm:px-5 py-2.5 rounded-xl bg-dc-accent text-dc-deep text-sm sm:text-base font-medium disabled:opacity-30 disabled:cursor-not-allowed hover:bg-dc-accent/90 transition-all duration-300 shrink-0"
             >
-              <Send className="w-4 h-4" />
+              {tt("aiCounselor.submit")}
             </button>
           </div>
         </div>

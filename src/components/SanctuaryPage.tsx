@@ -5,6 +5,7 @@ import AiCounselor from "./AiCounselor"
 import DailyCheckin from "./DailyCheckin"
 import SleepCalculator from "./SleepCalculator"
 import SeoContent from "./SeoContent"
+import ResonanceWall from "./ResonanceWall"
 import SitemapFooter from "./SitemapFooter"
 import AudioFloatingTray from "./AudioFloatingTray"
 
@@ -51,12 +52,17 @@ export default function SanctuaryPage() {
           </div>
         </section>
 
-        {/* SEO Content — hidden visually, indexed by crawlers */}
-        <div className="sr-only">
-          <section id="seo-content">
-            <SeoContent />
-          </section>
+        {/* SEO Content — 800字深度睡眠科学指南 */}
+      <section id="seo-content" className="w-full py-16 sm:py-24 px-4 sm:px-6">
+        <SeoContent />
+      </section>
+
+      {/* Resonance Wall — community mood board */}
+      <section id="resonance-wall" className="w-full py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto">
+          <ResonanceWall />
         </div>
+      </section>
       </main>
 
       <SitemapFooter />

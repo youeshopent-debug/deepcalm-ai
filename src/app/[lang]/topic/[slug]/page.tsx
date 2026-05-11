@@ -1,0 +1,166 @@
+import type { Locale } from "@/types"
+import { getDict } from "@/lib/getDict"
+import { getTopicBySlug, getTopicContent, getAllSlugs } from "@/content/topics"
+import ScientificGuide from "@/components/ScientificGuide"
+import SitemapFooter from "@/components/SitemapFooter"
+import Link from "next/link"
+import { ArrowLeft, BookOpen } from "lucide-react"
+import { notFound } from "next/navigation"
+
+const categoryColors: Record<string, string> = {
+  sleep: "from-indigo-500/10 to-purple-500/10",
+  anxiety: "from-rose-500/10 to-orange-500/10",
+  grief_loss: "from-slate-500/10 to-zinc-500/10",
+  loneliness: "from-sky-500/10 to-teal-500/10",
+  self_worth: "from-emerald-500/10 to-teal-500/10",
+  relationships: "from-pink-500/10 to-rose-500/10",
+  identity: "from-violet-500/10 to-blue-500/10",
+  mindfulness: "from-amber-500/10 to-yellow-500/10",
+  emotional_health: "from-red-500/10 to-rose-500/10",
+}
+const categoryIcon: Record<string, string> = {
+  sleep: "🌙", anxiety: "🫀", grief_loss: "💧", loneliness: "🌊",
+  self_worth: "✨", relationships: "💞", identity: "🎭",
+  mindfulness: "🧘", emotional_health: "💪",
+}
+
+const CATEGORY_NAMES: Record<string, Record<Locale, string>> = {
+  sleep: { zh: "睡眠", en: "Sleep", ms: "Tidur", ja: "睡眠", ko: "수면", th: "การนอนหลับ", es: "Sueño" },
+  anxiety: { zh: "焦虑", en: "Anxiety", ms: "Kebimbangan", ja: "不安", ko: "불안", th: "ความกังวล", es: "Ansiedad" },
+  grief_loss: { zh: "哀伤与失落", en: "Grief & Loss", ms: "Kesedihan & Kehilangan", ja: "悲しみと喪失", ko: "슬픔과 상실", th: "ความเศร้าและการสูญเสีย", es: "Duelo y Pérdida" },
+  loneliness: { zh: "孤独", en: "Loneliness", ms: "Kesunyian", ja: "孤独", ko: "외로움", th: "ความเหงา", es: "Soledad" },
+  self_worth: { zh: "自我价值", en: "Self-Worth", ms: "Harga Diri", ja: "自己価値", ko: "자존감", th: "คุณค่าในตนเอง", es: "Autoestima" },
+  relationships: { zh: "人际关系", en: "Relationships", ms: "Hubungan", ja: "人間関係", ko: "관계", th: "ความสัมพันธ์", es: "Relaciones" },
+  identity: { zh: "身份认同", en: "Identity", ms: "Identiti", ja: "アイデンティティ", ko: "정체성", th: "อัตลักษณ์", es: "Identidad" },
+  mindfulness: { zh: "正念", en: "Mindfulness", ms: "Kesedaran", ja: "マインドフルネス", ko: "마음챙김", th: "การมีสติ", es: "Atención Plena" },
+  emotional_health: { zh: "情绪健康", en: "Emotional Health", ms: "Kesihatan Emosi", ja: "感情的健康", ko: "정서 건강", th: "สุขภาพทางอารมณ์", es: "Salud Emocional" },
+}
+
+export async function generateStaticParams() {
+  const slugs = getAllSlugs()
+  const langs: Locale[] = ["zh", "en", "ms"]
+  const params: { lang: string; slug: string }[] = []
+  for (const lang of langs) {
+    for (const slug of slugs) {
+      params.push({ lang, slug })
+    }
+  }
+  return params
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }) {
+  const { lang, slug } = await params
+  const topic = getTopicBySlug(slug, lang as Locale)
+  if (!topic) return {}
+  return {
+    title: `${topic.title} - DeepCalm AI`,
+    description: topic.description,
+    keywords: topic.keywords,
+    metadataBase: new URL("https://deepcalm-ai.com"),
+    alternates: {
+      canonical: `/${lang}/topic/${slug}`,
+      languages: {
+        zh: `/zh/topic/${slug}`,
+        en: `/en/topic/${slug}`,
+        ms: `/ms/topic/${slug}`,
+        ja: `/ja/topic/${slug}`,
+        ko: `/ko/topic/${slug}`,
+        th: `/th/topic/${slug}`,
+        es: `/es/topic/${slug}`,
+      },
+    },
+    openGraph: { title: `${topic.title} - DeepCalm AI`, description: topic.description },
+  }
+}
+
+export default async function TopicDetailPage({ params }: { params: Promise<{ lang: string; slug: string }> }) {
+  const { lang, slug } = await params
+  const locale = lang as Locale
+  const topic = getTopicBySlug(slug, locale)
+  if (!topic) notFound()
+
+  const dict = await getDict(locale)
+  const content = getTopicContent(slug, locale)
+
+  const catColor = categoryColors[topic.category] || "from-nord-accent/10 to-nord-accent/5"
+  const t = (key: string) => {
+    const keys = key.split(".")
+    let val: Record<string, unknown> = dict as unknown as Record<string, unknown>
+    for (const k of keys) {
+      val = val?.[k] as Record<string, unknown>
+    }
+    return (typeof val === "string" ? val : key) as string
+  }
+
+  return (
+    <div className="min-h-screen bg-nord-bg">
+      <section className="py-24 relative">
+        <div className={`absolute inset-0 bg-gradient-to-b ${catColor}`} />
+
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link
+            href={`/${locale}`}
+            className="inline-flex items-center gap-2 text-nord-muted hover:text-nord-accent text-sm mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            {t("common.back") || "Back"}
+          </Link>
+
+          <div className="mb-8">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-nord-accent uppercase tracking-wider">
+              <BookOpen className="w-3.5 h-3.5" />
+              {CATEGORY_NAMES[topic.category]?.[locale] || topic.category}
+            </span>
+            <h1 className="text-3xl sm:text-4xl font-bold text-nord-text mt-3 mb-4">
+              {categoryIcon[topic.category] || "📖"} {topic.title}
+            </h1>
+            <p className="text-nord-text/60 leading-relaxed">{topic.description}</p>
+          </div>
+
+          <div className="space-y-8">
+            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
+              <h2 className="text-lg font-bold text-nord-text mb-4">
+                {locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
+              </h2>
+              <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed">
+                {content.science.split("\n").map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 bg-gradient-to-br from-nord-accent/[0.06] to-nord-card border border-nord-accent/15 rounded-2xl">
+              <h2 className="text-lg font-bold text-nord-text mb-4">
+                {locale === "zh" ? "🏋️ 日常健身指南" : locale === "ms" ? "🏋️ Panduan Kecergasan" : "🏋️ Emotional Fitness Guide"}
+              </h2>
+              <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed prose-strong:text-nord-text">
+                {content.fitnessGuide.split("\n").map((line, i) => {
+                  if (line.startsWith("## ")) return <h3 key={i} className="text-base font-semibold text-nord-text mt-4 mb-2">{line.slice(3)}</h3>
+                  if (/^\d+\./.test(line.trim())) return <p key={i} className="text-nord-text/70 leading-relaxed mb-2">{line}</p>
+                  if (line.trim() === "") return null
+                  return <p key={i} className="text-nord-text/70 leading-relaxed">{line}</p>
+                })}
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
+              <h2 className="text-lg font-bold text-nord-text mb-6">
+                {locale === "zh" ? "❓ 常见问题" : locale === "ms" ? "❓ Soalan Lazim" : "❓ FAQ"}
+              </h2>
+              <div className="space-y-4">
+                {content.faqItems.map((item, i) => (
+                  <div key={i} className="p-4 bg-nord-bg/50 rounded-xl border border-nord-border/20">
+                    <p className="text-nord-text font-medium text-sm mb-2">{item.q}</p>
+                    <p className="text-nord-text/60 text-sm leading-relaxed">{item.a}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <SitemapFooter />
+    </div>
+  )
+}

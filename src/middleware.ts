@@ -32,18 +32,22 @@ export function middleware(request: NextRequest) {
   }
 
   if (LOCALE_PATTERN.test(pathname)) {
-    const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value
-    if (cookieLocale && LOCALES.includes(cookieLocale as typeof LOCALES[number])) {
-      const currentLocale = pathname.match(LOCALE_PATTERN)?.[1]
-      if (currentLocale !== cookieLocale) {
-        const newPath = pathname.replace(/^\/(zh|en|ms|ja|ko|th|es)/, `/${cookieLocale}`)
-        const url = request.nextUrl.clone()
-        url.pathname = newPath
-        return NextResponse.redirect(url)
-      }
-    }
-    return NextResponse.next()
-  }
+          const ua = request.headers.get("User-Agent") || ""
+          const isCrawler = /Googlebot|bingbot|BingPreview|Slurp|DuckDuckBot|Baiduspider|YandexBot|facebot|facebookexternalhit|ia_archiver/i.test(ua)
+          if (isCrawler) return NextResponse.next()
+
+          const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value
+          if (cookieLocale && LOCALES.includes(cookieLocale as typeof LOCALES[number])) {
+            const currentLocale = pathname.match(LOCALE_PATTERN)?.[1]
+            if (currentLocale !== cookieLocale) {
+              const newPath = pathname.replace(/^\/(zh|en|ms|ja|ko|th|es)/, `/${cookieLocale}`)
+              const url = request.nextUrl.clone()
+              url.pathname = newPath
+              return NextResponse.redirect(url)
+            }
+          }
+          return NextResponse.next()
+        }
 
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value
   const detected = cookieLocale && LOCALES.includes(cookieLocale as typeof LOCALES[number])

@@ -14,6 +14,8 @@ export class AudioEngine {
   private birdTimer: ReturnType<typeof setTimeout> | null = null
   private extension: AudioExtension | null = null
   private _volume = 0.6
+  private channelBuffers = new Map<ChannelId, AudioBuffer>()
+  private bufferSources = new Map<ChannelId, AudioBufferSourceNode>()
 
   get volume() { return this._volume }
 
@@ -35,6 +37,19 @@ export class AudioEngine {
     if (!this.ctx || !this.masterGain) return
     if (active && !this.activeChannels.has(channel)) this.startChannel(channel)
     else if (!active && this.activeChannels.has(channel)) this.stopChannel(channel)
+  }
+
+  async loadAudioBuffer(channel: ChannelId, url: string): Promise<void> {
+    try {
+      const res = await fetch(url)
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const arrayBuf = await res.arrayBuffer()
+      if (!this.ctx) this.init()
+      const audioBuf = await this.ctx!.decodeAudioData(arrayBuf)
+      this.channelBuffers.set(channel, audioBuf)
+    } catch (e) {
+      console.warn(`[AudioEngine] failed to load ${url}:`, e)
+    }
   }
 
   private startChannel(channel: ChannelId) {
@@ -62,9 +77,19 @@ export class AudioEngine {
         this.channelGains.delete(channel)
       }, 2100)
     }
+    this.stopBufferSource(channel)
     if (channel === 'fire') this.stopCrackles()
     if (channel === 'birds') this.stopBirdChirps()
     this.activeChannels.delete(channel)
+  }
+
+  private stopBufferSource(channel: ChannelId) {
+    const src = this.bufferSources.get(channel)
+    if (src) {
+      try { src.stop() } catch {}
+      src.disconnect()
+      this.bufferSources.delete(channel)
+    }
   }
 
   private createSoundSources(channel: ChannelId, output: GainNode) {
@@ -173,6 +198,21 @@ export class AudioEngine {
 
   private createBirds(output: AudioNode) {
     if (!this.ctx) return
+
+    const buf = this.channelBuffers.get('birds')
+    if (buf) {
+      const src = this.ctx.createBufferSource()
+      src.buffer = buf
+      src.loop = true
+      const gain = this.ctx.createGain()
+      gain.gain.value = 0.5
+      src.connect(gain)
+      gain.connect(output)
+      src.start()
+      this.bufferSources.set('birds', src)
+      return
+    }
+
     const src = this.createNoiseSource()
     const filter = this.ctx.createBiquadFilter()
     filter.type = 'highpass'
@@ -307,9 +347,21 @@ export class AudioEngine {
     }
   }
 
+  startAmbient() {
+    this.init()
+    if (!this.activeChannels.has('rain')) {
+      this.toggleChannel('rain', true)
+    }
+  }
+
   destroy() {
     this.stopCrackles()
     this.stopBirdChirps()
+    this.bufferSources.forEach((src) => {
+      try { src.stop() } catch {}
+      src.disconnect()
+    })
+    this.bufferSources.clear()
     this.activeChannels.clear()
     this.channelGains.forEach(g => g.disconnect())
     this.channelGains.clear()
