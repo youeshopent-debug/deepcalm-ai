@@ -36,7 +36,7 @@ function color(theme: ThemeType, alpha: number): string {
   return map[theme] ?? map.deepcalm
 }
 
-export default function BackgroundCanvas() {
+export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean }) {
   const canvas = useRef<HTMLCanvasElement>(null)
   const { theme } = useTheme()
   const pRef = useRef<Dot[]>([])
@@ -49,10 +49,11 @@ export default function BackgroundCanvas() {
     const ctx = c.getContext("2d")
     if (!ctx) return
 
+    const count = videoMode ? 12 : 60
     const resize = () => {
       c.width = window.innerWidth
       c.height = window.innerHeight
-      pRef.current = dots(60, c.width, c.height)
+      pRef.current = dots(count, c.width, c.height)
     }
     resize()
     window.addEventListener("resize", resize)
@@ -108,7 +109,7 @@ export default function BackgroundCanvas() {
       window.removeEventListener("resize", resize)
       t0.current = 0
     }
-  }, [theme])
+  }, [theme, videoMode])
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">

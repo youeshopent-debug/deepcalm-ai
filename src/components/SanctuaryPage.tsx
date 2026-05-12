@@ -1,6 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import BackgroundCanvas from "./BackgroundCanvas"
+import BackgroundVideo from "./BackgroundVideo"
 import AiCounselor from "./AiCounselor"
 import DailyCheckin from "./DailyCheckin"
 import SleepCalculator from "./SleepCalculator"
@@ -10,9 +12,16 @@ import SitemapFooter from "./SitemapFooter"
 import AudioFloatingTray from "./AudioFloatingTray"
 
 export default function SanctuaryPage() {
+  const [videoMode] = useState(true)
+
   return (
     <div className="relative min-h-screen">
-      <BackgroundCanvas />
+      <BackgroundVideo
+        src="/videos/forest.mp4"
+        overlayOpacity={0.5}
+        enabled={videoMode}
+      />
+      <BackgroundCanvas videoMode={videoMode} />
 
       {/* 4s/7s Breathing Halo — guides user to breathe in sync */}
       <div className="fixed inset-0 z-[1] flex items-center justify-center pointer-events-none">

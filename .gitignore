@@ -5,3 +5,6 @@ node_modules
 
 .vercel
 .env*.local
+
+# Large video source files (use compressed versions for deployment)
+/public/videos/287510.mp4
