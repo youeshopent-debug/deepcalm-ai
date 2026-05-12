@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import { Moon, CloudRain, Wind, Flame, Droplets, Bird, Volume2 } from "lucide-react"
+import { Moon, CloudRain, Wind, Flame, Droplets, Bird, Bug, Volume2 } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
 import SleepCalculator from "./SleepCalculator"
 import { audioEngine, type ChannelId } from "@/lib/audioEngine"
@@ -12,6 +12,7 @@ const TRACKS: { id: ChannelId; icon: React.ElementType; labelKey: string; color:
   { id: "fire", icon: Flame, labelKey: "audioPlayer.fire", color: "rgba(255,160,80,0.7)" },
   { id: "stream", icon: Droplets, labelKey: "audioPlayer.stream", color: "rgba(100,200,220,0.7)" },
   { id: "birds", icon: Bird, labelKey: "audioPlayer.birds", color: "rgba(200,180,120,0.7)" },
+  { id: "insects", icon: Bug, labelKey: "audioPlayer.insects", color: "rgba(180,200,80,0.7)" },
 ]
 
 export default function AiHypnotist() {

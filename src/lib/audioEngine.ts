@@ -1,4 +1,4 @@
-export type ChannelId = 'rain' | 'wind' | 'fire' | 'stream' | 'birds'
+export type ChannelId = 'rain' | 'wind' | 'fire' | 'stream' | 'birds' | 'insects'
 
 export interface AudioExtension {
   name: string
@@ -12,8 +12,9 @@ export class AudioEngine {
   private activeChannels = new Set<ChannelId>()
   private crackleTimer: ReturnType<typeof setTimeout> | null = null
   private birdTimer: ReturnType<typeof setTimeout> | null = null
+  private insectTimer: ReturnType<typeof setTimeout> | null = null
   private extension: AudioExtension | null = null
-  private _volume = 0.6
+  private _volume = 0.12
   private channelBuffers = new Map<ChannelId, AudioBuffer>()
   private bufferSources = new Map<ChannelId, AudioBufferSourceNode>()
 
@@ -80,6 +81,7 @@ export class AudioEngine {
     this.stopBufferSource(channel)
     if (channel === 'fire') this.stopCrackles()
     if (channel === 'birds') this.stopBirdChirps()
+    if (channel === 'insects') this.stopInsectChirps()
     this.activeChannels.delete(channel)
   }
 
@@ -100,11 +102,20 @@ export class AudioEngine {
       case 'fire': this.createFire(output); break
       case 'stream': this.createStream(output); break
       case 'birds': this.createBirds(output); break
+      case 'insects': this.createInsects(output); break
     }
   }
 
   private createRain(output: AudioNode) {
     if (!this.ctx) return
+    const buf = this.channelBuffers.get('rain')
+    if (buf) {
+      const src = this.ctx.createBufferSource()
+      src.buffer = buf; src.loop = true
+      const gain = this.ctx.createGain(); gain.gain.value = 0.5
+      src.connect(gain); gain.connect(output); src.start()
+      this.bufferSources.set('rain', src); return
+    }
     this.createNoiseLayer(output, { type: 'bandpass', freq: 200, Q: 0.3, gain: 0.18 })
     this.createNoiseLayer(output, { type: 'bandpass', freq: 1200, Q: 0.4, gain: 0.4 })
     this.createNoiseLayer(output, { type: 'bandpass', freq: 3500, Q: 0.7, gain: 0.3 })
@@ -125,6 +136,14 @@ export class AudioEngine {
 
   private createWind(output: AudioNode) {
     if (!this.ctx) return
+    const buf = this.channelBuffers.get('wind')
+    if (buf) {
+      const src = this.ctx.createBufferSource()
+      src.buffer = buf; src.loop = true
+      const gain = this.ctx.createGain(); gain.gain.value = 0.5
+      src.connect(gain); gain.connect(output); src.start()
+      this.bufferSources.set('wind', src); return
+    }
     const src = this.createNoiseSource()
     const filter = this.ctx.createBiquadFilter()
     filter.type = 'lowpass'
@@ -149,6 +168,14 @@ export class AudioEngine {
 
   private createFire(output: AudioNode) {
     if (!this.ctx) return
+    const buf = this.channelBuffers.get('fire')
+    if (buf) {
+      const src = this.ctx.createBufferSource()
+      src.buffer = buf; src.loop = true
+      const gain = this.ctx.createGain(); gain.gain.value = 0.5
+      src.connect(gain); gain.connect(output); src.start()
+      this.bufferSources.set('fire', src); return
+    }
     const src = this.createNoiseSource()
     const filter = this.ctx.createBiquadFilter()
     filter.type = 'lowpass'
@@ -173,6 +200,14 @@ export class AudioEngine {
 
   private createStream(output: AudioNode) {
     if (!this.ctx) return
+    const buf = this.channelBuffers.get('stream')
+    if (buf) {
+      const src = this.ctx.createBufferSource()
+      src.buffer = buf; src.loop = true
+      const gain = this.ctx.createGain(); gain.gain.value = 0.5
+      src.connect(gain); gain.connect(output); src.start()
+      this.bufferSources.set('stream', src); return
+    }
     const src = this.createNoiseSource()
     const filter = this.ctx.createBiquadFilter()
     filter.type = 'bandpass'
@@ -213,18 +248,32 @@ export class AudioEngine {
       return
     }
 
+    this.startBirdChirps(output)
+  }
+
+  private createInsects(output: AudioNode) {
+    if (!this.ctx) return
+    const buf = this.channelBuffers.get('insects')
+    if (buf) {
+      const src = this.ctx.createBufferSource()
+      src.buffer = buf; src.loop = true
+      const gain = this.ctx.createGain(); gain.gain.value = 0.5
+      src.connect(gain); gain.connect(output); src.start()
+      this.bufferSources.set('insects', src); return
+    }
     const src = this.createNoiseSource()
     const filter = this.ctx.createBiquadFilter()
-    filter.type = 'highpass'
-    filter.frequency.value = 3000
+    filter.type = 'bandpass'
+    filter.frequency.value = 4800
+    filter.Q.value = 1.5
 
     const gain = this.ctx.createGain()
-    gain.gain.value = 0.08
+    gain.gain.value = 0.04
 
     const lfo = this.ctx.createOscillator()
-    lfo.frequency.value = 4
+    lfo.frequency.value = 0.3
     const lfoGain = this.ctx.createGain()
-    lfoGain.gain.value = 0.06
+    lfoGain.gain.value = 0.02
     lfo.connect(lfoGain)
     lfoGain.connect(gain.gain)
     lfo.start()
@@ -233,7 +282,7 @@ export class AudioEngine {
     filter.connect(gain)
     gain.connect(output)
 
-    this.startBirdChirps(output)
+    this.startInsectChirps(output)
   }
 
   private createNoiseSource() {
@@ -307,27 +356,50 @@ export class AudioEngine {
     const chirp = () => {
       if (!this.ctx || !this.activeChannels.has('birds')) return
       this.playBirdChirp(output)
-      this.birdTimer = setTimeout(chirp, 2000 + Math.random() * 4000)
+      this.birdTimer = setTimeout(chirp, 1500 + Math.random() * 1500)
     }
     chirp()
   }
 
   private playBirdChirp(output: AudioNode) {
     if (!this.ctx) return
-    const dur = 0.08 + Math.random() * 0.12
+    const chirpType = Math.floor(Math.random() * 3)
+    const dur = chirpType === 0 ? 0.06 + Math.random() * 0.04 :
+                chirpType === 1 ? 0.12 + Math.random() * 0.08 :
+                0.2 + Math.random() * 0.12
     const sr = this.ctx.sampleRate
     const len = Math.floor(sr * dur)
     const buf = this.ctx.createBuffer(1, len, sr)
     const d = buf.getChannelData(0)
+    const baseFreq = 1800 + Math.random() * 2200
+    const modFreq = 20 + Math.random() * 40
+    const modDepth = 0.05 + Math.random() * 0.1
     for (let i = 0; i < len; i++) {
       const t = i / sr
-      d[i] = Math.sin(2 * Math.PI * (2000 + Math.random() * 1500) * t) * Math.exp(-t * 12)
+      const progress = t / dur
+      const fm = 1 + modDepth * Math.sin(2 * Math.PI * modFreq * t)
+      const glide = 1 + 0.15 * Math.exp(-t * 30)
+      const freq = baseFreq * fm * glide
+      const s1 = Math.sin(2 * Math.PI * freq * t)
+      const s2 = Math.sin(2 * Math.PI * freq * 1.5 * t + 0.5) * 0.3
+      const s3 = Math.sin(2 * Math.PI * freq * 2.1 * t + 1.2) * 0.15
+      const s4 = Math.sin(2 * Math.PI * freq * 0.5 * t + 0.8) * 0.2
+      const am = 1 + 0.3 * Math.sin(2 * Math.PI * 60 * t)
+      const attack = Math.min(1, t / 0.01)
+      const decay = Math.exp(-t * 6)
+      const envelope = attack * decay
+      d[i] = (s1 + s2 + s3 + s4) * envelope * am * 0.4
     }
     const src = this.ctx.createBufferSource()
     src.buffer = buf
+    const filter = this.ctx.createBiquadFilter()
+    filter.type = 'bandpass'
+    filter.frequency.value = baseFreq * 1.2
+    filter.Q.value = 0.8
     const gain = this.ctx.createGain()
-    gain.gain.value = 0.15 + Math.random() * 0.2
-    src.connect(gain)
+    gain.gain.value = 0.35 + Math.random() * 0.25
+    src.connect(filter)
+    filter.connect(gain)
     gain.connect(output)
     src.start()
   }
@@ -339,12 +411,83 @@ export class AudioEngine {
     }
   }
 
+  private startInsectChirps(output: AudioNode) {
+    const chirp = () => {
+      if (!this.ctx || !this.activeChannels.has('insects')) return
+      this.playInsectChirp(output)
+      this.insectTimer = setTimeout(chirp, 600 + Math.random() * 900)
+    }
+    chirp()
+  }
+
+  private playInsectChirp(output: AudioNode) {
+    if (!this.ctx) return
+    const dur = 0.08 + Math.random() * 0.12
+    const sr = this.ctx.sampleRate
+    const len = Math.floor(sr * dur)
+    const buf = this.ctx.createBuffer(1, len, sr)
+    const d = buf.getChannelData(0)
+    const cf = 4000 + Math.random() * 2000
+    const pr = 25 + Math.random() * 15
+    for (let i = 0; i < len; i++) {
+      const t = i / sr
+      const pulse = Math.max(0, Math.sin(2 * Math.PI * pr * t))
+      const envelope = Math.exp(-t * 8) * (1 - t / dur)
+      d[i] = Math.sin(2 * Math.PI * cf * t) * pulse * envelope * 0.6
+    }
+    const src = this.ctx.createBufferSource()
+    src.buffer = buf
+    const filter = this.ctx.createBiquadFilter()
+    filter.type = 'bandpass'
+    filter.frequency.value = cf
+    filter.Q.value = 2
+    const gain = this.ctx.createGain()
+    gain.gain.value = 0.08 + Math.random() * 0.06
+    src.connect(filter)
+    filter.connect(gain)
+    gain.connect(output)
+    src.start()
+  }
+
+  private stopInsectChirps() {
+    if (this.insectTimer) {
+      clearTimeout(this.insectTimer)
+      this.insectTimer = null
+    }
+  }
+
   setMasterVolume(value: number) {
     this._volume = value
     if (this.masterGain) {
       const t = this.ctx?.currentTime ?? 0
       this.masterGain.gain.linearRampToValueAtTime(value, t + 0.1)
     }
+  }
+
+  setChannelVolume(channel: ChannelId, volume: number) {
+    const gain = this.channelGains.get(channel)
+    if (gain && this.ctx) {
+      const t = this.ctx.currentTime
+      gain.gain.linearRampToValueAtTime(volume, t + 0.3)
+    }
+  }
+
+  private readonly themeAudioMap: Record<string, { on: ChannelId[]; off: ChannelId[] }> = {
+    forest: { on: ['birds', 'insects'], off: ['rain', 'wind', 'fire', 'stream'] },
+    twilight: { on: ['stream', 'wind'], off: ['rain', 'fire', 'birds', 'insects'] },
+    earth: { on: [], off: ['rain', 'wind', 'fire', 'stream', 'birds', 'insects'] },
+    deepcalm: { on: [], off: [] },
+  }
+
+  applyThemeAudio(theme: string) {
+    if (!this.ctx) return
+    const cfg = this.themeAudioMap[theme] || this.themeAudioMap.deepcalm
+    cfg.on.forEach(id => {
+      if (!this.activeChannels.has(id)) this.toggleChannel(id, true)
+    })
+    cfg.off.forEach(id => {
+      if (this.activeChannels.has(id)) this.toggleChannel(id, false)
+    })
   }
 
   startAmbient() {
@@ -357,6 +500,7 @@ export class AudioEngine {
   destroy() {
     this.stopCrackles()
     this.stopBirdChirps()
+    this.stopInsectChirps()
     this.bufferSources.forEach((src) => {
       try { src.stop() } catch {}
       src.disconnect()

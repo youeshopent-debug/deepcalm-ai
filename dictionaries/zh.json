@@ -85,7 +85,8 @@
     "wind": "林风",
     "fire": "柴火",
     "stream": "溪流",
-    "birds": "虫鸟"
+    "birds": "虫鸟",
+    "insects": "夏夜虫鸣"
   },
   "audioPlayer": {
     "title": "沉浸式音频",
@@ -95,6 +96,7 @@
     "fire": "壁炉火声",
     "stream": "溪流潺潺",
     "birds": "虫鸣鸟叫",
+    "insects": "夏夜虫鸣",
     "idleHint": "移动鼠标显示控制面板"
   },
   "resonanceWall": {
@@ -282,10 +284,14 @@
     "sleepPoor": "难以入睡的状态往往源于过度活跃的默认模式网络（DMN）。试试 4-7-8 呼吸法：用鼻子吸气 4 秒 → 屏息 7 秒 → 用嘴呼气 8 秒，重复 4 个循环。研究表明，这种节奏能显著降低交感神经兴奋度。",
     "moodHeader": "今日情绪状态",
     "sharePrompt": "将此报告分享到社交媒体，提醒更多深夜朋友来 DeepCalm 避难。",
-    "subscribeCta": "订阅每日治愈简报，明早你将收到基于今夜数据的个性化睡眠建议和 REM 周期分析。"
+    "subscribeCta": "加入 DeepCalm 私域治愈圈。每日清晨推送个性化睡眠分析、REM 洞察与治愈小贴士——明早第一封就是你的专属报告。"
   },
   "aiCounselor": {
     "title": "AI 心理陪伴",
+    "topic_stress": "我感觉压力很大",
+    "topic_sleep": "我最近睡不好",
+    "topic_anxiety": "我总是很焦虑",
+    "topic_lonely": "我感到很孤独",
     "subtitle": "一个静静聆听的朋友，不带评判",
     "placeholder": "说说你现在的心情…",
     "submit": "发送",
@@ -368,5 +374,41 @@
     "dailyCheckin": "每日签到",
     "privacy": "隐私政策",
     "terms": "使用条款"
+  },
+  "affiliate": {
+    "title": "受信任的推荐产品",
+    "subtitle": "我们精选了能帮助你提升情绪健康的工具",
+    "recommendedFor": "推荐用于",
+    "viewProduct": "查看产品",
+    "buyNow": "立即购买",
+    "whyWeRecommend": "为什么推荐",
+    "scientificBacking": "科学依据",
+    "affiliateDisclaimer": "作为合作伙伴，我们可能从符合条件的购买中获得佣金",
+    "recommendedProducts": {
+      "weightedBlanket": {
+        "name": "重力毯",
+        "description": "深层压力刺激，改善睡眠质量和焦虑缓解",
+        "whyWeRecommendIt": "临床研究显示重力毯能降低皮质醇水平",
+        "price": "$59.99"
+      },
+      "sunLamp": {
+        "name": "光照治疗灯",
+        "description": "模拟自然日光，改善情绪和能量水平",
+        "whyWeRecommendIt": "SAD 治疗的黄金标准，经 FDA 批准",
+        "price": "$34.99"
+      },
+      "noiseMachine": {
+        "name": "白噪音机",
+        "description": "屏蔽干扰声，创造宁静睡眠环境",
+        "whyWeRecommendIt": "哈佛研究证实白噪音可减少入睡时间 38%",
+        "price": "$24.99"
+      },
+      "meditationCushion": {
+        "name": "冥想坐垫",
+        "description": "人体工学设计，支持更长时间的舒适冥想",
+        "whyWeRecommendIt": "正确姿势对有效冥想至关重要",
+        "price": "$39.99"
+      }
+    }
   }
 }

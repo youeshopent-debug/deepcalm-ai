@@ -79,6 +79,7 @@
     }
   },
   "audio": {
+    "insects": "夏の虫の声",
     "tabs": {
       "meditation": "瞑想",
       "nature": "自然の音",
@@ -87,6 +88,7 @@
     }
   },
   "audioPlayer": {
+    "insects": "夏の虫の声",
     "play": "再生",
     "stop": "停止",
     "playing": "再生中",
@@ -213,10 +215,14 @@
     "sleepPoor": "寝つきの悪さは過活動なデフォルトモードネットワーク（DMN）に起因することが多いです。4-7-8呼吸法：鼻から4秒吸い→7秒止め→口から8秒吐くを4サイクル。研究ではこのリズムが交感神経系の活動を有意に低下させることが示されています。",
     "moodHeader": "今日の気分",
     "sharePrompt": "このレポートをSNSで共有し、夜更かしの仲間にDeepCalmで安らぎを見つけるよう呼びかけましょう。",
-    "subscribeCta": "毎日のヒーリングブリーフを購読すると、今夜のデータに基づくパーソナライズ睡眠分析とREMサイクルインサイトが明日の朝に届きます。"
+    "subscribeCta": "プライベートヒーリングサークルに参加しよう。毎朝、あなただけの睡眠分析、REMインサイト、ウェルネスヒントをインボックスにお届け — 初回レポートは明日届きます。"
   },
   "aiCounselor": {
     "title": "AI メンタルサポート",
+    "topic_stress": "ストレスを感じています",
+    "topic_sleep": "よく眠れません",
+    "topic_anxiety": "不安を感じています",
+    "topic_lonely": "孤独を感じています",
     "subtitle": "判断せずに耳を傾ける、静かな友人",
     "placeholder": "今の気持ちを教えてください...",
     "submit": "送信",
@@ -323,5 +329,41 @@
     "dailyCheckin": "デイリーチェックイン",
     "privacy": "プライバシー",
     "terms": "利用規約"
+  },
+  "affiliate": {
+    "title": "信頼できるおすすめ製品",
+    "subtitle": "あなたの感情的な健康をサポートするために厳選したツール",
+    "recommendedFor": "おすすめ対象",
+    "viewProduct": "製品を見る",
+    "buyNow": "今すぐ購入",
+    "whyWeRecommend": "おすすめの理由",
+    "scientificBacking": "科学的根拠",
+    "affiliateDisclaimer": "アフィリエイトパートナーとして、対象となる購入から手数料をいただく場合があります",
+    "recommendedProducts": {
+      "weightedBlanket": {
+        "name": "Weighted Blanket",
+        "description": "深部圧迫刺激で睡眠の質を改善し不安を軽減",
+        "whyWeRecommendIt": "臨床研究により、ウェイテッドブランケットがコルチゾール値を下げることが示されています",
+        "price": "$59.99"
+      },
+      "sunLamp": {
+        "name": "Light Therapy Lamp",
+        "description": "自然光を模倣し、気分とエネルギーレベルを向上",
+        "whyWeRecommendIt": "SAD治療のゴールドスタンダード、FDA認可済み",
+        "price": "$34.99"
+      },
+      "noiseMachine": {
+        "name": "White Noise Machine",
+        "description": "邪音を遮断し、静かな睡眠環境を創造",
+        "whyWeRecommendIt": "ハーバード大学の研究：ホワイトノイズが入眠時間を38%短縮",
+        "price": "$24.99"
+      },
+      "meditationCushion": {
+        "name": "Meditation Cushion",
+        "description": "人間工学に基づいたデザインで、快適で長い瞑想をサポート",
+        "whyWeRecommendIt": "正しい姿勢は効果的な瞑想に不可欠です",
+        "price": "$39.99"
+      }
+    }
   }
 }

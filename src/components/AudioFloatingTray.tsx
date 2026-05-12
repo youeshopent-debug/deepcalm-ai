@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { Volume2, Music } from "lucide-react"
 import { audioEngine, type ChannelId } from "@/lib/audioEngine"
+import { useTheme } from "@/context/ThemeContext"
 
 const TRACKS: { id: ChannelId; label: string; emoji: string }[] = [
   { id: "rain", label: "Rain", emoji: "🌧" },
@@ -10,16 +11,18 @@ const TRACKS: { id: ChannelId; label: string; emoji: string }[] = [
   { id: "stream", label: "Stream", emoji: "🌊" },
   { id: "birds", label: "Birds", emoji: "🐦" },
   { id: "fire", label: "Fire", emoji: "🔥" },
+  { id: "insects", label: "Insects", emoji: "🦗" },
 ]
 
 export default function AudioFloatingTray() {
   const [expanded, setExpanded] = useState(false)
   const [channelStates, setChannelStates] = useState<Record<ChannelId, boolean>>(
-    { rain: false, wind: false, fire: false, stream: false, birds: false }
+    { rain: false, wind: false, fire: false, stream: false, birds: false, insects: false }
   )
   const [masterVolume, setMasterVolume] = useState(audioEngine.volume)
   const trayRef = useRef<HTMLDivElement>(null)
   const hasInitRef = useRef(false)
+  const { theme } = useTheme()
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -32,20 +35,31 @@ export default function AudioFloatingTray() {
   }, [])
 
   useEffect(() => {
-    if (hasInitRef.current) return
-    const handler = () => {
-      if (hasInitRef.current) return
+    Promise.all([
+      audioEngine.loadAudioBuffer('birds', '/audio/birds-nature.mp3'),
+      audioEngine.loadAudioBuffer('rain', '/audio/rain-nature.mp3'),
+      audioEngine.loadAudioBuffer('wind', '/audio/wind-nature.mp3'),
+      audioEngine.loadAudioBuffer('fire', '/audio/fire-nature.mp3'),
+      audioEngine.loadAudioBuffer('stream', '/audio/stream-nature.mp3'),
+      audioEngine.loadAudioBuffer('insects', '/audio/insects-nature.mp3'),
+    ]).then(() => {
       hasInitRef.current = true
-      audioEngine.startAmbient()
-      setChannelStates((prev) => ({ ...prev, rain: true }))
-    }
-    document.addEventListener("click", handler, { once: true })
-    return () => document.removeEventListener("click", handler)
+      audioEngine.applyThemeAudio(theme)
+    })
   }, [])
 
   useEffect(() => {
-    audioEngine.loadAudioBuffer('birds', '/audio/birds-nature.mp3')
-  }, [])
+    if (!hasInitRef.current) return
+    audioEngine.applyThemeAudio(theme)
+    setChannelStates({
+      rain: audioEngine.isActive('rain'),
+      wind: audioEngine.isActive('wind'),
+      fire: audioEngine.isActive('fire'),
+      stream: audioEngine.isActive('stream'),
+      birds: audioEngine.isActive('birds'),
+      insects: audioEngine.isActive('insects'),
+    })
+  }, [theme])
 
   const isAnyPlaying = Object.values(channelStates).some((v) => v)
 

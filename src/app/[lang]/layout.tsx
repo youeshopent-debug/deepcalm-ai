@@ -1,7 +1,11 @@
 import type { Metadata } from "next"
 import type { Locale } from "@/types"
 import { LanguageProvider } from "@/context/LanguageContext"
+import { ThemeProvider } from "@/context/ThemeContext"
+import ThemeSwitcher from "@/components/ThemeSwitcher"
+import BackgroundCanvas from "@/components/BackgroundCanvas"
 import Header from "@/components/Header"
+import AudioFloatingTray from "@/components/AudioFloatingTray"
 
 export function generateMetadata({ params: { lang } }: { params: { lang: string } }): Metadata {
   return {
@@ -20,10 +24,15 @@ export default function LangLayout({
 }) {
   return (
     <LanguageProvider initialLocale={lang as Locale}>
-      <div className="dark min-h-screen bg-dc-deep text-dc-text">
-        <Header />
-        {children}
-      </div>
+      <ThemeProvider>
+        <div className="dark min-h-screen bg-dc-deep text-dc-text">
+          <BackgroundCanvas />
+          <Header />
+          {children}
+          <ThemeSwitcher />
+          <AudioFloatingTray />
+        </div>
+      </ThemeProvider>
     </LanguageProvider>
   )
 }

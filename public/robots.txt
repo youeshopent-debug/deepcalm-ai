@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://deepcalm-ai.com/sitemap.xml

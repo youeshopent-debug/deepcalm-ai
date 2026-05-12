@@ -1,81 +1,123 @@
 "use client"
 
+import { useRef, useEffect } from "react"
+import { useTheme, type ThemeType } from "@/context/ThemeContext"
+
+const BREATH_MS = 19000
+const T_INHALE = 0.21
+const T_HOLD = 0.58
+
+interface Dot {
+  x: number; y: number
+  sx: number; sy: number
+  r: number; a: number
+  phase: number
+}
+
+function dots(count: number, w: number, h: number): Dot[] {
+  return Array.from({ length: count }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    sx: (Math.random() - 0.5) * 0.3,
+    sy: (Math.random() - 0.5) * 0.3,
+    r: 1.5 + Math.random() * 2.5,
+    a: 0.04 + Math.random() * 0.06,
+    phase: Math.random() * Math.PI * 2,
+  }))
+}
+
+function color(theme: ThemeType, alpha: number): string {
+  const map: Record<ThemeType, string> = {
+    deepcalm: `rgba(126,184,255,${alpha})`,
+    forest: `rgba(74,122,58,${alpha})`,
+    twilight: `rgba(74,138,186,${alpha})`,
+    earth: `rgba(184,148,90,${alpha})`,
+  }
+  return map[theme] ?? map.deepcalm
+}
+
 export default function BackgroundCanvas() {
+  const canvas = useRef<HTMLCanvasElement>(null)
+  const { theme } = useTheme()
+  const pRef = useRef<Dot[]>([])
+  const rid = useRef(0)
+  const t0 = useRef(0)
+
+  useEffect(() => {
+    const c = canvas.current
+    if (!c) return
+    const ctx = c.getContext("2d")
+    if (!ctx) return
+
+    const resize = () => {
+      c.width = window.innerWidth
+      c.height = window.innerHeight
+      pRef.current = dots(60, c.width, c.height)
+    }
+    resize()
+    window.addEventListener("resize", resize)
+
+    const draw = (now: number) => {
+      if (!ctx || !c) return
+      if (!t0.current) t0.current = now
+      const t = (now - t0.current) % BREATH_MS / BREATH_MS
+
+      let scale: number
+      if (t < T_INHALE) {
+        scale = 0.8 + (t / T_INHALE) * 0.4
+      } else if (t < T_HOLD) {
+        scale = 1.2 - ((t - T_INHALE) / (T_HOLD - T_INHALE)) * 0.05
+      } else {
+        scale = 1.15 - ((t - T_HOLD) / (1 - T_HOLD)) * 0.35
+      }
+
+      ctx.clearRect(0, 0, c.width, c.height)
+
+      const cx = c.width / 2
+      const cy = c.height / 2
+      const drift = (scale - 1) * 80
+
+      for (const p of pRef.current) {
+        const dx = p.x - cx
+        const dy = p.y - cy
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1
+        const ang = Math.atan2(dy, dx)
+
+        const tx = cx + Math.cos(ang) * (dist + drift)
+        const ty = cy + Math.sin(ang) * (dist + drift)
+        p.x += (tx - p.x) * 0.05
+        p.y += (ty - p.y) * 0.05
+
+        p.x += Math.sin(now * 0.0005 + p.phase) * p.sx
+        p.y += Math.cos(now * 0.0007 + p.phase) * p.sy
+
+        const alpha = p.a * Math.min(1.4, scale + 0.2)
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.r * scale, 0, Math.PI * 2)
+        ctx.fillStyle = color(theme, Math.max(0, Math.min(1, alpha)))
+        ctx.fill()
+      }
+
+      rid.current = requestAnimationFrame(draw)
+    }
+
+    rid.current = requestAnimationFrame(draw)
+
+    return () => {
+      cancelAnimationFrame(rid.current)
+      window.removeEventListener("resize", resize)
+      t0.current = 0
+    }
+  }, [theme])
+
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#111827] to-[#0f1729]" />
-
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(120,180,255,0.03),transparent_70%)] animate-breath-orb-4-7" />
-
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-dc-accent/[0.015] via-dc-accent/[0.008] to-transparent rounded-full animate-aurora-drift" />
-
-      <div className="absolute bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-dc-accent/[0.02] via-dc-accent/[0.008] to-transparent" />
-
-      <div className="absolute inset-0">
-        {Array.from({ length: 18 }).map((_, i) => (
-          <div
-            key={`p-${i}`}
-            className="absolute w-1 h-1 bg-dc-accent/30 rounded-full animate-float-particle"
-            style={{
-              left: `${5 + Math.random() * 90}%`,
-              animationDelay: `${i * 0.8}s`,
-              animationDuration: `${12 + Math.random() * 10}s`,
-              width: `${1.5 + Math.random() * 2}px`,
-              height: `${1.5 + Math.random() * 2}px`,
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="absolute bottom-[5%] left-0 right-0">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div
-            key={`w-${i}`}
-            className="absolute h-[1px] bg-gradient-to-r from-transparent via-dc-accent/[0.04] to-transparent"
-            style={{
-              left: `${10 + i * 20}%`,
-              right: `${10 + i * 20}%`,
-              bottom: `${i * 8}px`,
-              animationDelay: `${i * 1.5}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="absolute bottom-[8%] left-[15%] right-[15%] h-[120px] opacity-[0.015]">
-        <svg viewBox="0 0 400 120" preserveAspectRatio="none" className="w-full h-full">
-          <path
-            d="M0,60 Q50,20 100,60 T200,60 T300,60 T400,60"
-            fill="none"
-            stroke="rgba(126,184,255,0.3)"
-            strokeWidth="0.5"
-            className="animate-stream-glow"
-          />
-          <path
-            d="M0,70 Q60,30 120,70 T240,70 T360,70 T400,70"
-            fill="none"
-            stroke="rgba(126,184,255,0.15)"
-            strokeWidth="0.3"
-            className="animate-stream-glow"
-            style={{ animationDelay: "1s" }}
-          />
-        </svg>
-      </div>
-
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div
-          key={`l-${i}`}
-          className="absolute h-[2px] bg-gradient-to-r from-transparent via-dc-accent/10 to-transparent rounded-full animate-leaf-sway"
-          style={{
-            left: `${5 + i * 18}%`,
-            bottom: `${20 + Math.random() * 30}%`,
-            width: `${20 + Math.random() * 40}px`,
-            opacity: 0.08,
-            animationDelay: `${i * 2}s`,
-            animationDuration: `${10 + Math.random() * 8}s`,
-          }}
-        />
-      ))}
+      <div className="absolute inset-0 bg-[var(--dc-deep)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--dc-surface)]/50" />
+      <canvas
+        ref={canvas}
+        className="absolute inset-0 w-full h-full"
+      />
     </div>
   )
 }

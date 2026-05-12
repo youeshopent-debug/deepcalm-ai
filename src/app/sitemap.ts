@@ -3,6 +3,8 @@ import { getGuides } from "@/content/guides"
 import { getAnxietyScenarios } from "@/content/anxiety-scenarios"
 import { getAllSlugs } from "@/content/topics"
 
+export const dynamic = "force-dynamic"
+
 const LANGS = ["zh", "en", "ms", "ja", "ko", "th", "es"]
 const BASE = "https://deepcalm-ai.com"
 

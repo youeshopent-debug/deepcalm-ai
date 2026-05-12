@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { Volume2, CloudRain, Wind, Flame, Droplets, Bird, X } from 'lucide-react'
+import { Volume2, CloudRain, Wind, Flame, Droplets, Bird, Bug, X } from 'lucide-react'
 import { audioEngine, type ChannelId } from '@/lib/audioEngine'
 import { useLanguage } from '@/context/LanguageContext'
 
@@ -10,7 +10,8 @@ const TRACKS: { id: ChannelId; icon: React.ElementType; labelKey: string; color:
   { id: 'wind', icon: Wind, labelKey: 'audio.wind', color: 'rgba(180,220,200,0.7)' },
   { id: 'fire', icon: Flame, labelKey: 'audio.fire', color: 'rgba(255,160,80,0.7)' },
   { id: 'stream', icon: Droplets, labelKey: 'audio.stream', color: 'rgba(100,200,220,0.7)' },
-  { id: 'birds', icon: Bird, labelKey: 'audio.birds', color: 'rgba(200,180,120,0.7)' },
+  { id: 'birds', icon: Bird, labelKey: 'audio.birds', color: 'rgba(34,197,94,0.7)' },
+  { id: 'insects', icon: Bug, labelKey: 'audio.insects', color: 'rgba(180,200,80,0.7)' },
 ]
 
 export default function AudioMixer() {

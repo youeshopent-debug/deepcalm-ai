@@ -79,6 +79,7 @@
     }
   },
   "audio": {
+    "insects": "Insectos Nocturnos",
     "tabs": {
       "meditation": "Meditación",
       "nature": "Sonidos de la naturaleza",
@@ -87,6 +88,7 @@
     }
   },
   "audioPlayer": {
+    "insects": "Insectos Nocturnos",
     "play": "Reproducir",
     "stop": "Detener",
     "playing": "Reproduciendo",
@@ -213,10 +215,14 @@
     "sleepPoor": "La dificultad para dormir a menudo proviene de una Red de Modo Predeterminado (DMN) hiperactiva. Prueba la técnica 4-7-8: inhala por la nariz 4 segundos → retén 7 → exhala por la boca 8. Repite 4 ciclos. Las investigaciones muestran que este ritmo reduce significativamente la actividad del sistema nervioso simpático.",
     "moodHeader": "Estado de Ánimo de Hoy",
     "sharePrompt": "Comparte este informe en redes sociales para recordar a otras almas nocturnas que encuentren refugio en DeepCalm.",
-    "subscribeCta": "Suscríbete a los boletines diarios de sanación y recibe análisis personalizados del sueño con información de tus ciclos REM en tu bandeja de entrada mañana por la mañana."
+    "subscribeCta": "Únete a nuestro círculo de sanación privado. Recibe análisis personalizados del sueño, información REM y consejos de bienestar en tu bandeja de entrada cada mañana — tu primer informe llega mañana."
   },
   "aiCounselor": {
     "title": "Acompañante Psicológico AI",
+    "topic_stress": "Me siento estresado",
+    "topic_sleep": "No puedo dormir bien",
+    "topic_anxiety": "Me siento ansioso",
+    "topic_lonely": "Me siento solo",
     "subtitle": "Un amigo que escucha, sin juzgar",
     "placeholder": "Comparte lo que sientes ahora...",
     "submit": "Enviar",
@@ -323,5 +329,41 @@
     "dailyCheckin": "Registro Diario",
     "privacy": "Privacidad",
     "terms": "Términos"
+  },
+  "affiliate": {
+    "title": "Productos Recomendados de Confianza",
+    "subtitle": "Herramientas seleccionadas para apoyar tu bienestar emocional",
+    "recommendedFor": "Recomendado para",
+    "viewProduct": "Ver Producto",
+    "buyNow": "Comprar Ahora",
+    "whyWeRecommend": "Por Qué Lo Recomendamos",
+    "scientificBacking": "Respaldo Científico",
+    "affiliateDisclaimer": "Como afiliado, podemos recibir una comisión por compras que califiquen",
+    "recommendedProducts": {
+      "weightedBlanket": {
+        "name": "Manta de Peso",
+        "description": "Estimulación de presión profunda para mejorar el sueño y aliviar la ansiedad",
+        "whyWeRecommendIt": "Estudios clínicos muestran que las mantas de peso reducen los niveles de cortisol",
+        "price": "$59.99"
+      },
+      "sunLamp": {
+        "name": "Lámpara de Terapia de Luz",
+        "description": "Simula la luz natural para mejorar el estado de ánimo y la energía",
+        "whyWeRecommendIt": "Estándar de oro para el tratamiento del TAE, aprobado por la FDA",
+        "price": "$34.99"
+      },
+      "noiseMachine": {
+        "name": "Máquina de Ruido Blanco",
+        "description": "Bloquea sonidos perturbadores para un ambiente de sueño tranquilo",
+        "whyWeRecommendIt": "Estudio de Harvard: el ruido blanco reduce el inicio del sueño en un 38%",
+        "price": "$24.99"
+      },
+      "meditationCushion": {
+        "name": "Cojín de Meditación",
+        "description": "Diseño ergonómico para sesiones de meditación cómodas y prolongadas",
+        "whyWeRecommendIt": "Una postura adecuada es esencial para una meditación efectiva",
+        "price": "$39.99"
+      }
+    }
   }
 }

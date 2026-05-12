@@ -85,7 +85,8 @@
     "wind": "Forest Wind",
     "fire": "Crackling Fire",
     "stream": "Babbling Stream",
-    "birds": "Birds & Insects"
+    "birds": "Birds & Insects",
+    "insects": "Evening Insects"
   },
   "audioPlayer": {
     "title": "Immersive Audio",
@@ -95,6 +96,7 @@
     "fire": "Crackling Fire",
     "stream": "Babbling Brook",
     "birds": "Crickets & Birds",
+    "insects": "Evening Insects",
     "idleHint": "Move mouse to show controls"
   },
   "resonanceWall": {
@@ -282,10 +284,14 @@
     "sleepPoor": "Difficulty falling asleep often stems from an overactive Default Mode Network (DMN). Try the 4-7-8 breathing technique: inhale through your nose for 4 seconds → hold for 7 → exhale through your mouth for 8. Repeat 4 cycles. Research shows this rhythm significantly reduces sympathetic nervous system activity.",
     "moodHeader": "Today's Mood",
     "sharePrompt": "Share this report on social media to remind other late-night souls to find shelter at DeepCalm.",
-    "subscribeCta": "Subscribe to daily healing briefs, and receive personalized sleep analysis with REM cycle insights in your inbox tomorrow morning."
+    "subscribeCta": "Join our private healing circle. Get personalized sleep analysis, REM insights & wellness tips in your inbox every morning — your first report arrives tomorrow."
   },
   "aiCounselor": {
     "title": "AI Companion",
+    "topic_stress": "I'm feeling stressed",
+    "topic_sleep": "I can't sleep well",
+    "topic_anxiety": "I feel anxious",
+    "topic_lonely": "I feel lonely",
     "subtitle": "A friend who listens, without judgment",
     "placeholder": "Share what's on your mind...",
     "submit": "SEND",
@@ -368,5 +374,41 @@
     "dailyCheckin": "Daily Check-in",
     "privacy": "Privacy",
     "terms": "Terms"
+  },
+  "affiliate": {
+    "title": "Trusted Recommended Products",
+    "subtitle": "Curated tools to support your emotional wellness journey",
+    "recommendedFor": "Recommended for",
+    "viewProduct": "View Product",
+    "buyNow": "Buy Now",
+    "whyWeRecommend": "Why We Recommend",
+    "scientificBacking": "Scientific Backing",
+    "affiliateDisclaimer": "As an affiliate, we may earn a commission from qualifying purchases",
+    "recommendedProducts": {
+      "weightedBlanket": {
+        "name": "Weighted Blanket",
+        "description": "Deep pressure stimulation for better sleep and anxiety relief",
+        "whyWeRecommendIt": "Clinical studies show weighted blankets lower cortisol levels",
+        "price": "$59.99"
+      },
+      "sunLamp": {
+        "name": "Light Therapy Lamp",
+        "description": "Simulates natural daylight to improve mood and energy",
+        "whyWeRecommendIt": "Gold standard for SAD treatment, FDA cleared",
+        "price": "$34.99"
+      },
+      "noiseMachine": {
+        "name": "White Noise Machine",
+        "description": "Blocks disruptive sounds for a peaceful sleep environment",
+        "whyWeRecommendIt": "Harvard study: white noise reduces sleep onset by 38%",
+        "price": "$24.99"
+      },
+      "meditationCushion": {
+        "name": "Meditation Cushion",
+        "description": "Ergonomic design for comfortable, longer meditation sessions",
+        "whyWeRecommendIt": "Proper posture is essential for effective meditation",
+        "price": "$39.99"
+      }
+    }
   }
 }

@@ -85,7 +85,8 @@
     "wind": "Angin Rimba",
     "fire": "Api Unggun",
     "stream": "Aliran Sungai",
-    "birds": "Burung & Serangga"
+    "birds": "Burung & Serangga",
+    "insects": "Serangga Malam"
   },
   "audioPlayer": {
     "title": "Audio Imersif",
@@ -95,6 +96,7 @@
     "fire": "Api Perapian",
     "stream": "Aliran Sungai",
     "birds": "Burung & Serangga",
+    "insects": "Serangga Malam",
     "idleHint": "Gerakkan tetikus untuk menunjukkan kawalan"
   },
   "resonanceWall": {
@@ -282,10 +284,14 @@
     "sleepPoor": "Kesukaran tidur sering berpunca daripada Rangkaian Mod Lalai (DMN) yang terlalu aktif. Cuba teknik pernafasan 4-7-8: tarik nafas melalui hidung selama 4 saat → tahan 7 saat → hembus melalui mulut selama 8 saat. Ulang 4 kitaran. Penyelidikan menunjukkan irama ini mengurangkan aktiviti sistem saraf simpatetik dengan ketara.",
     "moodHeader": "Keadaan Emosi Hari Ini",
     "sharePrompt": "Kongsi laporan ini di media sosial untuk mengingatkan rakan tengah malam yang lain supaya mencari perlindungan di DeepCalm.",
-    "subscribeCta": "Langgan taklimat penyembuhan harian, dan terima analisis tidur peribadi dengan pandangan kitaran REM dalam peti masuk anda esok pagi."
+    "subscribeCta": "Sertai kalangan penyembuhan peribadi kami. Dapatkan analisis tidur peribadi, panduan REM & petua kesihatan dalam peti masuk anda setiap pagi — laporan pertama tiba esok."
   },
   "aiCounselor": {
     "title": "Teman AI",
+    "topic_stress": "Saya berasa tertekan",
+    "topic_sleep": "Saya sukar tidur",
+    "topic_anxiety": "Saya berasa cemas",
+    "topic_lonely": "Saya berasa sunyi",
     "subtitle": "Seorang teman yang mendengar, tanpa penghakiman",
     "placeholder": "Kongsi apa yang ada di fikiran anda...",
     "submit": "HANTAR",
@@ -368,5 +374,41 @@
     "dailyCheckin": "Daftar Masuk Harian",
     "privacy": "Privasi",
     "terms": "Terma"
+  },
+  "affiliate": {
+    "title": "Produk Disyorkan Yang Dipercayai",
+    "subtitle": "Alat terpilih untuk menyokong perjalanan kesejahteraan emosi anda",
+    "recommendedFor": "Disyorkan untuk",
+    "viewProduct": "Lihat Produk",
+    "buyNow": "Beli Sekarang",
+    "whyWeRecommend": "Kenapa Kami Syorkan",
+    "scientificBacking": "Sokongan Saintifik",
+    "affiliateDisclaimer": "Sebagai rakan kongsi, kami mungkin mendapat komisen daripada pembelian yang layak",
+    "recommendedProducts": {
+      "weightedBlanket": {
+        "name": "Selimut Berberat",
+        "description": "Rangsangan tekanan dalam untuk meningkatkan kualiti tidur dan melegakan kebimbangan",
+        "whyWeRecommendIt": "Kajian klinikal menunjukkan selimut berberat menurunkan tahap kortisol",
+        "price": "$59.99"
+      },
+      "sunLamp": {
+        "name": "Lampu Terapi Cahaya",
+        "description": "Meniru cahaya semula jadi untuk meningkatkan mood dan tenaga",
+        "whyWeRecommendIt": "Standard emas untuk rawatan SAD, diluluskan FDA",
+        "price": "$34.99"
+      },
+      "noiseMachine": {
+        "name": "Mesin Bunyi Putih",
+        "description": "Menyekat bunyi gangguan untuk persekitaran tidur yang tenang",
+        "whyWeRecommendIt": "Kajian Harvard: bunyi putih mengurangkan masa tidur sebanyak 38%",
+        "price": "$24.99"
+      },
+      "meditationCushion": {
+        "name": "Bantal Meditasi",
+        "description": "Reka bentuk ergonomik untuk sesi meditasi yang selesa dan lebih lama",
+        "whyWeRecommendIt": "Postur yang betul adalah penting untuk meditasi yang berkesan",
+        "price": "$39.99"
+      }
+    }
   }
 }

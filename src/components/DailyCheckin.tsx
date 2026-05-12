@@ -1,12 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useLanguage } from "@/context/LanguageContext"
-import { Moon, Sun, Send, Sparkles } from "lucide-react"
+import { Moon, Sun, Send, Sparkles, Download, X } from "lucide-react"
+import { toPng } from "html-to-image"
+import { QRCodeSVG } from "qrcode.react"
 
 const STORAGE_KEY = "deepcalm_checkins"
 const MOODS = ["calm", "anxious", "tired", "happy", "sad", "energetic"] as const
 const SLEEP_LEVELS = ["great", "okay", "poor"] as const
+const RECOMMENDED_PRODUCTS = [
+  { key: "weightedBlanket", icon: "🛏️" },
+  { key: "sunLamp", icon: "💡" },
+  { key: "noiseMachine", icon: "🎵" },
+  { key: "meditationCushion", icon: "🧘" },
+] as const
 
 export default function DailyCheckin() {
   const { tt, locale } = useLanguage()
@@ -19,6 +27,8 @@ export default function DailyCheckin() {
   const [subscribing, setSubscribing] = useState(false)
   const [comment, setComment] = useState("")
   const [commentLoading, setCommentLoading] = useState(false)
+  const [showPoster, setShowPoster] = useState(false)
+  const posterRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const data = localStorage.getItem(STORAGE_KEY)
@@ -115,6 +125,27 @@ export default function DailyCheckin() {
     }
   }
 
+  const handleSavePoster = async () => {
+    if (!posterRef.current) return
+    try {
+      const dataUrl = await toPng(posterRef.current, { quality: 0.95, pixelRatio: 2 })
+      const link = document.createElement("a")
+      link.download = `deepcalm-${Date.now()}.png`
+      link.href = dataUrl
+      link.click()
+      setShowPoster(false)
+    } catch {
+      // fallback: clipboard text share
+      const text = `${tt("healingReport.title")}\n${
+        sleep === "great" ? tt("healingReport.sleepGreat")
+          : sleep === "okay" ? tt("healingReport.sleepOkay")
+          : tt("healingReport.sleepPoor")
+      }\n\n${tt("healingReport.sharePrompt")}\n\nhttps://deepcalm-ai.com/${locale}`
+      navigator.clipboard?.writeText(text)
+      setShowPoster(false)
+    }
+  }
+
   if (checkedIn) {
     return (
       <section id="daily-checkin" className="py-24">
@@ -194,7 +225,7 @@ export default function DailyCheckin() {
                   <span className="text-sm text-dc-text">{getMoodLabel(mood)}</span>
                 </div>
               )}
-              <div className="mt-3 flex gap-2">
+              <div className="mt-3 flex gap-2 flex-wrap">
                 <button
                   onClick={() => {
                     const text = `${tt("healingReport.title")}\n${
@@ -208,6 +239,12 @@ export default function DailyCheckin() {
                 >
                   📤 {tt("common.share") || "Share"}
                 </button>
+                <button
+                  onClick={() => setShowPoster(true)}
+                  className="px-3 py-1.5 text-xs font-medium bg-dc-accent/10 hover:bg-dc-accent/20 text-dc-accent rounded-lg transition-colors"
+                >
+                  🎨 {tt("common.healPoster")}
+                </button>
                 {!emailSubscribed && (
                   <p className="text-xs text-dc-muted/70 leading-relaxed">
                     {tt("healingReport.subscribeCta")}
@@ -215,6 +252,85 @@ export default function DailyCheckin() {
                 )}
               </div>
             </div>
+
+            <div className="mt-6 p-4 bg-gradient-to-br from-amber-500/[0.06] to-transparent border border-amber-500/10 rounded-xl">
+              <h3 className="text-sm font-semibold text-dc-text flex items-center gap-2 mb-3">
+                <span className="text-lg">🛍️</span>
+                {tt("affiliate.title")}
+              </h3>
+              <p className="text-xs text-dc-muted/70 mb-3">{tt("affiliate.subtitle")}</p>
+              <div className="grid grid-cols-2 gap-2">
+                {RECOMMENDED_PRODUCTS.map((p) => (
+                  <div key={p.key} className="p-2.5 bg-dc-surface/50 rounded-xl border border-dc-border/30 hover:border-dc-accent/20 transition-colors">
+                    <div className="flex items-center gap-1.5 mb-1.5">
+                      <span className="text-base">{p.icon}</span>
+                      <span className="text-[11px] font-medium text-dc-text leading-tight">
+                        {tt(`affiliate.recommendedProducts.${p.key}.name`)}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-dc-muted/70 leading-relaxed mb-1.5 line-clamp-2">
+                      {tt(`affiliate.recommendedProducts.${p.key}.description`)}
+                    </p>
+                    <span className="inline-block text-[9px] text-amber-400/80 font-medium bg-amber-500/10 px-1.5 py-0.5 rounded">
+                      {tt("affiliate.whyWeRecommend")}: {tt(`affiliate.recommendedProducts.${p.key}.whyWeRecommendIt`)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-[9px] text-dc-muted/30 text-center leading-relaxed">
+                {tt("affiliate.affiliateDisclaimer")}
+              </p>
+            </div>
+
+            {showPoster && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+                <div className="relative max-w-sm w-full">
+                  <button
+                    onClick={() => setShowPoster(false)}
+                    className="absolute -top-2 -right-2 z-10 w-8 h-8 bg-dc-surface border border-dc-border rounded-full flex items-center justify-center hover:bg-dc-accent/10 transition-colors"
+                  >
+                    <X className="w-4 h-4 text-dc-muted" />
+                  </button>
+                  <div ref={posterRef} className="bg-gradient-to-br from-dc-deep via-[#1a1a3e] to-dc-deep rounded-2xl p-6 shadow-2xl border border-dc-border/30">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="text-3xl mb-2">🌙</div>
+                      <h3 className="text-lg font-bold text-white mb-1">DeepCalm AI</h3>
+                      <p className="text-xs text-white/50 mb-4">{tt("dailyCheckin.checkinDone")}</p>
+
+                      <div className="w-full p-3 bg-white/5 rounded-xl mb-3">
+                        <div className="flex items-center justify-center gap-3 mb-2">
+                          <div className="flex items-center gap-1.5 px-2 py-1 bg-white/10 rounded-full">
+                            {sleep === "great" ? <Sun className="w-3 h-3 text-yellow-400" /> : <Moon className="w-3 h-3 text-white/50" />}
+                            <span className="text-xs text-white/80">{getSleepLabel(sleep)}</span>
+                          </div>
+                          <span className="text-lg">{getMoodEmoji(mood)}</span>
+                          <span className="text-xs text-white/80">{getMoodLabel(mood)}</span>
+                        </div>
+                      </div>
+
+                      {comment && (
+                        <div className="w-full p-3 bg-dc-accent/10 rounded-xl mb-4">
+                          <p className="text-xs text-white/70 italic leading-relaxed">&ldquo;{comment}&rdquo;</p>
+                        </div>
+                      )}
+
+                      <div className="bg-white p-2 rounded-xl mb-2">
+                        <QRCodeSVG value={`https://deepcalm-ai.com/${locale}`} size={80} bgColor="#ffffff" fgColor="#000000" />
+                      </div>
+                      <p className="text-[10px] text-white/40">deepcalm-ai.com</p>
+
+                      <button
+                        onClick={handleSavePoster}
+                        className="mt-4 px-5 py-2 bg-dc-accent hover:bg-dc-accent/90 text-dc-deep text-sm font-medium rounded-xl transition-colors flex items-center gap-2"
+                      >
+                        <Download className="w-4 h-4" />
+                        {tt("common.healPosterSaved")}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
