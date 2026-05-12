@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server"
 const LOCALES = ["zh", "en", "ms", "ja", "ko", "th", "es"] as const
 const LOCALE_COOKIE = "deepcalm-locale"
 const LOCALE_PATTERN = /^\/(zh|en|ms|ja|ko|th|es)(\/|$)/
-const SKIP_PATTERN = /^\/(_next|api|favicon\.ico|sitemap|robots|images)/
+const SKIP_PATTERN = /^\/(_next|api|favicon\.ico|sitemap|robots|images|audio)/
 const DEFAULT_LOCALE = "zh"
 
 function getPreferredLocale(acceptLang: string): string {
@@ -66,5 +66,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|favicon\\.ico|sitemap|robots).*)"],
+  matcher: ["/((?!api|_next|favicon\\.ico|sitemap|robots|audio).*)"],
 }
