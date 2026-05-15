@@ -1,6 +1,6 @@
 "use client"
 
-import socialDict from "@/public/locales/social-en.json";
+import socialDict from "@/locales/social-en.json";
 import { ArrowRight, Brain, Clock, Shield, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 

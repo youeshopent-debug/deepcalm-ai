@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { useLanguage } from "@/context/LanguageContext"
+import { useLanguage } from "@/context/LanguageContext";
+import { useEffect, useRef, useState } from "react";
 
 interface Message {
   id: number
@@ -93,9 +93,13 @@ export default function ResonanceWall() {
   const { tt, locale } = useLanguage()
 
   const [messages, setMessages] = useState<(Message & { fading?: boolean })[]>([])
-  const [globalCount] = useState(() => Math.floor(Math.random() * 1501) + 500)
+  const [globalCount, setGlobalCount] = useState(0)
   const [input, setInput] = useState("")
   const [translations, setTranslations] = useState<Record<number, string | "loading">>({})
+
+  useEffect(() => {
+    setGlobalCount(Math.floor(Math.random() * 1501) + 500)
+  }, [])
   const counterRef = useRef(0)
 
   function addMessage(text: string) {
