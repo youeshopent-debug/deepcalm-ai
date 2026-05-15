@@ -35,25 +35,15 @@ function buildDailyEmail(name: string, lang: string, dayOfWeek: string): string 
 }
 
 async function fetchAudienceContacts(): Promise<any[]> {
-  const https = require("https")
-  return new Promise((resolve) => {
-    const options = {
-      hostname: "api.resend.com",
-      path: `/audiences/${AUDIENCE_ID}/contacts`,
-      method: "GET",
+  try {
+    const res = await fetch(`https://api.resend.com/audiences/${AUDIENCE_ID}/contacts`, {
       headers: { Authorization: `Bearer ${API_KEY}` },
-    }
-    const req = https.request(options, (res: any) => {
-      let d = ""
-      res.on("data", (c: any) => (d += c))
-      res.on("end", () => {
-        try { const p = JSON.parse(d); resolve(p.data?.data || []) }
-        catch { resolve([]) }
-      })
     })
-    req.on("error", () => resolve([]))
-    req.end()
-  })
+    const data = await res.json()
+    return data.data?.data || []
+  } catch {
+    return []
+  }
 }
 
 export async function GET(req: NextRequest) {
