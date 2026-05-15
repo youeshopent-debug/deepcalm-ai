@@ -12,7 +12,7 @@ node_modules
 # Debug & temp files
 _check*.cjs _check*.mjs _debug*.cjs _page.html _source*.html _sitemap*.xml
 error.txt output.txt quick-test*.cjs response.html dev-server.*.log test_*.txt
-take-screenshots.cjs check-zh-site.cjs _stress_test.cjs _resend_setup.cjs
+take-screenshots.cjs check-zh-site.cjs _stress_test.cjs _resend_setup.cjs _resend_test.cjs
 "= require('https');"
 
 # Playwright logs
