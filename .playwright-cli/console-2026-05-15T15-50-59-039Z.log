@@ -1,0 +1,33 @@
+[    4954ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/social:0
+[    5483ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:29889
+[    5571ms] Error: ENOENT: no such file or directory, open 'C:\Users\User\code\deepcalm-ai\.next\server\middleware-manifest.json'
+    at Object.readFileSync (node:fs:440:20)
+    at defaultLoadImpl (node:internal/modules/cjs/loader:1105:17)
+    at loadSource (node:internal/modules/cjs/loader:1732:20)
+    at Object..json (node:internal/modules/cjs/loader:1847:31)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1463:12)
+    at mod.require (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:147:16)
+    at DevServer.getMiddlewareManifest (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\next-server.js:938:26)
+    at DevServer.getEdgeFunctionsPages (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\next-server.js:954:31)
+    at NextNodeServer.handleCatchallRenderRequest (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\next-server.js:238:49)
+    at async DevServer.handleRequestImpl (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\base-server.js:818:17)
+    at async (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\dev\next-dev-server.js:339:20)
+    at async Span.traceAsyncFn (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (file://C:\Users\User\code\deepcalm-ai\node_modules\next\dist\server\lib\start-server.js:141:13)
+[    5564ms] [LOG] [HMR] connected @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/websocket.js:38
+[    5879ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/favicon.ico:0
+[   42471ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:221
+[   42915ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:349
+[   47514ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_next/static/css/app/layout.css?v=1778860302091:0
+[   47523ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_next/static/chunks/main-app.js?v=1778860302091:0
+[   47523ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/_next/static/chunks/app-pages-internals.js:0
+[   47554ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/favicon.ico:0

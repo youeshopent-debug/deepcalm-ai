@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 const LOCALES = ["zh", "en", "ms", "ja", "ko", "th", "es"] as const
 const LOCALE_COOKIE = "deepcalm-locale"
 const LOCALE_PATTERN = /^\/(zh|en|ms|ja|ko|th|es)(\/|$)/
-const SKIP_PATTERN = /^\/(_next|api|favicon\.ico|sitemap|robots|ads|images|audio|videos)/
+const SKIP_PATTERN = /^\/(_next|api|favicon\.ico|sitemap|robots|ads|images|audio|videos|social)\//
 const DEFAULT_LOCALE = "en"
 
 export function middleware(request: NextRequest) {
@@ -54,5 +54,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|favicon\\.ico|/?sitemap|/?robots|/?ads|audio|videos|images).*)"],
+  matcher: ["/((?!api|_next|favicon\\.ico|/?sitemap|/?robots|/?ads|audio|videos|images|social).*)"],
 }
