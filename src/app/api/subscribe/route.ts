@@ -14,6 +14,11 @@ function buildNotifyHtml(email: string, lang: string): string {
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>New DeepCalm Subscriber</title></head><body style="margin:0;padding:0;background-color:#0f1421;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif"><table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:40px 20px"><table width="480" cellpadding="0" cellspacing="0" style="background:linear-gradient(135deg,#1a2238,#141a2e);border-radius:16px;border:1px solid rgba(126,184,255,0.15)"><tr><td style="padding:32px"><h2 style="color:#e8edf5;font-size:18px;margin:0 0 16px">&#128233; New Subscription</h2><table cellpadding="8" cellspacing="0" style="color:#8892b0;font-size:13px;width:100%"><tr><td style="color:#5a6484;width:100px">Email</td><td style="color:#e8edf5;word-break:break-all">${email}</td></tr><tr><td style="color:#5a6484">Language</td><td style="color:#e8edf5">${lang}</td></tr><tr><td style="color:#5a6484">Time</td><td style="color:#e8edf5">${new Date().toISOString()}</td></tr></table><hr style="border:none;border-top:1px solid rgba(126,184,255,0.1);margin:20px 0"><p style="color:#5a6484;font-size:11px;margin:0">DeepCalm AI &middot; Midnight Sanctuary</p></td></tr></table></td></tr></table></body></html>`
 }
 
+async function resendPost(path: string, body: Record<string, unknown>) {
+  const res = await resend!.post(path, body as any) as any
+  return res
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -30,15 +35,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: "service_unavailable" }, { status: 503 })
     }
 
-    const upsertRes = await resend.contacts.create({
-      audienceId: AUDIENCE_ID,
-      email,
-      unsubscribed: false,
-      metadata: { lang, subscribedAt: new Date().toISOString() },
-    })
+    const upsertRes = await resendPost(
+      `/audiences/${AUDIENCE_ID}/contacts`,
+      { email, unsubscribed: false, metadata: { lang, subscribedAt: new Date().toISOString() } }
+    ) as any
 
     if (upsertRes.error) {
-      if (upsertRes.error.code === "validation_error" && upsertRes.error.message?.includes("already")) {
+      const msg = upsertRes.error?.message || ""
+      if (msg.toLowerCase().includes("already")) {
         return NextResponse.json({ ok: true, message: "already_subscribed" })
       }
       console.error("[subscribe] contact create failed:", upsertRes.error)
@@ -46,13 +50,13 @@ export async function POST(req: NextRequest) {
     }
 
     await Promise.allSettled([
-      resend.emails.send({
+      resend!.post("/email", {
         from: "DeepCalm AI <onboarding@resend.dev>",
         to: email,
         subject: "🌙 Welcome to DeepCalm AI — Your Daily Healing Starts Now",
         html: buildConfirmHtml(),
       }),
-      resend.emails.send({
+      resend!.post("/email", {
         from: "DeepCalm AI <onboarding@resend.dev>",
         to: "alanlsl8208@gmail.com",
         subject: `📩 New DeepCalm Subscriber: ${email}`,

@@ -62,13 +62,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 })
     }
 
-    const listRes = await resend.contacts.list({ audienceId: AUDIENCE_ID })
+    const listRes = await (resend as any).get(`/audiences/${AUDIENCE_ID}/contacts`) as any
     if (listRes.error) {
       console.error("[send-daily] failed to list contacts:", listRes.error)
       return NextResponse.json({ ok: false, error: "list_failed" }, { status: 500 })
     }
 
-    const contacts = listRes.data?.data || []
+    const contacts: any[] = listRes.data?.data || []
     if (contacts.length === 0) {
       return NextResponse.json({ ok: true, sent: 0, message: "no subscribers" })
     }
@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
     const dayOfWeek = new Date().toLocaleDateString("en-US", { weekday: "long" })
     const results = await Promise.allSettled(
       contacts.map((c) =>
-        resend!.emails.send({
+        resend!.post("/email", {
           from: "DeepCalm AI <onboarding@resend.dev>",
           to: c.email,
           subject: dayOfWeek === "Sunday" || dayOfWeek === "Saturday"
