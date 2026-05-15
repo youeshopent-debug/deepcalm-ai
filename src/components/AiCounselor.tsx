@@ -1,11 +1,15 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { useLanguage } from "@/context/LanguageContext"
+import { useLanguage } from "@/context/LanguageContext";
+import { mockChatReply } from "@/lib/mockCounselor";
+import { toPng } from "html-to-image";
 import {
-  MessageCircleHeart, Heart, X, ImageDown,
-} from "lucide-react"
-import { toPng } from "html-to-image"
+  Heart,
+  ImageDown,
+  MessageCircleHeart,
+  X,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 interface Message {
   role: "user" | "counselor"
@@ -33,6 +37,13 @@ export default function AiCounselor() {
   const shareRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    console.log("[AiCounselor] locale:", locale)
+    console.log("[AiCounselor] tt(welcome):", tt("aiCounselor.welcome"))
+    console.log("[AiCounselor] tt(title):", tt("aiCounselor.title"))
+    console.log("[AiCounselor] tt(subtitle):", tt("aiCounselor.subtitle"))
+  }, [locale, tt])
+
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
@@ -52,7 +63,7 @@ export default function AiCounselor() {
       const res = await fetch("/api/analyze-anxiety", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, mode: "chat", history }),
+        body: JSON.stringify({ text, mode: "chat", history, locale }),
       })
 
       if (!res.ok) throw new Error(`API returned ${res.status}`)
@@ -69,7 +80,7 @@ export default function AiCounselor() {
     } catch {
       const fallback: Message = {
         role: "counselor",
-        content: "I'm here with you. Sometimes the bravest thing we can do is speak our truth into the open. Would you like to tell me more about what's on your heart?",
+        content: mockChatReply(locale, text),
       }
       setMessages((prev) => [...prev, fallback])
     }
@@ -87,7 +98,6 @@ export default function AiCounselor() {
   const handleShare = async () => {
     const lastCounselorMsg = [...messages].reverse().find((m) => m.role === "counselor")
     if (!lastCounselorMsg) return
-
     if (!shareRef.current) return
 
     try {
@@ -102,15 +112,27 @@ export default function AiCounselor() {
 
       shareRef.current.style.display = "none"
 
+      const blob = await (await fetch(dataUrl)).blob()
+      const file = new File([blob], `deepcalm-healing-${Date.now()}.png`, { type: "image/png" })
+
+      if (navigator.share && navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: "DeepCalm Healing" })
+          setShowShareSuccess(true)
+          setTimeout(() => setShowShareSuccess(false), 3000)
+          return
+        } catch {}
+      }
+
       const link = document.createElement("a")
-      link.download = `deepcalm-healing-${Date.now()}.png`
+      link.download = file.name
       link.href = dataUrl
       link.click()
 
       setShowShareSuccess(true)
       setTimeout(() => setShowShareSuccess(false), 3000)
     } catch {
-      shareRef.current!.style.display = "none"
+      if (shareRef.current) shareRef.current.style.display = "none"
     }
   }
 
@@ -136,15 +158,6 @@ export default function AiCounselor() {
             </h2>
           </div>
           <div className="flex items-center gap-2">
-            {lastUsage && (
-              <div className="flex items-center gap-2 px-2.5 py-1 bg-dc-surface/50 border border-dc-border rounded-full text-xs">
-                <span className="text-dc-accent/70 font-medium">{lastUsage.model}</span>
-                <span className="text-dc-muted/50">|</span>
-                <span className="text-dc-muted">${lastUsage.cost.toFixed(6)}</span>
-                <span className="text-dc-muted/50">|</span>
-                <span className="text-dc-muted">∑ ${totalCost.toFixed(6)}</span>
-              </div>
-            )}
             {drawerOpen && (
               <button
                 onClick={() => setDrawerOpen(false)}
@@ -167,7 +180,7 @@ export default function AiCounselor() {
               </div>
               <div className="space-y-2">
                 <p className="text-xl sm:text-2xl font-medium text-dc-text">
-                  {tt("aiCounselor.greeting")}
+                  {tt("aiCounselor.welcome")}
                 </p>
                 <p className="text-xl sm:text-2xl text-dc-muted/80 max-w-lg leading-relaxed">
                   {tt("aiCounselor.subtitle")}

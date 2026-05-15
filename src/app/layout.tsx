@@ -4,7 +4,12 @@ import "./globals.css"
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html>
-      <body className="min-h-screen flex flex-col">{children}</body>
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9587418043365530" crossOrigin="anonymous"></script>
+      </head>
+      <body className="min-h-screen flex flex-col">
+        {children}
+      </body>
     </html>
   )
 }

@@ -1,8 +1,8 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react"
-import type { Locale } from "@/types"
-import { getDict, tt as t } from "@/lib/getDict"
+import { getDict, tt as t } from "@/lib/getDict";
+import type { Locale } from "@/types";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
 interface LanguageContextType {
   locale: Locale
@@ -20,21 +20,42 @@ export function LanguageProvider({
   children: ReactNode
   initialLocale?: Locale
 }) {
-  const [locale, setLocaleState] = useState<Locale>(initialLocale || "zh")
-  const [dict, setDict] = useState<Record<string, unknown>>(getDict(initialLocale || "zh"))
+  const [locale, setLocaleState] = useState<Locale>(initialLocale || "en")
+  const [dict, setDict] = useState<Record<string, unknown>>(() => {
+    const d = getDict(initialLocale || "en")
+    if (typeof window !== "undefined") {
+      console.log("[LanguageContext] init dict locale:", initialLocale || "en", "keys:", Object.keys(d))
+    }
+    return d
+  })
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale)
-    setDict(getDict(newLocale))
+    const d = getDict(newLocale)
+    if (typeof window !== "undefined") {
+      console.log("[LanguageContext] setLocale →", newLocale, "keys:", Object.keys(d))
+    }
+    setDict(d)
     if (typeof window !== "undefined") {
       localStorage.setItem("deepcalm-locale", newLocale)
+      document.cookie = `deepcalm-locale=${newLocale};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`
     }
   }, [])
 
   const tt = useCallback(
-    (path: string): string => t(dict, path),
+    (path: string): string => {
+      const result = t(dict, path)
+      if (typeof window !== "undefined" && !result) {
+        console.warn(`[LanguageContext] tt("${path}") returned empty. dict keys:`, Object.keys(dict))
+      }
+      return result
+    },
     [dict]
   )
+
+  useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale, dict, tt }}>

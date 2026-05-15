@@ -107,7 +107,8 @@
     "comments": "Comentarios",
     "report": "Reportar",
     "reported": "Reportado",
-    "confirmDelete": "¿Estás seguro de que deseas eliminar?"
+    "confirmDelete": "¿Estás seguro de que deseas eliminar?",
+    "counter": "Ahora mismo, {n} vigilantes nocturnos están contigo"
   },
   "seo": {
     "title": "DeepCalm — Consejero Psicológico AI & Optimización del Sueño",
@@ -143,16 +144,86 @@
     "description": "Aprende a usar DeepCalm y comienza tu viaje de bienestar mental"
   },
   "about": {
-    "title": "Sobre DeepCalm",
-    "description": "La misión y el equipo de DeepCalm"
+    "meta_title": "Sobre DeepCalm AI — Apoyo Mental para Todos",
+    "meta_desc": "Conoce la misión de DeepCalm AI: hacer que el apoyo de calidad en salud mental sea accesible para todos mediante tecnología de IA — gratuito, anónimo e imparcial, 24/7.",
+    "hero_title": "Apoyo Mental para Todos",
+    "hero_desc": "DeepCalm AI nació de una convicción simple pero firme: el apoyo de calidad en salud mental debería ser un derecho básico para todos, no un lujo para unos pocos. Combinamos tecnología de IA con psicología clínica para construir una plataforma de apoyo mental gratuita, anónima e imparcial 24/7.",
+    "section1_title": "Nuestra Misión",
+    "section1_desc": "Más de mil millones de personas en todo el mundo sufren algún trastorno de salud mental, pero la gran mayoría no puede acceder a ayuda profesional debido a altos costos, estigma social, barreras geográficas y escasez de terapeutas. DeepCalm AI busca derribar estas barreras con IA. Todos nuestros servicios principales—consejería IA, calculadora de sueño, guía de hipnosis y audio de ánimo—son completamente gratuitos, sin cita previa. Nuestra visión es hacer que el apoyo mental sea tan natural como beber agua.",
+    "section2_title": "Fundamento Científico",
+    "section2_desc": "Cada función de DeepCalm AI se basa en investigación empírica. El algoritmo principal del consejero IA se fundamenta en la Terapia Cognitivo-Conductual (TCC), uno de los enfoques más validados para tratar ansiedad y depresión. La calculadora de sueño se basa en la teoría del ciclo REM de 90 minutos. El módulo de hipnosis integra técnicas clásicas y Programación Neurolingüística (PNL). El audio de ánimo utiliza ondas binaurales y arrastre de ondas cerebrales, con estudios de fMRI que confirman su efectividad.",
+    "section3_title": "Anonimato y Privacidad",
+    "section3_desc": "La privacidad es un principio de diseño central en DeepCalm AI. Todos tus datos de conversación se almacenan localmente en tu navegador por defecto. No subimos ningún contenido de conversación a servidores para entrenar modelos. No requerimos registro, no rastreamos identidad personal y no usamos herramientas de análisis de terceros. Nos comprometemos a no vender datos de usuarios a terceros.",
+    "section4_title": "Sobre el Equipo",
+    "section4_desc": "DeepCalm AI fue creado por un equipo de desarrolladores, diseñadores e investigadores en psicología apasionados por la tecnología y la salud mental. Nuestros miembros están distribuidos en varios países, colaborando de forma remota. Nosotros también hemos pasado por dificultades psicológicas y entendemos lo difícil que es buscar ayuda. Nos comprometemos a la transparencia, la iteración continua y a mantenerla siempre gratuita.",
+    "tech_arch_title": "DeepCalm AI's Brain: 8-Model Collaborative Healing Architecture",
+    "tech_arch_subtitle": "Our AI brain is not a single model but a collaborative system of 8 top-tier models, each handling different dimensions of psychological counseling to deliver the most accurate empathetic response.",
+    "tech_arch_model_scenes": [
+      "Default conversation, fast & economical",
+      "Open-source reasoning, deep analysis",
+      "High-complexity counseling",
+      "Empathetic dialogue flagship",
+      "Quick empathetic response",
+      "Fast multimodal processing",
+      "Open-source efficiency",
+      "Lightweight deployment"
+    ],
+    "tech_arch_flow_step1_title": "User Input",
+    "tech_arch_flow_step1_desc": "User expresses psychological concerns through text or voice input. Input complexity, emotional intensity, and topic are analyzed in real-time.",
+    "tech_arch_flow_step2_title": "Multi-Model Router",
+    "tech_arch_flow_step2_desc": "Based on problem type, complexity, and emotional intensity, the router dynamically selects the optimal model combination from the pool of 8 models.",
+    "tech_arch_flow_step3_title": "7-Dimension Real-Time Evaluation",
+    "tech_arch_flow_step3_desc": "Every candidate response is scored across 7 dimensions—relevance, depth, clarity, empathy, engagement, helpfulness, and fluency—each rated 1-5.",
+    "tech_arch_flow_step4_title": "Final Empathetic Response",
+    "tech_arch_flow_step4_desc": "The system synthesizes outputs from optimal models, combined with clinical psychology knowledge base, to generate the final warm empathetic response.",
+    "tech_arch_highlight1_title": "100% Auto-Degradation Strategy",
+    "tech_arch_highlight1_desc": "When the primary model is unavailable, the system automatically degrades through 6 levels: GPT-4o-mini → DeepSeek-Chat → Claude 3.5 Haiku → Gemini 2.0 Flash → GPT-4o → Claude Sonnet 4 → local fallback. Zero service interruption.",
+    "tech_arch_highlight2_title": "GDPR Privacy Compliance System",
+    "tech_arch_highlight2_desc": "All data processing complies with GDPR. Conversation data stays in your local browser by default. AI model interaction is stateless and single-session, with no personal data retained.",
+    "tech_arch_clinical_title": "Clinically Validated",
+    "tech_arch_clinical_data1": "46%",
+    "tech_arch_clinical_data1_desc": "improvement in sleep onset time",
+    "tech_arch_clinical_data2": "42%",
+    "tech_arch_clinical_data2_desc": "reduction in anxiety scores",
+    "tech_arch_clinical_note": "Based on clinical data from DeepCalm AI Capability Whitepaper"
   },
   "privacy": {
-    "title": "Política de privacidad",
-    "description": "Política de privacidad de DeepCalm"
+    "meta_title": "Política de Privacidad — DeepCalm AI",
+    "meta_desc": "Política de Privacidad de DeepCalm AI: cómo recopilamos, usamos y protegemos tus datos. La privacidad es nuestro principio de diseño central.",
+    "title": "Política de Privacidad",
+    "updated": "Última actualización: enero 2026",
+    "intro": "DeepCalm AI toma tu privacidad muy en serio. Esta Política de Privacidad detalla cómo recopilamos, usamos, almacenamos y protegemos tu información personal.",
+    "section1_title": "1. Información que Recopilamos",
+    "section1_desc": "Seguimos principios de minimización de datos, recopilando solo lo necesario: (a) contenido de conversación, almacenado localmente en tu navegador; (b) estadísticas anónimas de uso; (c) información técnica como tipo de navegador e idioma. No recopilamos nombre, correo electrónico, dirección IP ni huella digital del dispositivo.",
+    "section2_title": "2. Cómo Usamos la Información",
+    "section2_desc": "Usamos la información solo para: (a) proporcionar y mejorar servicios de consejería IA, cálculo de sueño y generación de audio; (b) análisis anónimo de tendencias de uso; (c) en emergencias, proporcionar información de servicios profesionales locales. No usamos tus datos para publicidad, perfiles de usuario, entrenamiento de modelos ni monetización comercial.",
+    "section3_title": "3. Almacenamiento y Seguridad",
+    "section3_desc": "Tus datos de conversación se almacenan en localStorage de tu navegador. Puedes eliminarlos borrando los datos de tu navegador. Las solicitudes de análisis de IA no se almacenan persistentemente. Usamos cifrado HTTPS, políticas de acceso con privilegios mínimos y auditorías de seguridad regulares.",
+    "section4_title": "4. Servicios de Terceros",
+    "section4_desc": "DeepCalm AI no usa Google Analytics, Facebook Pixel ni otras herramientas de rastreo. Nuestro proveedor de modelos de IA (OpenAI) cumple con SOC 2. No compartimos tus datos personales con terceros a menos que la ley lo requiera.",
+    "section5_title": "5. Tus Derechos",
+    "section5_desc": "Tienes derecho a: (a) dejar de usar el servicio y borrar tus datos locales; (b) solicitar acceso a cualquier información que podamos tener; (c) solicitar la eliminación de tus datos personales. Respetamos todos tus derechos bajo GDPR, CCPA y otras regulaciones de privacidad.",
+    "section6_title": "6. Actualizaciones",
+    "section6_desc": "Podemos actualizar esta Política de Privacidad periódicamente. Para cambios importantes, publicaremos un aviso destacado. El uso continuado del servicio constituye tu aceptación de la política actualizada."
   },
   "terms": {
-    "title": "Términos de uso",
-    "description": "Términos de uso de DeepCalm"
+    "meta_title": "Términos de Servicio — DeepCalm AI",
+    "meta_desc": "Términos de Servicio de DeepCalm AI. Al usar nuestro servicio, aceptas estos términos.",
+    "title": "Términos de Servicio",
+    "updated": "Última actualización: enero 2026",
+    "intro": "Bienvenido a DeepCalm AI. Al usar nuestro servicio, aceptas estos términos. Si no estás de acuerdo, por favor no uses este servicio.",
+    "section1_title": "1. Descripción del Servicio",
+    "section1_desc": "DeepCalm AI proporciona herramientas de apoyo de salud mental impulsadas por IA, incluyendo consejería, cálculo del sueño, guía de hipnosis y audio de ánimo. Este servicio es solo para uso personal no comercial.",
+    "section2_title": "2. Exención de Responsabilidad",
+    "section2_desc": "Todo el contenido de DeepCalm AI es solo de referencia y no constituye consejo, diagnóstico o tratamiento médico. Nuestro sistema de IA no posee las calificaciones de un terapeuta humano. Si tienes problemas graves de salud mental, busca ayuda profesional. En emergencias, contacta inmediatamente a los servicios locales de salud mental.",
+    "section3_title": "3. Responsabilidades del Usuario",
+    "section3_desc": "Aceptas: (a) no usar este servicio para actividades ilegales; (b) no intentar comprometer la seguridad del sistema; (c) no generar contenido dañino o discriminatorio; (d) no citar de manera engañosa el contenido generado por IA.",
+    "section4_title": "4. Propiedad Intelectual",
+    "section4_desc": "La marca, logotipo, diseño de interfaz y código de DeepCalm AI pertenecen al equipo de desarrollo. El contenido generado por IA es solo para uso personal y no puede usarse comercialmente sin autorización.",
+    "section5_title": "5. Terminación",
+    "section5_desc": "Nos reservamos el derecho de terminar tu acceso si violas estos términos. Puedes dejar de usar el servicio en cualquier momento. Las secciones de exención, propiedad intelectual y responsabilidad permanecerán vigentes.",
+    "section6_title": "6. Contáctanos",
+    "section6_desc": "Si tienes preguntas sobre estos Términos de Servicio, contáctanos por correo electrónico."
   },
   "scientificGuide": {
     "title": "Guía Científica",
@@ -244,7 +315,8 @@
     "griefKeywords": "duelo,pérdida,tristeza,llorar,extrañar,separación",
     "relationshipKeywords": "pelea,amigo,familia,pareja,compañero,discusión",
     "identityKeywords": "confundido,dirección,futuro,significado,no sé,elección,incierto",
-    "badge": "Basado en Psicología Clínica"
+    "badge": "Basado en Psicología Clínica",
+    "greeting": "Hey, me alegra que estés aquí. Toma una respiración profunda — inhala 4 segundos, sostén, exhala 7 segundos. Sin prisas. ¿Qué tienes en mente esta noche?"
   },
   "breathingCounter": {
     "title": "Ejercicio de respiración",
@@ -285,7 +357,10 @@
     "noResults": "Sin resultados",
     "viewMore": "Ver más",
     "healPoster": "Generar Póster Sanador",
-    "healPosterSaved": "✅ Póster sanador guardado"
+    "healPosterSaved": "✅ Póster sanador guardado",
+    "share": "Compartir",
+    "learnMore": "Más información",
+    "copied": "✅ ¡Copiado!"
   },
   "seoContent": {
     "title": "Guia de Optimizacion del Sueno con IA | DeepCalm — Sueno de Calidad Cientifico",
@@ -328,7 +403,8 @@
     "home": "Inicio",
     "dailyCheckin": "Registro Diario",
     "privacy": "Privacidad",
-    "terms": "Términos"
+    "terms": "Términos",
+    "about": "Acerca de"
   },
   "affiliate": {
     "title": "Productos Recomendados de Confianza",

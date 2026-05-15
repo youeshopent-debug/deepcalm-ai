@@ -7,7 +7,8 @@
     "science": "Science",
     "about": "About",
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "about": "About Us"
   },
   "hero": {
     "title": "Bring Your Mind Back to Calm",
@@ -62,6 +63,7 @@
     "good": "Well Rested",
     "fair": "Fair",
     "result_title": "Recommended Bedtimes",
+    "calculate": "Calculate",
     "cycles": "Cycles",
     "bedtime": "Bedtime",
     "feel": "Morning Feel",
@@ -183,7 +185,37 @@
     "section3_title": "Anonymity & Privacy",
     "section3_desc": "Privacy is a core design principle at DeepCalm AI. All your conversation data is stored locally in your browser by default. We do not upload any conversation content to servers for model training. The AI model processes only your current session information and does not retain any personally identifiable information after analysis. We do not require registration, do not track personal identity, and do not use third-party analytics tools (such as Google Analytics). The only data collected is anonymous service usage statistics, used solely for improving service quality. We commit to never selling user data to third parties.",
     "section4_title": "About the Team",
-    "section4_desc": "DeepCalm AI is built by a team of developers, designers, and psychology researchers who are passionate about both technology and mental health. Our team members are distributed across multiple countries, collaborating remotely, believing that technology can be a powerful force for advancing mental health. We too have struggled with psychological distress and deeply understand the difficulty of seeking help. These personal experiences drive us to create this platform. We commit to transparency, continuous iteration, and remaining always free. If you have suggestions or feedback, feel free to contact us via email."
+    "section4_desc": "DeepCalm AI is built by a team of developers, designers, and psychology researchers who are passionate about both technology and mental health. Our team members are distributed across multiple countries, collaborating remotely, believing that technology can be a powerful force for advancing mental health. We too have struggled with psychological distress and deeply understand the difficulty of seeking help. These personal experiences drive us to create this platform. We commit to transparency, continuous iteration, and remaining always free. If you have suggestions or feedback, feel free to contact us via email.",
+    "tech_arch_title": "DeepCalm AI's Brain: 8-Model Collaborative Healing Architecture",
+    "tech_arch_subtitle": "Our AI brain is not a single model but a collaborative system of 8 top-tier models, each excelling in different dimensions. The intelligent router selects the most suitable model for your needs and synthesizes outputs through real-time 7-dimension evaluation to deliver the highest quality empathetic response.",
+    "tech_arch_model_scenes": [
+      "Default conversation, fast & economical",
+      "Open-source reasoning, deep analysis",
+      "High-complexity counseling",
+      "Empathetic dialogue flagship",
+      "Quick empathetic response",
+      "Fast multimodal processing",
+      "Open-source efficiency",
+      "Lightweight deployment"
+    ],
+    "tech_arch_flow_step1_title": "User Input",
+    "tech_arch_flow_step1_desc": "User expresses psychological concerns through text or voice input. The system performs initial intent recognition and emotional state assessment.",
+    "tech_arch_flow_step2_title": "Multi-Model Router",
+    "tech_arch_flow_step2_desc": "Based on problem type, complexity, and emotional intensity, the router dynamically selects the most appropriate AI model or model combination.",
+    "tech_arch_flow_step3_title": "7-Dimension Real-Time Evaluation",
+    "tech_arch_flow_step3_desc": "Every candidate response is scored across 7 dimensions—relevance, depth, clarity, empathy, engagement, helpfulness, and fluency—ensuring only the highest-quality response is selected.",
+    "tech_arch_flow_step4_title": "Final Empathetic Response",
+    "tech_arch_flow_step4_desc": "The system synthesizes outputs from optimal models, applies therapeutic fine-tuning, and delivers a warm, professional empathetic response to the user.",
+    "tech_arch_highlight1_title": "100% Auto-Degradation Strategy",
+    "tech_arch_highlight1_desc": "When the primary model is unavailable (network fluctuation, API timeout), the system automatically degrades to the next available model: GPT-4o-mini → DeepSeek-Chat → Claude 3.5 Haiku → Gemini 2.0 Flash → GPT-4o → Claude Sonnet 4 → local fallback. Zero service interruption.",
+    "tech_arch_highlight2_title": "GDPR Privacy Compliance System",
+    "tech_arch_highlight2_desc": "All data processing complies with GDPR. Conversation data stays in your local browser by default; AI model APIs process only ephemeral session content with no persistent storage.",
+    "tech_arch_clinical_title": "Clinically Validated",
+    "tech_arch_clinical_data1": "46%",
+    "tech_arch_clinical_data1_desc": "improvement in sleep onset time",
+    "tech_arch_clinical_data2": "42%",
+    "tech_arch_clinical_data2_desc": "reduction in anxiety scores",
+    "tech_arch_clinical_note": "Based on clinical data from DeepCalm AI Capability Whitepaper"
   },
   "privacy": {
     "meta_title": "Privacy Policy — DeepCalm AI",
@@ -313,7 +345,8 @@
     "griefKeywords": "grief,lost,sad,cry,miss,bereavement,departure",
     "relationshipKeywords": "fight,friend,family,couple,partner,relationship,argument",
     "identityKeywords": "confused,direction,future,meaning,unsure,choice,uncertain",
-    "badge": "Based on Clinical Psychology"
+    "badge": "Based on Clinical Psychology",
+    "greeting": "Hey, glad you made it. Take a deep breath first — 4 seconds in, hold, 7 seconds out. No rush. What's on your mind tonight?"
   },
   "breathingCounter": {
     "title": "🌬️ Collective Breathing",
@@ -330,7 +363,8 @@
     "learnMore": "Learn More",
     "share": "Share",
     "healPoster": "Generate Healing Poster",
-    "healPosterSaved": "✅ Healing poster saved"
+    "healPosterSaved": "✅ Healing poster saved",
+    "copied": "✅ Copied!"
   },
   "seoContent": {
     "title": "Understanding Your Sleep & Mind: A Science-Based Guide",
@@ -373,7 +407,8 @@
     "home": "Home",
     "dailyCheckin": "Daily Check-in",
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "about": "About Us"
   },
   "affiliate": {
     "title": "Trusted Recommended Products",

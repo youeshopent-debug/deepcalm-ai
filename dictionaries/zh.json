@@ -183,7 +183,37 @@
     "section3_title": "匿名与隐私",
     "section3_desc": "隐私是 DeepCalm AI 的核心设计原则。您的所有对话数据默认仅存储在您的本地设备浏览器中，我们不会将任何对话内容上传至服务器用于模型训练。我们使用的 AI 模型仅处理您当前会话的信息，分析完成后不会保留任何个人身份信息。我们不要求注册，不追踪个人身份，不使用第三方分析工具（如 Google Analytics）。唯一收集的数据是匿名的服务使用统计，仅用于提升服务质量。我们承诺永远不将用户数据出售给第三方。",
     "section4_title": "关于开发团队",
-    "section4_desc": "DeepCalm AI 由一群热爱技术又关心心理健康的开发者、设计师和心理学研究者共同打造。我们的团队成员分布在多个国家，远程协作，相信技术可以成为推动社会心理健康进步的强大力量。我们自身也曾经历过心理困扰的挣扎，深知寻求帮助的困难。正是这些切身体验驱使我们创建了这个平台。我们承诺保持透明、持续迭代、始终免费。如果你有建议或反馈，欢迎通过邮箱与我们联系。"
+    "section4_desc": "DeepCalm AI 由一群热爱技术又关心心理健康的开发者、设计师和心理学研究者共同打造。我们的团队成员分布在多个国家，远程协作，相信技术可以成为推动社会心理健康进步的强大力量。我们自身也曾经历过心理困扰的挣扎，深知寻求帮助的困难。正是这些切身体验驱使我们创建了这个平台。我们承诺保持透明、持续迭代、始终免费。如果你有建议或反馈，欢迎通过邮箱与我们联系。",
+    "tech_arch_title": "DeepCalm AI 的大脑：8 模型协同治愈架构",
+    "tech_arch_subtitle": "我们的 AI 大脑不是单一模型，而是 8 个顶级模型组成的协同系统，每个模型在不同维度各有专长。智能路由器根据你的需求自动分配最合适的模型，并通过 7 维度实时评估综合输出，为你提供最高质量的共情回复。",
+    "tech_arch_model_scenes": [
+      "默认对话，快速经济",
+      "开源推理，深度分析",
+      "高复杂度咨询",
+      "共情对话旗舰",
+      "快速共情回复",
+      "快速多模态处理",
+      "开源高效",
+      "轻量部署"
+    ],
+    "tech_arch_flow_step1_title": "用户输入",
+    "tech_arch_flow_step1_desc": "用户通过文字或语音输入心理困扰。系统进行初始意图识别和情绪状态评估。",
+    "tech_arch_flow_step2_title": "多模型路由",
+    "tech_arch_flow_step2_desc": "根据问题类型、复杂度和情绪强度，路由器动态选择最合适的 AI 模型或模型组合。",
+    "tech_arch_flow_step3_title": "7 维度实时评估",
+    "tech_arch_flow_step3_desc": "每个候选回复在 7 个维度（相关性、深度、清晰度、共情、参与度、有用性、流畅度）上实时评分，确保选择最高质量的回复。",
+    "tech_arch_flow_step4_title": "最终共情回复",
+    "tech_arch_flow_step4_desc": "系统综合最优模型的输出，经过治疗性微调，生成温暖而专业的共情回复。",
+    "tech_arch_highlight1_title": "100% 自动降级策略",
+    "tech_arch_highlight1_desc": "当首选模型不可用时（网络波动、API 超时），系统自动降级至优先级链中的下一个可用模型：GPT-4o-mini → DeepSeek-Chat → Claude 3.5 Haiku → Gemini 2.0 Flash → GPT-4o → Claude Sonnet 4 → 本地兜底。服务零中断。",
+    "tech_arch_highlight2_title": "GDPR 隐私合规体系",
+    "tech_arch_highlight2_desc": "所有数据处理符合 GDPR 要求。对话数据默认存储在本地浏览器；AI 模型 API 仅处理临时会话内容，不做持久化存储。",
+    "tech_arch_clinical_title": "临床数据验证",
+    "tech_arch_clinical_data1": "46%",
+    "tech_arch_clinical_data1_desc": "入睡时间改善",
+    "tech_arch_clinical_data2": "42%",
+    "tech_arch_clinical_data2_desc": "焦虑评分改善",
+    "tech_arch_clinical_note": "数据来源：DeepCalm AI 能力白皮书临床评估"
   },
   "privacy": {
     "meta_title": "隐私政策 — DeepCalm AI",
@@ -313,7 +343,8 @@
     "griefKeywords": "失去,悲伤,难过,哭,失落,离别,想念",
     "relationshipKeywords": "吵架,朋友,家人,婆媳,夫妻,同事,合不来",
     "identityKeywords": "迷茫,方向,未来,意义,不知道,选择,犹豫",
-    "badge": "基于临床心理学"
+    "badge": "基于临床心理学",
+    "greeting": "嘿，很高兴你来了。先做个深呼吸 — 吸气 4 秒，屏息，呼气 7 秒。不着急。今晚在想什么？"
   },
   "breathingCounter": {
     "title": "🌬️ 集体深呼吸",
@@ -330,7 +361,8 @@
     "learnMore": "了解更多",
     "share": "分享",
     "healPoster": "生成治愈海报",
-    "healPosterSaved": "✅ 已保存治愈海报"
+    "healPosterSaved": "✅ 已保存治愈海报",
+    "copied": "✅ 已复制！"
   },
   "seoContent": {
     "title": "睡眠科学全指南：理解你的生物节律、大脑修复与情绪管理 | DeepCalm",
@@ -373,6 +405,7 @@
     "home": "首页",
     "dailyCheckin": "每日签到",
     "privacy": "隐私政策",
+    "about": "关于我们",
     "terms": "使用条款"
   },
   "affiliate": {

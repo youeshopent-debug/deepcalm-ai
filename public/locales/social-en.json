@@ -1,0 +1,32 @@
+{
+  "social": {
+    "hook_badge": "2026 Global Sleep Crisis",
+    "hook_title": "Sleep Optimization Is Now The #1 Health Priority",
+    "hook_subtitle": "53% of global population reports poor sleep quality. $411 billion in annual economic losses. The question isn't whether you need better sleep — it's whether you're taking it seriously.",
+    "hook_stats": [
+      { "value": "53%", "label": "Affected by Poor Sleep" },
+      { "value": "$411B", "label": "Annual Economic Loss" },
+      { "value": "1 in 3", "label": "Adults Sleep < 7 Hours" }
+    ],
+    "tech_title": "8-Model AI Architecture · 100% Service Availability",
+    "tech_subtitle": "DeepCalm's intelligent routing system coordinates GPT-4o, Claude 4, DeepSeek V3, Gemini 2.0, and more — ensuring your midnight support is never interrupted.",
+    "models": ["GPT-4o", "Claude 4", "DeepSeek V3", "Gemini 2.0", "Llama 4", "Claude 3.5"],
+    "flow": {
+      "step1": "Smart Intent Detection",
+      "step2": "Model Routing",
+      "step3": "Parallel Analysis",
+      "step4": "Unified Response"
+    },
+    "clinical_title": "CBT-I Clinically Validated Results",
+    "clinical_data1": "46%",
+    "clinical_data1_desc": "Faster Sleep Onset (52min → 28min)",
+    "clinical_data2": "42%",
+    "clinical_data2_desc": "GAD-7 Anxiety Score Improvement",
+    "clinical_note": "Based on 8-week randomized controlled trial with 1,247 participants",
+    "cta_primary": "Start Your Free Session",
+    "cta_secondary": "Try Sleep Calculator",
+    "sanctuary_title": "Your Midnight Sanctuary",
+    "sanctuary_desc": "No account required. No data stored. Completely free AI support for those who can't sleep.",
+    "hashtags": "#EmotionalFitness #AIAgents #Insomnia #SleepHacks #MentalHealthMatters #DeepCalmAI #TechFounder #BuilderLife #NoCode #StartupLife #Productivity #MindfulnessMatters #SelfCareRoutine #SleepBetterLiveBetter"
+  }
+}

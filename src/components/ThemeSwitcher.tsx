@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { Palette, Leaf, Sunset, Sun, Sparkles } from "lucide-react"
 import { useTheme, type ThemeType } from "@/context/ThemeContext"
+import { audioEngine } from "@/lib/audioEngine"
 
 const themes: { key: ThemeType; label: string; labelEn: string; icon: typeof Leaf; color: string }[] = [
   { key: "deepcalm", label: "深邃空间", labelEn: "Deep Space", icon: Sparkles, color: "#1A2238" },
@@ -16,6 +17,26 @@ export default function ThemeSwitcher() {
   const [open, setOpen] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
   const btnRef = useRef<HTMLButtonElement>(null)
+  const audioLoadedRef = useRef(false)
+
+  useEffect(() => {
+    Promise.all([
+      audioEngine.loadAudioBuffer('birds', '/audio/birds-nature.mp3'),
+      audioEngine.loadAudioBuffer('rain', '/audio/rain-nature.mp3'),
+      audioEngine.loadAudioBuffer('wind', '/audio/wind-nature.mp3'),
+      audioEngine.loadAudioBuffer('fire', '/audio/fire-nature.mp3'),
+      audioEngine.loadAudioBuffer('stream', '/audio/stream-nature.mp3'),
+      audioEngine.loadAudioBuffer('insects', '/audio/insects-nature.mp3'),
+    ]).then(() => {
+      audioLoadedRef.current = true
+      audioEngine.applyThemeAudio(theme)
+    })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!audioLoadedRef.current) return
+    audioEngine.applyThemeAudio(theme)
+  }, [theme])
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -65,7 +86,9 @@ export default function ThemeSwitcher() {
               <button
                 key={t.key}
                 onClick={() => {
+                  audioEngine.init()
                   setTheme(t.key)
+                  audioEngine.applyThemeAudio(t.key)
                   setOpen(false)
                 }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg transition-all duration-200

@@ -1,10 +1,8 @@
 "use client"
 
-import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { useLanguage } from "@/context/LanguageContext"
 import { getTopicBySlug } from "@/content/topics"
-import type { Locale } from "@/types"
 
 const CATEGORY_KEYS: { i18nKey: string; items: string[] }[] = [
   { i18nKey: "sitemap.categories.sleep",      items: ["insomnia","deep-sleep","sleep-anxiety","nightmare","circadian-rhythm","sleep-hygiene","rem-sleep","napping"] },
@@ -19,9 +17,7 @@ const CATEGORY_KEYS: { i18nKey: string; items: string[] }[] = [
 ];
 
 export default function SitemapFooter() {
-  const pathname = usePathname();
-  const locale = pathname?.startsWith("/") ? pathname.split("/")[1] : "en";
-  const { tt } = useLanguage();
+  const { tt, locale } = useLanguage();
 
   return (
     <footer className="w-full border-t border-[var(--dc-border)]/40 bg-[var(--dc-surface)]/60 backdrop-blur-sm">
@@ -34,7 +30,7 @@ export default function SitemapFooter() {
               </h4>
               <ul className="space-y-1">
                 {cat.items.map((slug) => {
-                  const topic = getTopicBySlug(slug, locale as Locale);
+                  const topic = getTopicBySlug(slug, locale);
                   const href = `/${locale}/topic/${slug}`;
                   return (
                     <li key={slug}>
@@ -58,8 +54,9 @@ export default function SitemapFooter() {
           <div className="flex items-center gap-3">
             <Link href={`/${locale}`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.home")}</Link>
             <Link href={`/${locale}/#daily-checkin`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.dailyCheckin")}</Link>
-            <a href="https://deepcalm-ai.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.privacy")}</a>
-            <a href="https://deepcalm-ai.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.terms")}</a>
+            <Link href={`/${locale}/privacy`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.privacy")}</Link>
+            <Link href={`/${locale}/terms`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.terms")}</Link>
+            <Link href={`/${locale}/about`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.about")}</Link>
           </div>
         </div>
       </div>

@@ -113,7 +113,7 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-[var(--dc-deep)]" />
+      {videoMode ? null : <div className="absolute inset-0 bg-[var(--dc-deep)]" />}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--dc-surface)]/50" />
       <canvas
         ref={canvas}

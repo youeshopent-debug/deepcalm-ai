@@ -3,15 +3,17 @@
 import { useState } from "react"
 import BackgroundCanvas from "./BackgroundCanvas"
 import BackgroundVideo from "./BackgroundVideo"
+import HeroSection from "./HeroSection"
 import AiCounselor from "./AiCounselor"
 import DailyCheckin from "./DailyCheckin"
 import SleepCalculator from "./SleepCalculator"
 import SeoContent from "./SeoContent"
 import ResonanceWall from "./ResonanceWall"
 import SitemapFooter from "./SitemapFooter"
-import AudioFloatingTray from "./AudioFloatingTray"
+import { useLanguage } from "@/context/LanguageContext"
 
 export default function SanctuaryPage() {
+  const { tt } = useLanguage()
   const [videoMode] = useState(true)
 
   return (
@@ -42,6 +44,13 @@ export default function SanctuaryPage() {
       </div>
 
       <main className="relative z-10">
+        {/* Hero — brand intro */}
+        <HeroSection
+          title={tt("hero.title")}
+          subtitle={tt("hero.subtitle")}
+          ctaText={tt("hero.cta")}
+        />
+
         {/* AI Counselor — main interaction */}
         <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16">
           <AiCounselor />
@@ -79,7 +88,6 @@ export default function SanctuaryPage() {
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 text-xs text-dc-muted/40 pointer-events-none">
         DeepCalm AI · Midnight Sanctuary
       </div>
-      <AudioFloatingTray />
     </div>
   )
 }

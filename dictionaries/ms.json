@@ -7,7 +7,8 @@
     "science": "Sains",
     "about": "Tentang",
     "privacy": "Privasi",
-    "terms": "Terma"
+    "terms": "Terma",
+    "about": "Tentang"
   },
   "hero": {
     "title": "Bawa Fikiran Anda Kembali Tenang",
@@ -183,7 +184,37 @@
     "section3_title": "Tanpa Nama & Privasi",
     "section3_desc": "Privasi adalah prinsip reka bentuk teras di DeepCalm AI. Semua data perbualan anda disimpan secara tempatan dalam penyemak imbas anda secara lalai. Kami tidak memuat naik sebarang kandungan perbualan ke pelayan untuk latihan model. Model AI memproses hanya maklumat sesi semasa anda dan tidak menyimpan sebarang maklumat peribadi selepas analisis. Kami tidak memerlukan pendaftaran, tidak menjejaki identiti peribadi, dan tidak menggunakan alat analitik pihak ketiga (seperti Google Analytics). Satu-satunya data yang dikumpul adalah statistik penggunaan perkhidmatan tanpa nama, digunakan semata-mata untuk meningkatkan kualiti perkhidmatan. Kami komited untuk tidak menjual data pengguna kepada pihak ketiga.",
     "section4_title": "Tentang Pasukan",
-    "section4_desc": "DeepCalm AI dibina oleh pasukan pembangun, pereka, dan penyelidik psikologi yang bersemangat tentang teknologi dan kesihatan mental. Ahli pasukan kami bertaburan di pelbagai negara, bekerja bersama dari jauh, percaya bahawa teknologi boleh menjadi kuasa yang kuat untuk memajukan kesihatan mental. Kami juga pernah bergelut dengan tekanan psikologi dan memahami betapa sukarnya mendapatkan bantuan. Pengalaman peribadi ini mendorong kami untuk mencipta platform ini. Kami komited kepada ketelusan, lelaran berterusan, dan kekal percuma. Jika anda mempunyai cadangan atau maklum balas, sila hubungi kami melalui e-mel."
+    "section4_desc": "DeepCalm AI dibina oleh pasukan pembangun, pereka, dan penyelidik psikologi yang bersemangat tentang teknologi dan kesihatan mental. Ahli pasukan kami bertaburan di pelbagai negara, bekerja bersama dari jauh, percaya bahawa teknologi boleh menjadi kuasa yang kuat untuk memajukan kesihatan mental. Kami juga pernah bergelut dengan tekanan psikologi dan memahami betapa sukarnya mendapatkan bantuan. Pengalaman peribadi ini mendorong kami untuk mencipta platform ini. Kami komited kepada ketelusan, lelaran berterusan, dan kekal percuma. Jika anda mempunyai cadangan atau maklum balas, sila hubungi kami melalui e-mel.",
+    "tech_arch_title": "Otak DeepCalm AI: Seni Bina Penyembuhan Kolaboratif 8 Model",
+    "tech_arch_subtitle": "Otak AI kami bukan satu model tetapi sistem kolaboratif 8 model terkemuka, setiap satu cemerlang dalam dimensi berbeza. Penghala pintar memilih model paling sesuai untuk keperluan anda dan mensintesis output melalui penilaian 7 dimensi masa nyata untuk memberikan respons empati berkualiti tertinggi.",
+    "tech_arch_model_scenes": [
+      "Perbualan lalai, pantas & ekonomik",
+      "Penaakulan sumber terbuka, analisis mendalam",
+      "Kaunseling kompleks tinggi",
+      "Perbualan empati utama",
+      "Respons empati pantas",
+      "Pemprosesan multimodal pantas",
+      "Kecekapan sumber terbuka",
+      "Penggunaan ringan"
+    ],
+    "tech_arch_flow_step1_title": "Input Pengguna",
+    "tech_arch_flow_step1_desc": "Pengguna meluahkan masalah psikologi melalui input teks atau suara. Sistem melakukan pengecaman niat awal dan penilaian keadaan emosi.",
+    "tech_arch_flow_step2_title": "Penghala Berbilang Model",
+    "tech_arch_flow_step2_desc": "Berdasarkan jenis masalah, kerumitan, dan intensiti emosi, penghala secara dinamik memilih model AI atau gabungan model yang paling sesuai.",
+    "tech_arch_flow_step3_title": "Penilaian Masa Nyata 7 Dimensi",
+    "tech_arch_flow_step3_desc": "Setiap respons calon dinilai merentas 7 dimensi—relevansi, kedalaman, kejelasan, empati, penglibatan, kebolehgunaan, dan kelancaran—memastikan hanya respons berkualiti tertinggi dipilih.",
+    "tech_arch_flow_step4_title": "Respons Empati Akhir",
+    "tech_arch_flow_step4_desc": "Sistem mensintesis output daripada model optimum, menggunakan penalaan halus terapeutik, dan memberikan respons empati yang hangat dan profesional kepada pengguna.",
+    "tech_arch_highlight1_title": "Strategi Degradasi Auto 100%",
+    "tech_arch_highlight1_desc": "Apabila model utama tidak tersedia (gangguan rangkaian, tamat masa API), sistem secara automatik menurun ke model seterusnya yang tersedia: GPT-4o-mini → DeepSeek-Chat → Claude 3.5 Haiku → Gemini 2.0 Flash → GPT-4o → Claude Sonnet 4 → sandaran setempat. Sifar gangguan perkhidmatan.",
+    "tech_arch_highlight2_title": "Sistem Pematuhan Privasi GDPR",
+    "tech_arch_highlight2_desc": "Semua pemprosesan data mematuhi GDPR. Data perbualan kekal dalam penyemak imbas tempatan secara lalai; API model AI hanya memproses kandungan sesi sementara tanpa penyimpanan kekal.",
+    "tech_arch_clinical_title": "Disahkan Secara Klinikal",
+    "tech_arch_clinical_data1": "46%",
+    "tech_arch_clinical_data1_desc": "peningkatan dalam masa tidur",
+    "tech_arch_clinical_data2": "42%",
+    "tech_arch_clinical_data2_desc": "pengurangan skor kebimbangan",
+    "tech_arch_clinical_note": "Berdasarkan data klinikal daripada Kertas Putih Keupayaan DeepCalm AI"
   },
   "privacy": {
     "meta_title": "Dasar Privasi — DeepCalm AI",
@@ -313,7 +344,8 @@
     "griefKeywords": "kehilangan,sedih,menangis,rindu,duka,perpisahan",
     "relationshipKeywords": "bergaduh,kawan,keluarga,suami isteri,rakan sekerja,tak sekata",
     "identityKeywords": "keliru,hala tuju,masa depan,makna,tak tahu,pilihan,teragak-agak",
-    "badge": "Berasaskan Psikologi Klinikal"
+    "badge": "Berasaskan Psikologi Klinikal",
+    "greeting": "Hei, gembira awak datang. Ambil nafas dalam-dalam — tarik 4 saat, tahan, hembus 7 saat. Jangan tergesa-gesa. Apa yang awak fikirkan malam ini?"
   },
   "breathingCounter": {
     "title": "🌬️ Pernafasan Kolektif",
@@ -330,7 +362,8 @@
     "learnMore": "Ketahui Lebih Lanjut",
     "share": "Kongsi",
     "healPoster": "Jana Poster Penyembuhan",
-    "healPosterSaved": "✅ Poster penyembuhan disimpan"
+    "healPosterSaved": "✅ Poster penyembuhan disimpan",
+    "copied": "✅ Disalin!"
   },
   "seoContent": {
     "title": "Panduan Lengkap Sains Tidur: Memahami Irama Biologi, Pemulihan Otak & Pengurusan Emosi | DeepCalm",

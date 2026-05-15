@@ -53,7 +53,7 @@ export default function SleepCalculator() {
       <div className="p-6 glass rounded-xl mb-8">
         <div className="flex items-center gap-2 mb-6">
           <Clock className="w-5 h-5 text-dc-accent" />
-          <span className="text-sm font-medium text-dc-text">{tt('hypnotist.wake_time')}</span>
+          <span className="text-sm font-medium text-dc-text">{tt('sleepCalculator.wake_label')}</span>
         </div>
 
         <div className="text-center mb-6">
@@ -105,7 +105,7 @@ export default function SleepCalculator() {
 
       {results.length > 0 && (
         <div className="space-y-4 animate-slide-up">
-          <h4 className="text-sm font-medium text-dc-text mb-3">{tt('hypnotist.results_title')}</h4>
+          <h4 className="text-sm font-medium text-dc-text mb-3">{tt('sleepCalculator.result_title')}</h4>
           {results.map((r, i) => (
             <div
               key={i}
@@ -119,7 +119,7 @@ export default function SleepCalculator() {
                   <div>
                     <p className="text-dc-text text-sm font-medium">{r.bedtime}</p>
                     <p className="text-xs text-dc-muted">
-                      {r.cycles} × 90min = {r.cycles * 90}min {tt('hypnotist.cycles_label')}
+                      {r.cycles} × 90min = {r.cycles * 90}min {tt('sleepCalculator.cycles')}
                     </p>
                   </div>
                 </div>

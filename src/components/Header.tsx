@@ -1,7 +1,8 @@
 "use client"
 
-import { Moon } from "lucide-react"
-import GlobeLangSwitcher from "./GlobeLangSwitcher"
+import { Moon } from "lucide-react";
+import { Suspense } from "react";
+import GlobeLangSwitcher from "./GlobeLangSwitcher";
 
 export default function Header() {
   return (
@@ -17,7 +18,9 @@ export default function Header() {
             </span>
           </div>
 
-          <GlobeLangSwitcher />
+          <Suspense fallback={<div className="w-9 h-9" />}>
+            <GlobeLangSwitcher />
+          </Suspense>
         </div>
       </div>
     </header>

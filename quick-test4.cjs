@@ -1,0 +1,22 @@
+﻿const { chromium } = require('playwright');
+const fs = require('fs');
+(async () => {
+  console.log('START');
+  const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+  const page = await browser.newPage();
+  const logs = [];
+  page.on('console', msg => logs.push({ type: msg.type(), text: msg.text() }));
+  await page.goto('https://deepcalm-ai.com/zh', { waitUntil: 'networkidle', timeout: 60000 });
+  await page.waitForTimeout(2000);
+  const title = await page.title();
+  const h1 = await page.evaluate(() => document.querySelector('h1')?.textContent);
+  const lang = await page.evaluate(() => document.documentElement.lang);
+  await page.screenshot({ fullPage: true, path: 'output/debug_screenshot.png' });
+  console.log('TITLE:', title);
+  console.log('H1:', h1);
+  console.log('LANG:', lang);
+  console.log('LOGS:', logs.length);
+  logs.forEach(l => console.log('[' + l.type + ']', l.text.substring(0, 300)));
+  await browser.close();
+  console.log('DONE');
+})().catch(e => { console.error('ERR:', e.message, e.stack?.substring(0, 300)); process.exit(1); });

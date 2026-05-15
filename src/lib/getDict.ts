@@ -1,12 +1,12 @@
-import type { Locale } from "@/types"
+import type { Locale } from "@/types";
 
-import zh from "../../dictionaries/zh.json"
-import en from "../../dictionaries/en.json"
-import ms from "../../dictionaries/ms.json"
-import ja from "../../dictionaries/ja.json"
-import ko from "../../dictionaries/ko.json"
-import th from "../../dictionaries/th.json"
-import es from "../../dictionaries/es.json"
+import en from "../../dictionaries/en.json";
+import es from "../../dictionaries/es.json";
+import ja from "../../dictionaries/ja.json";
+import ko from "../../dictionaries/ko.json";
+import ms from "../../dictionaries/ms.json";
+import th from "../../dictionaries/th.json";
+import zh from "../../dictionaries/zh.json";
 
 const dictionaries: Record<Locale, any> = {
   zh,
@@ -29,8 +29,15 @@ export function tt(dict: any, path: string): string {
     if (result && typeof result === "object" && key in result) {
       result = result[key]
     } else {
-      return path
+      if (process.env.NODE_ENV === "development") {
+        console.warn(`[i18n] 缺失翻译键: "${path}"`)
+      }
+      return ""
     }
   }
-  return typeof result === "string" ? result : path
+  if (typeof result === "string") return result
+  if (process.env.NODE_ENV === "development") {
+    console.warn(`[i18n] 翻译值非字符串: "${path}"`, result)
+  }
+  return ""
 }

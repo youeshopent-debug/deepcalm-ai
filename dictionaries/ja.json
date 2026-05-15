@@ -107,7 +107,8 @@
     "comments": "コメント",
     "report": "報告",
     "reported": "報告済み",
-    "confirmDelete": "削除してもよろしいですか？"
+    "confirmDelete": "削除してもよろしいですか？",
+    "counter": "今、{n}人の夜警の仲間があなたと一緒にいます"
   },
   "seo": {
     "title": "DeepCalm — AI心理カウンセラー & 睡眠最適化",
@@ -143,16 +144,86 @@
     "description": "DeepCalmの使い方を学び、メンタルウェルネスの旅を始めましょう"
   },
   "about": {
-    "title": "DeepCalmについて",
-    "description": "DeepCalmのミッションとチームについて"
+    "meta_title": "DeepCalm AIについて — すべての人のためのメンタルサポート",
+    "meta_desc": "DeepCalm AIのミッション：AI技術を通じて、質の高いメンタルサポートをすべての人が利用できるように—無料、匿名、公正、24時間365日。",
+    "hero_title": "すべての人のためのメンタルサポート",
+    "hero_desc": "DeepCalm AIはシンプルで強い信念から生まれました。質の高いメンタルヘルスサポートは、一部の人の贅沢品ではなく、すべての人の基本的人権であるべきです。AI技術と臨床心理学を組み合わせ、24時間365日無料で匿名のメンタルサポートプラットフォームを構築しています。",
+    "section1_title": "私たちの使命",
+    "section1_desc": "世界中で10億人以上が何らかのメンタルヘルスの問題を抱えていますが、大多数が専門的なサポートを受けられていません。DeepCalm AIはAI技術でこれらの壁を取り払います。中核サービス—AIカウンセリング、睡眠計算、催眠ガイダンス、気分オーディオ—はすべて完全無料で、予約不要、登録不要、デバイスからすぐにアクセス可能です。",
+    "section2_title": "科学的根拠",
+    "section2_desc": "DeepCalm AIのすべての機能は実証研究に基づいています。AIカウンセラーのアルゴリズムは認知行動療法（CBT）の原理に基づいており、不安症やうつ病の治療で最も検証されたアプローチの一つです。睡眠計算機は90分のレム睡眠サイクル理論に基づき、催眠モジュールは古典的催眠技法と神経言語プログラミング（NLP）を統合。気分オーディオはバイノーラルビートと脳波同調を活用しています。",
+    "section3_title": "匿名性とプライバシー",
+    "section3_desc": "プライバシーはDeepCalm AIの中心的な設計原則です。すべての会話データはデフォルトでブラウザにローカル保存されます。会話内容をモデル学習のためにサーバーにアップロードすることはありません。登録不要、個人識別の追跡なし、サードパーティの分析ツールも不使用。収集するデータは匿名の利用統計のみで、サービス品質向上のみに使用されます。",
+    "section4_title": "チームについて",
+    "section4_desc": "DeepCalm AIは、テクノロジーとメンタルヘルスに情熱を持つ開発者、デザイナー、心理学研究者のチームによって構築されています。メンバーは複数の国に分散し、リモートで協力しています。私たち自身も心理的苦しみを経験し、助けを求める難しさを深く理解しています。透明性、継続的改善、そして常に無料であることをお約束します。",
+    "tech_arch_title": "DeepCalm AI's Brain: 8-Model Collaborative Healing Architecture",
+    "tech_arch_subtitle": "Our AI brain is not a single model but a collaborative system of 8 top-tier models, each handling different dimensions of psychological counseling to deliver the most accurate empathetic response.",
+    "tech_arch_model_scenes": [
+      "Default conversation, fast & economical",
+      "Open-source reasoning, deep analysis",
+      "High-complexity counseling",
+      "Empathetic dialogue flagship",
+      "Quick empathetic response",
+      "Fast multimodal processing",
+      "Open-source efficiency",
+      "Lightweight deployment"
+    ],
+    "tech_arch_flow_step1_title": "User Input",
+    "tech_arch_flow_step1_desc": "User expresses psychological concerns through text or voice input. Input complexity, emotional intensity, and topic are analyzed in real-time.",
+    "tech_arch_flow_step2_title": "Multi-Model Router",
+    "tech_arch_flow_step2_desc": "Based on problem type, complexity, and emotional intensity, the router dynamically selects the optimal model combination from the pool of 8 models.",
+    "tech_arch_flow_step3_title": "7-Dimension Real-Time Evaluation",
+    "tech_arch_flow_step3_desc": "Every candidate response is scored across 7 dimensions—relevance, depth, clarity, empathy, engagement, helpfulness, and fluency—each rated 1-5.",
+    "tech_arch_flow_step4_title": "Final Empathetic Response",
+    "tech_arch_flow_step4_desc": "The system synthesizes outputs from optimal models, combined with clinical psychology knowledge base, to generate the final warm empathetic response.",
+    "tech_arch_highlight1_title": "100% Auto-Degradation Strategy",
+    "tech_arch_highlight1_desc": "When the primary model is unavailable, the system automatically degrades through 6 levels: GPT-4o-mini → DeepSeek-Chat → Claude 3.5 Haiku → Gemini 2.0 Flash → GPT-4o → Claude Sonnet 4 → local fallback. Zero service interruption.",
+    "tech_arch_highlight2_title": "GDPR Privacy Compliance System",
+    "tech_arch_highlight2_desc": "All data processing complies with GDPR. Conversation data stays in your local browser by default. AI model interaction is stateless and single-session, with no personal data retained.",
+    "tech_arch_clinical_title": "Clinically Validated",
+    "tech_arch_clinical_data1": "46%",
+    "tech_arch_clinical_data1_desc": "improvement in sleep onset time",
+    "tech_arch_clinical_data2": "42%",
+    "tech_arch_clinical_data2_desc": "reduction in anxiety scores",
+    "tech_arch_clinical_note": "Based on clinical data from DeepCalm AI Capability Whitepaper"
   },
   "privacy": {
+    "meta_title": "プライバシーポリシー — DeepCalm AI",
+    "meta_desc": "DeepCalm AIのプライバシーポリシー：データの収集、使用、保護方法についての詳細。",
     "title": "プライバシーポリシー",
-    "description": "DeepCalmのプライバシーポリシー"
+    "updated": "最終更新日：2026年1月",
+    "intro": "DeepCalm AIはお客様のプライバシーを真剣に受け止めています。このプライバシーポリシーでは、お客様の個人情報の収集、使用、保存、保護方法について詳しく説明します。",
+    "section1_title": "1. 収集する情報",
+    "section1_desc": "データ最小化の原則に従い、サービス提供に必要な情報のみを収集します。会話内容はデフォルトでブラウザのlocalStorageに保存され、サーバーにアップロードされません。匿名の使用統計と、ブラウザタイプや言語設定などの技術情報を収集します。氏名、メールアドレス、IPアドレス、デバイスフィンガープリントは収集しません。",
+    "section2_title": "2. 情報の使用方法",
+    "section2_desc": "収集した情報は以下の目的のみに使用します：AIカウンセリング、睡眠計算、催眠ガイダンス、オーディオ生成サービスの提供と改善。使用傾向の匿名分析によるユーザー体験の向上。緊急時における専門サービス情報の提供。広告、ユーザープロファイリング、モデル学習、商業的データ収益化には使用しません。",
+    "section3_title": "3. データ保存とセキュリティ",
+    "section3_desc": "会話データはブラウザのlocalStorageに保存されます。ブラウザデータを消去することでいつでも削除できます。AI分析リクエストは永続保存されません。HTTPS暗号化通信、最小権限データアクセスポリシー、定期的なセキュリティ監査を実施しています。",
+    "section4_title": "4. サードパーティサービス",
+    "section4_desc": "DeepCalm AIはGoogle Analytics、Facebook Pixelなどのサードパーティ追跡ツールを使用していません。AIモデルプロバイダー（OpenAI）はSOC 2準拠です。法律で義務付けられている場合を除き、個人データを第三者と共有することはありません。",
+    "section5_title": "5. お客様の権利",
+    "section5_desc": "お客様には以下の権利があります：いつでもサービスの利用を停止し、ローカルデータを消去する権利。当社が保有する情報へのアクセスを請求する権利。個人データの削除を請求する権利。GDPR、CCPAなどのプライバシー規制に基づくすべての権利を尊重します。",
+    "section6_title": "6. ポリシーの更新",
+    "section6_desc": "このプライバシーポリシーは随時更新されることがあります。重要な変更がある場合は、ウェブサイト上で通知します。サービスの継続利用は、更新されたポリシーへの同意とみなされます。"
   },
   "terms": {
+    "meta_title": "利用規約 — DeepCalm AI",
+    "meta_desc": "DeepCalm AIの利用規約。本サービスを利用することで、これらの規約に同意したことになります。",
     "title": "利用規約",
-    "description": "DeepCalmの利用規約"
+    "updated": "最終更新日：2026年1月",
+    "intro": "DeepCalm AIへようこそ。本サービスを利用することで、これらの規約に同意したことになります。同意しない場合は、本サービスを利用しないでください。",
+    "section1_title": "1. サービスの説明",
+    "section1_desc": "DeepCalm AIはAIを活用したメンタルヘルスサポートツールを提供します。これにはAIカウンセリング、睡眠サイクル計算、催眠ガイダンス、気分オーディオ生成が含まれます。本サービスは個人の非商用利用のみを目的としています。",
+    "section2_title": "2. 免責事項",
+    "section2_desc": "DeepCalm AIが提供するすべての内容は参考用であり、医学的助言、診断、治療を構成するものではありません。深刻なメンタルヘルスの問題がある場合は、資格を持つ専門家の助けを求めてください。緊急時は直ちに地域の専門メンタルヘルスサービスに連絡してください。",
+    "section3_title": "3. ユーザーの責任",
+    "section3_desc": "お客様は以下のことに同意するものとします：違法行為に本サービスを使用しないこと。システムセキュリティを侵害しようとしないこと。有害または差別的なコンテンツを生成しないこと。AIの出力を誤解を招く方法で引用しないこと。",
+    "section4_title": "4. 知的財産",
+    "section4_desc": "DeepCalm AIのブランド名、ロゴ、UIデザイン、ソフトウェアコードは開発チームに帰属します。AIが生成したコンテンツは個人使用のみを目的とし、許可なく商業目的で使用することはできません。",
+    "section5_title": "5. 利用停止",
+    "section5_desc": "本規約に違反した場合、サービスの利用を停止する権利を留保します。お客様はいつでもサービスの利用を停止できます。利用停止後も、免責事項、知的財産権、責任に関する条項は有効です。",
+    "section6_title": "6. お問い合わせ",
+    "section6_desc": "これらの利用規約についてご質問がある場合は、メールにてお問い合わせください。"
   },
   "scientificGuide": {
     "title": "科学ガイド",
@@ -244,7 +315,8 @@
     "griefKeywords": "悲しい,喪失,涙,寂しい,別れ,恋しい",
     "relationshipKeywords": "喧嘩,友達,家族,夫婦,同僚,合わない",
     "identityKeywords": "迷い,方向,未来,意味,分からない,選択,悩む",
-    "badge": "臨床心理学に基づく"
+    "badge": "臨床心理学に基づく",
+    "greeting": "ようこそ。まずは深呼吸をしましょう — 4秒かけて息を吸い、止めて、7秒かけて吐きます。急がなくていいですよ。今夜は何をお考えですか？"
   },
   "breathingCounter": {
     "title": "呼吸エクササイズ",
@@ -285,7 +357,10 @@
     "noResults": "結果がありません",
     "viewMore": "もっと見る",
     "healPoster": "ヒーリングポスターを生成",
-    "healPosterSaved": "✅ ヒーリングポスターを保存しました"
+    "healPosterSaved": "✅ ヒーリングポスターを保存しました",
+    "share": "共有",
+    "learnMore": "もっと詳しく",
+    "copied": "✅ コピーしました！"
   },
   "seoContent": {
     "title": "AI睡眠最適化ガイド | DeepCalm — 科学的アプローチで質の高い睡眠を",
@@ -328,7 +403,8 @@
     "home": "ホーム",
     "dailyCheckin": "デイリーチェックイン",
     "privacy": "プライバシー",
-    "terms": "利用規約"
+    "terms": "利用規約",
+    "about": "私たちについて"
   },
   "affiliate": {
     "title": "信頼できるおすすめ製品",

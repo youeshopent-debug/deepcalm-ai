@@ -554,10 +554,10 @@ const guideMap: Record<string, Guide[]> = {
   ms: guidesMs,
 }
 
-export function getGuides(locale: string = "zh"): Guide[] {
-  return guideMap[locale] || guidesZh
+export function getGuides(locale: string = "en"): Guide[] {
+  return guideMap[locale] || guidesEn
 }
 
-export function getGuideBySlug(slug: string, locale: string = "zh"): Guide | undefined {
-  return (guideMap[locale] || guidesZh).find((g) => g.slug === slug)
+export function getGuideBySlug(slug: string, locale: string = "en"): Guide | undefined {
+  return (guideMap[locale] || guidesEn).find((g) => g.slug === slug)
 }

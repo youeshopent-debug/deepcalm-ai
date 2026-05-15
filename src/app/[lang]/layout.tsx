@@ -1,11 +1,12 @@
-import type { Metadata } from "next"
-import type { Locale } from "@/types"
-import { LanguageProvider } from "@/context/LanguageContext"
-import { ThemeProvider } from "@/context/ThemeContext"
-import ThemeSwitcher from "@/components/ThemeSwitcher"
-import BackgroundCanvas from "@/components/BackgroundCanvas"
-import Header from "@/components/Header"
-import AudioFloatingTray from "@/components/AudioFloatingTray"
+import AudioFloatingTray from "@/components/AudioFloatingTray";
+import BackgroundCanvas from "@/components/BackgroundCanvas";
+import BackgroundVideo from "@/components/BackgroundVideo";
+import Header from "@/components/Header";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { ThemeProvider } from "@/context/ThemeContext";
+import type { Locale } from "@/types";
+import type { Metadata } from "next";
 
 export function generateMetadata({ params: { lang } }: { params: { lang: string } }): Metadata {
   return {
@@ -15,6 +16,8 @@ export function generateMetadata({ params: { lang } }: { params: { lang: string 
   }
 }
 
+const VALID_LOCALES: Locale[] = ['zh', 'en', 'ms', 'ja', 'ko', 'th', 'es']
+
 export default function LangLayout({
   children,
   params: { lang },
@@ -22,11 +25,13 @@ export default function LangLayout({
   children: React.ReactNode
   params: { lang: string }
 }) {
+  const safeLocale: Locale = VALID_LOCALES.includes(lang as Locale) ? (lang as Locale) : 'zh'
   return (
-    <LanguageProvider initialLocale={lang as Locale}>
+    <LanguageProvider initialLocale={safeLocale} key={lang}>
       <ThemeProvider>
         <div className="dark min-h-screen bg-dc-deep text-dc-text">
-          <BackgroundCanvas />
+          <BackgroundVideo src="/videos/forest-bg.mp4" overlayOpacity={0.6} />
+          <BackgroundCanvas videoMode={true} />
           <Header />
           {children}
           <ThemeSwitcher />

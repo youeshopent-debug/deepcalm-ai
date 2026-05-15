@@ -1,53 +1,47 @@
-import type { Locale } from "@/types"
 import { getDict } from "@/lib/getDict"
-import { Heart } from "lucide-react"
+import TechArchSection from "@/components/TechArchSection"
 
-export async function generateStaticParams() {
-  return [{ lang: "zh" }, { lang: "en" }, { lang: "ms" }]
-}
+type Locale = "zh" | "en" | "ms" | "ja" | "ko" | "th" | "es"
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
-  const dict = await getDict(lang as Locale)
+  const dict = getDict(lang as Locale)
   return {
-    title: dict.about.meta_title,
-    description: dict.about.meta_desc,
-    openGraph: {
-      title: dict.about.meta_title,
-      description: dict.about.meta_desc,
-    },
+    title: dict.about?.meta_title || "About DeepCalm AI",
+    description: dict.about?.meta_desc || "Learn about DeepCalm AI",
   }
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
-  const dict = await getDict(lang as Locale)
-  const a = dict.about
+  const dict = getDict(lang as Locale)
+  const d = dict.about || {}
 
   const sections = [
-    { title: a.section1_title, desc: a.section1_desc },
-    { title: a.section2_title, desc: a.section2_desc },
-    { title: a.section3_title, desc: a.section3_desc },
-    { title: a.section4_title, desc: a.section4_desc },
+    { title: d.section1_title, desc: d.section1_desc },
+    { title: d.section2_title, desc: d.section2_desc },
+    { title: d.section3_title, desc: d.section3_desc },
+    { title: d.section4_title, desc: d.section4_desc },
   ]
 
   return (
-    <div className="min-h-screen bg-nord-bg">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex items-center gap-3 mb-6">
-          <Heart className="w-8 h-8 text-nord-accent" />
-          <h1 className="text-3xl sm:text-4xl font-bold text-nord-text">{a.hero_title}</h1>
-        </div>
-        <p className="text-nord-text/80 text-lg leading-relaxed mb-16">{a.hero_desc}</p>
-        <div className="space-y-14">
-          {sections.map((s, i) => (
-            <div key={i}>
-              <h2 className="text-2xl font-semibold text-nord-text mb-4">{s.title}</h2>
-              <p className="text-nord-text/70 leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <main className="min-h-screen bg-dc-deep text-dc-text">
+      {/* Hero */}
+      <section className="relative px-4 pt-32 pb-20 text-center">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-6">{d.hero_title}</h1>
+        <p className="text-lg text-dc-muted/80 max-w-2xl mx-auto leading-relaxed">{d.hero_desc}</p>
+      </section>
+
+      {/* Content Sections */}
+      {sections.map((s, i) => (
+        <section key={i} className="px-4 py-16 max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4">{s.title}</h2>
+          <p className="text-dc-muted/80 leading-relaxed whitespace-pre-line">{s.desc}</p>
+        </section>
+      ))}
+
+      {/* Tech Architecture */}
+      <TechArchSection dict={dict} />
+    </main>
   )
 }

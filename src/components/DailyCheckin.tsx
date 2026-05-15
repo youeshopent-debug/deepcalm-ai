@@ -28,6 +28,7 @@ export default function DailyCheckin() {
   const [comment, setComment] = useState("")
   const [commentLoading, setCommentLoading] = useState(false)
   const [showPoster, setShowPoster] = useState(false)
+  const [shareCopied, setShareCopied] = useState(false)
   const posterRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -40,13 +41,15 @@ export default function DailyCheckin() {
           setCheckedIn(true)
           setSleep(parsed.sleep || "")
           setMood(parsed.mood || "")
-          setComment(parsed.comment || "")
+          if (parsed.lang === locale) {
+            setComment(parsed.comment || "")
+          }
         }
       } catch { /* ignore */ }
     }
     const sub = localStorage.getItem("deepcalm_email")
     if (sub) setEmailSubscribed(true)
-  }, [])
+  }, [locale])
 
   const getMoodEmoji = (m: string) => {
     const map: Record<string, string> = {
@@ -69,7 +72,7 @@ export default function DailyCheckin() {
     setCheckedIn(true)
     setCommentLoading(true)
 
-    const data = { date: new Date().toDateString(), sleep, mood, comment: "" }
+    const data = { date: new Date().toDateString(), sleep, mood, comment: "", lang: locale }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
 
     try {
@@ -195,7 +198,7 @@ export default function DailyCheckin() {
                     className="px-4 py-2.5 bg-dc-accent hover:bg-dc-accent/90 disabled:opacity-50 text-dc-deep text-sm font-medium rounded-xl transition-colors flex items-center gap-2"
                   >
                     <Send className={`w-3.5 h-3.5 ${subscribing ? "animate-pulse" : ""}`} />
-                    {subscribing ? tt("dailyCheckin.subscribing") || "..." : tt("dailyCheckin.emailButton")}
+                    {subscribing ? tt("dailyCheckin.subscribing") : tt("dailyCheckin.emailButton")}
                   </button>
                 </div>
                 {emailError && (
@@ -220,24 +223,34 @@ export default function DailyCheckin() {
               </p>
               {mood && (
                 <div className="mt-3 flex items-center gap-2 px-3 py-1.5 bg-dc-surface/50 rounded-lg">
-                  <span className="text-xs text-dc-muted/70">{tt("healingReport.moodHeader")}：</span>
+                  <span className="text-xs text-dc-muted/70">{tt("healingReport.moodHeader")}: </span>
                   <span className="text-base">{getMoodEmoji(mood)}</span>
                   <span className="text-sm text-dc-text">{getMoodLabel(mood)}</span>
                 </div>
               )}
               <div className="mt-3 flex gap-2 flex-wrap">
                 <button
-                  onClick={() => {
+                  onClick={async () => {
                     const text = `${tt("healingReport.title")}\n${
                       sleep === "great" ? tt("healingReport.sleepGreat")
                         : sleep === "okay" ? tt("healingReport.sleepOkay")
                         : tt("healingReport.sleepPoor")
                     }\n\n${tt("healingReport.sharePrompt")}\n\nhttps://deepcalm-ai.com/${locale}`
-                    navigator.clipboard?.writeText(text)
+                    try {
+                      if (navigator.share) {
+                        await navigator.share({ title: "DeepCalm", text, url: `https://deepcalm-ai.com/${locale}` })
+                        return
+                      }
+                    } catch { /* user cancelled */ }
+                    try {
+                      await navigator.clipboard.writeText(text)
+                    } catch { /* clipboard blocked */ }
+                    setShareCopied(true)
+                    setTimeout(() => setShareCopied(false), 2500)
                   }}
                   className="px-3 py-1.5 text-xs font-medium bg-dc-accent/10 hover:bg-dc-accent/20 text-dc-accent rounded-lg transition-colors"
                 >
-                  📤 {tt("common.share") || "Share"}
+                  {shareCopied ? tt("common.copied") : `📤 ${tt("common.share")}`}
                 </button>
                 <button
                   onClick={() => setShowPoster(true)}

@@ -3,7 +3,7 @@ import { getGuides } from "@/content/guides"
 import { getAnxietyScenarios } from "@/content/anxiety-scenarios"
 import { getAllSlugs } from "@/content/topics"
 
-export const revalidate = 86400
+export const dynamic = "force-dynamic"
 
 const LANGS = ["zh", "en", "ms", "ja", "ko", "th", "es"]
 const BASE = "https://deepcalm-ai.com"
@@ -53,41 +53,47 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   }
 
-  for (const guide of getGuides()) {
-    for (const lang of LANGS) {
-      entries.push({
-        url: `${BASE}/${lang}/guide/${guide.slug}`,
-        lastModified: new Date(guide.publishedAt),
-        changeFrequency: "weekly",
-        priority: 0.8,
-        alternates: { languages: langAlternates(`/guide/${guide.slug}`) },
-      })
+  try {
+    for (const guide of getGuides()) {
+      for (const lang of LANGS) {
+        entries.push({
+          url: `${BASE}/${lang}/guide/${guide.slug}`,
+          lastModified: new Date(guide.publishedAt),
+          changeFrequency: "weekly",
+          priority: 0.8,
+          alternates: { languages: langAlternates(`/guide/${guide.slug}`) },
+        })
+      }
     }
-  }
+  } catch {}
 
-  for (const scenario of getAnxietyScenarios()) {
-    for (const lang of LANGS) {
-      entries.push({
-        url: `${BASE}/${lang}/anxiety/${scenario.slug}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: 0.8,
-        alternates: { languages: langAlternates(`/anxiety/${scenario.slug}`) },
-      })
+  try {
+    for (const scenario of getAnxietyScenarios()) {
+      for (const lang of LANGS) {
+        entries.push({
+          url: `${BASE}/${lang}/anxiety/${scenario.slug}`,
+          lastModified: new Date(),
+          changeFrequency: "weekly",
+          priority: 0.8,
+          alternates: { languages: langAlternates(`/anxiety/${scenario.slug}`) },
+        })
+      }
     }
-  }
+  } catch {}
 
-  for (const slug of getAllSlugs()) {
-    for (const lang of LANGS) {
-      entries.push({
-        url: `${BASE}/${lang}/topic/${slug}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: 0.7,
-        alternates: { languages: langAlternates(`/topic/${slug}`) },
-      })
+  try {
+    for (const slug of getAllSlugs()) {
+      for (const lang of LANGS) {
+        entries.push({
+          url: `${BASE}/${lang}/topic/${slug}`,
+          lastModified: new Date(),
+          changeFrequency: "weekly",
+          priority: 0.7,
+          alternates: { languages: langAlternates(`/topic/${slug}`) },
+        })
+      }
     }
-  }
+  } catch {}
 
   return entries
 }

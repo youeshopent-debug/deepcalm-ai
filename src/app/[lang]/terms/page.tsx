@@ -2,8 +2,10 @@ import type { Locale } from "@/types"
 import { getDict } from "@/lib/getDict"
 import { FileText } from "lucide-react"
 
+const locales: Locale[] = ["zh", "en", "ms", "ja", "ko", "th", "es"];
+
 export async function generateStaticParams() {
-  return [{ lang: "zh" }, { lang: "en" }, { lang: "ms" }]
+  return locales.map((lang) => ({ lang }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
