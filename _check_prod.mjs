@@ -1,8 +1,0 @@
-const res = await fetch("https://deepcalm-ai.com/zh")
-const text = await res.text()
-const langMatch = text.match(/lang="([^"]*)"/)
-console.log("html lang:", langMatch ? langMatch[1] : "NOT FOUND")
-console.log("Has aiCounselor:", text.includes("aiCounselor"))
-const hasText = text.includes("AI") && text.includes("心理")
-console.log("Has AI+心理 text:", hasText)
-console.log("Page length:", text.length)
