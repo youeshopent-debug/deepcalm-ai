@@ -27,28 +27,35 @@ export default async function GuidePage({ params }: { params: Promise<{ lang: st
   const guides = getGuides(lang)
 
   return (
-    <div className="min-h-screen bg-nord-bg">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex items-center gap-3 mb-4">
-          <BookOpen className="w-8 h-8 text-nord-accent" />
-          <h1 className="text-3xl sm:text-4xl font-bold text-nord-text">{dict.guide.title}</h1>
+    <div className="min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-16">
+        <div className="glass rounded-2xl p-6 sm:p-8 border border-dc-border/40">
+          <div className="flex items-center gap-3 mb-3">
+            <BookOpen className="w-7 h-7 text-dc-accent" />
+            <h1 className="text-3xl sm:text-4xl font-bold text-dc-text">
+              {dict.guide.title}
+            </h1>
+          </div>
+          <p className="text-dc-muted/80 text-base sm:text-lg leading-relaxed">
+            {dict.guide.subtitle}
+          </p>
         </div>
-        <p className="text-nord-text/70 text-lg mb-12">{dict.guide.subtitle}</p>
-        <div className="grid gap-8 sm:grid-cols-2">
+
+        <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 mt-10">
           {guides.map((guide) => (
             <Link
               key={guide.slug}
               href={`/${lang}/guide/${guide.slug}`}
-              className="group bg-nord-card rounded-xl p-6 border border-nord-border/30 hover:border-nord-accent/50 transition-all"
+              className="group glass rounded-2xl p-6 border border-dc-border/40 hover:border-dc-accent/30 transition-colors"
             >
-              <span className="text-xs font-medium text-nord-accent uppercase tracking-wider">
+              <span className="text-xs font-medium text-dc-accent uppercase tracking-wider">
                 {dict.guide[`category_${guide.category}` as keyof typeof dict.guide] as string}
               </span>
-              <h2 className="text-lg font-semibold text-nord-text mt-2 group-hover:text-nord-accent transition-colors">
+              <h2 className="text-lg font-semibold text-dc-text mt-2 group-hover:text-dc-accent transition-colors">
                 {guide.title}
               </h2>
-              <p className="text-nord-text/60 text-sm mt-2 line-clamp-2">{guide.description}</p>
-              <span className="inline-block text-nord-accent text-sm font-medium mt-4">
+              <p className="text-dc-muted/80 text-sm mt-2 line-clamp-2">{guide.description}</p>
+              <span className="inline-block text-dc-accent text-sm font-medium mt-4">
                 {dict.guide.readMore} →
               </span>
             </Link>

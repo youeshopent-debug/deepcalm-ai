@@ -38,21 +38,31 @@ export default async function TermsPage({ params }: { params: Promise<{ lang: st
   const disclaimerKeywords = ["免责", "Disclaimer", "penafian", "disclaimer"]
 
   return (
-    <div className="min-h-screen bg-nord-bg">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex items-center gap-3 mb-8">
-          <FileText className="w-8 h-8 text-nord-accent" />
-          <h1 className="text-3xl sm:text-4xl font-bold text-nord-text">{t.title}</h1>
+    <div className="min-h-screen">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-16">
+        <div className="glass rounded-2xl p-6 sm:p-8 border border-dc-border/40">
+          <div className="flex items-center gap-3 mb-4">
+            <FileText className="w-7 h-7 text-dc-accent" />
+            <h1 className="text-3xl sm:text-4xl font-bold text-dc-text">{t.title}</h1>
+          </div>
+          <p className="text-sm text-dc-muted/70 mb-6">{t.updated}</p>
+          <p className="text-dc-muted/80 leading-relaxed">{t.intro}</p>
         </div>
-        <p className="text-sm text-nord-muted mb-10">{t.updated}</p>
-        <p className="text-nord-text/80 leading-relaxed mb-10">{t.intro}</p>
-        <div className="space-y-10">
+
+        <div className="space-y-8 mt-10">
           {sections.map((s, i) => {
             const isDisclaimer = disclaimerKeywords.some((kw) => s.title.toLowerCase().includes(kw))
             return (
-              <div key={i} className={isDisclaimer ? "bg-nord-card border border-nord-accent/30 rounded-xl p-6" : ""}>
-                <h2 className="text-xl font-semibold text-nord-text mb-3">{s.title}</h2>
-                <p className="text-nord-text/70 leading-relaxed">{s.desc}</p>
+              <div
+                key={i}
+                className={
+                  isDisclaimer
+                    ? "glass rounded-2xl p-6 border border-dc-accent/25"
+                    : "glass rounded-2xl p-6 border border-dc-border/40"
+                }
+              >
+                <h2 className="text-xl font-semibold text-dc-text mb-3">{s.title}</h2>
+                <p className="text-dc-muted/80 leading-relaxed">{s.desc}</p>
               </div>
             )
           })}
