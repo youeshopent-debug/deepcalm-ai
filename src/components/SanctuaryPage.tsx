@@ -1,20 +1,33 @@
-"use client"
+import type { Locale } from "@/types"
+import AiCounselor from "./AiCounselor"
+import BackgroundCanvas from "./BackgroundCanvas"
+import BackgroundVideo from "./BackgroundVideo"
+import DailyCheckin from "./DailyCheckin"
+import HeroSection from "./HeroSection"
+import InlineScienceContent from "./InlineScienceContent"
+import PublisherContentBlock, { type PublisherTopic } from "./PublisherContentBlock"
+import ResonanceWall from "./ResonanceWall"
+import SeoContent from "./SeoContent"
+import SleepCalculator from "./SleepCalculator"
 
-import { useLanguage } from "@/context/LanguageContext";
-import { useState } from "react";
-import AiCounselor from "./AiCounselor";
-import BackgroundCanvas from "./BackgroundCanvas";
-import BackgroundVideo from "./BackgroundVideo";
-import DailyCheckin from "./DailyCheckin";
-import HeroSection from "./HeroSection";
-import InlineScienceContent from "./InlineScienceContent";
-import ResonanceWall from "./ResonanceWall";
-import SeoContent from "./SeoContent";
-import SleepCalculator from "./SleepCalculator";
-
-export default function SanctuaryPage() {
-  const { tt } = useLanguage()
-  const [videoMode] = useState(true)
+export default function SanctuaryPage({
+  lang,
+  heroTitle,
+  heroSubtitle,
+  heroCtaText,
+  publisherTitle,
+  publisherIntro,
+  publisherTopics,
+}: {
+  lang: Locale
+  heroTitle: string
+  heroSubtitle: string
+  heroCtaText: string
+  publisherTitle: string
+  publisherIntro: string
+  publisherTopics: PublisherTopic[]
+}) {
+  const videoMode = true
 
   return (
     <div className="relative min-h-screen">
@@ -44,15 +57,16 @@ export default function SanctuaryPage() {
       </div>
 
       <main className="relative z-10">
-        {/* Hero — brand intro */}
-        <HeroSection
-          title={tt("hero.title")}
-          subtitle={tt("hero.subtitle")}
-          ctaText={tt("hero.cta")}
+        <HeroSection title={heroTitle} subtitle={heroSubtitle} ctaText={heroCtaText} />
+
+        <PublisherContentBlock
+          lang={lang}
+          title={publisherTitle}
+          intro={publisherIntro}
+          topics={publisherTopics}
         />
 
-        {/* AI Counselor — main interaction */}
-        <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16">
+        <section id="ai-counselor" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-10">
           <div className="w-full">
             <AiCounselor />
             <div className="mt-10">
@@ -61,7 +75,6 @@ export default function SanctuaryPage() {
           </div>
         </section>
 
-        {/* Daily Check-in */}
         <section id="daily-checkin" className="w-full py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-2xl mx-auto">
             <DailyCheckin />
@@ -71,7 +84,6 @@ export default function SanctuaryPage() {
           </div>
         </section>
 
-        {/* Sleep Calculator */}
         <section id="sleep-calculator" className="w-full py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-2xl mx-auto">
             <SleepCalculator />
@@ -81,20 +93,18 @@ export default function SanctuaryPage() {
           </div>
         </section>
 
-        {/* SEO Content — 800字深度睡眠科学指南 */}
-      <section id="seo-content" className="w-full py-16 sm:py-24 px-4 sm:px-6">
-        <SeoContent />
-      </section>
+        <section id="seo-content" className="w-full py-16 sm:py-24 px-4 sm:px-6">
+          <SeoContent />
+        </section>
 
-      {/* Resonance Wall — community mood board */}
-      <section id="resonance-wall" className="w-full py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-2xl mx-auto">
-          <ResonanceWall />
-        </div>
-        <div className="mt-10">
-          <InlineScienceContent />
-        </div>
-      </section>
+        <section id="resonance-wall" className="w-full py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-2xl mx-auto">
+            <ResonanceWall />
+          </div>
+          <div className="mt-10">
+            <InlineScienceContent />
+          </div>
+        </section>
       </main>
 
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 text-xs text-dc-muted/40 pointer-events-none">
