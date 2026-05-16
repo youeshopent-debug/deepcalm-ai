@@ -44,7 +44,11 @@ export default function BackgroundVideo({ src, overlayOpacity = 0.55, enabled = 
       )}
       <div
         className="absolute inset-0 transition-colors duration-700"
-        style={{ backgroundColor: `rgba(10,10,18,${overlayOpacity})` }}
+        style={{
+          backgroundColor: `rgba(10,10,18,${overlayOpacity})`,
+          backgroundImage:
+            "radial-gradient(ellipse at top, rgba(126,184,255,0.10), transparent 60%), radial-gradient(ellipse at bottom, rgba(78,205,196,0.06), transparent 70%)",
+        }}
       />
     </div>
   )

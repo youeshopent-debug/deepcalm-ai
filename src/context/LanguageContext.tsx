@@ -12,6 +12,8 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType | null>(null)
+const FALLBACK_EN = getDict("en")
+const FALLBACK_ZH = getDict("zh")
 
 export function LanguageProvider({
   children,
@@ -23,18 +25,12 @@ export function LanguageProvider({
   const [locale, setLocaleState] = useState<Locale>(initialLocale || "en")
   const [dict, setDict] = useState<Record<string, unknown>>(() => {
     const d = getDict(initialLocale || "en")
-    if (typeof window !== "undefined") {
-      console.log("[LanguageContext] init dict locale:", initialLocale || "en", "keys:", Object.keys(d))
-    }
     return d
   })
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale)
     const d = getDict(newLocale)
-    if (typeof window !== "undefined") {
-      console.log("[LanguageContext] setLocale →", newLocale, "keys:", Object.keys(d))
-    }
     setDict(d)
     if (typeof window !== "undefined") {
       localStorage.setItem("deepcalm-locale", newLocale)
@@ -44,11 +40,16 @@ export function LanguageProvider({
 
   const tt = useCallback(
     (path: string): string => {
-      const result = t(dict, path)
-      if (typeof window !== "undefined" && !result) {
-        console.warn(`[LanguageContext] tt("${path}") returned empty. dict keys:`, Object.keys(dict))
+      const primary = t(dict, path)
+      if (primary) return primary
+
+      const fallback = t(FALLBACK_EN, path) || t(FALLBACK_ZH, path)
+      if (fallback) return fallback
+
+      if (process.env.NODE_ENV !== "production" && typeof window !== "undefined") {
+        console.warn(`[LanguageContext] tt("${path}") missing in all dictionaries.`)
       }
-      return result
+      return ""
     },
     [dict]
   )

@@ -37,13 +37,6 @@ export default function AiCounselor() {
   const shareRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    console.log("[AiCounselor] locale:", locale)
-    console.log("[AiCounselor] tt(welcome):", tt("aiCounselor.welcome"))
-    console.log("[AiCounselor] tt(title):", tt("aiCounselor.title"))
-    console.log("[AiCounselor] tt(subtitle):", tt("aiCounselor.subtitle"))
-  }, [locale, tt])
-
-  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
