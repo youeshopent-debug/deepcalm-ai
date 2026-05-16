@@ -33,7 +33,10 @@ export default async function TermsPage({ params }: { params: Promise<{ lang: st
     { title: t.section4_title, desc: t.section4_desc },
     { title: t.section5_title, desc: t.section5_desc },
     { title: t.section6_title, desc: t.section6_desc },
-  ]
+    { title: t.section7_title, desc: t.section7_desc },
+    { title: t.section8_title, desc: t.section8_desc },
+    { title: t.section9_title, desc: t.section9_desc },
+  ].filter((s) => s.title && s.desc)
 
   const disclaimerKeywords = ["免责", "Disclaimer", "penafian", "disclaimer"]
 
