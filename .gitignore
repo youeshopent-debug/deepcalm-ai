@@ -18,6 +18,9 @@ take-screenshots.cjs check-zh-site.cjs _stress_test.cjs _resend_setup.cjs _resen
 # Playwright logs
 .playwright-cli/
 
+# Git worktrees
+.worktrees/
+
 # Build artifacts & reports
 /screenshots/
 /scripts/
