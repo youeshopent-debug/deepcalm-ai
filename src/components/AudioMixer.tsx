@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { Volume2, CloudRain, Wind, Flame, Droplets, Bird, Bug, X } from 'lucide-react'
-import { audioEngine, type ChannelId } from '@/lib/audioEngine'
-import { useLanguage } from '@/context/LanguageContext'
+import { useLanguage } from '@/context/LanguageContext';
+import { audioEngine, type ChannelId } from '@/lib/audioEngine';
+import { Bird, Bug, CloudRain, Droplets, Flame, Volume2, Wind, X } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 
 const TRACKS: { id: ChannelId; icon: React.ElementType; labelKey: string; color: string }[] = [
   { id: 'rain', icon: CloudRain, labelKey: 'audio.rain', color: 'rgba(120,180,255,0.7)' },
@@ -21,12 +21,12 @@ export default function AudioMixer() {
   const [volume, setVolume] = useState(0.6)
 
   useEffect(() => {
-    audioEngine.init()
     const v = audioEngine.volume
     setVolume(v)
   }, [])
 
   const toggle = useCallback((id: ChannelId) => {
+    audioEngine.init()
     const next = new Set(active)
     if (next.has(id)) {
       next.delete(id)
@@ -39,6 +39,7 @@ export default function AudioMixer() {
   }, [active])
 
   const handleVolume = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    audioEngine.init()
     const v = parseFloat(e.target.value)
     setVolume(v)
     audioEngine.setMasterVolume(v)

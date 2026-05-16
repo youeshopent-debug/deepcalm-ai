@@ -15,6 +15,8 @@ export class AudioEngine {
   private insectTimer: ReturnType<typeof setTimeout> | null = null
   private extension: AudioExtension | null = null
   private _volume = 0.12
+  private pendingAudioData = new Map<ChannelId, ArrayBuffer>()
+  private decodingPending = false
   private channelBuffers = new Map<ChannelId, AudioBuffer>()
   private bufferSources = new Map<ChannelId, AudioBufferSourceNode>()
 
@@ -28,6 +30,7 @@ export class AudioEngine {
       this.masterGain.connect(this.ctx.destination)
     }
     if (this.ctx.state === 'suspended') this.ctx.resume()
+    void this.decodePendingAudioData()
   }
 
   setExtension(ext: AudioExtension) { this.extension = ext }
@@ -40,13 +43,32 @@ export class AudioEngine {
     else if (!active && this.activeChannels.has(channel)) this.stopChannel(channel)
   }
 
+  private async decodePendingAudioData(): Promise<void> {
+    if (!this.ctx) return
+    if (this.decodingPending) return
+    if (this.pendingAudioData.size === 0) return
+    this.decodingPending = true
+    const entries = Array.from(this.pendingAudioData.entries())
+    for (const [channel, arrayBuf] of entries) {
+      try {
+        const audioBuf = await this.ctx.decodeAudioData(arrayBuf.slice(0))
+        this.channelBuffers.set(channel, audioBuf)
+        this.pendingAudioData.delete(channel)
+      } catch {}
+    }
+    this.decodingPending = false
+  }
+
   async loadAudioBuffer(channel: ChannelId, url: string): Promise<void> {
     try {
       const res = await fetch(url)
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const arrayBuf = await res.arrayBuffer()
-      if (!this.ctx) this.init()
-      const audioBuf = await this.ctx!.decodeAudioData(arrayBuf)
+      if (!this.ctx) {
+        this.pendingAudioData.set(channel, arrayBuf)
+        return
+      }
+      const audioBuf = await this.ctx.decodeAudioData(arrayBuf)
       this.channelBuffers.set(channel, audioBuf)
     } catch (e) {
       console.warn(`[AudioEngine] failed to load ${url}:`, e)

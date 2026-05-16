@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { Volume2, Music } from "lucide-react"
-import { audioEngine, type ChannelId } from "@/lib/audioEngine"
-import { useTheme } from "@/context/ThemeContext"
+import { useTheme } from "@/context/ThemeContext";
+import { audioEngine, type ChannelId } from "@/lib/audioEngine";
+import { Music, Volume2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const TRACKS: { id: ChannelId; label: string; emoji: string }[] = [
   { id: "rain", label: "Rain", emoji: "🌧" },
@@ -64,12 +64,14 @@ export default function AudioFloatingTray() {
   const isAnyPlaying = Object.values(channelStates).some((v) => v)
 
   function handleChannelToggle(id: ChannelId) {
+    audioEngine.init()
     const next = !channelStates[id]
     setChannelStates((prev) => ({ ...prev, [id]: next }))
     audioEngine.toggleChannel(id, next)
   }
 
   function handleMasterVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
+    audioEngine.init()
     const vol = parseFloat(e.target.value)
     setMasterVolume(vol)
     audioEngine.setMasterVolume(vol)
