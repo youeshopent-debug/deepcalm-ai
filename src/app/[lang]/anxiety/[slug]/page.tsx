@@ -1,12 +1,11 @@
-import type { Locale } from "@/types"
-import { getDict } from "@/lib/getDict"
-import { getAnxietyScenarios, getAnxietyScenarioBySlug, getLocalizedField } from "@/content/anxiety-scenarios"
-import AiCounselor from "@/components/AiCounselor"
-import ScientificGuide from "@/components/ScientificGuide"
-import SitemapFooter from "@/components/SitemapFooter"
-import { ArrowLeft, Brain, CheckCircle2, Lightbulb, Sparkles } from "lucide-react"
-import Link from "next/link"
-import { notFound } from "next/navigation"
+import AiCounselor from "@/components/AiCounselor";
+import ScientificGuide from "@/components/ScientificGuide";
+import { getAnxietyScenarioBySlug, getAnxietyScenarios, getLocalizedField } from "@/content/anxiety-scenarios";
+import { getDict, tt } from "@/lib/getDict";
+import type { Locale } from "@/types";
+import { ArrowLeft, Brain, CheckCircle2, Lightbulb, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const scenarios = getAnxietyScenarios()
@@ -65,18 +64,13 @@ export default async function AnxietyScenarioPage({ params }: { params: Promise<
   const scenario = getAnxietyScenarioBySlug(slug)
   if (!scenario) notFound()
 
-  const dict = await getDict(locale)
+  const dict = getDict(locale)
+  const dictEn = getDict("en")
+  const dictZh = getDict("zh")
   const allScenarios = getAnxietyScenarios()
   const relatedScenarios = allScenarios.filter((s) => s.slug !== slug)
 
-  const t = (key: string) => {
-    const keys = key.split(".")
-    let val: Record<string, unknown> = dict
-    for (const k of keys) {
-      val = val?.[k] as Record<string, unknown>
-    }
-    return (typeof val === "string" ? val : key) as string
-  }
+  const t = (key: string, fallback: string) => tt(dict, key) || tt(dictEn, key) || tt(dictZh, key) || fallback
 
   return (
     <>
@@ -89,7 +83,7 @@ export default async function AnxietyScenarioPage({ params }: { params: Promise<
             className="inline-flex items-center gap-2 text-nord-muted hover:text-nord-accent text-sm mb-8 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            {t("common.back")}
+            {t("common.back", locale === "zh" ? "返回" : "Back")}
           </Link>
 
           <div className="text-center mb-12">
@@ -200,7 +194,6 @@ export default async function AnxietyScenarioPage({ params }: { params: Promise<
         </section>
       )}
 
-      <SitemapFooter />
     </>
   )
 }

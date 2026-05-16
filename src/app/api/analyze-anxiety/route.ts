@@ -2,6 +2,25 @@ import { mockAnalyze, mockChatReply } from "@/lib/mockCounselor";
 import type { Locale } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
 
+function cleanEnv(v: unknown): string {
+  return String(v || "")
+    .replace(/\uFEFF/g, "")
+    .replace(/[\r\n]/g, "")
+    .trim()
+}
+
+function tryExtractJsonObject(text: string): any | null {
+  const start = text.indexOf("{")
+  const end = text.lastIndexOf("}")
+  if (start < 0 || end <= start) return null
+  const candidate = text.slice(start, end + 1)
+  try {
+    return JSON.parse(candidate)
+  } catch {
+    return null
+  }
+}
+
 const buildAnalyzePrompt = (locale: string) => {
   const localeNameMap: Record<string, string> = {
     zh: "中文", en: "English", ms: "Bahasa Melayu",
@@ -266,8 +285,10 @@ async function callLLM(
   history: { role: string; content: string }[] = [],
   options: { jsonMode?: boolean } = {},
 ): Promise<{ content: string; usage: { model: string; inputTokens: number; outputTokens: number; cost: number } }> {
-  const openAiKey = process.env.OPENAI_API_KEY
-  const deepSeekKey = process.env.DEEPSEEK_API_KEY
+  const openAiKey = cleanEnv(process.env.OPENAI_API_KEY)
+  const deepSeekKey = cleanEnv(process.env.DEEPSEEK_API_KEY)
+  const openRouterKey = cleanEnv(process.env.OPENROUTER_API_KEY)
+  const openRouterModel = cleanEnv(process.env.OPENROUTER_MODEL) || "openai/gpt-4o-mini"
 
   const messages = [
     { role: "system", content: systemPrompt },
@@ -366,6 +387,54 @@ async function callLLM(
     }
   }
 
+  /* 3. 兜底：OpenRouter（OpenAI 兼容） */
+  if (openRouterKey) {
+    try {
+      const body: Record<string, unknown> = {
+        model: openRouterModel,
+        messages,
+        temperature: 0.9,
+        max_tokens: 1024,
+      }
+      if (options.jsonMode) body.response_format = { type: "json_object" }
+
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${openRouterKey}`,
+          "HTTP-Referer": "https://deepcalm-ai.com",
+          "X-Title": "DeepCalm AI",
+        },
+        body: JSON.stringify(body),
+      })
+
+      if (!res.ok) {
+        const errBody = await res.text()
+        console.error("OpenRouter error:", res.status, errBody)
+        throw new Error(`OpenRouter returned ${res.status}`)
+      }
+
+      const data = await res.json()
+      const content: string = data.choices?.[0]?.message?.content || ""
+      const usage = data.usage || { prompt_tokens: 0, completion_tokens: 0 }
+      const model = String(data.model || openRouterModel)
+      const cost = calcCost("gpt-4o-mini", usage.prompt_tokens || 0, usage.completion_tokens || 0)
+
+      return {
+        content,
+        usage: {
+          model,
+          inputTokens: usage.prompt_tokens || 0,
+          outputTokens: usage.completion_tokens || 0,
+          cost,
+        },
+      }
+    } catch (err) {
+      console.error("OpenRouter fallback also failed:", (err as Error).message)
+    }
+  }
+
   throw new Error("All LLM backends unavailable")
 }
 
@@ -383,6 +452,7 @@ export async function POST(request: NextRequest) {
     if (mode === "chat") {
       try {
         const result = await callLLM(buildConversationalPrompt(locale), text.trim(), history, { jsonMode: false })
+        if (!result.content || !result.content.trim()) throw new Error("empty_response")
         return NextResponse.json({
           role: "counselor",
           content: result.content,
@@ -401,7 +471,12 @@ export async function POST(request: NextRequest) {
     /* ── 分析模式（默认） ── */
     if (mode === "analyze") {
       /* 无 API key：降级到本地 mock */
-      if (!process.env.OPENAI_API_KEY && !process.env.DEEPSEEK_API_KEY) {
+      const hasAnyKey =
+        !!cleanEnv(process.env.OPENAI_API_KEY) ||
+        !!cleanEnv(process.env.DEEPSEEK_API_KEY) ||
+        !!cleanEnv(process.env.OPENROUTER_API_KEY)
+
+      if (!hasAnyKey) {
         console.warn("无 API Key 配置，降级到本地 mock 分析")
         const fallback = await mockAnalyze(locale as Locale, text.trim())
         return NextResponse.json({ ...fallback, usage: { model: "mock", inputTokens: 0, outputTokens: 0, cost: 0 } })
@@ -410,17 +485,26 @@ export async function POST(request: NextRequest) {
       try {
         const result = await callLLM(buildAnalyzePrompt(locale), text.trim(), [], { jsonMode: true })
 
-        let parsed: { thinkingPattern: string; encouragement: string; steps: string[]; dailyNote?: string }
+        let parsed: { thinkingPattern: string; encouragement: string; steps: string[]; dailyNote?: string } | null = null
         try {
           parsed = JSON.parse(result.content)
         } catch {
-          console.error("Failed to parse AI response as JSON:", result.content)
-          return NextResponse.json({ error: "AI 返回格式异常" }, { status: 502 })
+          parsed = tryExtractJsonObject(result.content)
         }
 
-        if (!parsed.thinkingPattern || !parsed.encouragement || !Array.isArray(parsed.steps) || parsed.steps.length < 2 || parsed.steps.length > 4) {
-          console.error("AI response missing required fields:", parsed)
-          return NextResponse.json({ error: "AI 返回数据结构不完整" }, { status: 502 })
+        if (!parsed || typeof parsed !== "object") {
+          const fallback = await mockAnalyze(locale as Locale, text.trim())
+          return NextResponse.json({ ...fallback, usage: result.usage })
+        }
+
+        if (!Array.isArray((parsed as any).steps) || (parsed as any).steps.length !== 3) {
+          const fallback = await mockAnalyze(locale as Locale, text.trim())
+          return NextResponse.json({ ...fallback, usage: result.usage })
+        }
+
+        if (!parsed.thinkingPattern || !parsed.encouragement) {
+          const fallback = await mockAnalyze(locale as Locale, text.trim())
+          return NextResponse.json({ ...fallback, usage: result.usage })
         }
 
         return NextResponse.json({ ...parsed, dailyNote: parsed.dailyNote || "", usage: result.usage })

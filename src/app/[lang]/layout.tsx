@@ -2,6 +2,7 @@ import AudioFloatingTray from "@/components/AudioFloatingTray";
 import BackgroundCanvas from "@/components/BackgroundCanvas";
 import BackgroundVideo from "@/components/BackgroundVideo";
 import Header from "@/components/Header";
+import SitemapFooter from "@/components/SitemapFooter";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -34,6 +35,7 @@ export default function LangLayout({
           <BackgroundCanvas videoMode={true} />
           <Header />
           {children}
+          <SitemapFooter />
           <ThemeSwitcher />
           <AudioFloatingTray />
         </div>

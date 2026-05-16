@@ -1,16 +1,16 @@
 "use client"
 
-import { useState } from "react"
-import BackgroundCanvas from "./BackgroundCanvas"
-import BackgroundVideo from "./BackgroundVideo"
-import HeroSection from "./HeroSection"
-import AiCounselor from "./AiCounselor"
-import DailyCheckin from "./DailyCheckin"
-import SleepCalculator from "./SleepCalculator"
-import SeoContent from "./SeoContent"
-import ResonanceWall from "./ResonanceWall"
-import SitemapFooter from "./SitemapFooter"
-import { useLanguage } from "@/context/LanguageContext"
+import { useLanguage } from "@/context/LanguageContext";
+import { useState } from "react";
+import AiCounselor from "./AiCounselor";
+import BackgroundCanvas from "./BackgroundCanvas";
+import BackgroundVideo from "./BackgroundVideo";
+import DailyCheckin from "./DailyCheckin";
+import HeroSection from "./HeroSection";
+import InlineScienceContent from "./InlineScienceContent";
+import ResonanceWall from "./ResonanceWall";
+import SeoContent from "./SeoContent";
+import SleepCalculator from "./SleepCalculator";
 
 export default function SanctuaryPage() {
   const { tt } = useLanguage()
@@ -53,7 +53,12 @@ export default function SanctuaryPage() {
 
         {/* AI Counselor — main interaction */}
         <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16">
-          <AiCounselor />
+          <div className="w-full">
+            <AiCounselor />
+            <div className="mt-10">
+              <InlineScienceContent />
+            </div>
+          </div>
         </section>
 
         {/* Daily Check-in */}
@@ -61,12 +66,18 @@ export default function SanctuaryPage() {
           <div className="max-w-2xl mx-auto">
             <DailyCheckin />
           </div>
+          <div className="mt-10">
+            <InlineScienceContent />
+          </div>
         </section>
 
         {/* Sleep Calculator */}
         <section id="sleep-calculator" className="w-full py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-2xl mx-auto">
             <SleepCalculator />
+          </div>
+          <div className="mt-10">
+            <InlineScienceContent />
           </div>
         </section>
 
@@ -80,10 +91,11 @@ export default function SanctuaryPage() {
         <div className="max-w-2xl mx-auto">
           <ResonanceWall />
         </div>
+        <div className="mt-10">
+          <InlineScienceContent />
+        </div>
       </section>
       </main>
-
-      <SitemapFooter />
 
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 text-xs text-dc-muted/40 pointer-events-none">
         DeepCalm AI · Midnight Sanctuary

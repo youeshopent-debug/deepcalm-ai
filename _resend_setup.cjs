@@ -1,6 +1,6 @@
 const https = require('https');
 
-const API_KEY = 're_KsGfM3fs_7byYe6hSTm8nX3saoM5ZSm9t';
+const API_KEY = process.env.RESEND_API_KEY || '';
 
 function api(method, path, body) {
   return new Promise((resolve, reject) => {
@@ -31,6 +31,10 @@ function api(method, path, body) {
 }
 
 async function main() {
+  if (!API_KEY) {
+    console.error("Missing RESEND_API_KEY")
+    process.exit(1)
+  }
   // List existing audiences
   console.log('=== Existing Audiences ===');
   const list = await api('GET', '/audiences');

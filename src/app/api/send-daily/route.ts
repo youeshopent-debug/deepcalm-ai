@@ -1,8 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID || ""
-const API_KEY = process.env.RESEND_API_KEY || ""
-const OPENCLAW_URL = process.env.OPENCLAW_WEBHOOK_URL || ""
+export const dynamic = "force-dynamic"
+
+function cleanEnv(v: unknown): string {
+  return String(v || "")
+    .replace(/\uFEFF/g, "")
+    .replace(/[\r\n]/g, "")
+    .trim()
+}
+
+const AUDIENCE_ID = cleanEnv(process.env.RESEND_AUDIENCE_ID)
+const API_KEY = cleanEnv(process.env.RESEND_API_KEY)
+const RESEND_FROM = cleanEnv(process.env.RESEND_FROM) || "DeepCalm AI <onboarding@resend.dev>"
 
 const TOPICS_EN = [
   "Start your day with a mindful moment — close your eyes and take three deep breaths.",
@@ -46,6 +55,25 @@ async function fetchAudienceContacts(): Promise<any[]> {
   }
 }
 
+async function sendEmail(to: string, subject: string, html: string) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: RESEND_FROM,
+      to: [to],
+      subject,
+      html,
+    }),
+  })
+
+  const data = await res.json().catch(() => ({}))
+  return { ok: res.ok, status: res.status, data }
+}
+
 export async function GET(req: NextRequest) {
   try {
     const cronSecret = process.env.CRON_SECRET
@@ -53,6 +81,8 @@ export async function GET(req: NextRequest) {
     if (cronSecret && authHeader !== cronSecret) {
       return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 })
     }
+
+    const dryRun = req.nextUrl.searchParams.get("dryRun") === "1"
 
     if (!AUDIENCE_ID || !API_KEY) {
       return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 })
@@ -65,41 +95,40 @@ export async function GET(req: NextRequest) {
 
     const dayOfWeek = new Date().toLocaleDateString("en-US", { weekday: "long" })
 
-    if (OPENCLAW_URL) {
-      const payload = {
-        type: "deepcalm_daily_newsletter",
-        contacts,
-        dayOfWeek,
-        emailBuilder: (name: string, lang: string) => buildDailyEmail(name, lang, dayOfWeek),
-      }
-      try {
-        const triggerRes = await fetch(OPENCLAW_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        })
-        if (triggerRes.ok) {
-          return NextResponse.json({ ok: true, sent: contacts.length, via: "openclaw", total: contacts.length })
-        }
-      } catch (e: any) {
-        console.warn("[send-daily] OpenClaw webhook failed, falling back to log:", e.message)
-      }
+    const subscribers = contacts.map((c: any) => ({
+      email: c.email,
+      lang: c.metadata?.lang || "en",
+      name: c.first_name || c.email.split("@")[0],
+    }))
+
+    if (dryRun) {
+      return NextResponse.json({ ok: true, via: "dryRun", sent: 0, total: contacts.length, subscribers })
     }
 
-    console.log(`[send-daily] would send to ${contacts.length} subscribers`)
-    console.log(`[send-daily] contacts:`, contacts.map((c: any) => `${c.email} (lang=${c.metadata?.lang || "en"})`).join(", "))
+    const limit = Math.max(1, Math.min(50, Number(process.env.DAILY_SEND_LIMIT || 30)))
+    const targets = subscribers.slice(0, limit)
+    const errors: any[] = []
+    let sent = 0
+
+    for (const t of targets) {
+      const subject = t.lang === "zh" ? "DeepCalm AI · 每日心灵陪伴" : "DeepCalm AI · Your Daily Sanctuary"
+      const html = buildDailyEmail(t.name, t.lang, dayOfWeek)
+      const r = await sendEmail(t.email, subject, html)
+      if (r.ok) {
+        sent += 1
+        continue
+      }
+      errors.push({ email: t.email, status: r.status, message: r.data?.message || "send_failed" })
+    }
 
     return NextResponse.json({
-      ok: true,
-      via: "preview",
-      sent: 0,
+      ok: errors.length === 0,
+      via: "resend",
+      sent,
       total: contacts.length,
-      message: "OpenClaw webhook not configured — listing subscribers only",
-      subscribers: contacts.map((c: any) => ({
-        email: c.email,
-        lang: c.metadata?.lang || "en",
-        name: c.first_name || c.email.split("@")[0],
-      })),
+      attempted: targets.length,
+      skipped: Math.max(0, contacts.length - targets.length),
+      errors,
     })
   } catch (err) {
     console.error("[send-daily] error:", err)

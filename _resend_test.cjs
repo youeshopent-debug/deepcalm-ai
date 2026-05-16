@@ -1,7 +1,7 @@
 const https = require('https');
 
-const API_KEY = 're_KsGfM3fs_7byYe6hSTm8nX3saoM5ZSm9t';
-const AUDIENCE_ID = 'cd7400b0-3bb5-4997-bc2d-7977649cfc95';
+const API_KEY = process.env.RESEND_API_KEY || '';
+const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID || '';
 
 function api(method, path, body) {
   return new Promise((resolve, reject) => {
@@ -33,6 +33,14 @@ function api(method, path, body) {
 }
 
 async function main() {
+  if (!API_KEY) {
+    console.error("Missing RESEND_API_KEY")
+    process.exit(1)
+  }
+  if (!AUDIENCE_ID) {
+    console.error("Missing RESEND_AUDIENCE_ID")
+    process.exit(1)
+  }
   // Test 1: Add contact to audience
   console.log('\n=== Test: Add contact ===');
   await api('POST', `/audiences/${AUDIENCE_ID}/contacts`, {
@@ -47,7 +55,7 @@ async function main() {
 
   // Test 3: Send email
   console.log('\n=== Test: Send email ===');
-  await api('POST', '/email', {
+  await api('POST', '/emails', {
     from: 'onboarding@resend.dev',
     to: 'test@example.com',
     subject: 'Test from DeepCalm',

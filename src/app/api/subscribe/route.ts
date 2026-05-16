@@ -1,7 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID || ""
-const API_KEY = process.env.RESEND_API_KEY || ""
+export const dynamic = "force-dynamic"
+
+function cleanEnv(v: unknown): string {
+  return String(v || "")
+    .replace(/\uFEFF/g, "")
+    .replace(/[\r\n]/g, "")
+    .trim()
+}
+
+const AUDIENCE_ID = cleanEnv(process.env.RESEND_AUDIENCE_ID)
+const API_KEY = cleanEnv(process.env.RESEND_API_KEY)
 
 async function addToResendAudience(email: string, lang: string) {
   try {

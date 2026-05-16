@@ -1,11 +1,9 @@
-import type { Locale } from "@/types"
-import { getDict } from "@/lib/getDict"
-import { getTopicBySlug, getTopicContent, getAllSlugs } from "@/content/topics"
-import ScientificGuide from "@/components/ScientificGuide"
-import SitemapFooter from "@/components/SitemapFooter"
-import Link from "next/link"
-import { ArrowLeft, BookOpen } from "lucide-react"
-import { notFound } from "next/navigation"
+import { getAllSlugs, getTopicBySlug, getTopicContent } from "@/content/topics";
+import { getDict, tt } from "@/lib/getDict";
+import type { Locale } from "@/types";
+import { ArrowLeft, BookOpen } from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 const categoryColors: Record<string, string> = {
   sleep: "from-indigo-500/10 to-purple-500/10",
@@ -79,18 +77,13 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
   const topic = getTopicBySlug(slug, locale)
   if (!topic) notFound()
 
-  const dict = await getDict(locale)
+  const dict = getDict(locale)
+  const dictEn = getDict("en")
+  const dictZh = getDict("zh")
   const content = getTopicContent(slug, locale)
 
   const catColor = categoryColors[topic.category] || "from-nord-accent/10 to-nord-accent/5"
-  const t = (key: string) => {
-    const keys = key.split(".")
-    let val: Record<string, unknown> = dict as unknown as Record<string, unknown>
-    for (const k of keys) {
-      val = val?.[k] as Record<string, unknown>
-    }
-    return (typeof val === "string" ? val : key) as string
-  }
+  const t = (key: string, fallback: string) => tt(dict, key) || tt(dictEn, key) || tt(dictZh, key) || fallback
 
   return (
     <div className="min-h-screen bg-nord-bg">
@@ -103,7 +96,7 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
             className="inline-flex items-center gap-2 text-nord-muted hover:text-nord-accent text-sm mb-8 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            {t("common.back") || "Back"}
+            {t("common.back", locale === "zh" ? "返回" : "Back")}
           </Link>
 
           <div className="mb-8">
@@ -160,7 +153,6 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
         </div>
       </section>
 
-      <SitemapFooter />
     </div>
   )
 }
