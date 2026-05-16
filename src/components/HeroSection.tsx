@@ -19,7 +19,7 @@ export default function HeroSection({
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[58vh] sm:min-h-[62vh] flex items-center justify-center overflow-hidden pt-14">
       <div className="aurora-gradient pointer-events-none absolute inset-0" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
@@ -52,7 +52,7 @@ export default function HeroSection({
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 animate-float">
         <ArrowDown className="w-5 h-5 text-dc-muted/40" />
       </div>
     </section>
