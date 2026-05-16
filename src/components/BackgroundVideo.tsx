@@ -10,17 +10,27 @@ interface Props {
 
 export default function BackgroundVideo({ src, overlayOpacity = 0.55, enabled = true }: Props) {
   const [mounted, setMounted] = useState(false)
+  const [activated, setActivated] = useState(false)
   const [loaded, setLoaded] = useState(false)
 
   if (!enabled) return null
 
   useEffect(() => {
     setMounted(true)
+
+    const activate = () => setActivated(true)
+    window.addEventListener("pointerdown", activate, { once: true })
+    window.addEventListener("keydown", activate, { once: true })
+
+    return () => {
+      window.removeEventListener("pointerdown", activate)
+      window.removeEventListener("keydown", activate)
+    }
   }, [])
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      {mounted && (
+      {mounted && activated && (
         <video
           src={src}
           autoPlay
