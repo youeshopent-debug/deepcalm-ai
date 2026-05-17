@@ -1,6 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: { unoptimized: true },
+  async headers() {
+    return [
+      {
+        source: "/videos/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, noarchive",
+          },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       {
