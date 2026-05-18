@@ -1,6 +1,10 @@
 import type { ReactNode } from "react"
 import "./globals.css"
 
+export const metadata = {
+  metadataBase: new URL("https://deepcalm-ai.com"),
+}
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html>

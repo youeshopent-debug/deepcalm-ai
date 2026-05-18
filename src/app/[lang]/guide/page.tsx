@@ -14,6 +14,19 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: dict.guide.meta_title + " - DeepCalm AI",
     description: dict.guide.meta_desc,
+    metadataBase: new URL("https://deepcalm-ai.com"),
+    alternates: {
+      canonical: `/${lang}/guide`,
+      languages: {
+        zh: "/zh/guide",
+        en: "/en/guide",
+        ms: "/ms/guide",
+        ja: "/ja/guide",
+        ko: "/ko/guide",
+        th: "/th/guide",
+        es: "/es/guide",
+      },
+    },
     openGraph: {
       title: dict.guide.meta_title + " - DeepCalm AI",
       description: dict.guide.meta_desc,

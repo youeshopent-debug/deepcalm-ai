@@ -1,7 +1,12 @@
 import { getDict } from "@/lib/getDict"
 import TechArchSection from "@/components/TechArchSection"
+import type { Locale } from "@/types"
 
-type Locale = "zh" | "en" | "ms" | "ja" | "ko" | "th" | "es"
+const locales: Locale[] = ["zh", "en", "ms", "ja", "ko", "th", "es"]
+
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }))
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
@@ -9,6 +14,23 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: dict.about?.meta_title || "About DeepCalm AI",
     description: dict.about?.meta_desc || "Learn about DeepCalm AI",
+    metadataBase: new URL("https://deepcalm-ai.com"),
+    alternates: {
+      canonical: `/${lang}/about`,
+      languages: {
+        zh: "/zh/about",
+        en: "/en/about",
+        ms: "/ms/about",
+        ja: "/ja/about",
+        ko: "/ko/about",
+        th: "/th/about",
+        es: "/es/about",
+      },
+    },
+    openGraph: {
+      title: dict.about?.meta_title || "About DeepCalm AI",
+      description: dict.about?.meta_desc || "Learn about DeepCalm AI",
+    },
   }
 }
 

@@ -14,6 +14,7 @@ export function generateMetadata({ params: { lang } }: { params: { lang: string 
     title: "DeepCalm AI — Midnight Sanctuary",
     description:
       "Find your calm in the quiet hours. AI-powered emotional support, sleep guidance, and a community that breathes with you.",
+    metadataBase: new URL("https://deepcalm-ai.com"),
   }
 }
 

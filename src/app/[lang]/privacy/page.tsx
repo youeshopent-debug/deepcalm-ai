@@ -14,6 +14,19 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: dict.privacy.meta_title,
     description: dict.privacy.meta_desc,
+    metadataBase: new URL("https://deepcalm-ai.com"),
+    alternates: {
+      canonical: `/${lang}/privacy`,
+      languages: {
+        zh: "/zh/privacy",
+        en: "/en/privacy",
+        ms: "/ms/privacy",
+        ja: "/ja/privacy",
+        ko: "/ko/privacy",
+        th: "/th/privacy",
+        es: "/es/privacy",
+      },
+    },
     openGraph: {
       title: dict.privacy.meta_title,
       description: dict.privacy.meta_desc,
