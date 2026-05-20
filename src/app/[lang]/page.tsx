@@ -1,4 +1,5 @@
 import SanctuaryPage from "@/components/SanctuaryPage"
+import LibraryPreview from "@/components/LibraryPreview"
 import type { PublisherTopic } from "@/components/PublisherContentBlock"
 import { getDict, tt } from "@/lib/getDict"
 import type { Locale } from "@/types"
@@ -52,14 +53,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const publisherIntro = tt(dict, "seoContent.p1") || ""
 
   return (
-    <SanctuaryPage
-      lang={locale}
-      heroTitle={heroTitle}
-      heroSubtitle={heroSubtitle}
-      heroCtaText={heroCtaText}
-      publisherTitle={publisherTitle}
-      publisherIntro={publisherIntro}
-      publisherTopics={DEFAULT_PUBLISHER_TOPICS}
-    />
+    <>
+      <SanctuaryPage
+        lang={locale}
+        heroTitle={heroTitle}
+        heroSubtitle={heroSubtitle}
+        heroCtaText={heroCtaText}
+        publisherTitle={publisherTitle}
+        publisherIntro={publisherIntro}
+        publisherTopics={DEFAULT_PUBLISHER_TOPICS}
+      />
+      <LibraryPreview locale={locale} />
+    </>
   )
 }

@@ -95,5 +95,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   } catch {}
 
+  for (const lang of LANGS) {
+    entries.push({
+      url: `${BASE}/${lang}/library`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+      alternates: { languages: langAlternates("/library") },
+    })
+  }
+
+  try {
+    for (const slug of getAllSlugs()) {
+      for (const lang of LANGS) {
+        entries.push({
+          url: `${BASE}/${lang}/library/${slug}`,
+          lastModified: new Date(),
+          changeFrequency: "weekly",
+          priority: 0.8,
+          alternates: { languages: langAlternates(`/library/${slug}`) },
+        })
+      }
+    }
+  } catch {}
+
   return entries
 }
