@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowDown } from "lucide-react"
 
 export default function HeroSection({
   title,
@@ -36,24 +35,14 @@ export default function HeroSection({
           {subtitle}
         </p>
 
-        <div className={`mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <div className={`mt-10 transition-all duration-1000 delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <a
             href="#ai-counselor"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-dc-accent text-dc-deep font-semibold text-sm hover:bg-dc-accent/90 transition-all duration-300 shadow-lg shadow-dc-accent/20"
           >
             {ctaText}
           </a>
-          <a
-            href="#resonance-wall"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl glass text-dc-text text-sm font-medium hover:bg-dc-accent/10 transition-all duration-300"
-          >
-            Listen to Others
-          </a>
         </div>
-      </div>
-
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 animate-float">
-        <ArrowDown className="w-5 h-5 text-dc-muted/40" />
       </div>
     </section>
   )

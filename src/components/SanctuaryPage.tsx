@@ -2,13 +2,10 @@ import type { Locale } from "@/types"
 import AiCounselor from "./AiCounselor"
 import BackgroundCanvas from "./BackgroundCanvas"
 import BackgroundVideo from "./BackgroundVideo"
-import DailyCheckin from "./DailyCheckin"
+import HealingToolbox from "./HealingToolbox"
 import HeroSection from "./HeroSection"
-import InlineScienceContent from "./InlineScienceContent"
 import PublisherContentBlock, { type PublisherTopic } from "./PublisherContentBlock"
 import ResonanceWall from "./ResonanceWall"
-import SeoContent from "./SeoContent"
-import SleepCalculator from "./SleepCalculator"
 
 export default function SanctuaryPage({
   lang,
@@ -38,7 +35,6 @@ export default function SanctuaryPage({
       />
       <BackgroundCanvas videoMode={videoMode} />
 
-      {/* 4s/7s Breathing Halo — guides user to breathe in sync */}
       <div className="fixed inset-0 z-[1] flex items-center justify-center pointer-events-none">
         <div
           className="w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] rounded-full animate-breathing-halo-4-7"
@@ -69,40 +65,14 @@ export default function SanctuaryPage({
         <section id="ai-counselor" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-10">
           <div className="w-full">
             <AiCounselor />
-            <div className="mt-10">
-              <InlineScienceContent />
-            </div>
           </div>
         </section>
 
-        <section id="daily-checkin" className="w-full py-16 sm:py-24 px-4 sm:px-6">
-          <div className="max-w-2xl mx-auto">
-            <DailyCheckin />
-          </div>
-          <div className="mt-10">
-            <InlineScienceContent />
-          </div>
-        </section>
-
-        <section id="sleep-calculator" className="w-full py-16 sm:py-24 px-4 sm:px-6">
-          <div className="max-w-2xl mx-auto">
-            <SleepCalculator />
-          </div>
-          <div className="mt-10">
-            <InlineScienceContent />
-          </div>
-        </section>
-
-        <section id="seo-content" className="w-full py-16 sm:py-24 px-4 sm:px-6">
-          <SeoContent />
-        </section>
+        <HealingToolbox />
 
         <section id="resonance-wall" className="w-full py-16 sm:py-24 px-4 sm:px-6">
           <div className="max-w-2xl mx-auto">
             <ResonanceWall />
-          </div>
-          <div className="mt-10">
-            <InlineScienceContent />
           </div>
         </section>
       </main>
