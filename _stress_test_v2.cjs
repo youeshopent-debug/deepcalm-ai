@@ -27,7 +27,7 @@ const LOCALES = ['zh', 'en', 'ms', 'ja', 'ko', 'th', 'es'];
 const REQUEST_TIMEOUT = 20000;        // 单页超时 20s
 const CONCURRENCY = 5;                // 并发数
 const SLOW_THRESHOLD_MS = 5000;       // 响应 >5s 标记为慢速
-const SAMPLE_SLUGS = ['sleep-science', 'anxiety-causes', 'loneliness-causes', 'mindfulness-meditation'];
+const SAMPLE_SLUGS = ['insomnia', 'deep-sleep', 'stress-relief', 'panic-attack'];
 
 // ── 结果收集 ──
 const RESULTS = [];
@@ -151,7 +151,7 @@ async function testSSGPages() {
   console.log('\n═══ 1. 7语言 SSG 首页加载 + SEO ═══\n');
   for (const locale of LOCALES) {
     await testPage(`/${locale} 首页`, `${BASE_URL}/${locale}`, {
-      'html-lang': (p) => p.evaluate(() => document.documentElement.lang === '{{locale}}'.replace('{{locale}}', locale)),
+      'html-lang': (p) => p.evaluate((l) => document.documentElement.lang === l, locale),
       'has-header': assert.selectorExists('header'),
       'has-main': assert.selectorExists('main, section, [class*="container"]'),
       'title-not-deepcalm-only': (_p, _c, title) => {
