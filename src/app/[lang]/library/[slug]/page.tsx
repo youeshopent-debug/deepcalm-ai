@@ -53,10 +53,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }) {
   const { lang, slug } = await params
-  const topic = getTopicBySlug(slug, lang as Locale)
+  const locale = lang as Locale
+  const topic = getTopicBySlug(slug, locale)
   if (!topic) return {}
+  const catName = CATEGORY_NAMES[topic.category]?.[locale] || topic.category
+  const suffix = locale === "zh" ? "心理健康指南" : locale === "ms" ? "Panduan Kesihatan Mental" : locale === "ja" ? "メンタルヘルスガイド" : locale === "ko" ? "정신 건강 가이드" : locale === "th" ? "คู่มือสุขภาพจิต" : locale === "es" ? "Guía de Salud Mental" : "Mental Health Guide"
+  const seoTitle = `${topic.title} | ${catName} ${suffix} - DeepCalm AI`
   return {
-    title: `${topic.title} - DeepCalm AI`,
+    title: seoTitle,
     description: topic.description,
     keywords: topic.keywords,
     metadataBase: new URL("https://deepcalm-ai.com"),
@@ -67,7 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         ja: `https://deepcalm-ai.com/ja/library/${slug}`, ko: `https://deepcalm-ai.com/ko/library/${slug}`, th: `https://deepcalm-ai.com/th/library/${slug}`, es: `https://deepcalm-ai.com/es/library/${slug}`,
       },
     },
-    openGraph: { title: `${topic.title} - DeepCalm AI`, description: topic.description },
+    openGraph: { title: seoTitle, description: topic.description },
   }
 }
 

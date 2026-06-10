@@ -33,6 +33,9 @@ export default function AiCounselor() {
   const [showShareSuccess, setShowShareSuccess] = useState(false)
   const [lastUsage, setLastUsage] = useState<UsageInfo | null>(null)
   const [totalCost, setTotalCost] = useState(0)
+  const [showDecompose, setShowDecompose] = useState(false)
+  const [decomposeSteps, setDecomposeSteps] = useState<string[]>([])
+  const [isDecomposing, setIsDecomposing] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const shareRef = useRef<HTMLDivElement>(null)
 
@@ -79,6 +82,28 @@ export default function AiCounselor() {
     }
 
     setIsAnalyzing(false)
+  }
+
+  const handleDecompose = async () => {
+    const lastUserMsg = [...messages].reverse().find((m) => m.role === "user")
+    if (!lastUserMsg) return
+    setIsDecomposing(true)
+    try {
+      const res = await fetch("/api/analyze-anxiety/decompose", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: lastUserMsg.content, locale }),
+      })
+      if (!res.ok) throw new Error(`decompose API returned ${res.status}`)
+      const data = await res.json()
+      if (Array.isArray(data.steps) && data.steps.length === 3) {
+        setDecomposeSteps(data.steps)
+        setShowDecompose(true)
+      }
+    } catch {
+      // Silent fail — simply don't show the decompose card
+    }
+    setIsDecomposing(false)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -253,6 +278,32 @@ export default function AiCounselor() {
           </div>
         )}
 
+        {showDecompose && decomposeSteps.length === 3 && (
+          <div className="shrink-0 px-4 sm:px-6 py-2 animate-fade-in-glow">
+            <div className="bg-dc-surface/60 backdrop-blur-md border border-dc-border/60 rounded-2xl px-4 sm:px-6 py-4">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-dc-muted/60 font-medium tracking-wide">⚡ 快拆 · 3 步行动</p>
+                <button
+                  onClick={() => setShowDecompose(false)}
+                  className="text-dc-muted/40 hover:text-dc-muted transition-colors"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
+              <div className="space-y-2">
+                {decomposeSteps.map((step, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-dc-accent/20 text-dc-accent text-[10px] font-bold flex items-center justify-center mt-0.5">
+                      {i + 1}
+                    </span>
+                    <p className="text-sm text-dc-text/80 leading-relaxed">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="shrink-0 px-4 sm:px-6 py-4 sm:py-5">
           <div className="flex items-center gap-2 sm:gap-3 bg-dc-surface/60 backdrop-blur-md border border-dc-border rounded-2xl px-4 sm:px-6 py-3 sm:py-4 focus-within:border-dc-accent/40 transition-all duration-300">
             <input
@@ -264,6 +315,23 @@ export default function AiCounselor() {
               className="flex-1 bg-transparent text-xl text-dc-text placeholder:text-dc-muted/50 outline-none"
               onClick={() => setDrawerOpen(true)}
             />
+            {!showWelcome && messages.filter((m) => m.role === "counselor").length > 0 && (
+              <button
+                onClick={handleDecompose}
+                disabled={isDecomposing}
+                className="px-3 py-2 rounded-xl text-sm font-medium bg-purple-500/15 text-purple-400 hover:bg-purple-500/25 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shrink-0"
+              >
+                {isDecomposing ? (
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-purple-400/60 rounded-full animate-pulse-soft" />
+                    <span className="w-2 h-2 bg-purple-400/60 rounded-full animate-pulse-soft" style={{ animationDelay: "0.3s" }} />
+                    <span className="w-2 h-2 bg-purple-400/60 rounded-full animate-pulse-soft" style={{ animationDelay: "0.6s" }} />
+                  </span>
+                ) : (
+                  "⚡ 快拆"
+                )}
+              </button>
+            )}
             <button
               onClick={handleSend}
               disabled={!input.trim() || isAnalyzing}

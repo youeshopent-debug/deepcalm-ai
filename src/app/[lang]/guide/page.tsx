@@ -10,9 +10,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
-  const dict = await getDict(lang as Locale)
+  const locale = lang as Locale
+  const dict = await getDict(locale)
+  const suffix = locale === "zh" ? "自助指南" : locale === "ms" ? "Panduan Bantuan Diri" : locale === "ja" ? "セルフヘルプガイド" : locale === "ko" ? "셀프헬프 가이드" : locale === "th" ? "คู่มือช่วยเหลือตนเอง" : locale === "es" ? "Guía de Autoayuda" : "Self-Help Guide"
+  const seoTitle = `${dict.guide.meta_title} | ${suffix} - DeepCalm AI`
   return {
-    title: dict.guide.meta_title + " - DeepCalm AI",
+    title: seoTitle,
     description: dict.guide.meta_desc,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
@@ -28,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       },
     },
     openGraph: {
-      title: dict.guide.meta_title + " - DeepCalm AI",
+      title: seoTitle,
       description: dict.guide.meta_desc,
     },
   }

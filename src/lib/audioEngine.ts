@@ -1,5 +1,15 @@
 export type ChannelId = 'rain' | 'wind' | 'fire' | 'stream' | 'birds' | 'insects'
 
+export type BinauralType = 'delta' | 'theta' | 'alpha' | 'beta' | 'gamma'
+
+export const BINAURAL_FREQUENCIES: Record<BinauralType, { label: string; baseFreq: number; beatFreq: number; description: string }> = {
+  delta:  { label: 'Delta',  baseFreq: 200, beatFreq: 3,   description: 'Deep sleep, restoration' },
+  theta:  { label: 'Theta',  baseFreq: 200, beatFreq: 6,   description: 'Meditation, creativity' },
+  alpha:  { label: 'Alpha',  baseFreq: 200, beatFreq: 10,  description: 'Relaxation, focus' },
+  beta:   { label: 'Beta',   baseFreq: 200, beatFreq: 18,  description: 'Alertness, concentration' },
+  gamma:  { label: 'Gamma',  baseFreq: 200, beatFreq: 40,  description: 'Peak cognition, insight' },
+}
+
 export interface AudioExtension {
   name: string
   generateTrack?: (channelId: ChannelId) => Promise<AudioBuffer | null>
@@ -15,6 +25,8 @@ export class AudioEngine {
   private insectTimer: ReturnType<typeof setTimeout> | null = null
   private extension: AudioExtension | null = null
   private _volume = 0.12
+  private binauralOscillators: { left: OscillatorNode; right: OscillatorNode; panner: StereoPannerNode } | null = null
+  private activeBinaural: BinauralType | null = null
   private pendingAudioData = new Map<ChannelId, ArrayBuffer>()
   private decodingPending = false
   private channelBuffers = new Map<ChannelId, AudioBuffer>()
@@ -512,6 +524,88 @@ export class AudioEngine {
     })
   }
 
+  get activeBinauralType(): BinauralType | null { return this.activeBinaural }
+
+  isBinauralActive(): boolean { return this.activeBinaural !== null }
+
+  startBinaural(type: BinauralType) {
+    this.init()
+    if (!this.ctx || !this.masterGain) return
+
+    // Stop existing binaural
+    this.stopBinaural()
+
+    const cfg = BINAURAL_FREQUENCIES[type]
+    if (!cfg) return
+
+    // Mute all ambient channels when entering binaural mode
+    this.activeChannels.forEach((ch) => {
+      if (this.activeChannels.has(ch)) this.toggleChannel(ch, false)
+    })
+
+    try {
+      const leftOsc = this.ctx.createOscillator()
+      const rightOsc = this.ctx.createOscillator()
+      const leftPanner = this.ctx.createStereoPanner()
+      const rightPanner = this.ctx.createStereoPanner()
+
+      leftOsc.type = 'sine'
+      leftOsc.frequency.value = cfg.baseFreq
+
+      rightOsc.type = 'sine'
+      rightOsc.frequency.value = cfg.baseFreq + cfg.beatFreq
+
+      leftPanner.pan.value = -1 // full left
+      rightPanner.pan.value = 1  // full right
+
+      const leftGain = this.ctx.createGain()
+      leftGain.gain.value = 0.3
+      const rightGain = this.ctx.createGain()
+      rightGain.gain.value = 0.3
+
+      leftOsc.connect(leftGain)
+      leftGain.connect(leftPanner)
+      leftPanner.connect(this.masterGain)
+
+      rightOsc.connect(rightGain)
+      rightGain.connect(rightPanner)
+      rightPanner.connect(this.masterGain)
+
+      leftOsc.start()
+      rightOsc.start()
+
+      this.binauralOscillators = { left: leftOsc, right: rightOsc, panner: leftPanner }
+      this.activeBinaural = type
+    } catch {
+      // Fallback: single tone mono if StereoPanner not supported
+      if (!this.ctx) return
+      try {
+        const osc = this.ctx.createOscillator()
+        osc.type = 'sine'
+        osc.frequency.value = cfg.baseFreq + cfg.beatFreq / 2
+        const gain = this.ctx.createGain()
+        gain.gain.value = 0.2
+        osc.connect(gain)
+        gain.connect(this.masterGain)
+        osc.start()
+        this.binauralOscillators = null
+        this.activeBinaural = type
+      } catch {}
+    }
+  }
+
+  stopBinaural() {
+    if (this.binauralOscillators) {
+      try { this.binauralOscillators.left.stop() } catch {}
+      try { this.binauralOscillators.right.stop() } catch {}
+      this.binauralOscillators.left.disconnect()
+      this.binauralOscillators.right.disconnect()
+      this.binauralOscillators.panner.disconnect()
+      this.binauralOscillators = null
+    }
+    this.activeBinaural = null
+  }
+
   startAmbient() {
     this.init()
     if (!this.activeChannels.has('rain')) {
@@ -528,6 +622,7 @@ export class AudioEngine {
       src.disconnect()
     })
     this.bufferSources.clear()
+    this.stopBinaural()
     this.activeChannels.clear()
     this.channelGains.forEach(g => g.disconnect())
     this.channelGains.clear()

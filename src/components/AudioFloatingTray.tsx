@@ -1,8 +1,8 @@
 "use client"
 
 import { useTheme } from "@/context/ThemeContext";
-import { audioEngine, type ChannelId } from "@/lib/audioEngine";
-import { Music, Volume2 } from "lucide-react";
+import { audioEngine, type ChannelId, type BinauralType } from "@/lib/audioEngine";
+import { Music, Volume2, Headphones } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const TRACKS: { id: ChannelId; label: string; emoji: string }[] = [
@@ -14,11 +14,21 @@ const TRACKS: { id: ChannelId; label: string; emoji: string }[] = [
   { id: "insects", label: "Insects", emoji: "🦗" },
 ]
 
+const BINAURAL_TYPES: { type: BinauralType; label: string; emoji: string; description: string }[] = [
+  { type: 'delta',  label: 'Delta',  emoji: '🧠', description: 'Deep Sleep 3Hz' },
+  { type: 'theta',  label: 'Theta',  emoji: '🧘', description: 'Meditation 6Hz' },
+  { type: 'alpha',  label: 'Alpha',  emoji: '🌊', description: 'Relaxation 10Hz' },
+  { type: 'beta',   label: 'Beta',   emoji: '⚡',  description: 'Alertness 18Hz' },
+  { type: 'gamma',  label: 'Gamma',  emoji: '💎',  description: 'Peak Cognition 40Hz' },
+]
+
 export default function AudioFloatingTray() {
   const [expanded, setExpanded] = useState(false)
   const [channelStates, setChannelStates] = useState<Record<ChannelId, boolean>>(
     { rain: false, wind: false, fire: false, stream: false, birds: false, insects: false }
   )
+  const [binauralMode, setBinauralMode] = useState(false)
+  const [activeBinauralType, setActiveBinauralType] = useState<BinauralType | null>(null)
   const [masterVolume, setMasterVolume] = useState(audioEngine.volume)
   const trayRef = useRef<HTMLDivElement>(null)
   const hasInitRef = useRef(false)
@@ -65,9 +75,34 @@ export default function AudioFloatingTray() {
 
   function handleChannelToggle(id: ChannelId) {
     audioEngine.init()
+    // If binaural is active, stop it first (mutual exclusion)
+    if (audioEngine.isBinauralActive()) {
+      audioEngine.stopBinaural()
+      setBinauralMode(false)
+      setActiveBinauralType(null)
+    }
     const next = !channelStates[id]
     setChannelStates((prev) => ({ ...prev, [id]: next }))
     audioEngine.toggleChannel(id, next)
+  }
+
+  function handleBinauralToggle(type: BinauralType) {
+    audioEngine.init()
+    if (activeBinauralType === type) {
+      // Toggle off
+      audioEngine.stopBinaural()
+      setBinauralMode(false)
+      setActiveBinauralType(null)
+    } else {
+      // Stop all ambient channels first
+      setChannelStates({
+        rain: false, wind: false, fire: false,
+        stream: false, birds: false, insects: false,
+      })
+      audioEngine.startBinaural(type)
+      setBinauralMode(true)
+      setActiveBinauralType(type)
+    }
   }
 
   function handleMasterVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -83,13 +118,15 @@ export default function AudioFloatingTray() {
         onClick={() => setExpanded(!expanded)}
         className="flex items-center gap-2 px-3 py-2 rounded-xl bg-dc-surface/60 backdrop-blur-lg border border-dc-border/50 shadow-lg hover:bg-dc-surface/80 transition-all text-dc-text/60 hover:text-dc-text"
       >
-        {isAnyPlaying ? (
+        {binauralMode ? (
+          <Headphones className="w-4 h-4 text-purple-400" />
+        ) : isAnyPlaying ? (
           <Volume2 className="w-4 h-4 text-dc-accent" />
         ) : (
           <Music className="w-4 h-4" />
         )}
         <span className="text-xs hidden sm:inline">
-          {isAnyPlaying ? "Playing" : "Ambient"}
+          {binauralMode ? "3D Sound" : isAnyPlaying ? "Playing" : "Ambient"}
         </span>
       </button>
 
@@ -125,6 +162,34 @@ export default function AudioFloatingTray() {
                 )}
               </button>
             ))}
+          </div>
+
+          {/* Divider */}
+          <div className="my-3 border-t border-dc-border/30" />
+
+          {/* Binaural Section */}
+          <div>
+            <p className="text-xs text-dc-text/40 mb-2">3D Sound · Binaural Beats</p>
+            <div className="space-y-1">
+              {BINAURAL_TYPES.map((item) => (
+                <button
+                  key={item.type}
+                  onClick={() => handleBinauralToggle(item.type)}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all ${
+                    activeBinauralType === item.type
+                      ? "bg-purple-500/15 text-purple-400"
+                      : "text-dc-text/60 hover:bg-dc-surface/60 hover:text-dc-text"
+                  }`}
+                >
+                  <span className="text-base w-6 text-center">{item.emoji}</span>
+                  <span className="text-xs font-medium">{item.label}</span>
+                  <span className="ml-auto text-[10px] text-dc-text/40">{item.description}</span>
+                  {activeBinauralType === item.type && (
+                    <span className="text-[10px] text-purple-400/60">ON</span>
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}

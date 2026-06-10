@@ -3,16 +3,19 @@ import type { Locale } from "@/types"
 import AiCounselor from "./AiCounselor"
 import BackgroundCanvas from "./BackgroundCanvas"
 import BackgroundVideo from "./BackgroundVideo"
+import DailyBriefing from "./DailyBriefing"
 import HealingToolbox from "./HealingToolbox"
 import HeroSection from "./HeroSection"
 import PublisherContentBlock, { type PublisherTopic } from "./PublisherContentBlock"
 import ResonanceWall from "./ResonanceWall"
+import SsrAccordion from "./SsrAccordion"
 
 export default function SanctuaryPage({
   lang,
   heroTitle,
   heroSubtitle,
   heroCtaText,
+  healingIntro,
   publisherTitle,
   publisherIntro,
   publisherTopics,
@@ -21,6 +24,7 @@ export default function SanctuaryPage({
   heroTitle: string
   heroSubtitle: string
   heroCtaText: string
+  healingIntro: string
   publisherTitle: string
   publisherIntro: string
   publisherTopics: PublisherTopic[]
@@ -46,41 +50,44 @@ export default function SanctuaryPage({
       />
       <BackgroundCanvas videoMode={videoMode} />
 
-      <div className="fixed inset-0 z-[1] flex items-center justify-center pointer-events-none">
-        <div
-          className="w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] rounded-full animate-breathing-halo-4-7"
-          style={{
-            background: "radial-gradient(circle, rgba(126,184,255,0.12) 0%, rgba(106,90,205,0.08) 40%, transparent 65%)",
-            filter: "blur(60px)",
-          }}
-        />
-        <div
-          className="absolute w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] rounded-full animate-breathe-inner-4-7"
-          style={{
-            background: "radial-gradient(circle, rgba(126,184,255,0.1) 0%, rgba(78,205,196,0.06) 35%, transparent 60%)",
-            filter: "blur(80px)",
-          }}
-        />
-      </div>
-
       <main className="relative z-10">
         <HeroSection title={heroTitle} subtitle={heroSubtitle} ctaText={heroCtaText} />
 
-        {/* AI Counselor — elevated to above-the-fold visual center */}
+        {/* ── Healing Intro ~200 chars, SSR-visible ── */}
+        <section className="px-4 sm:px-6 -mt-6 sm:-mt-8 pb-8">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-base sm:text-lg text-dc-muted/90 leading-relaxed font-light tracking-wide">
+              {healingIntro}
+            </p>
+            <div className="mt-5 flex items-center justify-center gap-3">
+              <span className="h-px w-12 bg-dc-accent/30" />
+              <span className="text-xs text-dc-muted/40 uppercase tracking-[0.2em]">
+                {lang === "zh" ? "你的心灵庇护所" : "Your Sanctuary"}
+              </span>
+              <span className="h-px w-12 bg-dc-accent/30" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── Daily Health Briefing ── */}
+        <DailyBriefing lang={lang} />
+
+        {/* AI Counselor */}
         <section id="ai-counselor" className="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 pt-10">
           <div className="w-full">
             <AiCounselor />
           </div>
         </section>
 
-        {/* Featured Insight: CBT-I deep content */}
-        <section className="px-4 sm:px-6 py-16 sm:py-24">
+        {/* Featured Insight: wrapped in SSR accordion for visual decluttering */}
+        <section className="px-4 sm:px-6 py-8 sm:py-12">
           <div className="max-w-3xl mx-auto">
-            <div className="glass rounded-2xl p-6 sm:p-8 border border-dc-border/40 backdrop-blur-xl">
-              <h2 className="text-xl sm:text-2xl font-semibold text-dc-text leading-snug">
-                {featuredInsightTitle}
-              </h2>
-              <p className="mt-4 text-base sm:text-lg text-dc-muted leading-relaxed">
+            <SsrAccordion
+              title={featuredInsightTitle}
+              defaultOpen={false}
+              className="border-dc-border/20"
+            >
+              <p className="text-base sm:text-lg text-dc-muted leading-relaxed">
                 {featuredInsightBody}
               </p>
               <div className="mt-6">
@@ -91,7 +98,7 @@ export default function SanctuaryPage({
                   {lang === "zh" ? "深入阅读 →" : "Read In-Depth →"}
                 </Link>
               </div>
-            </div>
+            </SsrAccordion>
           </div>
         </section>
 

@@ -1,6 +1,7 @@
 import AudioFloatingTray from "@/components/AudioFloatingTray";
 import BackgroundCanvas from "@/components/BackgroundCanvas";
 import BackgroundVideo from "@/components/BackgroundVideo";
+import CookieConsent from "@/components/CookieConsent";
 import Header from "@/components/Header";
 import SitemapFooter from "@/components/SitemapFooter";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
@@ -38,6 +39,7 @@ export default function LangLayout({
           {children}
           <SitemapFooter />
           <ThemeSwitcher />
+          <CookieConsent />
           <AudioFloatingTray />
         </div>
       </ThemeProvider>

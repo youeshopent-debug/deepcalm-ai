@@ -116,9 +116,19 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
-  const dict = getDict(lang as Locale)
+  const locale = lang as Locale
+  const dict = getDict(locale)
   const en = getDict("en")
-  const title = tt(dict, "library.title") || "Midnight Wisdom Library - DeepCalm AI"
+  const localeTitles: Record<Locale, string> = {
+    zh: "心理健康百科 | 44 篇科学文章 - DeepCalm AI",
+    en: "Mental Health Encyclopedia | 44 Science-Backed Articles - DeepCalm AI",
+    ms: "Ensiklopedia Kesihatan Mental | 44 Artikel Saintifik - DeepCalm AI",
+    ja: "メンタルヘルス百科 | 44の科学記事 - DeepCalm AI",
+    ko: "정신 건강 백과 | 44개의 과학 기사 - DeepCalm AI",
+    th: "สารานุกรมสุขภาพจิต | 44 บทความวิทยาศาสตร์ - DeepCalm AI",
+    es: "Enciclopedia de Salud Mental | 44 Artículos Científicos - DeepCalm AI",
+  }
+  const title = tt(dict, "library.title") || localeTitles[locale] || localeTitles.en
   const desc = tt(dict, "library.desc") || tt(en, "library.desc") || "Explore 44 science-backed articles on sleep, anxiety, mindfulness, and emotional health."
   return {
     title,

@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next"
-import type { MetadataRoute } from "next"
 import { getGuides } from "@/content/guides"
 import { getAnxietyScenarios } from "@/content/anxiety-scenarios"
 import { getAllSlugs } from "@/content/topics"

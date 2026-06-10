@@ -1,6 +1,6 @@
 import type { Locale } from '@/types'
 import { generateDefaultContent } from './topic-content-templates'
-import './custom-content'
+import { initCustomContent } from './custom-content'
 
 export interface Topic {
   slug: string
@@ -622,3 +622,7 @@ const CONTENT_GENERATORS: Record<string, ContentGen> = {}
 export function registerContentGenerator(slug: string, fn: ContentGen) {
   CONTENT_GENERATORS[slug] = fn
 }
+
+// Initialize custom content generators after the module is fully initialized
+// (avoids circular dependency — initCustomContent receives registerContentGenerator as a callback)
+initCustomContent(registerContentGenerator)
