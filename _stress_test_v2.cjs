@@ -184,7 +184,7 @@ async function testTopicSEOandRelated() {
           // Should have format: "Title | Category suffix - DeepCalm AI"
           return title.includes('|') && title.includes('- DeepCalm');
         },
-        'related-reading-section': assert.textInContent('推荐阅读', 'Recommended Reading', 'Bacaan Disyorkan'),
+        'related-reading-section': assert.textInContent('相关阅读', 'Related Reading', 'Bacaan Berkaitan'),
       });
     }
   }
@@ -329,7 +329,7 @@ async function testResponseTimeBenchmark() {
     `${BASE_URL}/zh`,
     `${BASE_URL}/en`,
     `${BASE_URL}/zh/sanctuary`,
-    `${BASE_URL}/zh/library/sleep-science`,
+    `${BASE_URL}/zh/library/insomnia`,
     `${BASE_URL}/zh/about`,
     `${BASE_URL}/zh/guide`,
   ];
