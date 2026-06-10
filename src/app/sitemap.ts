@@ -51,6 +51,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
       alternates: { languages: langAlternates("/about") },
     })
+    entries.push({
+      url: `${BASE}/${lang}/sanctuary`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+      alternates: { languages: langAlternates("/sanctuary") },
+    })
   }
 
   try {
