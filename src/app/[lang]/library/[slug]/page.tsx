@@ -1,5 +1,5 @@
 import type { Locale } from "@/types"
-import { getAllSlugs, getTopicBySlug, getTopicContent, getTopicsByCategory } from "@/content/topics"
+import { getAllSlugs, getTopicBySlug, getTopicContent, getTopicsByCategory, getTopics } from "@/content/topics"
 import { getDict, tt } from "@/lib/getDict"
 import { notFound } from "next/navigation"
 import Breadcrumb from "@/components/Breadcrumb"
@@ -61,10 +61,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     keywords: topic.keywords,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/library/${slug}`,
+      canonical: `https://deepcalm-ai.com/${lang}/library/${slug}`,
       languages: {
-        zh: `/zh/library/${slug}`, en: `/en/library/${slug}`, ms: `/ms/library/${slug}`,
-        ja: `/ja/library/${slug}`, ko: `/ko/library/${slug}`, th: `/th/library/${slug}`, es: `/es/library/${slug}`,
+        zh: `https://deepcalm-ai.com/zh/library/${slug}`, en: `https://deepcalm-ai.com/en/library/${slug}`, ms: `https://deepcalm-ai.com/ms/library/${slug}`,
+        ja: `https://deepcalm-ai.com/ja/library/${slug}`, ko: `https://deepcalm-ai.com/ko/library/${slug}`, th: `https://deepcalm-ai.com/th/library/${slug}`, es: `https://deepcalm-ai.com/es/library/${slug}`,
       },
     },
     openGraph: { title: `${topic.title} - DeepCalm AI`, description: topic.description },
@@ -86,9 +86,15 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
   const icon = categoryIcon[topic.category] || "📖"
   const catName = CATEGORY_NAMES[topic.category]?.[locale] || topic.category
 
-  const related = getTopicsByCategory(topic.category, locale)
+  const sameCat = getTopicsByCategory(topic.category, locale)
     .filter((t) => t.slug !== slug)
-    .slice(0, 3)
+    .slice(0, 4)
+
+  const others = getTopics(locale)
+    .filter((t) => t.slug !== slug && t.category !== topic.category)
+    .sort((a, b) => a.slug.localeCompare(b.slug))
+
+  const related = sameCat.concat(others.slice(0, Math.max(0, 6 - sameCat.length)))
 
   const t = (key: string, fallback: string) => tt(dict, key) || tt(dictEn, key) || tt(dictZh, key) || fallback
 
@@ -166,7 +172,7 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
               <h2 className="text-lg font-bold text-nord-text mb-6">
                 {locale === "zh" ? "📖 相关阅读" : locale === "ms" ? "📖 Bacaan Berkaitan" : "📖 Related Reading"}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {related.map((r) => (
                   <LibraryCard
                     key={r.slug}

@@ -25,7 +25,7 @@ export default function PublisherContentBlock({
   intro: string
   topics: PublisherTopic[]
 }) {
-  const excerpt = truncate(intro, 200)
+  const excerpt = truncate(intro, 100)
 
   return (
     <section className="relative z-10 w-full px-4 sm:px-6 -mt-10 pb-8">
@@ -37,7 +37,13 @@ export default function PublisherContentBlock({
           <h2 className="text-xl sm:text-2xl font-semibold text-dc-text leading-snug">
             {title}
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-dc-muted leading-relaxed">
+          <p
+            className="mt-4 text-base sm:text-lg text-dc-muted leading-relaxed max-h-24 overflow-hidden"
+            style={{
+              maskImage: "linear-gradient(to bottom, black 80%, transparent 96%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 96%)",
+            }}
+          >
             {excerpt}
           </p>
 
@@ -54,6 +60,11 @@ export default function PublisherContentBlock({
             >
               {lang === "zh" ? "科学指南总入口" : "Science Guide"}
             </Link>
+          </div>
+
+          {/* SSR crawlable full text for SEO */}
+          <div className="hidden" aria-hidden="true">
+            {intro}
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">

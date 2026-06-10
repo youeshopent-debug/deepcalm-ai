@@ -51,8 +51,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${locale}/library/sleep-science-guide`,
-      languages: Object.fromEntries(ALL_LOCALES.map((l) => [l, `/${l}/library/sleep-science-guide`])),
+      canonical: `https://deepcalm-ai.com/${locale}/library/sleep-science-guide`,
+      languages: Object.fromEntries(ALL_LOCALES.map((l) => [l, `https://deepcalm-ai.com/${l}/library/sleep-science-guide`])),
     },
     openGraph: { title, description },
   }

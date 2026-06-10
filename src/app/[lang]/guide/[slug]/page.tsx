@@ -92,15 +92,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     keywords: guide.keywords,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/guide/${slug}`,
+      canonical: `https://deepcalm-ai.com/${lang}/guide/${slug}`,
       languages: {
-        zh: `/zh/guide/${slug}`,
-        en: `/en/guide/${slug}`,
-        ms: `/ms/guide/${slug}`,
-        ja: `/ja/guide/${slug}`,
-        ko: `/ko/guide/${slug}`,
-        th: `/th/guide/${slug}`,
-        es: `/es/guide/${slug}`,
+        zh: `https://deepcalm-ai.com/zh/guide/${slug}`,
+        en: `https://deepcalm-ai.com/en/guide/${slug}`,
+        ms: `https://deepcalm-ai.com/ms/guide/${slug}`,
+        ja: `https://deepcalm-ai.com/ja/guide/${slug}`,
+        ko: `https://deepcalm-ai.com/ko/guide/${slug}`,
+        th: `https://deepcalm-ai.com/th/guide/${slug}`,
+        es: `https://deepcalm-ai.com/es/guide/${slug}`,
       },
     },
     openGraph: {

@@ -16,15 +16,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: dict.guide.meta_desc,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/guide`,
+      canonical: `https://deepcalm-ai.com/${lang}/guide`,
       languages: {
-        zh: "/zh/guide",
-        en: "/en/guide",
-        ms: "/ms/guide",
-        ja: "/ja/guide",
-        ko: "/ko/guide",
-        th: "/th/guide",
-        es: "/es/guide",
+        zh: "https://deepcalm-ai.com/zh/guide",
+        en: "https://deepcalm-ai.com/en/guide",
+        ms: "https://deepcalm-ai.com/ms/guide",
+        ja: "https://deepcalm-ai.com/ja/guide",
+        ko: "https://deepcalm-ai.com/ko/guide",
+        th: "https://deepcalm-ai.com/th/guide",
+        es: "https://deepcalm-ai.com/es/guide",
       },
     },
     openGraph: {

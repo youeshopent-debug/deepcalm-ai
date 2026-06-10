@@ -125,10 +125,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: desc,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/library`,
+      canonical: `https://deepcalm-ai.com/${lang}/library`,
       languages: {
-        zh: "/zh/library", en: "/en/library", ms: "/ms/library",
-        ja: "/ja/library", ko: "/ko/library", th: "/th/library", es: "/es/library",
+        zh: "https://deepcalm-ai.com/zh/library", en: "https://deepcalm-ai.com/en/library", ms: "https://deepcalm-ai.com/ms/library",
+        ja: "https://deepcalm-ai.com/ja/library", ko: "https://deepcalm-ai.com/ko/library", th: "https://deepcalm-ai.com/th/library", es: "https://deepcalm-ai.com/es/library",
       },
     },
     openGraph: { title, description: desc },

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import type { MetadataRoute } from "next"
 import { getGuides } from "@/content/guides"
 import { getAnxietyScenarios } from "@/content/anxiety-scenarios"
 import { getAllSlugs } from "@/content/topics"
@@ -19,9 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entries.push({
       url: `${BASE}/${lang}`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: "daily",
       priority: 1.0,
-      alternates: { languages: langAlternates() },
+      alternates: { languages: langAlternates("") },
     })
     entries.push({
       url: `${BASE}/${lang}/guide`,
@@ -81,20 +82,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   } catch {}
 
-  try {
-    for (const slug of getAllSlugs()) {
-      for (const lang of LANGS) {
-        entries.push({
-          url: `${BASE}/${lang}/topic/${slug}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly",
-          priority: 0.7,
-          alternates: { languages: langAlternates(`/topic/${slug}`) },
-        })
-      }
-    }
-  } catch {}
-
   for (const lang of LANGS) {
     entries.push({
       url: `${BASE}/${lang}/library`,
@@ -116,6 +103,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
           alternates: { languages: langAlternates(`/library/${slug}`) },
         })
       }
+    }
+  } catch {}
+
+  // Standalone library pages not covered by getAllSlugs()
+  try {
+    for (const lang of LANGS) {
+      entries.push({
+        url: `${BASE}/${lang}/library/sleep-science-guide`,
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.8,
+        alternates: { languages: langAlternates("/library/sleep-science-guide") },
+      })
     }
   } catch {}
 

@@ -1,0 +1,20 @@
+{
+  "zh": {
+    "science": "## 互相依赖 → 共依赖的神经内分泌基础\n\n共依赖（Codependency）不是"太爱了"，而是**自我调节外包**——你的情绪稳定依赖于另一个人的状态。神经层面，共依赖者的前额叶-杏仁核连接较弱，导致情绪调节需要外部输入。\n\n关键在于**催产素系统的双刃剑效应**：催产素促进依恋，但也增强了"依恋对象的情绪状态即我的状态"的神经耦合。高共依赖者在伴侣痛苦时，自己的前扣带回（ACC）和前脑岛（AI）的激活程度几乎与伴侣同步——这不是共情过剩，而是自我-他人区分神经机制的减弱。治疗的目标不是减少爱，而是重建"他人痛苦≠我必须痛苦"的神经边界。",
+    "fitness": "## 共依赖恢复 · 边界建立实践\n\n**核心原理**：边界不是墙，而是门——你可以选择开关，而不是被别人撞开。\n\n• **情绪归因训练**：每天记录3次"我现在感受如何+这个感受是谁的"。例：焦虑（我的）/ 感到伴侣的沮丧（ta的）。分离"我的"和"你的"情绪。\n• **延迟响应协议**：当伴侣/重要他人情绪激动时，不要立即回应。深呼吸3次，问自己："ta需要我解决，还是只是倾听？"然后只做被需要的角色。\n• **独立愉悦活动**：每周至少3次独自做一件你享受但不与伴侣分享的事（读ta不感兴趣的书、去ta不喜欢的餐厅）。重建"我可以快乐而不需要ta在场"的神经通路。\n• **身体边界练习**：当感到被过度索取时，做一个身体动作标记边界——后退一步、交叉手臂、或把手放在胸口。身体动作强化神经边界。",
+    "faq": [
+      ["共依赖和关心他人的区别在哪里？", "关键区别：当你帮助对方时，如果ta拒绝帮助你的感受。共依赖：如果ta拒绝你的帮助，你会感到焦虑/被拒绝/无价值——你的自我价值建立在"被需要"上。健康的关心：你能提供帮助但不执着于ta是否接受，你的自我价值是内在稳定的。"],
+      ["共依赖者分手后为什么特别痛苦？", "因为共依赖者的自我调节系统外包给了伴侣。分手不仅是失去一个人，而是失去了情绪调节的外部工具。这就是为什么共依赖者分手后常常感到"不知道自己是谁"。恢复的关键是重建内在的自我调节能力——这就是边界练习的目的。"],
+      ["如何判断自己是否在共依赖关系中？", ["三个自检问题：1) 你是否在对方情绪不好时感到焦虑？2) 你是否经常牺牲自己的需求来照顾对方？3) 你是否觉得"如果我不做，没人会做"？如果三个回答都是"是"，需要关注边界重建"][],[""]]
+    ]
+  },
+  "en": {
+    "science": "## Codependency → Neuroendocrine Basis\n\nCodependency isn't \"loving too much\"—it's **outsourced self-regulation**: your emotional stability depends on another person's state. Neurally, codependent individuals show weaker prefrontal-amygdala connections, requiring external input for emotion regulation.\n\nThe key is **oxytocin's double-edged sword**: oxytocin promotes attachment but also enhances neural coupling where \"my partner's emotional state equals my state.\" Highly codependent individuals show nearly synchronized anterior cingulate cortex (ACC) and anterior insula (AI) activation when their partner is distressed—not over-empathy, but weakened self-other distinction. The therapeutic goal isn't reducing love, but rebuilding the neural boundary that says \"their pain ≠ my pain.\"",
+    "fitness": "## Codependency Recovery · Boundary-Building Practice\n\n**Core principle**: Boundaries aren't walls—they're doors. You choose when to open, rather than being barged through.\n\n• **Emotion Attribution Training**: 3 times daily, record \"how I feel now + whose feeling this is.\" Example: anxious (mine) / sensing partner's frustration (theirs). Separate \"mine\" from \"yours.\"\n• **Delayed Response Protocol**: When partner/close other is emotionally activated, don't respond immediately. Take 3 deep breaths, ask: \"Do they need me to solve, or just listen?\" Then play only the needed role.\n• **Independent Enjoyment Activity**: At least 3x/week, do something you enjoy alone without sharing with your partner (read a book they don't like, visit a restaurant they dislike). Rebuild neural pathways for \"I can be happy without them present.\"\n• **Physical Boundary Practice**: When feeling over-extracted, make a physical gesture marking the boundary—step back, cross arms, or place hand on chest. Physical actions reinforce neural boundaries.",
+    "faq": [
+      ["What's the difference between codependency and caring?", "Key distinction: how you feel when your help is refused. Codependency: you feel anxious/rejected/worthless if they refuse—your self-worth is built on 'being needed.' Healthy caring: you offer help without attachment to its acceptance—your self-worth is internally stable."],
+      ["Why do codependent people suffer so much after breakup?", "Because the codependent's self-regulation system was outsourced to their partner. A breakup isn't just losing a person—it's losing the external tool for emotional regulation. This is why codependents often feel 'I don't know who I am' after a breakup. Recovery hinges on rebuilding internal self-regulation capacity—that's what boundary practice is for."],
+      ["How do I know if I'm in a codependent relationship?", "Three self-check questions: 1) Do you feel anxious when the other person is in a bad mood? 2) Do you frequently sacrifice your own needs to take care of them? 3) Do you feel 'if I don't do it, no one will'? If all three are 'yes,' boundary reconstruction is needed."]
+    ]
+  }
+}

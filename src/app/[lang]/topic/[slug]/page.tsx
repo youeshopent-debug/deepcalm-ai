@@ -3,7 +3,8 @@ import { getDict, tt } from "@/lib/getDict";
 import type { Locale } from "@/types";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect, RedirectType } from "next/navigation";
+import { TopicJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 
 const categoryColors: Record<string, string> = {
   sleep: "from-indigo-500/10 to-purple-500/10",
@@ -56,15 +57,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     keywords: topic.keywords,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/topic/${slug}`,
+      canonical: `https://deepcalm-ai.com/${lang}/library/${slug}`,
       languages: {
-        zh: `/zh/topic/${slug}`,
-        en: `/en/topic/${slug}`,
-        ms: `/ms/topic/${slug}`,
-        ja: `/ja/topic/${slug}`,
-        ko: `/ko/topic/${slug}`,
-        th: `/th/topic/${slug}`,
-        es: `/es/topic/${slug}`,
+        zh: `https://deepcalm-ai.com/zh/library/${slug}`,
+        en: `https://deepcalm-ai.com/en/library/${slug}`,
+        ms: `https://deepcalm-ai.com/ms/library/${slug}`,
+        ja: `https://deepcalm-ai.com/ja/library/${slug}`,
+        ko: `https://deepcalm-ai.com/ko/library/${slug}`,
+        th: `https://deepcalm-ai.com/th/library/${slug}`,
+        es: `https://deepcalm-ai.com/es/library/${slug}`,
       },
     },
     openGraph: { title: `${topic.title} - DeepCalm AI`, description: topic.description },
@@ -76,6 +77,7 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
   const locale = lang as Locale
   const topic = getTopicBySlug(slug, locale)
   if (!topic) notFound()
+  redirect(`/${lang}/library/${slug}`, RedirectType.replace)
 
   const dict = getDict(locale)
   const dictEn = getDict("en")
@@ -87,6 +89,12 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
 
   return (
     <div className="min-h-screen bg-nord-bg">
+      <TopicJsonLd locale={locale} slug={slug} topic={topic} faqItems={content.faqItems} />
+      <BreadcrumbJsonLd items={[
+        { name: locale === "zh" ? "首页" : "Home", url: `https://deepcalm-ai.com/${locale}` },
+        { name: CATEGORY_NAMES[topic.category]?.[locale] || topic.category, url: `https://deepcalm-ai.com/${locale}/library/${slug}` },
+        { name: topic.title, url: `https://deepcalm-ai.com/${locale}/library/${slug}` },
+      ]} />
       <section className="py-24 relative">
         <div className={`absolute inset-0 bg-gradient-to-b ${catColor}`} />
 

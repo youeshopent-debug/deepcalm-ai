@@ -1,5 +1,6 @@
 import type { Locale } from '@/types'
 import { generateDefaultContent } from './topic-content-templates'
+import './custom-content'
 
 export interface Topic {
   slug: string
@@ -505,6 +506,51 @@ const topicMeta: Record<string, { zh: { title: string; desc: string; kw: string 
     th: { title: "ความยืดหยุ่นทางจิตใจ", desc: "วิทยาศาสตร์ของความยืดหยุ่นทางจิตใจ — เติบโตผ่านความทุกข์", kw: "ความยืดหยุ่นทางจิตใจ,การเติบโตผ่านความทุกข์" },
     es: { title: "Resiliencia", desc: "La ciencia de la resiliencia psicológica — crecer a través de la adversidad", kw: "resiliencia,fortaleza mental,crecimiento, #VibeCoding,#EmotionalFitness" },
   },
+  anxiety_depression: {
+    zh: { title: "焦虑与抑郁", desc: "焦虑和抑郁常常共生——理解两者的联系、区别和协同应对策略", kw: "焦虑,抑郁,共病,情绪障碍,心理健康, #VibeCoding,#EmotionalFitness" },
+    en: { title: "Anxiety & Depression", desc: "Anxiety and depression often co-occur — understand their connection, differences, and integrated coping strategies", kw: "anxiety,depression,comorbidity,mood disorders,mental health, #VibeCoding,#EmotionalFitness" },
+    ms: { title: "Kebimbangan & Kemurungan", desc: "Kebimbangan dan kemurungan sering berlaku bersama — fahami hubungan dan strategi mengatasi", kw: "kebimbangan,kemurungan,kesihatan mental, #VibeCoding,#EmotionalFitness" },
+    ja: { title: "不安とうつ", desc: "不安とうつはしばしば共存する——その関連性と統合的対処法を理解する", kw: "不安,うつ,併存,メンタルヘルス" },
+    ko: { title: "불안과 우울", desc: "불안과 우울은 자주 함께 나타납니다 — 연결고리와 통합 대처 전략 이해하기", kw: "불안,우울,공존,정신 건강" },
+    th: { title: "ความวิตกกังวลและภาวะซึมเศร้า", desc: "ความวิตกกังวลและภาวะซึมเศร้ามักเกิดขึ้นร่วมกัน — ทำความเข้าใจความเชื่อมโยงและวิธีรับมือ", kw: "ความวิตกกังวล,ภาวะซึมเศร้า,สุขภาพจิต" },
+    es: { title: "Ansiedad y Depresión", desc: "La ansiedad y la depresión a menudo coexisten — comprende su conexión y estrategias integradas de afrontamiento", kw: "ansiedad,depresión,salud mental, #VibeCoding,#EmotionalFitness" },
+  },
+  stress_management: {
+    zh: { title: "压力管理", desc: "基于生物-心理-社会模型的科学压力管理——从神经科学到日常实践", kw: "压力管理,皮质醇,压力应对,放松技巧,心理健康, #VibeCoding,#EmotionalFitness" },
+    en: { title: "Stress Management", desc: "Science-based stress management through the biopsychosocial model — from neuroscience to daily practice", kw: "stress management,cortisol,coping,relaxation,mental health, #VibeCoding,#EmotionalFitness" },
+    ms: { title: "Pengurusan Stres", desc: "Pengurusan stres berasaskan sains — daripada neurosains kepada amalan harian", kw: "pengurusan stres,kortisol,relaksasi, #VibeCoding,#EmotionalFitness" },
+    ja: { title: "ストレス管理", desc: "生物心理社会モデルに基づく科学的ストレス管理——神経科学から日常実践まで", kw: "ストレス管理,コルチゾール,リラクゼーション" },
+    ko: { title: "스트레스 관리", desc: "생물심리사회 모델 기반 과학적 스트레스 관리 — 신경과학부터 일상 실천까지", kw: "스트레스 관리,코르티솔,이완 기법" },
+    th: { title: "การจัดการความเครียด", desc: "การจัดการความเครียดด้วยวิทยาศาสตร์ — จากประสาทวิทยาศาสตร์สู่การปฏิบัติประจำวัน", kw: "การจัดการความเครียด,คอร์ติซอล,การผ่อนคลาย" },
+    es: { title: "Manejo del Estrés", desc: "Manejo del estrés basado en ciencia — desde la neurociencia hasta la práctica diaria", kw: "manejo del estrés,cortisol,relajación, #VibeCoding,#EmotionalFitness" },
+  },
+  circadian_rhythm_deep: {
+    zh: { title: "昼夜节律深度", desc: "你的内在时钟如何掌控一切——从基因表达到情绪波动的昼夜节律科学", kw: "昼夜节律,生物钟,睡眠周期,褪黑素,健康, #VibeCoding,#EmotionalFitness" },
+    en: { title: "Circadian Rhythm Deep Dive", desc: "How your internal clock governs everything — from gene expression to mood swings, the full science of circadian rhythms", kw: "circadian rhythm,biological clock,sleep cycle,melatonin,health, #VibeCoding,#EmotionalFitness" },
+    ms: { title: "Irama Sirkadian Mendalam", desc: "Bagaimana jam dalaman anda mengawal segalanya — daripada ekspresi gen hingga perubahan mood", kw: "irama sirkadian,biologi tidur,melatonin, #VibeCoding,#EmotionalFitness" },
+    ja: { title: "サーカディアンリズム深掘り", desc: "体内時計がすべてを支配する——遺伝子発現から気分変動までの科学", kw: "サーカディアンリズム,体内時計,メラトニン" },
+    ko: { title: "서카디안 리듬 심층", desc: "당신의 내부 시계가 모든 것을 지배한다 — 유전자 발현부터 기분 변화까지", kw: "서카디안 리듬,생체 시계,멜라토닌" },
+    th: { title: "จังหวะเซอร์คาเดียนเชิงลึก", desc: "นาฬิกาภายในของคุณควบคุมทุกอย่าง — จากยีนสู่ความผันผวนทางอารมณ์", kw: "จังหวะเซอร์คาเดียน,นาฬิกาชีวภาพ,เมลาโทนิน" },
+    es: { title: "Ritmo Circadiano en Profundidad", desc: "Cómo tu reloj interno lo gobierna todo — de la expresión génica a los cambios de humor", kw: "ritmo circadiano,reloj biológico,melatonina, #VibeCoding,#EmotionalFitness" },
+  },
+  polyvagal_emotion: {
+    zh: { title: "多迷走神经情绪调节", desc: "用多迷走神经理论理解你的神经系统——从生存模式到社会连接的神经通路", kw: "多迷走神经理论,情绪调节,神经系统,迷走神经,安全感, #VibeCoding,#EmotionalFitness" },
+    en: { title: "Polyvagal Emotion Regulation", desc: "Understand your nervous system through polyvagal theory — neural pathways from survival mode to social connection", kw: "polyvagal theory,emotion regulation,nervous system,vagus nerve,safety, #VibeCoding,#EmotionalFitness" },
+    ms: { title: "Peraturan Emosi Polivagal", desc: "Fahami sistem saraf anda melalui teori polivagal — dari mod survival ke hubungan sosial", kw: "teori polivagal,peraturan emosi,saraf vagus, #VibeCoding,#EmotionalFitness" },
+    ja: { title: "ポリヴェーガル感情調節", desc: "ポリヴェーガル理論で神経系を理解する——生存モードから社会的つながりへの神経経路", kw: "ポリヴェーガル理論,感情調節,迷走神経" },
+    ko: { title: "폴리베이걸 감정 조절", desc: "폴리베이걸 이론으로 신경계 이해하기 — 생존 모드에서 사회적 연결까지", kw: "폴리베이걸 이론,감정 조절,미주 신경" },
+    th: { title: "การควบคุมอารมณ์แบบพอลีเวเกิล", desc: "ทำความเข้าใจระบบประสาทผ่านทฤษฎีพอลีเวเกิล — จากโหมดเอาชีวิตรอดสู่การเชื่อมต่อทางสังคม", kw: "ทฤษฎีพอลีเวเกิล,การควบคุมอารมณ์,เส้นประสาทเวกัส" },
+    es: { title: "Regulación Emocional Polivagal", desc: "Comprende tu sistema nervioso a través de la teoría polivagal — de la supervivencia a la conexión social", kw: "teoría polivagal,regulación emocional,nervio vago, #VibeCoding,#EmotionalFitness" },
+  },
+  neural_meditation: {
+    zh: { title: "冥想的神经机制", desc: "冥想时你的大脑在发生什么——从默认模式网络到神经可塑性的完整科学解析", kw: "冥想,神经可塑性,默认模式网络,脑电波,正念, #VibeCoding,#EmotionalFitness" },
+    en: { title: "Neural Mechanisms of Meditation", desc: "What happens in your brain during meditation — from the default mode network to neuroplasticity, the full science", kw: "meditation,neuroplasticity,default mode network,brain waves,mindfulness, #VibeCoding,#EmotionalFitness" },
+    ms: { title: "Mekanisme Neural Meditasi", desc: "Apa yang berlaku dalam otak semasa meditasi — dari rangkaian mod lalai kepada neuroplastisitas", kw: "meditasi,neuroplastisitas,kesedaran, #VibeCoding,#EmotionalFitness" },
+    ja: { title: "瞑想の神経メカニズム", desc: "瞑想中に脳で何が起きているか——デフォルトモードネットワークから神経可塑性まで", kw: "瞑想,神経可塑性,デフォルトモードネットワーク" },
+    ko: { title: "명상의 신경 메커니즘", desc: "명상 중 뇌에서 무슨 일이 일어날까 — 기본 모드 네트워크부터 신경가소성까지", kw: "명상,신경가소성,기본 모드 네트워크" },
+    th: { title: "กลไกทางประสาทของการทำสมาธิ", desc: "เกิดอะไรขึ้นในสมองระหว่างทำสมาธิ — จากเครือข่ายดีฟอลต์โหมดถึงความยืดหยุ่นของสมอง", kw: "การทำสมาธิ,ความยืดหยุ่นของสมอง,คลื่นสมอง" },
+    es: { title: "Mecanismos Neurales de la Meditación", desc: "Qué sucede en tu cerebro durante la meditación — de la red de modo predeterminado a la neuroplasticidad", kw: "meditación,neuroplasticidad,red de modo predeterminado, #VibeCoding,#EmotionalFitness" },
+  },
 };
 
 export function getTopics(lang: Locale): Topic[] {
@@ -549,15 +595,15 @@ export function getCategoryBySlug(slug: string): string {
 }
 
 const CATEGORY_MAP: Record<string, string[]> = {
-  sleep: ["insomnia","deep-sleep","sleep-anxiety","nightmare","circadian-rhythm","sleep-hygiene","rem-sleep","napping"],
-  anxiety: ["stress-relief","panic-attack","social-anxiety","generalized-anxiety","health-anxiety","work-stress","exam-nerves"],
+  sleep: ["insomnia","deep-sleep","sleep-anxiety","nightmare","circadian-rhythm","sleep-hygiene","rem-sleep","napping","circadian_rhythm_deep"],
+  anxiety: ["stress-relief","panic-attack","social-anxiety","generalized-anxiety","health-anxiety","work-stress","exam-nerves","anxiety_depression","stress_management"],
   grief_loss: ["loss","bereavement","pet-loss","divorce","long-distance"],
   loneliness: ["solitude","isolation","friendship","social-skills","belonging"],
   self_worth: ["self-esteem","impostor-syndrome","perfectionism","body-image","comparison","self-compassion"],
   relationships: ["break-up","communication","trust","co-dependency","boundaries","parenting","family-conflict"],
   identity: ["purpose","career-change","quarter-life-crisis","midlife-crisis","cultural-identity"],
-  mindfulness: ["meditation","body-scan","breathwork","gratitude","journaling"],
-  emotional_health: ["anger-management","emotional-regulation","mood-tracking","burnout","resilience"],
+  mindfulness: ["meditation","body-scan","breathwork","gratitude","journaling","neural_meditation"],
+  emotional_health: ["anger-management","emotional-regulation","mood-tracking","burnout","resilience","polyvagal_emotion"],
 }
 
 export function getTopicContent(slug: string, lang: Locale): TopicContent {
