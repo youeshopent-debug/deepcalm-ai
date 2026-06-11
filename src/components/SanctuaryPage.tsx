@@ -1,13 +1,9 @@
 import Link from "next/link"
 import type { Locale } from "@/types"
-import AiCounselor from "./AiCounselor"
-import BackgroundCanvas from "./BackgroundCanvas"
-import BackgroundVideo from "./BackgroundVideo"
+import BackgroundLayer from "./BackgroundLayer"
 import DailyBriefing from "./DailyBriefing"
-import HealingToolbox from "./HealingToolbox"
-import HeroSection from "./HeroSection"
+import InteractiveAreas from "./InteractiveAreas"
 import PublisherContentBlock, { type PublisherTopic } from "./PublisherContentBlock"
-import ResonanceWall from "./ResonanceWall"
 import SsrAccordion from "./SsrAccordion"
 
 export default function SanctuaryPage({
@@ -29,8 +25,6 @@ export default function SanctuaryPage({
   publisherIntro: string
   publisherTopics: PublisherTopic[]
 }) {
-  const videoMode = true
-
   const featuredInsightTitle =
     lang === "zh"
       ? "前沿洞察：CBT-I 与睡眠科学"
@@ -43,17 +37,18 @@ export default function SanctuaryPage({
 
   return (
     <div className="relative min-h-screen">
-      <BackgroundVideo
-        src="/videos/forest.mp4"
-        overlayOpacity={0.5}
-        enabled={videoMode}
-      />
-      <BackgroundCanvas videoMode={videoMode} />
+      <BackgroundLayer />
 
       <main className="relative z-10">
-        <HeroSection title={heroTitle} subtitle={heroSubtitle} ctaText={heroCtaText} />
+        {/* ═══ Interactive layer (Hero + Tools + Counselor + Resonance) ═══ */}
+        <InteractiveAreas
+          lang={lang}
+          heroTitle={heroTitle}
+          heroSubtitle={heroSubtitle}
+          heroCtaText={heroCtaText}
+        />
 
-        {/* ── Healing Intro ~200 chars, SSR-visible ── */}
+        {/* ═══ 入门层：简短疗愈 Intro — SSR visible ═══ */}
         <section className="px-4 sm:px-6 -mt-6 sm:-mt-8 pb-8">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-base sm:text-lg text-dc-muted/90 leading-relaxed font-light tracking-wide">
@@ -69,17 +64,10 @@ export default function SanctuaryPage({
           </div>
         </section>
 
-        {/* ── Daily Health Briefing ── */}
+        {/* ── Daily Health Briefing — SSR ready ── */}
         <DailyBriefing lang={lang} />
 
-        {/* AI Counselor */}
-        <section id="ai-counselor" className="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 pt-10">
-          <div className="w-full">
-            <AiCounselor />
-          </div>
-        </section>
-
-        {/* Featured Insight: wrapped in SSR accordion for visual decluttering */}
+        {/* ═══ 深度层：SSR 可折叠前沿洞察 — 1500+ chars visible in HTML ═══ */}
         <section className="px-4 sm:px-6 py-8 sm:py-12">
           <div className="max-w-3xl mx-auto">
             <SsrAccordion
@@ -102,20 +90,13 @@ export default function SanctuaryPage({
           </div>
         </section>
 
+        {/* ═══ 发布商内容 — SSR 静态可见 ═══ */}
         <PublisherContentBlock
           lang={lang}
           title={publisherTitle}
           intro={publisherIntro}
           topics={publisherTopics}
         />
-
-        <HealingToolbox />
-
-        <section id="resonance-wall" className="w-full py-16 sm:py-24 px-4 sm:px-6">
-          <div className="max-w-2xl mx-auto">
-            <ResonanceWall />
-          </div>
-        </section>
       </main>
 
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 text-xs text-dc-muted/40 pointer-events-none">

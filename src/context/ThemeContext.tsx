@@ -2,7 +2,9 @@
 
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react"
 
-export type ThemeType = "deepcalm" | "forest" | "twilight" | "earth"
+export type ThemeType = "deepcalm" | "forest" | "twilight" | "earth" | "deepsea" | "starry"
+
+const VALID_THEMES: ThemeType[] = ["deepcalm", "forest", "twilight", "earth", "deepsea", "starry"]
 
 interface ThemeContextType {
   theme: ThemeType
@@ -19,12 +21,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as ThemeType | null
-    if (stored && ["forest", "twilight", "earth", "deepcalm"].includes(stored)) {
+    if (stored && VALID_THEMES.includes(stored)) {
       setThemeState(stored)
     }
-    document.documentElement.setAttribute("data-theme", theme)
     setMounted(true)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    if (mounted) {
+      document.documentElement.setAttribute("data-theme", theme)
+    }
+  }, [theme, mounted])
 
   const setTheme = useCallback((newTheme: ThemeType) => {
     setThemeState(newTheme)

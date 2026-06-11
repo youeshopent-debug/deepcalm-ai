@@ -2,7 +2,7 @@ import type { Locale } from "@/types"
 
 const BASE = "https://deepcalm-ai.com"
 
-interface FaqItem {
+export interface FaqItem {
   q: string
   a: string
 }
@@ -12,6 +12,7 @@ interface TopicData {
   description: string
   keywords: string
   category: string
+  image?: string
 }
 
 const SLUG_TO_EN: Record<string, string> = {
@@ -117,12 +118,15 @@ interface TopicJsonLdProps {
   topic: TopicData
   faqItems: FaqItem[]
   datePublished?: string
+  references?: string[]
 }
 
-export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished }: TopicJsonLdProps) {
+export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, references }: TopicJsonLdProps) {
   const pageUrl = `${BASE}/${locale}/topic/${slug}`
   const catLabel = SLUG_TO_EN[topic.category] || topic.category
   const today = new Date().toISOString().split("T")[0]
+
+  const imageUrl = topic.image || `https://deepcalm-ai.com/og-images/library/${slug}.png`
 
   const graph: Record<string, unknown>[] = [
     {
@@ -138,6 +142,12 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished }: To
       about: { "@type": "Thing", name: catLabel },
       isPartOf: { "@type": "WebPage", "@id": pageUrl, url: pageUrl, inLanguage: locale },
       mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+      image: {
+        "@type": "ImageObject",
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+      },
       author: {
         "@type": "Person",
         "@id": `${BASE}#person`,
@@ -182,6 +192,9 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished }: To
         "@type": "Audience",
         audienceType: "Adults experiencing sleep difficulties, anxiety, or emotional distress",
       },
+      ...(references && references.length > 0
+        ? { citation: references.map((r) => ({ "@type": "MedicalWebPage", url: r })) }
+        : {}),
     },
   ]
 
@@ -199,5 +212,111 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished }: To
   }
 
   const json = { "@context": "https://schema.org", "@graph": graph }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />
+}
+
+const SANCTUARY_NAME: Record<Locale, string> = {
+  zh: "DeepCalm AI 心灵庇护所",
+  en: "DeepCalm AI Sanctuary",
+  ms: "Tempat Perlindungan AI DeepCalm",
+  ja: "DeepCalm AIサンクチュアリ",
+  ko: "DeepCalm AI 성소",
+  th: "สถานที่ศักดิ์สิทธิ์ DeepCalm AI",
+  es: "Santuario AI DeepCalm",
+}
+
+const SANCTUARY_DESC: Record<Locale, string> = {
+  zh: "用认知科学重塑睡眠、用神经生物学化解焦虑。24/7 AI 陪伴，无需预约，没有评判。",
+  en: "Reimagining sleep through cognitive science, dissolving anxiety through neurobiology. 24/7 AI companionship, no judgment.",
+  ms: "Membentuk semula tidur melalui sains kognitif, meleraikan kebimbangan melalui neurobiologi. Teman AI 24/7, tanpa penghakiman.",
+  ja: "認知科学で睡眠を再構築し、神経生物学で不安を溶解。24時間AI伴侶、判断なし。",
+  ko: "인지과학으로 수면을 재구성하고 신경생물학으로 불안을 녹입니다. 24/7 AI 동반자, 판단 없이.",
+  th: "ปรับโครงสร้างการนอนด้วยวิทยาศาสตร์การรู้คิด ละลายความวิตกกังวลด้วยประสาทชีววิทยา ผู้ร่วมทาง AI ตลอด 24 ชั่วโมง ไม่มีการตัดสิน",
+  es: "Rediseñando el sueño a través de la ciencia cognitiva, disolviendo la ansiedad a través de la neurobiología. Acompañante AI 24/7, sin juicios.",
+}
+
+export function SanctuaryWebPageJsonLd({ locale }: { locale: Locale }) {
+  const pageUrl = `${BASE}/${locale}/sanctuary`
+  const today = new Date().toISOString().split("T")[0]
+
+  const json = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: SANCTUARY_NAME[locale] || SANCTUARY_NAME.en,
+    description: SANCTUARY_DESC[locale] || SANCTUARY_DESC.en,
+    inLanguage: locale,
+    isPartOf: { "@id": `${BASE}#website` },
+    about: { "@type": "Thing", name: "Mental Health & Sleep Wellness" },
+    dateModified: today,
+    reviewedBy: {
+      "@type": "Person",
+      name: "DeepCalm AI Clinical Review Board",
+    },
+    lastReviewed: today,
+    audience: {
+      "@type": "Audience",
+      audienceType: "Adults experiencing sleep difficulties, anxiety, or emotional distress",
+    },
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />
+}
+
+/**
+ * Standalone FAQPage JSON-LD — inject into any page that needs FAQ schema.
+ * Returns null when items array is empty (no empty <script> tags).
+ */
+export function FaqJsonLd({ items, locale }: { items: FaqItem[]; locale: Locale }) {
+  if (items.length === 0) return null
+
+  const json = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />
+}
+
+/**
+ * Standalone MedicalWebPage JSON-LD — signals medical/health vertical to Google.
+ * Use on home page and sanctuary to boost E-E-A-T for health-related queries.
+ */
+export function MedicalWebPageJsonLd({ locale }: { locale: Locale }) {
+  const pageUrl = `${BASE}/${locale}`
+  const today = new Date().toISOString().split("T")[0]
+
+  const json = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "@id": `${pageUrl}#medical`,
+    headline: "DeepCalm AI — Emotional Support & Sleep Wellness Platform",
+    description:
+      "AI-powered emotional support platform offering evidence-based sleep guidance, anxiety management, and emotional wellness through cognitive science and 24/7 AI companionship.",
+    url: pageUrl,
+    inLanguage: locale,
+    about: { "@type": "MedicalCondition", name: "Mental Health" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+    reviewedBy: {
+      "@type": "Person",
+      name: "DeepCalm AI Clinical Review Board",
+      description:
+        "Multidisciplinary team of clinical psychologists, neuroscientists, and mental health researchers ensuring evidence-based accuracy of all content.",
+    },
+    lastReviewed: today,
+    medicalSpecialty: {
+      "@type": "MedicalSpecialty",
+      name: "MentalHealth",
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: "Adults experiencing sleep difficulties, anxiety, or emotional distress",
+    },
+  }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />
 }

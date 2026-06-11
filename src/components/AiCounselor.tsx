@@ -7,6 +7,7 @@ import {
   Heart,
   ImageDown,
   MessageCircleHeart,
+  Sparkles,
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -23,6 +24,81 @@ interface UsageInfo {
   cost: number
 }
 
+/** localStorage 记忆数据结构 */
+interface MemoryData {
+  emotionTags: string[]
+  lastVisit: string
+  visitCount: number
+}
+
+/** 7语种 "欢迎回来" 问候模板 — {tag} 会被替换为具体情绪标签 */
+const WELCOME_BACK_TEMPLATES: Record<string, string> = {
+  zh: "嘿，很高兴你回来了。上次你说{tag}，这几天感觉好些了吗？",
+  en: "Hey, glad you're back. Last time you mentioned {tag} — how have you been feeling?",
+  ms: "Hei, gembira anda kembali. Kali terakhir anda menyebut {tag} — bagaimana perasaan anda?",
+  ja: "やあ、戻ってきてくれて嬉しいです。前回は{tag}と言っていましたが、その後気分はいかがですか？",
+  ko: "안녕하세요, 다시 오신 것을 환영합니다. 지난번에 {tag}에 대해 말씀하셨는데, 요즘은 어떠신가요?",
+  th: "ดีใจที่คุณกลับมา ครั้งที่แล้วคุณพูดถึง{tag} ช่วงนี้คุณรู้สึกดีขึ้นไหม?",
+  es: "Me alegra verte de nuevo. La última vez mencionaste {tag} — ¿cómo te has sentido?",
+}
+
+/** 情绪标签 → 本地化短语映射 */
+const TAG_PHRASES: Record<string, Record<string, string>> = {
+  stress: {
+    zh: "压力很大", en: "feeling stressed", ms: "tertekan", ja: "ストレスが溜まっている", ko: "스트레스가 많다고", th: "เครียดมาก", es: "mucho estrés",
+  },
+  sleep: {
+    zh: "入睡有点难", en: "having trouble sleeping", ms: "sukar tidur", ja: "寝つきが悪い", ko: "잠들기 어렵다고", th: "นอนไม่หลับ", es: "dificultad para dormir",
+  },
+  anxiety: {
+    zh: "有些焦虑", en: "feeling anxious", ms: "berasa cemas", ja: "不安を感じている", ko: "불안감을 느낀다고", th: "รู้สึกกังวล", es: "sintiendo ansiedad",
+  },
+  lonely: {
+    zh: "感到孤独", en: "feeling lonely", ms: "berasa sunyi", ja: "孤独を感じている", ko: "외롭다고 느낀다고", th: "รู้สึกเหงา", es: "sintiendo soledad",
+  },
+}
+
+/** 从用户消息中提取情绪标签 */
+function extractEmotionTags(text: string): string[] {
+  const tags: string[] = []
+  const lower = text.toLowerCase()
+  const stressWords = ["stress", "stressed", "压力", "ストレス", "스트레스", "tertekan", "เครียด", "estrés"]
+  const sleepWords = ["sleep", "insomnia", "失眠", "不眠", "잠", "tidur", "นอน", "sueño", "入睡", "sleepless"]
+  const anxietyWords = ["anxiety", "anxious", "焦虑", "不安", "불안", "cemas", "กังวล", "ansiedad"]
+  const lonelyWords = ["lonely", "loneliness", "孤独", "loneliness", "외로움", "sunyi", "เหงา", "soledad", "alone"]
+  if (stressWords.some(w => lower.includes(w))) tags.push("stress")
+  if (sleepWords.some(w => lower.includes(w))) tags.push("sleep")
+  if (anxietyWords.some(w => lower.includes(w))) tags.push("anxiety")
+  if (lonelyWords.some(w => lower.includes(w))) tags.push("lonely")
+  return tags
+}
+
+/** 保存记忆到 localStorage */
+function saveMemory(tags: string[]) {
+  try {
+    const prevRaw = localStorage.getItem("deepcalm-memory")
+    const prev: MemoryData = prevRaw ? JSON.parse(prevRaw) : { emotionTags: [], lastVisit: "", visitCount: 0 }
+    // 合并去重，最多保留 3 个标签
+    const merged = [...new Set([...tags, ...prev.emotionTags])].slice(0, 3)
+    const memory: MemoryData = {
+      emotionTags: merged,
+      lastVisit: new Date().toISOString(),
+      visitCount: prev.visitCount + 1,
+    }
+    localStorage.setItem("deepcalm-memory", JSON.stringify(memory))
+  } catch { /* localStorage 不可用则静默失败 */ }
+}
+
+/** 读取记忆 */
+function loadMemory(): MemoryData | null {
+  try {
+    const raw = localStorage.getItem("deepcalm-memory")
+    return raw ? JSON.parse(raw) : null
+  } catch { return null }
+}
+
+const STORAGE_KEY = "deepcalm-memory"
+
 export default function AiCounselor() {
   const { tt, locale } = useLanguage()
   const [messages, setMessages] = useState<Message[]>([])
@@ -36,9 +112,20 @@ export default function AiCounselor() {
   const [showDecompose, setShowDecompose] = useState(false)
   const [decomposeSteps, setDecomposeSteps] = useState<string[]>([])
   const [isDecomposing, setIsDecomposing] = useState(false)
+  const [returnVisitor, setReturnVisitor] = useState<MemoryData | null>(null)
+  const memorySavedRef = useRef(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const shareRef = useRef<HTMLDivElement>(null)
 
+  /** 挂载时读取记忆，检测回访 */
+  useEffect(() => {
+    const mem = loadMemory()
+    if (mem && mem.emotionTags.length > 0) {
+      setReturnVisitor(mem)
+    }
+  }, [])
+
+  /** 自动滚动到最新消息 */
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
@@ -53,6 +140,15 @@ export default function AiCounselor() {
     const userMsg: Message = { role: "user", content: text }
     setMessages((prev) => [...prev, userMsg])
     setIsAnalyzing(true)
+
+    // 提取情绪标签并保存到 localStorage 记忆（仅首次发送时）
+    if (!memorySavedRef.current) {
+      const tags = extractEmotionTags(text)
+      if (tags.length > 0) {
+        saveMemory(tags)
+        memorySavedRef.current = true
+      }
+    }
 
     try {
       const history = messages.map((m) => ({ role: m.role, content: m.content }))
@@ -194,15 +290,37 @@ export default function AiCounselor() {
           {showWelcome && messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center space-y-6 py-12">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-dc-accent/20 to-transparent flex items-center justify-center animate-breath-orb-4-7">
-                <Heart className="w-8 h-8 text-dc-accent" />
+                {returnVisitor ? (
+                  <Sparkles className="w-8 h-8 text-dc-accent" />
+                ) : (
+                  <Heart className="w-8 h-8 text-dc-accent" />
+                )}
               </div>
               <div className="space-y-2">
-                <p className="text-xl sm:text-2xl font-medium text-dc-text">
-                  {tt("aiCounselor.welcome")}
-                </p>
-                <p className="text-xl sm:text-2xl text-dc-muted/80 max-w-lg leading-relaxed">
-                  {tt("aiCounselor.subtitle")}
-                </p>
+                {returnVisitor ? (
+                  <>
+                    <p className="text-xl sm:text-2xl font-medium text-dc-text">
+                      {(() => {
+                        const tmpl = WELCOME_BACK_TEMPLATES[locale] || WELCOME_BACK_TEMPLATES.en
+                        const tagKey = returnVisitor.emotionTags[0]
+                        const phrase = TAG_PHRASES[tagKey]?.[locale] || TAG_PHRASES[tagKey]?.en || tagKey
+                        return tmpl.replace("{tag}", phrase)
+                      })()}
+                    </p>
+                    <p className="text-base text-dc-muted/60 max-w-lg leading-relaxed">
+                      {locale === "zh" ? "今天想聊聊什么？" : locale === "ms" ? "Apa yang anda mahu bincangkan hari ini?" : locale === "ja" ? "今日は何について話しますか？" : locale === "ko" ? "오늘은 무엇에 대해 이야기하고 싶으신가요?" : locale === "th" ? "วันนี้คุณอยากคุยเรื่องอะไร?" : locale === "es" ? "¿De qué te gustaría hablar hoy?" : "What would you like to talk about today?"}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-xl sm:text-2xl font-medium text-dc-text">
+                      {tt("aiCounselor.welcome")}
+                    </p>
+                    <p className="text-xl sm:text-2xl text-dc-muted/80 max-w-lg leading-relaxed">
+                      {tt("aiCounselor.subtitle")}
+                    </p>
+                  </>
+                )}
               </div>
               <div className="grid grid-cols-2 gap-2 w-full max-w-sm">
                 {["stress", "sleep", "anxiety", "lonely"].map((t) => (

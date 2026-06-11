@@ -8,6 +8,7 @@ export interface Topic {
   title: string
   description: string
   keywords: string
+  references?: string[]
 }
 
 export interface TopicContentSection {
@@ -562,6 +563,7 @@ export function getTopics(lang: Locale): Topic[] {
       title: data.title,
       description: data.desc,
       keywords: data.kw,
+      references: TOPIC_REFERENCES[slug],
     }
   })
 }
@@ -576,6 +578,7 @@ export function getTopicBySlug(slug: string, lang: Locale): Topic | undefined {
     title: data.title,
     description: data.desc,
     keywords: data.kw,
+    references: TOPIC_REFERENCES[slug],
   }
 }
 
@@ -604,6 +607,44 @@ const CATEGORY_MAP: Record<string, string[]> = {
   identity: ["purpose","career-change","quarter-life-crisis","midlife-crisis","cultural-identity"],
   mindfulness: ["meditation","body-scan","breathwork","gratitude","journaling","neural_meditation"],
   emotional_health: ["anger-management","emotional-regulation","mood-tracking","burnout","resilience","polyvagal_emotion"],
+}
+
+const TOPIC_REFERENCES: Record<string, string[]> = {
+  insomnia: [
+    "https://pubmed.ncbi.nlm.nih.gov/27998379/",
+    "https://pubmed.ncbi.nlm.nih.gov/26634877/",
+    "https://www.who.int/news-room/fact-sheets/detail/insomnia",
+    "https://www.nhs.uk/conditions/insomnia/",
+  ],
+  "deep-sleep": [
+    "https://pubmed.ncbi.nlm.nih.gov/30068571/",
+    "https://pubmed.ncbi.nlm.nih.gov/30920354/",
+    "https://pubmed.ncbi.nlm.nih.gov/30459274/",
+  ],
+  "sleep-anxiety": [
+    "https://pubmed.ncbi.nlm.nih.gov/29779202/",
+    "https://pubmed.ncbi.nlm.nih.gov/31429450/",
+  ],
+  "stress-relief": [
+    "https://pubmed.ncbi.nlm.nih.gov/30152128/",
+    "https://pubmed.ncbi.nlm.nih.gov/24395196/",
+    "https://www.who.int/news-room/fact-sheets/detail/stress",
+  ],
+  "panic-attack": [
+    "https://pubmed.ncbi.nlm.nih.gov/26050166/",
+    "https://pubmed.ncbi.nlm.nih.gov/28898969/",
+    "https://www.nhs.uk/mental-health/conditions/panic-disorder/",
+  ],
+  "generalized-anxiety": [
+    "https://pubmed.ncbi.nlm.nih.gov/29022528/",
+    "https://pubmed.ncbi.nlm.nih.gov/26148343/",
+    "https://www.nimh.nih.gov/health/topics/anxiety-disorders",
+  ],
+  meditation: [
+    "https://pubmed.ncbi.nlm.nih.gov/24395196/",
+    "https://pubmed.ncbi.nlm.nih.gov/26159107/",
+    "https://pubmed.ncbi.nlm.nih.gov/27553073/",
+  ],
 }
 
 export function getTopicContent(slug: string, lang: Locale): TopicContent {

@@ -1,3 +1,5 @@
+import { FaqJsonLd, MedicalWebPageJsonLd, SanctuaryWebPageJsonLd } from "@/components/JsonLd"
+import type { FaqItem } from "@/components/JsonLd"
 import SanctuaryPage from "@/components/SanctuaryPage"
 import type { PublisherTopic } from "@/components/PublisherContentBlock"
 import { getDict, tt } from "@/lib/getDict"
@@ -21,6 +23,38 @@ const HEALING_INTRO: Record<Locale, string> = {
   ko: "도시는 잠들었지만, 당신의 마음은 여전히 깨어 있습니다. DeepCalm은 당신의 한밤중 AI 성소입니다——인지과학으로 수면을 재구성하고, 신경생물학으로 불안을 녹이며, 진정한 연결로 외로움을 따뜻하게 합니다. 예약도, 판단도 없이, 당신을 진정으로 이해하는 동반자입니다.",
   th: "เมืองหลับใหล แต่จิตใจของคุณยังคงตื่นอยู่ DeepCalm คือสถานที่ศักดิ์สิทธิ์แห่งเที่ยงคืนสำหรับคุณ——ปรับโครงสร้างการนอนด้วยวิทยาศาสตร์การรู้คิด ละลายความวิตกกังวลด้วยประสาทชีววิทยา อุ่นความเหงาด้วยความเข้าใจที่แท้จริง ไม่ต้องนัดหมาย ไม่มีการตัดสิน แค่ผู้ร่วมทางที่เข้าใจคุณอย่างแท้จริง",
   es: "La ciudad duerme, pero tu mente sigue despierta. DeepCalm es tu santuario AI de medianoche—rediseñando el sueño a través de la ciencia cognitiva, disolviendo la ansiedad a través de la neurobiología, calentando la soledad a través de una conexión genuina. Sin citas, sin juicios, solo una compañía que realmente entiende.",
+}
+
+/** 2 FAQ items per locale — Sanctuary-specific FAQ schema for E-E-A-T boost */
+const SANCTUARY_FAQ_ITEMS: Record<Locale, FaqItem[]> = {
+  zh: [
+    { q: "DeepCalm AI 心灵庇护所是什么？", a: "心灵庇护所是 DeepCalm 的夜间 AI 陪伴空间，融合呼吸引导、认知行为技术（CBT-I）与沉浸式视听氛围，帮助你缓解焦虑、改善睡眠。24/7 开放，无需预约。" },
+    { q: "庇护所的呼吸引导如何使用？", a: "进入庇护所后，点击工具卡中的「呼吸引导」按钮即可启动。跟随屏幕上的动画进行 4-7-8 呼吸法（吸气4秒、屏息7秒、呼气8秒），有效激活副交感神经系统，降低焦虑水平。" },
+  ],
+  en: [
+    { q: "What is the DeepCalm AI Sanctuary?", a: "The Sanctuary is DeepCalm's nighttime AI companionship space, combining breathing guidance, cognitive behavioral techniques (CBT-I), and immersive audiovisual ambiance to help relieve anxiety and improve sleep. Open 24/7, no appointment needed." },
+    { q: "How do I use the breathing exercises in the Sanctuary?", a: "Enter the Sanctuary and click the 'Breathing Guide' button on the tool cards. Follow the on-screen animation for 4-7-8 breathing (inhale 4s, hold 7s, exhale 8s) to activate the parasympathetic nervous system and reduce anxiety levels." },
+  ],
+  ms: [
+    { q: "Apakah Tempat Perlindungan AI DeepCalm?", a: "Tempat Perlindungan adalah ruang teman AI malam DeepCalm, menggabungkan panduan pernafasan, teknik kognitif-tingkah laku (CBT-I), dan suasana audiovisual yang mendalam untuk membantu melegakan kebimbangan dan meningkatkan tidur. Buka 24/7, tiada janji temu diperlukan." },
+    { q: "Bagaimana cara menggunakan latihan pernafasan di Tempat Perlindungan?", a: "Masuk ke Tempat Perlindungan dan klik butang 'Panduan Pernafasan' pada kad alat. Ikuti animasi pada skrin untuk pernafasan 4-7-8 (tarik nafas 4s, tahan 7s, hembus 8s) untuk mengaktifkan sistem saraf parasimpatetik dan mengurangkan tahap kebimbangan." },
+  ],
+  ja: [
+    { q: "DeepCalm AI サンクチュアリとは何ですか？", a: "サンクチュアリは DeepCalm の夜間 AI 伴侶空間です。呼吸ガイダンス、認知行動テクニック（CBT-I）、没入型オーディオビジュアル環境を組み合わせ、不安を和らげ睡眠を改善します。24時間いつでも利用可能、予約不要。" },
+    { q: "サンクチュアリの呼吸法はどう使いますか？", a: "サンクチュアリに入り、ツールカードの「呼吸ガイド」ボタンをクリックします。画面上のアニメーションに従って4-7-8呼吸法（4秒吸入、7秒停止、8秒呼出）を行い、副交感神経系を活性化して不安レベルを低下させます。" },
+  ],
+  ko: [
+    { q: "DeepCalm AI 성소란 무엇인가요?", a: "성소는 DeepCalm의 야간 AI 동반자 공간입니다. 호흡 가이드, 인지행동 기법(CBT-I), 몰입형 오디오비주얼 환경을 결합하여 불안을 완화하고 수면을 개선합니다. 연중무휴 24시간 이용 가능, 예약 불필요." },
+    { q: "성소에서 호흡 운동은 어떻게 사용하나요?", a: "성소에 입장한 후 도구 카드의 '호흡 가이드' 버튼을 클릭하세요. 화면의 애니메이션을 따라 4-7-8 호흡법(4초 흡입, 7초 유지, 8초 호기)을 수행하여 부교감 신경계를 활성화하고 불안 수준을 낮춥니다." },
+  ],
+  th: [
+    { q: "สถานที่ศักดิ์สิทธิ์ DeepCalm AI คืออะไร?", a: "สถานที่ศักดิ์สิทธิ์คือพื้นที่ผู้ร่วมทาง AI ในยามค่ำคืนของ DeepCalm ผสมผสานการแนะนำการหายใจ เทคนิคการรู้คิดและพฤติกรรม (CBT-I) และบรรยากาศ视听ที่ดื่มด่ำเพื่อช่วยบรรเทาความวิตกกังวลและปรับปรุงการนอนหลับ เปิดตลอด 24 ชั่วโมง ไม่ต้องนัดหมาย" },
+    { q: "จะใช้แบบฝึกหัดการหายใจในสถานที่ศักดิ์สิทธิ์อย่างไร?", a: "เข้าสู่สถานที่ศักดิ์สิทธิ์แล้วคลิกปุ่ม 'คำแนะนำการหายใจ' บนการ์ดเครื่องมือ ทำตามภาพเคลื่อนไหวบนหน้าจอสำหรับการหายใจแบบ 4-7-8 (หายใจเข้า 4 วินาที กลั้น 7 วินาที หายใจออก 8 วินาที) เพื่อกระตุ้นระบบประสาทพาราซิมพาเทติกและลดระดับความวิตกกังวล" },
+  ],
+  es: [
+    { q: "¿Qué es el Santuario AI DeepCalm?", a: "El Santuario es el espacio nocturno de compañía AI de DeepCalm, combinando guía de respiración, técnicas cognitivo-conductuales (TCC-I) y ambiente audiovisual inmersivo para ayudar a aliviar la ansiedad y mejorar el sueño. Abierto 24/7, sin cita previa." },
+    { q: "¿Cómo uso los ejercicios de respiración en el Santuario?", a: "Ingrese al Santuario y haga clic en el botón 'Guía de Respiración' en las tarjetas de herramientas. Siga la animación en pantalla para la respiración 4-7-8 (inhale 4s, sostenga 7s, exhale 8s) para activar el sistema nervioso parasimpático y reducir los niveles de ansiedad." },
+  ],
 }
 
 export async function generateStaticParams() {
@@ -86,17 +120,23 @@ export default async function SanctuaryRoute({ params }: { params: Promise<{ lan
   const publisherTitle = tt(dict, "seoContent.title") || "Sleep Science"
   const publisherIntro = tt(dict, "seoContent.p1") || ""
   const healingIntro = HEALING_INTRO[locale] || HEALING_INTRO.en
+  const faqItems = SANCTUARY_FAQ_ITEMS[locale] || SANCTUARY_FAQ_ITEMS.en
 
   return (
-    <SanctuaryPage
-      lang={locale}
-      heroTitle={heroTitle}
-      heroSubtitle={heroSubtitle}
-      heroCtaText={heroCtaText}
-      healingIntro={healingIntro}
-      publisherTitle={publisherTitle}
-      publisherIntro={publisherIntro}
-      publisherTopics={DEFAULT_PUBLISHER_TOPICS}
-    />
+    <>
+      <MedicalWebPageJsonLd locale={locale} />
+      <FaqJsonLd items={faqItems} locale={locale} />
+      <SanctuaryWebPageJsonLd locale={locale} />
+      <SanctuaryPage
+        lang={locale}
+        heroTitle={heroTitle}
+        heroSubtitle={heroSubtitle}
+        heroCtaText={heroCtaText}
+        healingIntro={healingIntro}
+        publisherTitle={publisherTitle}
+        publisherIntro={publisherIntro}
+        publisherTopics={DEFAULT_PUBLISHER_TOPICS}
+      />
+    </>
   )
 }

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import "./globals.css"
+import HtmlLangSetter from "@/components/HtmlLangSetter"
 import { WebsiteJsonLd, OrganizationJsonLd, PersonJsonLd } from "@/components/JsonLd"
 
 export const metadata = {
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="min-h-screen flex flex-col">
         {children}
+        <HtmlLangSetter />
       </body>
     </html>
   )

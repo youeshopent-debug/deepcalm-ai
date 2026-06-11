@@ -32,6 +32,8 @@ function color(theme: ThemeType, alpha: number): string {
     forest: `rgba(74,122,58,${alpha})`,
     twilight: `rgba(74,138,186,${alpha})`,
     earth: `rgba(184,148,90,${alpha})`,
+    deepsea: `rgba(20,80,160,${alpha})`,
+    starry: `rgba(120,60,180,${alpha})`,
   }
   return map[theme] ?? map.deepcalm
 }

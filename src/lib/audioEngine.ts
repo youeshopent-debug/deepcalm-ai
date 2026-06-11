@@ -2,6 +2,15 @@ export type ChannelId = 'rain' | 'wind' | 'fire' | 'stream' | 'birds' | 'insects
 
 export type BinauralType = 'delta' | 'theta' | 'alpha' | 'beta' | 'gamma'
 
+/**
+ * Per-channel volume multipliers (0..1) for meditation mode.
+ * Only specify channels you want to adjust; unspecified channels keep current volume.
+ */
+export interface MeditationAudioPreset {
+  channels?: Partial<Record<ChannelId, number>>
+  masterVolume?: number  // 0..1, applied on top of existing master volume
+}
+
 export const BINAURAL_FREQUENCIES: Record<BinauralType, { label: string; baseFreq: number; beatFreq: number; description: string }> = {
   delta:  { label: 'Delta',  baseFreq: 200, beatFreq: 3,   description: 'Deep sleep, restoration' },
   theta:  { label: 'Theta',  baseFreq: 200, beatFreq: 6,   description: 'Meditation, creativity' },
@@ -31,6 +40,13 @@ export class AudioEngine {
   private decodingPending = false
   private channelBuffers = new Map<ChannelId, AudioBuffer>()
   private bufferSources = new Map<ChannelId, AudioBufferSourceNode>()
+
+  /** Breathing bridge — set by BreathingGuide, read by BackgroundVideo */
+  breathingPhase: 'inhale' | 'hold' | 'exhale' | 'done' | null = null
+  breathingProgress = 0
+
+  /** Meditation mode flag — set by MeditationController */
+  meditationActive = false
 
   get volume() { return this._volume }
 
@@ -509,6 +525,8 @@ export class AudioEngine {
   private readonly themeAudioMap: Record<string, { on: ChannelId[]; off: ChannelId[] }> = {
     forest: { on: ['birds', 'insects'], off: ['rain', 'wind', 'fire', 'stream'] },
     twilight: { on: ['stream', 'wind'], off: ['rain', 'fire', 'birds', 'insects'] },
+    deepsea: { on: ['stream'], off: ['rain', 'fire', 'wind', 'birds', 'insects'] },
+    starry: { on: ['wind'], off: ['rain', 'fire', 'stream', 'birds', 'insects'] },
     earth: { on: [], off: ['rain', 'wind', 'fire', 'stream', 'birds', 'insects'] },
     deepcalm: { on: [], off: [] },
   }
@@ -522,6 +540,51 @@ export class AudioEngine {
     cfg.off.forEach(id => {
       if (this.activeChannels.has(id)) this.toggleChannel(id, false)
     })
+  }
+
+  private _savedMasterVolume = 0.12
+  private _savedChannelVolumes = new Map<ChannelId, number>()
+
+  /** Switch to meditation audio preset — reduces channel volumes for immersive calm */
+  setMeditationPreset(preset: MeditationAudioPreset) {
+    this.meditationActive = true
+    if (!this.ctx) return
+
+    // Save current master volume
+    this._savedMasterVolume = this._volume
+
+    // Save current channel volumes and apply preset
+    this.channelGains.forEach((gain, ch) => {
+      this._savedChannelVolumes.set(ch, gain.gain.value)
+      const targetVol = preset.channels?.[ch]
+      if (targetVol !== undefined) {
+        const t = this.ctx!.currentTime
+        gain.gain.linearRampToValueAtTime(Math.max(0, Math.min(1, targetVol)), t + 1.5)
+      }
+    })
+
+    // Apply master volume override if specified
+    if (preset.masterVolume !== undefined) {
+      this.setMasterVolume(Math.max(0, Math.min(1, preset.masterVolume)))
+    }
+  }
+
+  /** Exit meditation mode — restore saved channel volumes */
+  clearMeditationPreset() {
+    this.meditationActive = false
+    if (!this.ctx) return
+
+    this.channelGains.forEach((gain, ch) => {
+      const saved = this._savedChannelVolumes.get(ch)
+      if (saved !== undefined) {
+        const t = this.ctx!.currentTime
+        gain.gain.linearRampToValueAtTime(saved, t + 1.5)
+      }
+    })
+    this._savedChannelVolumes.clear()
+
+    // Restore master volume
+    this.setMasterVolume(this._savedMasterVolume)
   }
 
   get activeBinauralType(): BinauralType | null { return this.activeBinaural }

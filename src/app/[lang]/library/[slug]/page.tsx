@@ -1,10 +1,20 @@
 import type { Locale } from "@/types"
-import { getAllSlugs, getTopicBySlug, getTopicContent, getTopicsByCategory, getTopics } from "@/content/topics"
+import { getAllSlugs, getTopicBySlug, getTopicContent } from "@/content/topics"
+import { getRecommendations } from "@/lib/recommendation-engine"
 import { getDict, tt } from "@/lib/getDict"
 import { notFound } from "next/navigation"
 import Breadcrumb from "@/components/Breadcrumb"
 import LibraryCard from "@/components/LibraryCard"
 import AiEntrance from "@/components/AiEntrance"
+import ExpertBadge from "@/components/ExpertBadge"
+import ExternalReferences from "@/components/ExternalReferences"
+import KnowledgeMap from "@/components/KnowledgeMap"
+import SleepStreakBadge from "@/components/SleepStreakBadge"
+import PrintPdfButtons from "@/components/PrintPdfButtons"
+import TableOfContents from "@/components/TableOfContents"
+import { TopicJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd"
+import { extractHeadings } from "@/lib/extractHeadings"
+import Link from "next/link"
 import { BookOpen } from "lucide-react"
 
 const categoryIcon: Record<string, string> = {
@@ -90,24 +100,18 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
   const icon = categoryIcon[topic.category] || "📖"
   const catName = CATEGORY_NAMES[topic.category]?.[locale] || topic.category
 
-  const sameCat = getTopicsByCategory(topic.category, locale)
-    .filter((t) => t.slug !== slug)
-    .slice(0, 4)
-
-  const others = getTopics(locale)
-    .filter((t) => t.slug !== slug && t.category !== topic.category)
-    .sort((a, b) => a.slug.localeCompare(b.slug))
-
-  const related = sameCat.concat(others.slice(0, Math.max(0, 6 - sameCat.length)))
+  const related = getRecommendations(slug, locale, 6)
 
   const t = (key: string, fallback: string) => tt(dict, key) || tt(dictEn, key) || tt(dictZh, key) || fallback
+
+  const headings = extractHeadings(content)
 
   return (
     <div className="min-h-screen bg-nord-bg">
       <section className="py-24 relative">
         <div className={`absolute inset-0 bg-gradient-to-b ${catColor}`} />
 
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb
             items={[
               { label: "Library", href: `/${locale}/library` },
@@ -128,68 +132,126 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
             <p className="text-nord-text/60 leading-relaxed">{topic.description}</p>
           </div>
 
-          <div className="space-y-8">
-            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-4">
-                {locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
-              </h2>
-              <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed">
-                {content.science.split("\n").filter(Boolean).map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
+          <ExpertBadge locale={locale} />
+
+          {/* P3-B: 在沉浸模式中阅读 — 快捷入口 */}
+          <div className="mt-4 text-center">
+            <Link
+              href={`/${locale}/sanctuary`}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-dc-accent/10 hover:bg-dc-accent/20 text-dc-accent text-sm font-medium border border-dc-accent/20 hover:border-dc-accent/40 transition-all"
+            >
+              🌙 {locale === "zh" ? "在沉浸模式中阅读" : locale === "ms" ? "Baca dalam Mod Imersif" : locale === "ja" ? "没入モードで読む" : locale === "ko" ? "몰입 모드로 읽기" : locale === "th" ? "อ่านในโหมดดื่มด่ำ" : locale === "es" ? "Leer en modo inmersivo" : "Read in Immersive Mode"}
+            </Link>
+          </div>
+
+          <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-8">
+            {/* TOC Sidebar - desktop sticky, mobile collapsible */}
+            <div className="lg:order-1">
+              <TableOfContents headings={headings} locale={locale} />
             </div>
 
-            <div className="p-6 sm:p-8 bg-gradient-to-br from-nord-accent/[0.06] to-nord-card border border-nord-accent/15 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-4">
-                {locale === "zh" ? "🏋️ 日常健身指南" : locale === "ms" ? "🏋️ Panduan Kecergasan" : "🏋️ Emotional Fitness Guide"}
-              </h2>
-              <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed prose-strong:text-nord-text">
-                {content.fitnessGuide.split("\n").map((line, i) => {
-                  if (line.startsWith("## ")) return <h3 key={i} className="text-base font-semibold text-nord-text mt-4 mb-2">{line.slice(3)}</h3>
-                  if (/^\d+\./.test(line.trim())) return <p key={i} className="text-nord-text/70 leading-relaxed mb-2">{line}</p>
-                  if (line.trim() === "") return null
-                  return <p key={i} className="text-nord-text/70 leading-relaxed">{line}</p>
-                })}
-              </div>
-            </div>
-
-            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-6">
-                {locale === "zh" ? "❓ 常见问题" : locale === "ms" ? "❓ Soalan Lazim" : "❓ FAQ"}
-              </h2>
-              <div className="space-y-4">
-                {content.faqItems.map((item, i) => (
-                  <div key={i} className="p-4 bg-nord-bg/50 rounded-xl border border-nord-border/20">
-                    <p className="text-nord-text font-medium text-sm mb-2">{item.q}</p>
-                    <p className="text-nord-text/60 text-sm leading-relaxed">{item.a}</p>
+            {/* Main Content */}
+            <div className="lg:order-2 min-w-0">
+              <div className="space-y-8 max-w-3xl">
+                {/* Science Section */}
+                <div id="science" className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl scroll-mt-24">
+                  <h2 className="text-lg font-bold text-nord-text mb-4">
+                    {locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
+                  </h2>
+                  <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed">
+                    {content.science.split("\n").filter(Boolean).map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
                   </div>
-                ))}
+                  {topic.references && topic.references.length > 0 && (
+                    <ExternalReferences references={topic.references} locale={locale} />
+                  )}
+                </div>
+
+                {/* Fitness Guide Section */}
+                <div className="p-6 sm:p-8 bg-gradient-to-br from-nord-accent/[0.06] to-nord-card border border-nord-accent/15 rounded-2xl">
+                  <h2 className="text-lg font-bold text-nord-text mb-4">
+                    {locale === "zh" ? "🏋️ 日常健身指南" : locale === "ms" ? "🏋️ Panduan Kecergasan" : "🏋️ Emotional Fitness Guide"}
+                  </h2>
+                  <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed prose-strong:text-nord-text">
+                    {content.fitnessGuide.split("\n").map((line, i) => {
+                      if (line.startsWith("## ")) {
+                        const text = line.slice(3).trim()
+                        const id = text.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, "-").replace(/^-+|-+$/g, "")
+                        return <h3 key={i} id={id} className="text-base font-semibold text-nord-text mt-4 mb-2 scroll-mt-24">{text}</h3>
+                      }
+                      if (/^\d+\./.test(line.trim())) return <p key={i} className="text-nord-text/70 leading-relaxed mb-2">{line}</p>
+                      if (line.trim() === "") return null
+                      return <p key={i} className="text-nord-text/70 leading-relaxed">{line}</p>
+                    })}
+                  </div>
+                </div>
+
+                {/* FAQ Section */}
+                <div id="faq" className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl scroll-mt-24">
+                  <h2 className="text-lg font-bold text-nord-text mb-6">
+                    {locale === "zh" ? "❓ 常见问题" : locale === "ms" ? "❓ Soalan Lazim" : "❓ FAQ"}
+                  </h2>
+                  <div className="space-y-4">
+                    {content.faqItems.map((item, i) => (
+                      <div key={i} id={`faq-${i}`} className="p-4 bg-nord-bg/50 rounded-xl border border-nord-border/20 scroll-mt-24">
+                        <p className="text-nord-text font-medium text-sm mb-2">{item.q}</p>
+                        <p className="text-nord-text/60 text-sm leading-relaxed">{item.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+
+              <PrintPdfButtons locale={locale} slug={slug} />
+
+              <AiEntrance locale={locale} />
+
+              <KnowledgeMap slug={slug} locale={locale} />
+
+              {related.length > 0 && (
+                <div className="mt-16">
+                  <h2 className="text-lg font-bold text-nord-text mb-6">
+                    {locale === "zh" ? "📖 相关阅读" : locale === "ms" ? "📖 Bacaan Berkaitan" : "📖 Related Reading"}
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {related.map((r) => (
+                      <LibraryCard
+                        key={r.slug}
+                        slug={r.slug}
+                        title={r.title}
+                        description={r.description}
+                        category={r.category}
+                        locale={locale}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 守夜勋章 — 每日阅读习惯游戏化 */}
+              <SleepStreakBadge locale={locale} />
             </div>
           </div>
 
-          <AiEntrance locale={locale} />
-
-          {related.length > 0 && (
-            <div className="mt-16">
-              <h2 className="text-lg font-bold text-nord-text mb-6">
-                {locale === "zh" ? "📖 相关阅读" : locale === "ms" ? "📖 Bacaan Berkaitan" : "📖 Related Reading"}
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {related.map((r) => (
-                  <LibraryCard
-                    key={r.slug}
-                    slug={r.slug}
-                    title={r.title}
-                    description={r.description}
-                    category={r.category}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+          <BreadcrumbJsonLd
+            items={[
+              { name: catName === "睡眠" ? "Library" : "Library", url: `https://deepcalm-ai.com/${locale}/library` },
+              { name: catName, url: `https://deepcalm-ai.com/${locale}/library#${topic.category}` },
+              { name: topic.title, url: `https://deepcalm-ai.com/${locale}/library/${slug}` },
+            ]}
+          />
+          <TopicJsonLd
+            locale={locale}
+            slug={slug}
+            topic={{
+              title: topic.title,
+              description: topic.description,
+              keywords: topic.keywords,
+              category: topic.category,
+            }}
+            faqItems={content.faqItems.map((item) => ({ q: item.q, a: item.a }))}
+          />
         </div>
       </section>
     </div>
