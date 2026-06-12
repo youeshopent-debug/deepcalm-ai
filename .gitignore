@@ -29,3 +29,16 @@ take-screenshots.cjs check-zh-site.cjs _stress_test.cjs _resend_setup.cjs _resen
 *.html
 *.pdf
 *.xlsx
+
+# Debug & diagnostic scripts (project root level)
+/_diagnose*.cjs
+/_diagnose*.js
+/_diagnose*.py
+/_fix_*.cjs
+/_fix_*.js
+/_fix_*.py
+/_names.txt
+/test-results/
+/test_artifacts/
+/check_*.py
+/debug_*.py
