@@ -94,7 +94,7 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
               {locale === "zh" ? "睡眠科学" : locale === "ms" ? "Sains Tidur" : "Sleep Science"}
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">{title}</h1>
-            <p className="text-slate-600 leading-relaxed">{intro}</p>
+            <p className="text-slate-800 leading-relaxed">{intro}</p>
           </div>
 
           <div className="space-y-8">
@@ -111,7 +111,7 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
                     {section.icon}
                     {sectionTitle}
                   </h2>
-                  <div className="prose prose-invert max-w-none prose-p:text-slate-700 prose-p:leading-relaxed space-y-4">
+                  <div className="prose prose-slate max-w-none prose-p:text-slate-900 prose-p:leading-relaxed space-y-4">
                     {section.bodyKeys.map((key) => {
                       const text = t(`seoContent.${key}`, "")
                       return text ? <p key={key}>{text}</p> : null
