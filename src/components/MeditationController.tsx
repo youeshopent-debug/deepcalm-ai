@@ -79,15 +79,18 @@ const EMOTION_THEME_HINT: Record<string, VisualTheme> = {
   relax: "forest",
 }
 
-export default function MeditationController({ onClose }: { onClose: () => void }) {
+export default function MeditationController({ onClose, initialEmotion }: {
+  onClose: () => void
+  initialEmotion?: string
+}) {
   const { locale } = useLanguage()
   const { setTheme } = useTheme()
   const labels = LABELS[locale] || LABELS.en
 
   /* ── State ── */
   const [state, setState] = useState<SessionState>("idle")
-  const [customText, setCustomText] = useState("")
-  const [selectedEmotion, setSelectedEmotion] = useState<string>("")
+  const [customText, setCustomText] = useState(initialEmotion || "")
+  const [selectedEmotion, setSelectedEmotion] = useState<string>(initialEmotion || "")
   const [script, setScript] = useState<MeditationScript | null>(null)
   const [tick, setTick] = useState<TickAction | null>(null)
   const [currentLineIndex, setCurrentLineIndex] = useState(-1)
@@ -242,6 +245,15 @@ export default function MeditationController({ onClose }: { onClose: () => void 
       }
     }
   }, [locale, setTheme, cleanup, startTickLoop, onClose])
+
+  /* ── Auto-trigger from external (e.g. Library topic card) ── */
+  const autoStartedRef = useRef(false)
+  useEffect(() => {
+    if (initialEmotion && !autoStartedRef.current) {
+      autoStartedRef.current = true
+      handleStart(initialEmotion)
+    }
+  }, [initialEmotion, handleStart])
 
   /* ── Controls ── */
   const handlePause = useCallback(() => {

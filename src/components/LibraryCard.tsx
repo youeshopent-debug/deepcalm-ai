@@ -1,6 +1,9 @@
+"use client"
+
 import type { Locale } from "@/types"
 import Link from "next/link"
-import { ArrowRight, BookOpen } from "lucide-react"
+import { motion } from "framer-motion"
+import { Sparkles, BookOpen } from "lucide-react"
 
 const categoryIcon: Record<string, string> = {
   sleep: "🌙", anxiety: "🫀", grief_loss: "💧", loneliness: "🌊",
@@ -20,59 +23,90 @@ const CATEGORY_NAMES: Record<string, Record<Locale, string>> = {
   emotional_health: { zh: "情绪健康", en: "Emotional Health", ms: "Kesihatan Emosi", ja: "感情的健康", ko: "정서 건강", th: "สุขภาพทางอารมณ์", es: "Salud Emocional" },
 }
 
-const gradientByCategory: Record<string, string> = {
-  sleep: "from-indigo-500/10 to-purple-500/10",
-  anxiety: "from-rose-500/10 to-orange-500/10",
-  grief_loss: "from-slate-500/10 to-zinc-500/10",
-  loneliness: "from-sky-500/10 to-teal-500/10",
-  self_worth: "from-emerald-500/10 to-teal-500/10",
-  relationships: "from-pink-500/10 to-rose-500/10",
-  identity: "from-violet-500/10 to-blue-500/10",
-  mindfulness: "from-amber-500/10 to-yellow-500/10",
-  emotional_health: "from-red-500/10 to-rose-500/10",
-}
-
 interface LibraryCardProps {
   slug: string
   title: string
+  hook?: string
   description: string
   category: string
   locale: Locale
+  onStartMeditation?: (slug: string, emotion: string) => void
 }
 
-export default function LibraryCard({ slug, title, description, category, locale }: LibraryCardProps) {
-  const gradient = gradientByCategory[category] || "from-nord-accent/10 to-nord-accent/5"
+const READ_LABEL: Record<Locale, string> = {
+  zh: "阅读全文", en: "Read", ms: "Baca", ja: "読む", ko: "읽기", th: "อ่าน", es: "Leer",
+}
+
+const MEDITATION_LABEL: Record<Locale, string> = {
+  zh: "开始 AI 冥想", en: "Start AI Meditation", ms: "Mulai Meditasi AI", ja: "AI瞑想を開始", ko: "AI 명상 시작", th: "เริ่มทำสมาธิ AI", es: "Iniciar Meditación AI",
+}
+
+export default function LibraryCard({ slug, title, hook, description, category, locale, onStartMeditation }: LibraryCardProps) {
   const icon = categoryIcon[category] || "📖"
   const catName = CATEGORY_NAMES[category]?.[locale] || category
+  const displayTitle = hook || title
+
+  const handleMeditation = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    onStartMeditation?.(slug, displayTitle)
+  }
 
   return (
-    <Link href={`/${locale}/library/${slug}`} className="group block">
-      <div className={`relative h-full p-6 sm:p-7 bg-nord-card border border-nord-border/20 rounded-2xl
-        hover:border-nord-accent/30 transition-all duration-300
-        hover:shadow-[0_0_30px_-6px_rgba(94,129,172,0.15)]
-        before:absolute before:inset-0 before:bg-gradient-to-b ${gradient}
-        before:rounded-2xl before:opacity-0 before:transition-opacity before:duration-300
-        hover:before:opacity-100 overflow-hidden`}>
-        <div className="relative z-10 flex flex-col h-full">
+    <motion.div
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.15}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+      className="shrink-0 w-[300px]"
+    >
+      <Link href={`/${locale}/library/${slug}`} className="group block h-full">
+        <div
+          className="relative h-full p-6 sm:p-7 backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl
+            hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col"
+        >
+          {/* Category badge */}
           <div className="flex items-center gap-2 mb-3">
             <span className="text-lg">{icon}</span>
             <span className="text-[10px] font-medium text-nord-accent uppercase tracking-widest">
               {catName}
             </span>
           </div>
-          <h3 className="text-base font-bold text-nord-text mb-2 group-hover:text-nord-accent transition-colors leading-snug">
-            {title}
+
+          {/* Hook / Title */}
+          <h3 className="text-base font-bold text-nord-text mb-2 leading-snug">
+            {displayTitle}
           </h3>
+
+          {/* Description */}
           <p className="text-sm text-nord-text/50 leading-relaxed line-clamp-3 flex-1">
             {description}
           </p>
+
+          {/* Explore link indicator */}
           <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-nord-accent/70 group-hover:text-nord-accent transition-colors">
             <BookOpen className="w-3.5 h-3.5" />
-            <span>Explore</span>
-            <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+            <span>{READ_LABEL[locale] || READ_LABEL.en}</span>
           </div>
+
+          {/* AI Meditation trigger */}
+          {onStartMeditation && (
+            <button
+              onClick={handleMeditation}
+              className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-2.5
+                bg-gradient-to-r from-nord-accent/20 to-nord-accent/10
+                hover:from-nord-accent/30 hover:to-nord-accent/20
+                border border-nord-accent/20 hover:border-nord-accent/40
+                rounded-xl text-xs font-medium text-nord-accent
+                transition-all duration-300"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{MEDITATION_LABEL[locale] || MEDITATION_LABEL.en}</span>
+            </button>
+          )}
         </div>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   )
 }
