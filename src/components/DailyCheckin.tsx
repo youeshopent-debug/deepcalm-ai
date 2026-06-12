@@ -152,7 +152,7 @@ export default function DailyCheckin() {
     return (
       <section id="daily-checkin" className="py-24">
         <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white/95 backdrop-blur-3xl rounded-2xl shadow-2xl border border-slate-100/50">
+          <div className="bg-white rounded-2xl shadow-2xl border border-slate-100/50">
             <div className="p-6 sm:p-8">
               <div className="flex items-center gap-3 mb-5">
                 <Sparkles className="w-5 h-5 text-blue-600" />
@@ -183,14 +183,14 @@ export default function DailyCheckin() {
 
               {!emailSubscribed ? (
                 <form onSubmit={handleEmailSubmit} className="mt-6 space-y-2">
-                  <p className="text-xs text-slate-500">{tt("dailyCheckin.emailPlaceholder")}</p>
+                  <p className="text-xs text-slate-600">{tt("dailyCheckin.emailPlaceholder")}</p>
                   <div className="flex gap-2">
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); setEmailError(false) }}
                       placeholder={tt("dailyCheckin.emailInputPlaceholder")}
-                      className="flex-1 px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-colors"
+                      className="flex-1 px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm text-slate-800 placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-colors"
                     />
                     <button
                       type="submit"
@@ -207,7 +207,7 @@ export default function DailyCheckin() {
                 </form>
               ) : (
                 <div className="mt-6 p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
-                  <p className="text-sm font-medium text-emerald-700">✅ {tt("dailyCheckin.emailSuccess")}</p>
+                  <p className="text-sm font-semibold text-emerald-800">✅ {tt("dailyCheckin.emailSuccess")}</p>
                 </div>
               )}
 
@@ -223,7 +223,7 @@ export default function DailyCheckin() {
                 </p>
                 {mood && (
                   <div className="mt-3 flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg">
-                    <span className="text-xs font-medium text-slate-500">{tt("healingReport.moodHeader")}: </span>
+                    <span className="text-xs font-semibold text-slate-600">{tt("healingReport.moodHeader")}: </span>
                     <span className="text-base">{getMoodEmoji(mood)}</span>
                     <span className="text-sm font-semibold text-slate-800">{getMoodLabel(mood)}</span>
                   </div>
@@ -248,7 +248,7 @@ export default function DailyCheckin() {
                       setShareCopied(true)
                       setTimeout(() => setShareCopied(false), 2500)
                     }}
-                    className="px-3 py-1.5 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors"
+                    className="px-3 py-1.5 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors shadow-sm"
                   >
                     {shareCopied ? tt("common.copied") : `📤 ${tt("common.share")}`}
                   </button>
@@ -259,7 +259,7 @@ export default function DailyCheckin() {
                     🎨 {tt("common.healPoster")}
                   </button>
                   {!emailSubscribed && (
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-500 leading-relaxed">
                       {tt("healingReport.subscribeCta")}
                     </p>
                   )}
@@ -271,7 +271,7 @@ export default function DailyCheckin() {
                   <span className="text-lg">🛍️</span>
                   {tt("affiliate.title")}
                 </h3>
-                <p className="text-xs text-slate-500 mb-3">{tt("affiliate.subtitle")}</p>
+                <p className="text-xs text-slate-600 mb-3">{tt("affiliate.subtitle")}</p>
                 <div className="grid grid-cols-2 gap-2">
                   {RECOMMENDED_PRODUCTS.map((p) => (
                     <div key={p.key} className="p-2.5 bg-white rounded-xl border border-slate-200 hover:border-blue-300 transition-colors">
@@ -290,7 +290,7 @@ export default function DailyCheckin() {
                     </div>
                   ))}
                 </div>
-                <p className="mt-3 text-[9px] text-slate-400 text-center leading-relaxed">
+                <p className="mt-3 text-[9px] text-slate-500 text-center leading-relaxed">
                   {tt("affiliate.affiliateDisclaimer")}
                 </p>
               </div>
@@ -354,7 +354,7 @@ export default function DailyCheckin() {
   return (
     <section id="daily-checkin" className="py-8">
       <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white/95 backdrop-blur-3xl rounded-2xl shadow-2xl border border-slate-100/50">
+        <div className="bg-white rounded-2xl shadow-2xl border border-slate-100/50">
           <div className="p-6 sm:p-8">
             <div className="text-center mb-8">
               <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">
