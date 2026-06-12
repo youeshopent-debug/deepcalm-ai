@@ -75,9 +75,9 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
   const disclaimer = t("seoContent.disclaimer", "")
 
   return (
-    <div className="min-h-screen bg-nord-bg">
+    <div className="min-h-screen bg-slate-50">
       <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-nord-accent/5 via-nord-bg to-nord-bg pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sky-500/5 via-slate-50 to-slate-50 pointer-events-none" />
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb
@@ -89,12 +89,12 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
           />
 
           <div className="mb-10">
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-nord-accent uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-700 uppercase tracking-wider">
               <BookOpen className="w-3.5 h-3.5" />
               {locale === "zh" ? "睡眠科学" : locale === "ms" ? "Sains Tidur" : "Sleep Science"}
             </span>
-            <h1 className="text-3xl sm:text-4xl font-bold text-nord-text mt-3 mb-4">{title}</h1>
-            <p className="text-nord-text/60 leading-relaxed">{intro}</p>
+            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">{title}</h1>
+            <p className="text-slate-600 leading-relaxed">{intro}</p>
           </div>
 
           <div className="space-y-8">
@@ -105,13 +105,13 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
               return (
                 <div
                   key={idx}
-                  className={`p-6 sm:p-8 bg-gradient-to-br ${SECTION_STYLES[idx]} border border-nord-border/30 rounded-2xl`}
+                  className={`p-6 sm:p-8 bg-gradient-to-br ${SECTION_STYLES[idx]} border border-slate-200/30 rounded-2xl`}
                 >
-                  <h2 className="text-lg font-bold text-nord-text mb-4 inline-flex items-center gap-2">
+                  <h2 className="text-lg font-bold text-slate-900 mb-4 inline-flex items-center gap-2">
                     {section.icon}
                     {sectionTitle}
                   </h2>
-                  <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed space-y-4">
+                  <div className="prose prose-invert max-w-none prose-p:text-slate-700 prose-p:leading-relaxed space-y-4">
                     {section.bodyKeys.map((key) => {
                       const text = t(`seoContent.${key}`, "")
                       return text ? <p key={key}>{text}</p> : null
@@ -123,15 +123,15 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
           </div>
 
           {disclaimer && (
-            <div className="mt-10 p-4 bg-nord-card/50 border border-nord-border/20 rounded-xl">
-              <p className="text-xs text-nord-text/30 leading-relaxed">{disclaimer}</p>
+            <div className="mt-10 p-4 bg-white/50 border border-slate-200/20 rounded-xl">
+              <p className="text-xs text-slate-500 leading-relaxed">{disclaimer}</p>
             </div>
           )}
 
           <div className="mt-12 text-center">
             <Link
               href={`/${locale}`}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-nord-accent/10 hover:bg-nord-accent/20 text-nord-accent font-medium rounded-xl border border-nord-accent/20 hover:border-nord-accent/40 transition-all duration-300 text-sm"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-sky-500/10 hover:bg-sky-500/20 text-sky-700 font-medium rounded-xl border border-sky-200/40 hover:border-sky-200/60 transition-all duration-300 text-sm"
             >
               <ArrowLeft className="w-4 h-4" />
               {locale === "zh" ? "返回首页" : "Back to Home"}
