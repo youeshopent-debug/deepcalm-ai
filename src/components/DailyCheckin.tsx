@@ -152,7 +152,7 @@ export default function DailyCheckin() {
     return (
       <section id="daily-checkin" className="py-24">
         <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-100/50">
+          <div className="bg-slate-50 rounded-2xl shadow-2xl border border-slate-200/80">
             <div className="p-6 sm:p-8">
               <div className="flex items-center gap-3 mb-5">
                 <Sparkles className="w-5 h-5 text-blue-600" />
@@ -354,7 +354,7 @@ export default function DailyCheckin() {
   return (
     <section id="daily-checkin" className="py-8">
       <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-2xl border border-slate-100/50">
+        <div className="bg-slate-50 rounded-2xl shadow-2xl border border-slate-200/80">
           <div className="p-6 sm:p-8">
             <div className="text-center mb-8">
               <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">
