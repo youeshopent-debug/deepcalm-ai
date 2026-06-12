@@ -111,10 +111,10 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
                     {section.icon}
                     {sectionTitle}
                   </h2>
-                  <div className="prose prose-slate max-w-none prose-p:text-slate-900 prose-p:leading-relaxed space-y-4">
+                  <div className="space-y-4 text-slate-900 leading-relaxed">
                     {section.bodyKeys.map((key) => {
                       const text = t(`seoContent.${key}`, "")
-                      return text ? <p key={key}>{text}</p> : null
+                      return text ? <p key={key} className="text-slate-900 leading-relaxed">{text}</p> : null
                     })}
                   </div>
                 </div>
