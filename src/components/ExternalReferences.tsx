@@ -70,8 +70,8 @@ export default function ExternalReferences({ references, locale }: ExternalRefer
   if (!references || references.length === 0) return null
 
   return (
-    <div className="mt-8 p-5 bg-nord-card/50 border border-nord-border/20 rounded-xl">
-      <h3 className="text-sm font-semibold text-nord-text/80 mb-3">
+    <div className="mt-8 p-5 bg-white/95 backdrop-blur-[50px] border border-slate-200/20 rounded-xl shadow-lg">
+      <h3 className="text-sm font-bold text-blue-900 mb-3">
         {SECTION_HEADING[locale] || SECTION_HEADING.en}
       </h3>
       <ol className="space-y-2">
@@ -83,14 +83,14 @@ export default function ExternalReferences({ references, locale }: ExternalRefer
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-nord-accent hover:text-nord-accent/80 underline underline-offset-2 transition-colors"
+                className="inline-flex items-center gap-1 text-blue-700 hover:text-blue-800 underline underline-offset-2 decoration-blue-400 transition-colors"
               >
                 {label}
                 <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
-              <span className="text-nord-text/40 ml-1">— {domain}</span>
+              <span className="text-slate-500 ml-1">— {domain}</span>
             </li>
           )
         })}

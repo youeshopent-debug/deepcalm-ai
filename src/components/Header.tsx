@@ -11,7 +11,9 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-dc-deep/60 backdrop-blur-xl">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 渐变覆盖层：确保导航文字在任何亮色背景上保持可读 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent pointer-events-none -z-10" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center justify-between h-12">
           <div className="flex items-center gap-6">
             <Link href={`/${locale}`} className="flex items-center gap-2 group">

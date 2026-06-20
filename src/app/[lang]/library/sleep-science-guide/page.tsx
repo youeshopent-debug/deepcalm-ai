@@ -105,7 +105,7 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
               return (
                 <div
                   key={idx}
-                  className={`p-6 sm:p-8 bg-gradient-to-br ${SECTION_STYLES[idx]} border border-slate-200/30 rounded-2xl`}
+                  className={`p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-slate-200/20 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]`}
                 >
                   <h2 className="text-lg font-bold text-slate-900 mb-4 inline-flex items-center gap-2">
                     {section.icon}
@@ -123,8 +123,8 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
           </div>
 
           {disclaimer && (
-            <div className="mt-10 p-4 bg-white/50 border border-slate-200/20 rounded-xl">
-              <p className="text-xs text-slate-500 leading-relaxed">{disclaimer}</p>
+            <div className="mt-10 p-4 bg-white/95 backdrop-blur-[50px] border border-slate-200/20 rounded-xl shadow">
+              <p className="text-xs text-slate-600 leading-relaxed">{disclaimer}</p>
             </div>
           )}
 

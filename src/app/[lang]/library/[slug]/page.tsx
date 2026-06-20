@@ -154,11 +154,11 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
             <div className="lg:order-2 min-w-0">
               <div className="space-y-8 max-w-3xl">
                 {/* Science Section */}
-                <div id="science" className="p-6 sm:p-8 bg-white border border-slate-200/60 rounded-2xl scroll-mt-24">
+                <div id="science" className="p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] scroll-mt-24">
                   <h2 className="text-lg font-bold text-slate-900 mb-4">
                     {locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
                   </h2>
-                  <div className="prose prose-invert max-w-none prose-p:text-slate-700 prose-p:leading-relaxed">
+                  <div className="prose prose-invert max-w-none prose-p:text-slate-800 prose-p:leading-relaxed">
                     {content.science.split("\n").filter(Boolean).map((p, i) => (
                       <p key={i}>{p}</p>
                     ))}
@@ -169,34 +169,34 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
                 </div>
 
                 {/* Fitness Guide Section */}
-                <div className="p-6 sm:p-8 bg-gradient-to-br from-sky-500/[0.06] to-white border border-sky-200/40 rounded-2xl">
+                <div className="p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-sky-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
                   <h2 className="text-lg font-bold text-slate-900 mb-4">
                     {locale === "zh" ? "🏋️ 日常健身指南" : locale === "ms" ? "🏋️ Panduan Kecergasan" : "🏋️ Emotional Fitness Guide"}
                   </h2>
-                  <div className="prose prose-invert max-w-none prose-p:text-slate-700 prose-p:leading-relaxed prose-strong:text-slate-900">
+                  <div className="prose prose-invert max-w-none prose-p:text-slate-800 prose-p:leading-relaxed prose-strong:text-slate-900">
                     {content.fitnessGuide.split("\n").map((line, i) => {
                       if (line.startsWith("## ")) {
                         const text = line.slice(3).trim()
                         const id = text.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, "-").replace(/^-+|-+$/g, "")
                         return <h3 key={i} id={id} className="text-base font-semibold text-slate-900 mt-4 mb-2 scroll-mt-24">{text}</h3>
                       }
-                      if (/^\d+\./.test(line.trim())) return <p key={i} className="text-slate-700 leading-relaxed mb-2">{line}</p>
+                      if (/^\d+\./.test(line.trim())) return <p key={i} className="text-slate-800 leading-relaxed mb-2">{line}</p>
                       if (line.trim() === "") return null
-                      return <p key={i} className="text-slate-700 leading-relaxed">{line}</p>
+                      return <p key={i} className="text-slate-800 leading-relaxed">{line}</p>
                     })}
                   </div>
                 </div>
 
                 {/* FAQ Section */}
-                <div id="faq" className="p-6 sm:p-8 bg-white border border-slate-200/60 rounded-2xl scroll-mt-24">
+                <div id="faq" className="p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] scroll-mt-24">
                   <h2 className="text-lg font-bold text-slate-900 mb-6">
                     {locale === "zh" ? "❓ 常见问题" : locale === "ms" ? "❓ Soalan Lazim" : "❓ FAQ"}
                   </h2>
                   <div className="space-y-4">
                     {content.faqItems.map((item, i) => (
-                      <div key={i} id={`faq-${i}`} className="p-4 bg-slate-100/50 rounded-xl border border-slate-200/40 scroll-mt-24">
+                      <div key={i} id={`faq-${i}`} className="p-4 bg-slate-100/80 rounded-xl border border-slate-200/40 scroll-mt-24">
                         <p className="text-slate-900 font-medium text-sm mb-2">{item.q}</p>
-                        <p className="text-slate-600 text-sm leading-relaxed">{item.a}</p>
+                        <p className="text-slate-700 text-sm leading-relaxed">{item.a}</p>
                       </div>
                     ))}
                   </div>
