@@ -1,4 +1,15 @@
-"use server"
+/**
+ * 冥想脚本引擎（客户端版）
+ *
+ * 架构变更说明（Vercel → Cloudflare Pages 迁移）：
+ * - 原为 Next.js Server Action（"use server"），不支持 static export
+ * - 改为先调用 Cloudflare Function (/api/meditation-script)
+ * - 网络不可用时降级到本地硬编码模板（FALLBACK_SCRIPTS）
+ *
+ * 调用链: MeditationController → generateMeditationScript()
+ *   → fetch(/api/meditation-script) → Cloudflare Function → LLM
+ *   → 失败 → getFallbackScript() (本地模板)
+ */
 
 import type { Locale } from "@/types"
 
@@ -66,82 +77,6 @@ function inferTheme(input: MeditationInput): VisualTheme {
   if (/悲伤|sad|grief|depress|孤独|lonely|loss/.test(emotion)) return "starry"
   if (/愤怒|angry|frustrat|烦躁|irritat/.test(emotion)) return "twilight"
   return "forest"
-}
-
-/* ── Locale name map ── */
-
-const LOCALE_NAME: Record<Locale, string> = {
-  zh: "中文",
-  en: "English",
-  ms: "Bahasa Melayu",
-  ja: "日本語",
-  ko: "한국어",
-  th: "ภาษาไทย",
-  es: "Español",
-}
-
-/* ── System prompt builder ── */
-
-function buildMeditationPrompt(input: MeditationInput): string {
-  const langName = LOCALE_NAME[input.locale] || "中文"
-  const duration = DURATION_MAP[input.duration || "short"]
-  const topicHint = input.topicSlug
-    ? `用户选择的主题：${input.topicSlug}。脚本内容应贴合该主题的核心治愈方向。`
-    : ""
-  const emotionHint = input.emotion
-    ? `用户当前的描述情绪：${input.emotion}。脚本应匹配此情绪基调。`
-    : ""
-
-  return `[ROLE]
-你是 DeepCalm AI 的冥想引导师——一位声音温暖的老朋友。你的任务是生成一段冥想引导脚本。
-
-[CRITICAL: LANGUAGE_LOCK]
-必须且只能使用${langName}输出整个脚本。严禁混入其他语言。
-
-[TONE]
-- 缓慢、温柔、有呼吸节奏
-- 使用自然意象（月光、湖水、森林、微风）
-- 每句话都要像在轻声耳语
-- 每行末尾可以用"……"延音
-- 不用专业术语，不用"你应该"，只用"或许可以……""感受……"
-
-[STRUCTURE]
-将总时长 ${duration} 秒划分为以下阶段，按顺序输出：
-
-1. 开场安定（约20%时间）：引导用户找到一个舒适的姿势，闭上眼睛，做三次深呼吸。语气像深夜咖啡馆里坐在对面的朋友。
-2. 核心引导（约55%时间）：根据用户情况展开冥想主题。用具体的感官意象引导注意力的流动——如水波、树叶、星光。至少包含3个感官锚点（触觉/温度/听觉/视觉）。
-3. 深化停留（约15%时间）：引导进入更深的安静状态。语速更慢，句子更短，留白更多。
-4. 温和回归（约10%时间）：引导慢慢回到当下，轻轻动一下手指和脚趾，准备睁开眼睛。
-
-${topicHint}
-${emotionHint}
-
-[OUTPUT FORMAT]
-你必须输出纯净 JSON，格式如下（不要有任何其他内容）：
-
-{
-  "title": "冥想标题（不超过15字，概括本次冥想）",
-  "lines": [
-    {
-      "text": "引导语句……",
-      "startAt": 0,
-      "breathInstruction": "inhale",
-      "durationSec": 12
-    }
-  ],
-  "audioPreset": "relaxation"
-}
-
-每条 line 的规则：
-- startAt：该行开始的秒数（从0开始递增）
-- durationSec：该行持续的秒数（每行8-25秒）
-- breathInstruction：inhale(吸气) / hold(屏息) / exhale(呼气) / neutral(中性呼吸，不特别指示) —— 每2-3行至少出现一次呼吸指令，遵循"吸气→屏息→呼气"的自然节奏
-- lines 的总条数必须覆盖整个 ${duration} 秒（最后一条的 startAt + durationSec 应接近 ${duration}）
-- 开头前3行必须是：第1行吸气 → 第2行屏息 → 第3行呼气，作为起始准备呼吸
-
-audioPreset 可选值：relaxation(放松) / body_scan(身体扫描) / deep_sleep(深度睡眠) / morning_energy(晨间能量)
-
-总行数控制在 8-15 条之间。每行 text 不超过 80 字。`
 }
 
 /* ── Fallback script templates ── */
@@ -261,7 +196,6 @@ const FALLBACK_SCRIPTS: Partial<Record<Locale, MeditationScript[]>> = {
 function getFallbackScript(input: MeditationInput): MeditationScript {
   const scripts = FALLBACK_SCRIPTS[input.locale] || FALLBACK_SCRIPTS.en || FALLBACK_SCRIPTS.zh!
   if (!scripts) {
-    // Ultimate fallback — inline minimal script if no templates exist
     return {
       title: "Simple Breath",
       lines: [
@@ -282,252 +216,37 @@ function getFallbackScript(input: MeditationInput): MeditationScript {
   return { ...scripts[0], lines: [...scripts[0].lines] }
 }
 
-/* ── Helpers ── */
-
-function cleanEnv(v: unknown): string {
-  return String(v || "")
-    .replace(/\uFEFF/g, "")
-    .replace(/[\r\n]/g, "")
-    .trim()
-}
-
-function tryExtractJsonObject(text: string): any | null {
-  const start = text.indexOf("{")
-  const end = text.lastIndexOf("}")
-  if (start < 0 || end <= start) return null
-  const candidate = text.slice(start, end + 1)
-  try {
-    return JSON.parse(candidate)
-  } catch {
-    return null
-  }
-}
-
-const COST_PER_TOKEN: Record<string, { input: number; output: number }> = {
-  "gpt-4o-mini": { input: 0.15 / 1_000_000, output: 0.60 / 1_000_000 },
-  "deepseek-v4-flash": { input: 0.27 / 1_000_000, output: 1.10 / 1_000_000 },
-}
-
-function calcCost(model: string, inTokens: number, outTokens: number): number {
-  const rates = COST_PER_TOKEN[model]
-  if (!rates) return 0
-  return inTokens * rates.input + outTokens * rates.output
-}
-
-/* ── LLM call with triple fallback ── */
-
-interface LlmResult {
-  content: string
-  usage: { model: string; inputTokens: number; outputTokens: number; cost: number }
-}
-
-async function callLLM(systemPrompt: string, userText: string): Promise<LlmResult> {
-  const openAiKey = cleanEnv(process.env.OPENAI_API_KEY)
-  const deepSeekKey = cleanEnv(process.env.DEEPSEEK_API_KEY)
-  const openRouterKey = cleanEnv(process.env.OPENROUTER_API_KEY)
-  const openRouterModel = cleanEnv(process.env.OPENROUTER_MODEL) || "openai/gpt-4o-mini"
-
-  const messages = [
-    { role: "system", content: systemPrompt },
-    { role: "user", content: userText },
-  ]
-
-  /* 1. OpenAI GPT-4o-mini */
-  if (openAiKey) {
-    try {
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${openAiKey}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages,
-          temperature: 0.8,
-          max_tokens: 2048,
-          response_format: { type: "json_object" },
-        }),
-      })
-      if (!res.ok) throw new Error(`OpenAI returned ${res.status}`)
-      const data = await res.json()
-      const content: string = data.choices?.[0]?.message?.content || ""
-      const usage = data.usage || { prompt_tokens: 0, completion_tokens: 0 }
-      return {
-        content,
-        usage: {
-          model: "gpt-4o-mini",
-          inputTokens: usage.prompt_tokens || 0,
-          outputTokens: usage.completion_tokens || 0,
-          cost: calcCost("gpt-4o-mini", usage.prompt_tokens || 0, usage.completion_tokens || 0),
-        },
-      }
-    } catch (err) {
-      console.error("OpenAI meditation call failed:", (err as Error).message)
-    }
-  }
-
-  /* 2. DeepSeek fallback */
-  if (deepSeekKey) {
-    try {
-      const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${deepSeekKey}`,
-        },
-        body: JSON.stringify({
-          model: "deepseek-chat",
-          messages,
-          temperature: 0.8,
-          max_tokens: 2048,
-          response_format: { type: "json_object" },
-        }),
-      })
-      if (!res.ok) throw new Error(`DeepSeek returned ${res.status}`)
-      const data = await res.json()
-      const content: string = data.choices?.[0]?.message?.content || ""
-      const usage = data.usage || { prompt_tokens: 0, completion_tokens: 0 }
-      return {
-        content,
-        usage: {
-          model: "deepseek-v4-flash",
-          inputTokens: usage.prompt_tokens || 0,
-          outputTokens: usage.completion_tokens || 0,
-          cost: calcCost("deepseek-v4-flash", usage.prompt_tokens || 0, usage.completion_tokens || 0),
-        },
-      }
-    } catch (err) {
-      console.error("DeepSeek meditation fallback failed:", (err as Error).message)
-    }
-  }
-
-  /* 3. OpenRouter fallback */
-  if (openRouterKey) {
-    try {
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${openRouterKey}`,
-          "HTTP-Referer": "https://deepcalm-ai.com",
-          "X-Title": "DeepCalm AI",
-        },
-        body: JSON.stringify({
-          model: openRouterModel,
-          messages,
-          temperature: 0.8,
-          max_tokens: 2048,
-          response_format: { type: "json_object" },
-        }),
-      })
-      if (!res.ok) throw new Error(`OpenRouter returned ${res.status}`)
-      const data = await res.json()
-      const content: string = data.choices?.[0]?.message?.content || ""
-      const usage = data.usage || { prompt_tokens: 0, completion_tokens: 0 }
-      return {
-        content,
-        usage: {
-          model: String(data.model || openRouterModel),
-          inputTokens: usage.prompt_tokens || 0,
-          outputTokens: usage.completion_tokens || 0,
-          cost: calcCost("gpt-4o-mini", usage.prompt_tokens || 0, usage.completion_tokens || 0),
-        },
-      }
-    } catch (err) {
-      console.error("OpenRouter meditation fallback failed:", (err as Error).message)
-    }
-  }
-
-  throw new Error("All LLM backends unavailable for meditation script generation")
-}
-
 /* ── Public entry point ── */
 
 export async function generateMeditationScript(input: MeditationInput): Promise<{
   script: MeditationScript
   usage: { model: string; inputTokens: number; outputTokens: number; cost: number }
 }> {
-  const useLLM =
-    !!cleanEnv(process.env.OPENAI_API_KEY) ||
-    !!cleanEnv(process.env.DEEPSEEK_API_KEY) ||
-    !!cleanEnv(process.env.OPENROUTER_API_KEY)
-
-  if (!useLLM) {
-    console.warn("No LLM keys configured, using fallback meditation script template")
-    return {
-      script: getFallbackScript(input),
-      usage: { model: "fallback-template", inputTokens: 0, outputTokens: 0, cost: 0 },
+  // 优先调用 Cloudflare Function
+  try {
+    const res = await fetch("/api/meditation-script", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+      signal: AbortSignal.timeout(15000), // 15s timeout
+    })
+    if (res.ok) {
+      const data = await res.json()
+      if (data.script && data.script.lines && data.script.lines.length >= 5) {
+        return {
+          script: data.script,
+          usage: data.usage || { model: "cf-function", inputTokens: 0, outputTokens: 0, cost: 0 },
+        }
+      }
     }
+    console.warn("Meditation API returned invalid response, falling back to local template")
+  } catch (err) {
+    console.warn("Meditation API call failed, using offline fallback:", (err as Error).message)
   }
 
-  const prompt = buildMeditationPrompt(input)
-  const userText = input.emotion
-    ? `请根据我当前的情绪生成一段冥想脚本：${input.emotion}${input.topicSlug ? `，并结合主题：${input.topicSlug}` : ""}`
-    : input.topicSlug
-      ? `请根据主题生成一段冥想脚本：${input.topicSlug}`
-      : "请生成一段通用的放松冥想脚本"
-
-  try {
-    const result = await callLLM(prompt, userText)
-
-    let parsed: MeditationScript | null = null
-    try {
-      parsed = JSON.parse(result.content) as MeditationScript
-    } catch {
-      const obj = tryExtractJsonObject(result.content)
-      if (obj) parsed = obj as MeditationScript
-    }
-
-    if (
-      !parsed ||
-      !parsed.lines ||
-      !Array.isArray(parsed.lines) ||
-      parsed.lines.length < 5
-    ) {
-      console.warn("LLM returned invalid meditation script, using fallback template")
-      return {
-        script: getFallbackScript(input),
-        usage: result.usage,
-      }
-    }
-
-    // Validate and fix lines
-    const validated: MeditationLine[] = parsed.lines.map((l: any, i: number) => ({
-      text: typeof l.text === "string" ? l.text : "",
-      startAt: typeof l.startAt === "number" ? l.startAt : i * 20,
-      durationSec: typeof l.durationSec === "number" ? l.durationSec : 20,
-      breathInstruction: ["inhale", "hold", "exhale", "neutral"].includes(l.breathInstruction)
-        ? l.breathInstruction
-        : undefined,
-    })).filter((l: MeditationLine) => l.text.length > 0)
-
-    if (validated.length < 5) {
-      return {
-        script: getFallbackScript(input),
-        usage: result.usage,
-      }
-    }
-
-    const totalSeconds = validated[validated.length - 1].startAt + validated[validated.length - 1].durationSec
-
-    return {
-      script: {
-        lines: validated,
-        visualTheme: inferTheme(input),
-        audioPreset: (["relaxation", "body_scan", "deep_sleep", "morning_energy"].includes(parsed.audioPreset)
-          ? parsed.audioPreset
-          : "relaxation") as MeditationScript["audioPreset"],
-        totalSeconds,
-        title: typeof parsed.title === "string" ? parsed.title.slice(0, 30) : "冥想引导",
-      },
-      usage: result.usage,
-    }
-  } catch (err) {
-    console.error("Meditation script generation failed, using fallback:", (err as Error).message)
-    return {
-      script: getFallbackScript(input),
-      usage: { model: "fallback-template", inputTokens: 0, outputTokens: 0, cost: 0 },
-    }
+  // 降级：本地模板
+  return {
+    script: getFallbackScript(input),
+    usage: { model: "fallback-template", inputTokens: 0, outputTokens: 0, cost: 0 },
   }
 }

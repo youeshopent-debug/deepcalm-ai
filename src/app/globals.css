@@ -5,7 +5,7 @@
 :root {
   --dc-deep: #1A2238;
   --dc-surface: #0F1729;
-  --dc-card: rgba(26, 34, 56, 0.75);
+  --dc-card: rgba(26, 34, 56, 0.95);
   --dc-border: rgba(168, 200, 255, 0.08);
   --dc-border-glow: rgba(128, 180, 255, 0.15);
   --dc-text: #E8EDF5;
@@ -23,10 +23,10 @@
 [data-theme="forest"] {
   --dc-deep: #9CAF88;
   --dc-surface: #B5C8A0;
-  --dc-card: rgba(255, 255, 255, 0.6);
+  --dc-card: rgba(255, 255, 255, 0.95);
   --dc-border: rgba(60, 80, 40, 0.12);
   --dc-border-glow: rgba(100, 140, 70, 0.2);
-  --dc-text: #1A2E1A;
+  --dc-text: #1E293B;
   --dc-muted: rgba(40, 60, 30, 0.5);
   --dc-accent: #4A7A3A;
   --dc-accent-soft: rgba(74, 122, 58, 0.12);
@@ -42,10 +42,10 @@
 [data-theme="twilight"] {
   --dc-deep: #778899;
   --dc-surface: #8FA8BB;
-  --dc-card: rgba(255, 255, 255, 0.5);
+  --dc-card: rgba(255, 255, 255, 0.95);
   --dc-border: rgba(40, 60, 80, 0.1);
   --dc-border-glow: rgba(100, 150, 200, 0.18);
-  --dc-text: #1A2A3A;
+  --dc-text: #1E293B;
   --dc-muted: rgba(30, 50, 70, 0.45);
   --dc-accent: #4A8ABA;
   --dc-accent-soft: rgba(74, 138, 186, 0.12);
@@ -61,10 +61,10 @@
 [data-theme="earth"] {
   --dc-deep: #E5D3B3;
   --dc-surface: #F0E4CE;
-  --dc-card: rgba(255, 255, 255, 0.5);
+  --dc-card: rgba(255, 255, 255, 0.95);
   --dc-border: rgba(140, 120, 80, 0.12);
   --dc-border-glow: rgba(180, 150, 100, 0.2);
-  --dc-text: #2A2218;
+  --dc-text: #1E293B;
   --dc-muted: rgba(60, 50, 35, 0.45);
   --dc-accent: #B8945A;
   --dc-accent-soft: rgba(184, 148, 90, 0.12);
@@ -80,7 +80,7 @@
 [data-theme="deepsea"] {
   --dc-deep: #0A1628;
   --dc-surface: #0F1F3A;
-  --dc-card: rgba(10, 30, 60, 0.8);
+  --dc-card: rgba(10, 30, 60, 0.95);
   --dc-border: rgba(60, 140, 220, 0.12);
   --dc-border-glow: rgba(40, 120, 210, 0.2);
   --dc-text: #C8E0FF;
@@ -99,7 +99,7 @@
 [data-theme="starry"] {
   --dc-deep: #0E0A1E;
   --dc-surface: #1A1230;
-  --dc-card: rgba(20, 12, 40, 0.8);
+  --dc-card: rgba(20, 12, 40, 0.95);
   --dc-border: rgba(180, 140, 255, 0.12);
   --dc-border-glow: rgba(160, 120, 240, 0.2);
   --dc-text: #E0D8F5;
@@ -183,7 +183,7 @@ body {
   }
 
   .glass-strong {
-    background: rgba(15, 23, 41, 0.85);
+    background: var(--dc-card);
     backdrop-filter: blur(32px) saturate(1.4);
     -webkit-backdrop-filter: blur(32px) saturate(1.4);
     box-shadow:

@@ -142,6 +142,11 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, refe
       about: { "@type": "Thing", name: catLabel },
       isPartOf: { "@type": "WebPage", "@id": pageUrl, url: pageUrl, inLanguage: locale },
       mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+      /** speakable — Google 推荐的 TTS 结构化数据，标识可朗读内容区域，增强无障碍和 AMP 合规 */
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["#science", "#faq"],
+      },
       image: {
         "@type": "ImageObject",
         url: imageUrl,
@@ -161,6 +166,10 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, refe
         name: "DeepCalm AI",
         url: BASE,
       },
+      /** citation — 将参考文献注入 Article schema，强化 E-E-A-T 信号 */
+      ...(references && references.length > 0
+        ? { citation: references.map((r) => ({ "@type": "CreativeWork", url: r })) }
+        : {}),
     },
     {
       "@type": "MedicalWebPage",
@@ -208,6 +217,7 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, refe
         acceptedAnswer: { "@type": "Answer", text: item.a },
       })),
       isPartOf: { "@type": "WebPage", "@id": pageUrl },
+      mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
     })
   }
 

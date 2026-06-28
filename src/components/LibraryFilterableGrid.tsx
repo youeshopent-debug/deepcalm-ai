@@ -68,8 +68,7 @@ export default function LibraryFilterableGrid({
               {intro && (
                 <p className="text-sm text-nord-text/40 mb-6 ml-9 max-w-2xl">{intro}</p>
               )}
-              {/* Horizontal scroll container — native scrollbars hidden via .scrollbar-none */}
-              <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-none">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {topics.map((topic) => (
                   <LibraryCard
                     key={topic.slug}
