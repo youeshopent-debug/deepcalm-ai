@@ -12,6 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html>
       <head>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9587418043365530" crossOrigin="anonymous"></script>
+        <meta name="google-adsense-account" content="ca-pub-9587418043365530" />
         <WebsiteJsonLd />
         <OrganizationJsonLd />
         <PersonJsonLd />
