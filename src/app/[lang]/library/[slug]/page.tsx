@@ -8,6 +8,7 @@ import LibraryCard from "@/components/LibraryCard"
 import AiEntrance from "@/components/AiEntrance"
 import ExpertBadge from "@/components/ExpertBadge"
 import ExternalReferences from "@/components/ExternalReferences"
+import SsrAccordion from "@/components/SsrAccordion"
 import KnowledgeMap from "@/components/KnowledgeMap"
 import SleepStreakBadge from "@/components/SleepStreakBadge"
 import PrintPdfButtons from "@/components/PrintPdfButtons"
@@ -154,18 +155,20 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
             <div className="lg:order-2 min-w-0">
               <div className="space-y-8 max-w-3xl">
                 {/* Science Section */}
-                <div id="science" className="p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] scroll-mt-24">
-                  <h2 className="text-lg font-bold text-slate-900 mb-4">
-                    {locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
-                  </h2>
-                  <div className="prose prose-invert max-w-none prose-p:text-slate-800 prose-p:leading-relaxed">
-                    {content.science.split("\n").filter(Boolean).map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
-                  </div>
-                  {topic.references && topic.references.length > 0 && (
-                    <ExternalReferences references={topic.references} locale={locale} />
-                  )}
+                <div id="science" className="scroll-mt-24">
+                  <SsrAccordion
+                    title={locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
+                    className="!bg-white/98 !backdrop-blur-[100px] !border-slate-200/30 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+                  >
+                    <div className="prose prose-invert max-w-none prose-p:text-slate-800 prose-p:leading-relaxed">
+                      {content.science.split("\n").filter(Boolean).map((p, i) => (
+                        <p key={i}>{p}</p>
+                      ))}
+                    </div>
+                    {topic.references && topic.references.length > 0 && (
+                      <ExternalReferences references={topic.references} locale={locale} />
+                    )}
+                  </SsrAccordion>
                 </div>
 
                 {/* Fitness Guide Section */}

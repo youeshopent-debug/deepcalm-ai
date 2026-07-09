@@ -90,6 +90,37 @@ const CARDS: CardDef[] = [
   },
 ]
 
+/** Card-specific CTA text (action-oriented, per card) */
+const CTA_TEXT: Record<number, Record<Locale, string>> = {
+  0: {
+    zh: "开始计划",
+    en: "Start Plan",
+    ms: "Mulakan Rancangan",
+    ja: "計画を開始",
+    ko: "계획 시작",
+    th: "เริ่มแผน",
+    es: "Iniciar Plan",
+  },
+  1: {
+    zh: "开始练习",
+    en: "Start Practice",
+    ms: "Mulakan Latihan",
+    ja: "練習を開始",
+    ko: "연습 시작",
+    th: "เริ่มฝึก",
+    es: "Iniciar Práctica",
+  },
+  2: {
+    zh: "前往工具箱",
+    en: "Go to Toolbox",
+    ms: "Pergi ke Alatan",
+    ja: "ツールボックスへ",
+    ko: "도구함으로",
+    th: "ไปยังกล่องเครื่องมือ",
+    es: "Ir a la Caja de Herramientas",
+  },
+}
+
 const CARD_ICON_WRAPPERS = [
   "bg-indigo-500/10 text-indigo-400",
   "bg-rose-500/10 text-rose-400",
@@ -124,6 +155,7 @@ export default function ActionableToolCards({
             const title = card.title[locale] || card.title.en
             const hook = card.hook[locale] || card.hook.en
             const iconWrapperStyle = CARD_ICON_WRAPPERS[i] || CARD_ICON_WRAPPERS[0]
+            const ctaText = CTA_TEXT[i]?.[locale] || CTA_TEXT[i]?.en || ""
 
             const isLink = !!card.href
             const isButton = card.action === "breathing" || card.action === "anchor"
@@ -154,16 +186,9 @@ export default function ActionableToolCards({
                 {/* Hook */}
                 <p className="text-xs text-dc-muted/70 leading-relaxed flex-1">{hook}</p>
 
-                {/* Arrow indicator */}
-                <div className="mt-3 flex items-center gap-1 text-[11px] text-dc-accent/60 group-hover:text-dc-accent transition-colors">
-                  <span>
-                    {locale === "zh" ? "了解更多" :
-                     locale === "ms" ? "Ketahui" :
-                     locale === "ja" ? "詳細" :
-                     locale === "ko" ? "자세히" :
-                     locale === "th" ? "เรียนรู้" :
-                     locale === "es" ? "Saber más" : "Learn more"}
-                  </span>
+                {/* CTA Pill */}
+                <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full border bg-dc-accent/15 text-dc-accent border-dc-accent/20 group-hover:bg-dc-accent/25 transition-all duration-200">
+                  <span>{ctaText}</span>
                   <span className="text-xs group-hover:translate-x-0.5 transition-transform">→</span>
                 </div>
               </>

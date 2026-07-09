@@ -14,14 +14,14 @@ interface Dot {
   phase: number
 }
 
-function dots(count: number, w: number, h: number): Dot[] {
+function dots(count: number, w: number, h: number, subtle: boolean): Dot[] {
   return Array.from({ length: count }, () => ({
     x: Math.random() * w,
     y: Math.random() * h,
     sx: (Math.random() - 0.5) * 0.3,
     sy: (Math.random() - 0.5) * 0.3,
-    r: 1.5 + Math.random() * 2.5,
-    a: 0.04 + Math.random() * 0.06,
+    r: subtle ? 2.0 + Math.random() * 3.0 : 1.5 + Math.random() * 2.5,
+    a: subtle ? 0.08 + Math.random() * 0.10 : 0.10 + Math.random() * 0.20,
     phase: Math.random() * Math.PI * 2,
   }))
 }
@@ -51,11 +51,11 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
     const ctx = c.getContext("2d")
     if (!ctx) return
 
-    const count = videoMode ? 12 : 60
+    const count = videoMode ? 24 : 60
     const resize = () => {
       c.width = window.innerWidth
       c.height = window.innerHeight
-      pRef.current = dots(count, c.width, c.height)
+      pRef.current = dots(count, c.width, c.height, !!videoMode)
     }
     resize()
     window.addEventListener("resize", resize)

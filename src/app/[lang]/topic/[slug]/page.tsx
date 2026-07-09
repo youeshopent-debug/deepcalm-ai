@@ -3,7 +3,8 @@ import { getDict, tt } from "@/lib/getDict";
 import type { Locale } from "@/types";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import Link from "next/link";
-import { notFound, redirect, RedirectType } from "next/navigation";
+import { notFound } from "next/navigation";
+import SsrAccordion from "@/components/SsrAccordion";
 import { TopicJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 
 const categoryColors: Record<string, string> = {
@@ -47,7 +48,7 @@ const CATEGORY_NAMES: Record<string, Record<Locale, string>> = {
 
 export async function generateStaticParams() {
   const slugs = getAllSlugs()
-  const langs: Locale[] = ["zh", "en", "ms"]
+  const langs: Locale[] = ["zh", "en", "ms", "ja", "ko", "th", "es"]
   const params: { lang: string; slug: string }[] = []
   for (const lang of langs) {
     for (const slug of slugs) {
@@ -131,16 +132,16 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
           </div>
 
           <div className="space-y-8">
-            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-4">
-                {locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
-              </h2>
+            <SsrAccordion
+              title={locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
+              className="!bg-nord-card !border-nord-border/30"
+            >
               <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed">
                 {content.science.split("\n").map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
               </div>
-            </div>
+            </SsrAccordion>
 
             <div className="p-6 sm:p-8 bg-gradient-to-br from-nord-accent/[0.06] to-nord-card border border-nord-accent/15 rounded-2xl">
               <h2 className="text-lg font-bold text-nord-text mb-4">
@@ -212,5 +213,4 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
 
     </div>
   )
-  redirect(`/${lang}/library/${slug}`, RedirectType.replace)
 }
