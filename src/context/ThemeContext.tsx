@@ -2,9 +2,9 @@
 
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react"
 
-export type ThemeType = "deepcalm" | "forest" | "twilight" | "earth" | "deepsea" | "starry"
+export type ThemeType = "deepcalm" | "forest" | "twilight" | "earth" | "deepsea" | "starry" | "winter_night"
 
-const VALID_THEMES: ThemeType[] = ["deepcalm", "forest", "twilight", "earth", "deepsea", "starry"]
+const VALID_THEMES: ThemeType[] = ["deepcalm", "forest", "twilight", "earth", "deepsea", "starry", "winter_night"]
 
 interface ThemeContextType {
   theme: ThemeType

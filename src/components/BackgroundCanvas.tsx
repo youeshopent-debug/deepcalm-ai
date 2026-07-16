@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react"
 import { useTheme, type ThemeType } from "@/context/ThemeContext"
+import { audioEngine } from "@/lib/audioEngine"
 
 const BREATH_MS = 19000
 const T_INHALE = 0.21
@@ -51,6 +52,7 @@ const PALETTES: Record<ThemeType, Palette> = {
   earth:   { bright: { r: 220, g: 190, b: 140 }, mid: { r: 160, g: 130, b: 80 },  dim: { r: 80, g: 60, b: 35 } },
   deepsea: { bright: { r: 100, g: 180, b: 255 }, mid: { r: 40, g: 110, b: 200 },  dim: { r: 15, g: 50, b: 120 } },
   starry:  { bright: { r: 200, g: 160, b: 255 }, mid: { r: 130, g: 80, b: 200 },  dim: { r: 55, g: 30, b: 100 } },
+  winter_night: { bright: { r: 220, g: 235, b: 255 }, mid: { r: 180, g: 200, b: 240 }, dim: { r: 100, g: 120, b: 180 } },
 }
 
 function lerpRGB(a: RGB, b: RGB, t: number): RGB {
@@ -70,6 +72,9 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
   const rid = useRef(0)
   const t0 = useRef(0)
   const angleRef = useRef(0)
+  /* ── breathing bridge: prefer audioEngine, fallback to local timer ── */
+  const breathPhaseRef = useRef<'inhale' | 'hold' | 'exhale' | 'done' | null>(null)
+  const breathProgressRef = useRef(0)
 
   useEffect(() => {
     const c = canvas.current
@@ -94,20 +99,47 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
       if (!ctx || !c) return
       if (!t0.current) t0.current = now
       const elapsed = now - t0.current
-      const t = (elapsed % BREATH_MS) / BREATH_MS
 
-      /* breathing Z offset: inhale → particles drift forward 200px */
+      /* ── breathing bridge: read from audioEngine if active ── */
+      const enginePhase = audioEngine.breathingPhase
+      const engineProgress = audioEngine.breathingProgress
       let breathZ: number
-      if (t < T_INHALE) {
-        breathZ = (t / T_INHALE) * 200
-      } else if (t < T_HOLD) {
-        breathZ = 200
+      if (enginePhase !== null) {
+        /* sync with BreathingGuide / audioEngine */
+        breathPhaseRef.current = enginePhase
+        breathProgressRef.current = engineProgress
+        const p = engineProgress
+        if (enginePhase === 'inhale') {
+          breathZ = p * 200
+        } else if (enginePhase === 'hold') {
+          breathZ = 200
+        } else { /* exhale */
+          breathZ = 200 - p * 200
+        }
       } else {
-        breathZ = 200 - ((t - T_HOLD) / (1 - T_HOLD)) * 200
+        /* fallback: independent 4-7-8 timer when engine not running */
+        const t = (elapsed % BREATH_MS) / BREATH_MS
+        if (t < T_INHALE) {
+          breathZ = (t / T_INHALE) * 200
+          breathPhaseRef.current = 'inhale'
+          breathProgressRef.current = t / T_INHALE
+        } else if (t < T_HOLD) {
+          breathZ = 200
+          breathPhaseRef.current = 'hold'
+          breathProgressRef.current = (t - T_INHALE) / (T_HOLD - T_INHALE)
+        } else {
+          breathZ = 200 - ((t - T_HOLD) / (1 - T_HOLD)) * 200
+          breathPhaseRef.current = 'exhale'
+          breathProgressRef.current = (t - T_HOLD) / (1 - T_HOLD)
+        }
       }
 
-      /* slow Y-axis rotation */
-      angleRef.current += 0.002
+      const isSnow = theme === 'winter_night'
+
+      if (!isSnow) {
+        /* slow Y-axis rotation (only for non-snow modes) */
+        angleRef.current += 0.002
+      }
 
       const w = window.innerWidth
       const h = window.innerHeight
@@ -115,6 +147,7 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
       const cy = h / 2
       const cosA = Math.cos(angleRef.current)
       const sinA = Math.sin(angleRef.current)
+      const halfH = h / 2
 
       /* painter's algorithm: sort far→near */
       const sorted = [...pRef.current].sort((a, b) => b.z - a.z)
@@ -124,14 +157,34 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
       const pal = PALETTES[theme] ?? PALETTES.deepcalm
 
       for (const p of sorted) {
-        /* gentle Brownian drift */
-        p.x += Math.sin(elapsed * 0.0003 + p.phase) * p.vx
-        p.y += Math.cos(elapsed * 0.0004 + p.phase) * p.vy
-        p.z += Math.sin(elapsed * 0.0002 + p.phase * 1.3) * p.vz
+        let rx: number, rz: number
 
-        /* Y-axis rotation */
-        const rx = p.x * cosA - p.z * sinA
-        const rz = p.x * sinA + p.z * cosA
+        if (isSnow) {
+          /* ── Snowfall mode: gravity + horizontal sway + breath-modulated speed ── */
+          const speedMul = breathPhaseRef.current === 'exhale' ? 1.3
+            : breathPhaseRef.current === 'inhale' ? 0.6
+            : 1.0
+          p.y += 0.35 * speedMul
+          p.x += Math.sin(elapsed * 0.0015 + p.phase) * 0.25 * speedMul
+          p.z += Math.sin(elapsed * 0.0006 + p.phase * 1.3) * 0.04
+          /* reset when falls off bottom */
+          if (p.y > halfH + 120) {
+            p.y = -halfH - 60
+            p.x = (Math.random() - 0.5) * Math.min(w, h) * 0.6
+            p.z = (Math.random() - 0.5) * DEPTH
+          }
+          rx = p.x
+          rz = p.z
+        } else {
+          /* gentle Brownian drift */
+          p.x += Math.sin(elapsed * 0.0003 + p.phase) * p.vx
+          p.y += Math.cos(elapsed * 0.0004 + p.phase) * p.vy
+          p.z += Math.sin(elapsed * 0.0002 + p.phase * 1.3) * p.vz
+
+          /* Y-axis rotation */
+          rx = p.x * cosA - p.z * sinA
+          rz = p.x * sinA + p.z * cosA
+        }
 
         /* breathing modulates Z depth – particles near centre shift more */
         const bz = rz + breathZ * (rz / HALF_DEPTH) * 0.5
@@ -141,7 +194,8 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
         if (d <= 0) continue
         const sx = cx + (rx * FOV) / d
         const sy = cy + (p.y * FOV) / d
-        const sr = Math.max(0.3, (p.r * FOV) / d)
+        const baseR = isSnow ? p.r * 1.6 : p.r
+        const sr = Math.max(0.3, (baseR * FOV) / d)
 
         /* depth-normalised [0..1]: 0 = front, 1 = back */
         const zNorm = Math.max(0, Math.min(1, (bz + HALF_DEPTH) / DEPTH))
@@ -159,11 +213,11 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
         ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha})`
         ctx.fill()
 
-        /* subtle glow on near, bright particles */
-        if (zNorm < 0.35 && sr > 0.8) {
+        /* subtle glow on near, bright particles / snowflakes */
+        if (zNorm < (isSnow ? 0.5 : 0.35) && sr > (isSnow ? 0.5 : 0.8)) {
           ctx.beginPath()
-          ctx.arc(sx, sy, sr * 2.8, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.07})`
+          ctx.arc(sx, sy, sr * (isSnow ? 3.5 : 2.8), 0, Math.PI * 2)
+          ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * (isSnow ? 0.12 : 0.07)})`
           ctx.fill()
         }
       }

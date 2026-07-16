@@ -527,6 +527,7 @@ export class AudioEngine {
     twilight: { on: ['stream', 'wind'], off: ['rain', 'fire', 'birds', 'insects'] },
     deepsea: { on: ['stream'], off: ['rain', 'fire', 'wind', 'birds', 'insects'] },
     starry: { on: ['wind'], off: ['rain', 'fire', 'stream', 'birds', 'insects'] },
+    winter_night: { on: ['wind'], off: ['rain', 'fire', 'stream', 'birds', 'insects'] },
     earth: { on: [], off: ['rain', 'wind', 'fire', 'stream', 'birds', 'insects'] },
     deepcalm: { on: [], off: [] },
   }

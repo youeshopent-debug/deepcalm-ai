@@ -4,10 +4,9 @@ import { useEffect, useRef, useState } from "react"
 import { useTheme, type ThemeType } from "@/context/ThemeContext"
 import { audioEngine } from "@/lib/audioEngine"
 import AudioMixer from "./AudioMixer"
-import BackgroundCanvas from "./BackgroundCanvas"
 import BackgroundVideo, { type VisualTheme } from "./BackgroundVideo"
 
-// Map ThemeType (4+2 options) to VisualTheme (4 video themes)
+// Map ThemeType to VisualTheme (used when video is rendered)
 const THEME_TO_VISUAL: Record<ThemeType, VisualTheme> = {
   deepcalm: "forest",
   forest: "forest",
@@ -15,6 +14,7 @@ const THEME_TO_VISUAL: Record<ThemeType, VisualTheme> = {
   earth: "forest",
   deepsea: "deepsea",
   starry: "starry",
+  winter_night: "starry",
 }
 
 export default function BackgroundLayer() {
@@ -46,16 +46,20 @@ export default function BackgroundLayer() {
 
   const visualTheme = THEME_TO_VISUAL[theme] || "forest"
 
+  /* winter_night uses Canvas-native snowfall — skip BackgroundVideo entirely */
+  const showVideo = theme !== 'winter_night'
+
   return (
     <>
-      <BackgroundVideo
-        theme={visualTheme}
-        overlayOpacity={0.5}
-        enabled={true}
-        breathingPhase={breathingPhase}
-        breathingProgress={breathingProgress}
-      />
-      <BackgroundCanvas videoMode={true} />
+      {showVideo && (
+        <BackgroundVideo
+          theme={visualTheme}
+          overlayOpacity={0.5}
+          enabled={true}
+          breathingPhase={breathingPhase}
+          breathingProgress={breathingProgress}
+        />
+      )}
 
       {/* Audio mixer — 6-channel ambient sound control */}
       <AudioMixer />
