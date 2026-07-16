@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Palette, Leaf, Sunset, Sun, Sparkles } from "lucide-react"
+import { Palette, Leaf, Sunset, Sun, Sparkles, Snowflake } from "lucide-react"
 import { useTheme, type ThemeType } from "@/context/ThemeContext"
 import { audioEngine } from "@/lib/audioEngine"
 
@@ -10,6 +10,7 @@ const themes: { key: ThemeType; label: string; labelEn: string; icon: typeof Lea
   { key: "forest", label: "森林空间", labelEn: "Forest Space", icon: Leaf, color: "#9CAF88" },
   { key: "twilight", label: "暮色空间", labelEn: "Twilight Space", icon: Sunset, color: "#778899" },
   { key: "earth", label: "大地空间", labelEn: "Earth Space", icon: Sun, color: "#E5D3B3" },
+  { key: "winter_night", label: "冬夜落雪", labelEn: "Winter Night", icon: Snowflake, color: "#B4C8FF" },
 ]
 
 export default function ThemeSwitcher() {
