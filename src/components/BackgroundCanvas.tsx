@@ -12,6 +12,8 @@ const DEPTH = 1000
 const HALF_DEPTH = 500
 const COUNT_DESKTOP = 280
 const COUNT_MOBILE = 140
+const SNOW_COUNT_DESKTOP = 360
+const SNOW_COUNT_MOBILE = 200
 
 /* ── 3D Particle ──────────────────────────────── */
 
@@ -134,15 +136,33 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
         }
       }
 
+      const w = window.innerWidth
+      const h = window.innerHeight
       const isSnow = theme === 'winter_night'
+
+      /* ── for snowfall, recreate particles with larger spread & size ── */
+      if (isSnow && pRef.current.length > 0 && pRef.current[0].vx > 0.5) {
+        /* already snow-initialized, skip */
+      } else if (isSnow) {
+        const snowCount = isMobile ? SNOW_COUNT_MOBILE : SNOW_COUNT_DESKTOP
+        const spread = Math.min(w, h) * 0.8
+        pRef.current = Array.from({ length: snowCount }, () => ({
+          x: (Math.random() - 0.5) * spread,
+          y: (Math.random() - 0.5) * spread,
+          z: (Math.random() - 0.5) * DEPTH,
+          vx: 0.6 + Math.random() * 0.5,  /* flag: >0.5 = snow-init */
+          vy: 0,
+          vz: 0,
+          r: 2.0 + Math.random() * 4.0,
+          phase: Math.random() * Math.PI * 2,
+        }))
+      }
 
       if (!isSnow) {
         /* slow Y-axis rotation (only for non-snow modes) */
         angleRef.current += 0.002
       }
 
-      const w = window.innerWidth
-      const h = window.innerHeight
       const cx = w / 2
       const cy = h / 2
       const cosA = Math.cos(angleRef.current)
@@ -160,18 +180,26 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
         let rx: number, rz: number
 
         if (isSnow) {
-          /* ── Snowfall mode: gravity + horizontal sway + breath-modulated speed ── */
-          const speedMul = breathPhaseRef.current === 'exhale' ? 1.3
-            : breathPhaseRef.current === 'inhale' ? 0.6
+          /* ── 3D Snowfall mode: gravity + 3-layer sway + breath-modulated ── */
+          const speedMul = breathPhaseRef.current === 'exhale' ? 1.25
+            : breathPhaseRef.current === 'inhale' ? 0.5
             : 1.0
-          p.y += 0.35 * speedMul
-          p.x += Math.sin(elapsed * 0.0015 + p.phase) * 0.25 * speedMul
-          p.z += Math.sin(elapsed * 0.0006 + p.phase * 1.3) * 0.04
-          /* reset when falls off bottom */
-          if (p.y > halfH + 120) {
-            p.y = -halfH - 60
-            p.x = (Math.random() - 0.5) * Math.min(w, h) * 0.6
+          /* gravity – slower at top (far z), faster near bottom (near z) */
+          const zDepth = (p.z + HALF_DEPTH) / DEPTH  /* 0..1 */
+          const gravity = (0.18 + zDepth * 0.25) * speedMul
+          p.y += gravity
+          /* 3-layer horizontal sway: primary + micro-turbulence + infraslow wave */
+          p.x += Math.sin(elapsed * 0.0012 + p.phase) * 0.35 * speedMul
+               + Math.sin(elapsed * 0.004 + p.phase * 2.7) * 0.08
+          /* Z-axis drift for depth parallax */
+          p.z += Math.sin(elapsed * 0.0005 + p.phase * 1.7) * 0.06 * speedMul
+          /* reset when falls off bottom – re-spawn at random depth for variety */
+          if (p.y > halfH + 150) {
+            p.y = -halfH - 80
+            p.x = (Math.random() - 0.5) * Math.min(w, h) * 0.8
             p.z = (Math.random() - 0.5) * DEPTH
+            p.r = 2.0 + Math.random() * 4.0
+            p.phase = Math.random() * Math.PI * 2
           }
           rx = p.x
           rz = p.z
@@ -194,30 +222,55 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
         if (d <= 0) continue
         const sx = cx + (rx * FOV) / d
         const sy = cy + (p.y * FOV) / d
-        const baseR = isSnow ? p.r * 1.6 : p.r
+        const baseR = isSnow ? p.r * 2.2 : p.r
         const sr = Math.max(0.3, (baseR * FOV) / d)
 
         /* depth-normalised [0..1]: 0 = front, 1 = back */
         const zNorm = Math.max(0, Math.min(1, (bz + HALF_DEPTH) / DEPTH))
 
         /* alpha fades with depth + brightens during inhale */
-        const baseAlpha = 0.55 - zNorm * 0.45
+        const baseAlpha = isSnow ? 0.85 - zNorm * 0.50 : 0.55 - zNorm * 0.45
         const breathBoost = 1.0 + (breathZ / 200) * 0.35
-        const finalAlpha = Math.min(0.92, baseAlpha * breathBoost)
+        const finalAlpha = Math.min(0.95, baseAlpha * breathBoost)
 
         /* colour interpolated by depth */
         const rgb = lerpRGB(pal.bright, pal.dim, zNorm)
 
         ctx.beginPath()
-        ctx.arc(sx, sy, sr, 0, Math.PI * 2)
+        if (isSnow && sr > 1.5) {
+          /* ── 6-point snowflake crystal for larger flakes ── */
+          const spokes = 6
+          const step = (Math.PI * 2) / spokes
+          ctx.moveTo(sx + sr, sy)
+          for (let i = 1; i < spokes; i++) {
+            const a = step * i
+            /* outer point */
+            ctx.lineTo(sx + Math.cos(a) * sr, sy + Math.sin(a) * sr)
+            /* inner notch */
+            const notchA = a + step / 2
+            ctx.lineTo(sx + Math.cos(notchA) * sr * 0.35, sy + Math.sin(notchA) * sr * 0.35)
+          }
+          ctx.closePath()
+        } else {
+          ctx.arc(sx, sy, sr, 0, Math.PI * 2)
+        }
         ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha})`
         ctx.fill()
 
         /* subtle glow on near, bright particles / snowflakes */
-        if (zNorm < (isSnow ? 0.5 : 0.35) && sr > (isSnow ? 0.5 : 0.8)) {
+        if (zNorm < (isSnow ? 0.55 : 0.35) && sr > (isSnow ? 0.4 : 0.8)) {
           ctx.beginPath()
-          ctx.arc(sx, sy, sr * (isSnow ? 3.5 : 2.8), 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * (isSnow ? 0.12 : 0.07)})`
+          if (isSnow) {
+            /* soft radial gradient glow for snowflakes */
+            const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, sr * 4.5)
+            grad.addColorStop(0, `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.25})`)
+            grad.addColorStop(1, `rgba(${rgb.r},${rgb.g},${rgb.b},0)`)
+            ctx.fillStyle = grad
+            ctx.arc(sx, sy, sr * 4.5, 0, Math.PI * 2)
+          } else {
+            ctx.arc(sx, sy, sr * 2.8, 0, Math.PI * 2)
+            ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.07})`
+          }
           ctx.fill()
         }
       }
