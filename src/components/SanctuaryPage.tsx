@@ -50,16 +50,18 @@ export default function SanctuaryPage({
 
         {/* ═══ 入门层：简短疗愈 Intro — SSR visible ═══ */}
         <section className="px-4 sm:px-6 -mt-6 sm:-mt-8 pb-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-base sm:text-lg text-dc-muted/90 leading-relaxed font-light tracking-wide">
-              {healingIntro}
-            </p>
-            <div className="mt-5 flex items-center justify-center gap-3">
-              <span className="h-px w-12 bg-dc-accent/30" />
-              <span className="text-xs text-dc-muted/40 uppercase tracking-[0.2em]">
-                {lang === "zh" ? "你的心灵庇护所" : "Your Sanctuary"}
-              </span>
-              <span className="h-px w-12 bg-dc-accent/30" />
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white/98 backdrop-blur-3xl p-6 sm:p-8 rounded-2xl border border-slate-200/20 text-center shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+              <p className="text-base sm:text-lg text-slate-800 leading-relaxed font-light tracking-wide">
+                {healingIntro}
+              </p>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <span className="h-px w-12 bg-dc-accent/30" />
+                <span className="text-xs text-slate-500/60 uppercase tracking-[0.2em]">
+                  {lang === "zh" ? "你的心灵庇护所" : "Your Sanctuary"}
+                </span>
+                <span className="h-px w-12 bg-dc-accent/30" />
+              </div>
             </div>
           </div>
         </section>
@@ -75,7 +77,7 @@ export default function SanctuaryPage({
               defaultOpen={false}
               className="border-dc-border/20"
             >
-              <p className="text-base sm:text-lg text-dc-muted leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-800 leading-relaxed">
                 {featuredInsightBody}
               </p>
               <div className="mt-6">
@@ -99,7 +101,7 @@ export default function SanctuaryPage({
         />
       </main>
 
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 text-xs text-dc-muted/40 pointer-events-none">
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 text-xs text-slate-500/60 pointer-events-none">
         DeepCalm AI · Midnight Sanctuary
       </div>
     </div>

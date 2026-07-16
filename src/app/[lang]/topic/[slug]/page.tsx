@@ -97,11 +97,11 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
   const dictZh = getDict("zh")
   const content = getTopicContent(slug, locale)
 
-  const catColor = categoryColors[topic.category] || "from-nord-accent/10 to-nord-accent/5"
+  const catColor = categoryColors[topic.category] || "from-sky-200/30 to-slate-200/30"
   const t = (key: string, fallback: string) => tt(dict, key) || tt(dictEn, key) || tt(dictZh, key) || fallback
 
   return (
-    <div className="min-h-screen bg-nord-bg">
+    <div className="min-h-screen bg-slate-50">
       <TopicJsonLd locale={locale} slug={slug} topic={topic} faqItems={content.faqItems} />
       <BreadcrumbJsonLd items={[
         { name: locale === "zh" ? "首页" : "Home", url: `https://deepcalm-ai.com/${locale}` },
@@ -114,69 +114,69 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href={`/${locale}`}
-            className="inline-flex items-center gap-2 text-nord-muted hover:text-nord-accent text-sm mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-slate-500 hover:text-sky-700 text-sm mb-8 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             {t("common.back", locale === "zh" ? "返回" : "Back")}
           </Link>
 
           <div className="mb-8">
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-nord-accent uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-700 uppercase tracking-wider">
               <BookOpen className="w-3.5 h-3.5" />
               {CATEGORY_NAMES[topic.category]?.[locale] || topic.category}
             </span>
-            <h1 className="text-3xl sm:text-4xl font-bold text-nord-text mt-3 mb-4">
+            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">
               {categoryIcon[topic.category] || "📖"} {topic.title}
             </h1>
-            <p className="text-nord-text/60 leading-relaxed">{topic.description}</p>
+            <p className="text-slate-800 leading-relaxed">{topic.description}</p>
           </div>
 
           <div className="space-y-8">
             <SsrAccordion
               title={locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
-              className="!bg-nord-card !border-nord-border/30"
+              className="!bg-white/98 !backdrop-blur-3xl !border !border-slate-200/20"
             >
-              <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed">
+              <div className="prose max-w-none prose-p:text-slate-800 prose-p:leading-relaxed">
                 {content.science.split("\n").map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
               </div>
             </SsrAccordion>
 
-            <div className="p-6 sm:p-8 bg-gradient-to-br from-nord-accent/[0.06] to-nord-card border border-nord-accent/15 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-4">
+            <div className="p-6 sm:p-8 bg-white/98 backdrop-blur-3xl border border-sky-200/20 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+              <h2 className="text-lg font-bold text-slate-900 mb-4">
                 {locale === "zh" ? "🏋️ 日常健身指南" : locale === "ms" ? "🏋️ Panduan Kecergasan" : "🏋️ Emotional Fitness Guide"}
               </h2>
-              <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed prose-strong:text-nord-text">
+              <div className="prose max-w-none prose-p:text-slate-800 prose-p:leading-relaxed prose-strong:text-slate-900">
                 {content.fitnessGuide.split("\n").map((line, i) => {
-                  if (line.startsWith("## ")) return <h3 key={i} className="text-base font-semibold text-nord-text mt-4 mb-2">{line.slice(3)}</h3>
-                  if (/^\d+\./.test(line.trim())) return <p key={i} className="text-nord-text/70 leading-relaxed mb-2">{line}</p>
+                  if (line.startsWith("## ")) return <h3 key={i} className="text-base font-semibold text-slate-900 mt-4 mb-2">{line.slice(3)}</h3>
+                  if (/^\d+\./.test(line.trim())) return <p key={i} className="text-slate-800 leading-relaxed mb-2">{line}</p>
                   if (line.trim() === "") return null
-                  return <p key={i} className="text-nord-text/70 leading-relaxed">{line}</p>
+                  return <p key={i} className="text-slate-800 leading-relaxed">{line}</p>
                 })}
               </div>
             </div>
 
-            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-6">
+            <div className="p-6 sm:p-8 bg-white/98 backdrop-blur-3xl border border-slate-200/20 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+              <h2 className="text-lg font-bold text-slate-900 mb-6">
                 {locale === "zh" ? "❓ 常见问题" : locale === "ms" ? "❓ Soalan Lazim" : "❓ FAQ"}
               </h2>
               <div className="space-y-4">
                 {content.faqItems.map((item, i) => (
-                  <div key={i} className="p-4 bg-nord-bg/50 rounded-xl border border-nord-border/20">
-                    <p className="text-nord-text font-medium text-sm mb-2">{item.q}</p>
-                    <p className="text-nord-text/60 text-sm leading-relaxed">{item.a}</p>
+                  <div key={i} className="p-4 bg-white/95 rounded-xl border border-slate-200/20">
+                    <p className="text-slate-900 font-medium text-sm mb-2">{item.q}</p>
+                    <p className="text-slate-700 text-sm leading-relaxed">{item.a}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-4">
+            <div className="p-6 sm:p-8 bg-white/98 backdrop-blur-3xl border border-slate-200/20 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+              <h2 className="text-lg font-bold text-slate-900 mb-4">
                 {locale === "zh" ? "📋 临床依据与引用" : locale === "ms" ? "📋 Rujukan Klinikal" : "📋 Clinical Evidence & References"}
               </h2>
-              <div className="prose prose-invert max-w-none">
-                <p className="nord-text/70 text-sm leading-relaxed">{CLINICAL_EVIDENCE[locale] || CLINICAL_EVIDENCE.en}</p>
+              <div className="prose max-w-none">
+                <p className="text-slate-700 text-sm leading-relaxed">{CLINICAL_EVIDENCE[locale] || CLINICAL_EVIDENCE.en}</p>
               </div>
             </div>
 
@@ -186,8 +186,8 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
               if (related.length === 0) return null
               const visible = related.slice(0, 4)
               return (
-                <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
-                  <h2 className="text-lg font-bold text-nord-text mb-6">
+                <div className="p-6 sm:p-8 bg-white/98 backdrop-blur-3xl border border-slate-200/20 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-lg font-bold text-slate-900 mb-6">
                     {locale === "zh" ? "📖 推荐阅读" : locale === "ms" ? "📖 Bacaan Disyorkan" : "📖 Recommended Reading"}
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -195,12 +195,12 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
                       <Link
                         key={r.slug}
                         href={`/${locale}/topic/${r.slug}`}
-                        className="block p-4 bg-nord-bg/50 rounded-xl border border-nord-border/20 hover:border-dc-accent/30 hover:bg-dc-accent/5 transition-all duration-300"
+                        className="block p-4 bg-white/95 rounded-xl border border-slate-200/20 hover:border-sky-300/30 hover:bg-sky-50/50 transition-all duration-300"
                       >
-                        <span className="text-sm font-medium text-nord-text leading-snug block mb-1">
+                        <span className="text-sm font-medium text-slate-900 leading-snug block mb-1">
                           {categoryIcon[r.category] || "📖"} {r.title}
                         </span>
-                        <span className="text-xs text-nord-text/50 line-clamp-2">{r.description}</span>
+                        <span className="text-xs text-slate-600 line-clamp-2">{r.description}</span>
                       </Link>
                     ))}
                   </div>
