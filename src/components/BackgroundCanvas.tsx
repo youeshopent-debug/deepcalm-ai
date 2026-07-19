@@ -40,10 +40,50 @@ const SNOW_LAYERS: LayerDef[] = [
   { zMin: -500, zMax: -150, rMin: 4.0, rMax: 7.0, alphaBase: 0.75, alphaRange: 0.20, speed: 1.50, swayAmp: 0.70, ratio: 0.20 },
 ]
 
-/* ── Wind field: multi-frequency superposition ────── */
-const WIND_FREQ = [0.0008, 0.0015, 0.0030, 0.0055, 0.0011]
-const WIND_AMP  = [0.35,   0.20,   0.10,   0.04,   0.12]
-const WIND_PHASE_MULT = [1.0, 2.3, 4.7, 8.1, 0.6]
+/* ── Simplex Noise (3D) ─────────────────────────────
+     Compact implementation based on Stefan Gustavson's
+     simplex noise. Returns value in [-1, 1].          */
+const STRETCH_3D = 1 / 3
+const SQUISH_3D = 1 / 6
+const SIMPLEX_GRAD: number[][] = []
+const GRAD_TABLE = [
+  [1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],
+  [1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],
+  [0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1],
+]
+for (let gi = 0; gi < 12; gi++) {
+  for (let rep = 0; rep < 4; rep++) SIMPLEX_GRAD.push(GRAD_TABLE[gi])
+}
+const PERM: number[] = []
+;(function initPerm() {
+  const p = [151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,190,6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,125,136,171,168,68,175,74,165,71,134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,230,220,105,92,41,55,46,245,40,244,102,143,54,65,25,63,161,1,216,80,73,209,76,132,187,208,89,18,169,200,196,135,130,116,188,159,86,164,100,109,198,173,186,3,64,52,217,226,250,124,123,5,202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,189,28,42,223,183,170,213,119,248,152,2,44,154,163,70,221,153,101,155,167,43,172,9,129,22,39,253,19,98,108,110,79,113,224,232,178,185,112,104,218,246,97,228,251,34,242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,107,49,192,214,31,181,199,106,157,184,84,204,176,115,121,50,45,127,4,150,254,138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180]
+  for (let i = 0; i < 512; i++) PERM[i] = p[i & 255]
+})()
+function simplex3D(x: number, y: number, z: number): number {
+  const s = (x + y + z) * STRETCH_3D
+  const xs = x + s; const ys = y + s; const zs = z + s
+  const xsb = Math.floor(xs); const ysb = Math.floor(ys); const zsb = Math.floor(zs)
+  const si = (xsb + ysb + zsb) * SQUISH_3D
+  const xb = xsb - si; const yb = ysb - si; const zb = zsb - si
+  const xr = x - xb; const yr = y - yb; const zr = z - zb
+  let i: number, j: number, k: number
+  if (xr >= yr) {
+    if (yr >= zr) { i=1; j=0; k=0; } else if (xr >= zr) { i=1; j=0; k=1; } else { i=0; j=0; k=1; }
+  } else {
+    if (yr < zr) { i=0; j=0; k=1; } else if (xr < zr) { i=0; j=1; k=0; } else { i=0; j=1; k=1; }
+  }
+  const t0 = 0.6 - xr*xr - yr*yr - zr*zr; let n0 = 0; if (t0 > 0) { n0 = t0*t0*t0*t0 * (SIMPLEX_GRAD[PERM[PERM[PERM[xsb&255]+ysb&255]+zsb&255]%12][0]*xr + SIMPLEX_GRAD[PERM[PERM[PERM[xsb&255]+ysb&255]+zsb&255]%12][1]*yr + SIMPLEX_GRAD[PERM[PERM[PERM[xsb&255]+ysb&255]+zsb&255]%12][2]*zr) }
+  const xr1 = xr - i + SQUISH_3D; const yr1 = yr - j + SQUISH_3D; const zr1 = zr - k + SQUISH_3D
+  const t1 = 0.6 - xr1*xr1 - yr1*yr1 - zr1*zr1; let n1 = 0; if (t1 > 0) { n1 = t1*t1*t1*t1 * (SIMPLEX_GRAD[PERM[PERM[PERM[(xsb+i)&255]+(ysb+j)&255]+(zsb+k)&255]%12][0]*xr1 + SIMPLEX_GRAD[PERM[PERM[PERM[(xsb+i)&255]+(ysb+j)&255]+(zsb+k)&255]%12][1]*yr1 + SIMPLEX_GRAD[PERM[PERM[PERM[(xsb+i)&255]+(ysb+j)&255]+(zsb+k)&255]%12][2]*zr1) }
+  const xr2 = xr - 0.5 + SQUISH_3D * 2; const yr2 = yr - 0.5 + SQUISH_3D * 2; const zr2 = zr - 0.5 + SQUISH_3D * 2
+  const t2 = 0.6 - xr2*xr2 - yr2*yr2 - zr2*zr2; let n2 = 0; if (t2 > 0) { n2 = t2*t2*t2*t2 * (SIMPLEX_GRAD[PERM[PERM[PERM[(xsb+1)&255]+(ysb+1)&255]+(zsb+1)&255]%12][0]*xr2 + SIMPLEX_GRAD[PERM[PERM[PERM[(xsb+1)&255]+(ysb+1)&255]+(zsb+1)&255]%12][1]*yr2 + SIMPLEX_GRAD[PERM[PERM[PERM[(xsb+1)&255]+(ysb+1)&255]+(zsb+1)&255]%12][2]*zr2) }
+  return (n0 + n1 + n2) * 32
+}
+
+/* ── Wind field: Simplex Noise (replaces sine superposition) ── */
+const WIND_NOISE_SCALE = 0.008   /* spatial frequency */
+const WIND_TIME_SCALE = 0.0003   /* temporal frequency */
+const WIND_AMPLITUDE = 0.8       /* max horizontal displacement per frame */
 
 /* ── 3D Particle ──────────────────────────────────── */
 
@@ -101,6 +141,7 @@ function createSnowParticles(w: number, h: number): Particle3D[] {
      Baked blur for near-layer sprites                      */
 
 interface SnowSprites {
+  tiny: HTMLCanvasElement    /* ~1px radius — replaces ctx.arc() flat dots */
   small: HTMLCanvasElement   /* ~2px radius */
   medium: HTMLCanvasElement  /* ~4px */
   large: HTMLCanvasElement   /* ~7px */
@@ -160,6 +201,7 @@ function createSnowSprite(radius: number, blurPx: number, color: string): HTMLCa
 function preRenderSprites(): SnowSprites {
   const baseColor = "rgba(220, 235, 255, 0.85)"
   return {
+    tiny:   createSnowSprite(1, 0, baseColor),
     small:  createSnowSprite(2, 0, baseColor),
     medium: createSnowSprite(5, 1, baseColor),
     large:  createSnowSprite(9, 2, baseColor),
@@ -206,6 +248,8 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
   const breathProgressRef = useRef(0)
 
   useEffect(() => {
+    /* videoMode: skip all canvas rendering — video provides the visual */
+    if (videoMode) return
     try {
       const c = canvas.current
       if (!c) return
@@ -324,12 +368,12 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
                 const gravity = (0.12 + zDepth * 0.28) * breathFactor
                 p.y += gravity
   
-                /* multi-frequency wind (5 superimposed sine waves) */
-                let windX = 0
-                for (let i = 0; i < WIND_FREQ.length; i++) {
-                  windX += Math.sin(elapsed * WIND_FREQ[i] + p.phase * WIND_PHASE_MULT[i]) * WIND_AMP[i]
-                }
-                p.x += windX * breathFactor
+                /* Simplex Noise wind — organic, non-repeating turbulence */
+                const noiseX = p.x * WIND_NOISE_SCALE
+                const noiseY = p.y * WIND_NOISE_SCALE
+                const noiseT = elapsed * WIND_TIME_SCALE + p.phase * 0.5
+                const windForce = simplex3D(noiseX, noiseY, noiseT) * WIND_AMPLITUDE
+                p.x += windForce * breathFactor
   
                 /* Z-axis drift for depth parallax */
                 p.z += Math.sin(elapsed * 0.0005 + p.phase * 1.7) * 0.06 * breathFactor
@@ -411,11 +455,12 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
                   ctx.drawImage(sprite, sx - hs, sy - hs)
                   ctx.globalAlpha = 1
                 } else {
-                  /* ── Small / far flake: simple dot ─────── */
-                  ctx.beginPath()
-                  ctx.arc(sx, sy, Math.max(0.5, sr), 0, Math.PI * 2)
-                  ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.8})`
-                  ctx.fill()
+                  /* ── Small / far flake: drawImage miniature sprite ── */
+                  const sprite = sr > 1.0 ? sprites.tiny : sprites.tiny
+                  const hs = sprite.width / 2
+                  ctx.globalAlpha = finalAlpha * 0.8
+                  ctx.drawImage(sprite, sx - hs, sy - hs)
+                  ctx.globalAlpha = 1
                 }
               } else {
                 /* ── Non-snow rendering (circle) ──────────── */
@@ -485,12 +530,16 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-[var(--dc-deep)]" />
+      {!videoMode && (
+        <div className="absolute inset-0 bg-[var(--dc-deep)]" />
+      )}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--dc-surface)]/50" />
-      <canvas
-        ref={canvas}
-        className="absolute inset-0 w-full h-full"
-      />
+      {!videoMode && (
+        <canvas
+          ref={canvas}
+          className="absolute inset-0 w-full h-full"
+        />
+      )}
     </div>
   )
 }

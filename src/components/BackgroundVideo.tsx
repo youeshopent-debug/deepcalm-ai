@@ -145,6 +145,12 @@ export default function BackgroundVideo({
         />
       )}
 
+      {/* backdrop-blur 柔化: 降低视频压缩颗粒感 */}
+      <div className="absolute inset-0 backdrop-blur-[2px] pointer-events-none" />
+
+      {/* 暗色柔化覆盖层: 进一步抑制颗粒感 */}
+      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+
       {/* Theme-aware overlay */}
       <div
         className="absolute inset-0 transition-all duration-1000"

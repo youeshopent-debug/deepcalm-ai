@@ -433,13 +433,13 @@ body {
 
 @keyframes breath-glow {
   0%, 100% {
-    text-shadow: 0 0 20px rgba(126, 184, 255, 0.15),
-                 0 0 40px rgba(126, 184, 255, 0.06);
+    text-shadow: 0 0 20px rgba(6, 78, 59, 0.15),
+                 0 0 40px rgba(6, 78, 59, 0.06);
   }
   36.4% {
-    text-shadow: 0 0 40px rgba(126, 184, 255, 0.35),
-                 0 0 80px rgba(126, 184, 255, 0.15),
-                 0 0 120px rgba(126, 184, 255, 0.06);
+    text-shadow: 0 0 40px rgba(6, 78, 59, 0.35),
+                 0 0 80px rgba(6, 78, 59, 0.15),
+                 0 0 120px rgba(6, 78, 59, 0.06);
   }
 }
 

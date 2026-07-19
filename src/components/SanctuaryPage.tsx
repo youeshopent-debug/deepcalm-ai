@@ -1,6 +1,5 @@
 import Link from "next/link"
 import type { Locale } from "@/types"
-import BackgroundLayer from "./BackgroundLayer"
 import DailyBriefing from "./DailyBriefing"
 import InteractiveAreas from "./InteractiveAreas"
 import PublisherContentBlock, { type PublisherTopic } from "./PublisherContentBlock"
@@ -37,8 +36,6 @@ export default function SanctuaryPage({
 
   return (
     <div className="relative min-h-screen">
-      <BackgroundLayer />
-
       <main className="relative z-10">
         {/* ═══ Interactive layer (Hero + Tools + Counselor + Resonance) ═══ */}
         <InteractiveAreas

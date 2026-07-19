@@ -5,6 +5,7 @@ import { useTheme, type ThemeType } from "@/context/ThemeContext"
 import { audioEngine } from "@/lib/audioEngine"
 import AudioMixer from "./AudioMixer"
 import BackgroundVideo, { type VisualTheme } from "./BackgroundVideo"
+import BackgroundCanvas from "./BackgroundCanvas"
 
 // Map ThemeType to VisualTheme (used when video is rendered)
 const THEME_TO_VISUAL: Record<ThemeType, VisualTheme> = {
@@ -47,11 +48,11 @@ export default function BackgroundLayer() {
   const visualTheme = THEME_TO_VISUAL[theme] || "forest"
 
   /* winter_night uses Canvas-native snowfall — skip BackgroundVideo entirely */
-  const showVideo = theme !== 'winter_night'
+  const useVideo = theme !== 'winter_night'
 
   return (
     <>
-      {showVideo && (
+      {useVideo && (
         <BackgroundVideo
           theme={visualTheme}
           overlayOpacity={0.5}
@@ -60,6 +61,10 @@ export default function BackgroundLayer() {
           breathingProgress={breathingProgress}
         />
       )}
+
+      {/* Canvas layer: videoMode=true emits only ambient gradient when video active;
+          videoMode=false (winter_night) renders full snow engine */}
+      <BackgroundCanvas videoMode={useVideo} />
 
       {/* Audio mixer — 6-channel ambient sound control */}
       <AudioMixer />

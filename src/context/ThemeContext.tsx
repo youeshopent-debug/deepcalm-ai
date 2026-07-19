@@ -16,7 +16,7 @@ const ThemeContext = createContext<ThemeContextType | null>(null)
 const STORAGE_KEY = "deepcalm-theme"
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeType>("deepcalm")
+  const [theme, setThemeState] = useState<ThemeType>("forest")
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {

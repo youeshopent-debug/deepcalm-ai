@@ -1,5 +1,5 @@
 import AudioFloatingTray from "@/components/AudioFloatingTray";
-import BackgroundCanvas from "@/components/BackgroundCanvas";
+import BackgroundLayer from "@/components/BackgroundLayer";
 import CookieConsent from "@/components/CookieConsent";
 import Header from "@/components/Header";
 import MedicalDisclaimer from "@/components/MedicalDisclaimer";
@@ -46,7 +46,7 @@ export default function LangLayout({
     <LanguageProvider initialLocale={safeLocale} key={lang}>
       <ThemeProvider>
         <div className="dark min-h-screen bg-white/95 backdrop-blur-3xl text-slate-800">
-          <BackgroundCanvas />
+          <BackgroundLayer />
           <Header />
           {children}
           <SitemapFooter />
