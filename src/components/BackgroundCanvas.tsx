@@ -126,7 +126,9 @@ function createSnowSprite(radius: number, blurPx: number, color: string): HTMLCa
   const c = document.createElement("canvas")
   c.width = size
   c.height = size
-  const ctx = c.getContext("2d")!
+  const ctx = c.getContext("2d")
+  /* defensive: if Canvas2D context unavailable, return blank canvas */
+  if (!ctx) return c
   const cx = size / 2
   const cy = size / 2
 
@@ -204,265 +206,280 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
   const breathProgressRef = useRef(0)
 
   useEffect(() => {
-    const c = canvas.current
-    if (!c) return
-    const ctx = c.getContext("2d")
-    if (!ctx) return
+    try {
+      const c = canvas.current
+      if (!c) return
+      const ctx = c.getContext("2d")
+      if (!ctx) return
 
-    const isMobile = window.innerWidth < 768
+      const isMobile = window.innerWidth < 768
 
-    /* pre-render snowflake sprites once */
-    spritesRef.current = preRenderSprites()
-
-    /* resize handler */
-    const resize = () => {
-      c.width = window.innerWidth
-      c.height = window.innerHeight
-      const w = window.innerWidth
-      const h = window.innerHeight
-      if (theme === 'winter_night') {
-        pRef.current = createSnowParticles(w, h)
-      } else {
-        const count = isMobile ? COUNT_MOBILE : COUNT_DESKTOP
-        pRef.current = createParticles(count, w, h)
+      /* pre-render snowflake sprites once */
+      try {
+        spritesRef.current = preRenderSprites()
+      } catch (spriteErr) {
+        console.error("[BackgroundCanvas] sprite pre-render failed:", spriteErr)
+        spritesRef.current = null
       }
-    }
-    resize()
-    window.addEventListener("resize", resize)
 
-    /* ── animation loop ─────────────────────────── */
-    const draw = (now: number) => {
-      if (!ctx || !c) return
-      if (!t0.current) t0.current = now
-      const elapsed = now - t0.current
-
-      /* ── breathing bridge ────────────────────────── */
-      const enginePhase = audioEngine.breathingPhase
-      const engineProgress = audioEngine.breathingProgress
-      let breathZ: number
-      if (enginePhase !== null) {
-        breathPhaseRef.current = enginePhase
-        breathProgressRef.current = engineProgress
-        const p = engineProgress
-        if (enginePhase === 'inhale') {
-          breathZ = p * 200
-        } else if (enginePhase === 'hold') {
-          breathZ = 200
+      /* resize handler */
+      const resize = () => {
+        c.width = window.innerWidth
+        c.height = window.innerHeight
+        const w = window.innerWidth
+        const h = window.innerHeight
+        if (theme === 'winter_night') {
+          pRef.current = createSnowParticles(w, h)
         } else {
-          breathZ = 200 - p * 200
-        }
-      } else {
-        const t = (elapsed % BREATH_MS) / BREATH_MS
-        if (t < T_INHALE) {
-          breathZ = (t / T_INHALE) * 200
-          breathPhaseRef.current = 'inhale'
-          breathProgressRef.current = t / T_INHALE
-        } else if (t < T_HOLD) {
-          breathZ = 200
-          breathPhaseRef.current = 'hold'
-          breathProgressRef.current = (t - T_INHALE) / (T_HOLD - T_INHALE)
-        } else {
-          breathZ = 200 - ((t - T_HOLD) / (1 - T_HOLD)) * 200
-          breathPhaseRef.current = 'exhale'
-          breathProgressRef.current = (t - T_HOLD) / (1 - T_HOLD)
+          const count = isMobile ? COUNT_MOBILE : COUNT_DESKTOP
+          pRef.current = createParticles(count, w, h)
         }
       }
+      resize()
+      window.addEventListener("resize", resize)
 
-      const w = window.innerWidth
-      const h = window.innerHeight
-      const isSnow = theme === 'winter_night'
-
-      /* ── lazy initialise snow particles on first draw ── */
-      if (isSnow && pRef.current.length === 0) {
-        pRef.current = createSnowParticles(w, h)
-      }
-
-      if (!isSnow) {
-        /* slow Y-axis rotation (only for non-snow modes) */
-        angleRef.current += 0.002
-      }
-
-      const cx = w / 2
-      const cy = h / 2
-      const cosA = Math.cos(angleRef.current)
-      const sinA = Math.sin(angleRef.current)
-
-      /* ── painter's algorithm: sort far→near ───────── */
-      const sorted = [...pRef.current].sort((a, b) => b.z - a.z)
-
-      ctx.clearRect(0, 0, w, h)
-
-      /* ── breath factor for snow mode ───────────── */
-      const breathFactor = breathPhaseRef.current === 'exhale' ? 1.5
-        : breathPhaseRef.current === 'inhale' ? 0.5
-        : 1.0
-      /* opacity boost: inhale → dim, exhale → bright */
-      const breathOpacity = breathPhaseRef.current === 'exhale' ? 1.0
-        : breathPhaseRef.current === 'inhale' ? 0.40
-        : 0.75
-
-      const pal = PALETTES[theme] ?? PALETTES.deepcalm
-      const sprites = spritesRef.current
-
-      for (const p of sorted) {
-        let rx: number, ry: number, rz: number
-
-        if (isSnow) {
-          /* ── Snowflake physics ────────────────────── */
-
-          /* gravity by depth */
-          const zDepth = (p.z + HALF_DEPTH) / DEPTH   /* 0..1 */
-          const gravity = (0.12 + zDepth * 0.28) * breathFactor
-          p.y += gravity
-
-          /* multi-frequency wind (5 superimposed sine waves) */
-          let windX = 0
-          for (let i = 0; i < WIND_FREQ.length; i++) {
-            windX += Math.sin(elapsed * WIND_FREQ[i] + p.phase * WIND_PHASE_MULT[i]) * WIND_AMP[i]
-          }
-          p.x += windX * breathFactor
-
-          /* Z-axis drift for depth parallax */
-          p.z += Math.sin(elapsed * 0.0005 + p.phase * 1.7) * 0.06 * breathFactor
-
-          /* reset when falls off bottom */
-          if (p.y > h / 2 + 120) {
-            const layerIdx = Math.floor(Math.random() * SNOW_LAYERS.length)
-            const layer = SNOW_LAYERS[layerIdx]
-            p.y = -(h / 2) - 60
-            p.x = (Math.random() - 0.5) * Math.min(w, h) * 0.9
-            p.z = layer.zMin + Math.random() * (layer.zMax - layer.zMin)
-            p.r = layer.rMin + Math.random() * (layer.rMax - layer.rMin)
-            p.phase = Math.random() * Math.PI * 2
-          }
-
-          rx = p.x
-          ry = p.y
-          rz = p.z
-        } else {
-          /* gentle Brownian drift */
-          p.x += Math.sin(elapsed * 0.0003 + p.phase) * p.vx
-          p.y += Math.cos(elapsed * 0.0004 + p.phase) * p.vy
-          p.z += Math.sin(elapsed * 0.0002 + p.phase * 1.3) * p.vz
-
-          /* Y-axis rotation */
-          rx = p.x * cosA - p.z * sinA
-          ry = p.y
-          rz = p.x * sinA + p.z * cosA
-        }
-
-        /* breathing modulates Z depth */
-        const bz = rz + breathZ * (rz / HALF_DEPTH) * 0.5
-
-        /* ── 3D projection ───────────────────────────
-             sx = (x / z) * focalLength + centerX
-             scale = focalLength / z                         */
-        const zd = bz + FOCAL_LENGTH   /* shift to positive domain */
-        if (zd <= 0) continue
-        const scale = FOCAL_LENGTH / zd
-        const sx = cx + rx * scale
-        const sy = cy + ry * scale
-
-        /* depth-normalised [0..1]: 0 = front, 1 = back */
-        const zNorm = Math.max(0, Math.min(1, (bz + HALF_DEPTH) / DEPTH))
-
-        /* ── colour by depth ───────────────────────── */
-        const rgb = lerpRGB(pal.bright, pal.dim, zNorm)
-        const baseAlpha = isSnow
-          ? (0.75 - zNorm * 0.55) * breathOpacity
-          : 0.55 - zNorm * 0.45
-
-        /* ── snowflake rendering (isSnow branch) ──── */
-        if (isSnow && sprites) {
-          const sr = Math.max(0.4, p.r * scale)
-          const finalAlpha = Math.min(0.92, baseAlpha)
-
-          if (sr > 3.5) {
-            /* ── Large flake: crystal path + glow ───── */
-            /* glow first */
-            if (zNorm < 0.6) {
-              const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, sr * 4)
-              grad.addColorStop(0, `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.15})`)
-              grad.addColorStop(1, `rgba(${rgb.r},${rgb.g},${rgb.b},0)`)
-              ctx.fillStyle = grad
-              ctx.beginPath()
-              ctx.arc(sx, sy, sr * 4, 0, Math.PI * 2)
-              ctx.fill()
+      /* ── animation loop ─────────────────────────── */
+      const draw = (now: number) => {
+          try {
+            if (!ctx || !c) return
+            if (!t0.current) t0.current = now
+            const elapsed = now - t0.current
+  
+            /* ── breathing bridge ────────────────────────── */
+            const enginePhase = audioEngine.breathingPhase
+            const engineProgress = audioEngine.breathingProgress
+            let breathZ: number
+            if (enginePhase !== null) {
+              breathPhaseRef.current = enginePhase
+              breathProgressRef.current = engineProgress
+              const p = engineProgress
+              if (enginePhase === 'inhale') {
+                breathZ = p * 200
+              } else if (enginePhase === 'hold') {
+                breathZ = 200
+              } else {
+                breathZ = 200 - p * 200
+              }
+            } else {
+              const t = (elapsed % BREATH_MS) / BREATH_MS
+              if (t < T_INHALE) {
+                breathZ = (t / T_INHALE) * 200
+                breathPhaseRef.current = 'inhale'
+                breathProgressRef.current = t / T_INHALE
+              } else if (t < T_HOLD) {
+                breathZ = 200
+                breathPhaseRef.current = 'hold'
+                breathProgressRef.current = (t - T_INHALE) / (T_HOLD - T_INHALE)
+              } else {
+                breathZ = 200 - ((t - T_HOLD) / (1 - T_HOLD)) * 200
+                breathPhaseRef.current = 'exhale'
+                breathProgressRef.current = (t - T_HOLD) / (1 - T_HOLD)
+              }
             }
-            /* crystal */
-            ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha})`
-            ctx.beginPath()
-            renderCrystalPath(ctx, sr)
-            ctx.fill()
-          } else if (sr > 1.8) {
-            /* ── Medium flake: drawImage sprite + tint ── */
-            const sprite = sr > 2.8 ? sprites.medium : sprites.small
-            const hs = sprite.width / 2
-            ctx.globalAlpha = finalAlpha
-            ctx.drawImage(sprite, sx - hs, sy - hs)
-            ctx.globalAlpha = 1
-          } else {
-            /* ── Small / far flake: simple dot ─────── */
-            ctx.beginPath()
-            ctx.arc(sx, sy, Math.max(0.5, sr), 0, Math.PI * 2)
-            ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.8})`
-            ctx.fill()
-          }
-        } else {
-          /* ── Non-snow rendering (circle) ──────────── */
-          const sr = Math.max(0.3, (p.r * FOCAL_LENGTH) / (FOCAL_LENGTH + bz))
-          const finalAlpha = Math.min(0.85, baseAlpha * (1.0 + (breathZ / 200) * 0.35))
-
-          ctx.beginPath()
-          ctx.arc(sx, sy, sr, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha})`
-          ctx.fill()
-
-          if (zNorm < 0.35 && sr > 0.8) {
-            ctx.beginPath()
-            ctx.arc(sx, sy, sr * 2.8, 0, Math.PI * 2)
-            ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.07})`
-            ctx.fill()
+  
+            const w = window.innerWidth
+            const h = window.innerHeight
+            const isSnow = theme === 'winter_night'
+  
+            /* ── lazy initialise snow particles on first draw ── */
+            if (isSnow && pRef.current.length === 0) {
+              pRef.current = createSnowParticles(w, h)
+            }
+  
+            if (!isSnow) {
+              /* slow Y-axis rotation (only for non-snow modes) */
+              angleRef.current += 0.002
+            }
+  
+            const cx = w / 2
+            const cy = h / 2
+            const cosA = Math.cos(angleRef.current)
+            const sinA = Math.sin(angleRef.current)
+  
+            /* ── painter's algorithm: sort far→near ───────── */
+            const sorted = [...pRef.current].sort((a, b) => b.z - a.z)
+  
+            ctx.clearRect(0, 0, w, h)
+  
+            /* ── breath factor for snow mode ───────────── */
+            const breathFactor = breathPhaseRef.current === 'exhale' ? 1.5
+              : breathPhaseRef.current === 'inhale' ? 0.5
+              : 1.0
+            /* opacity boost: inhale → dim, exhale → bright */
+            const breathOpacity = breathPhaseRef.current === 'exhale' ? 1.0
+              : breathPhaseRef.current === 'inhale' ? 0.40
+              : 0.75
+  
+            const pal = PALETTES[theme] ?? PALETTES.deepcalm
+            const sprites = spritesRef.current
+  
+            for (const p of sorted) {
+              let rx: number, ry: number, rz: number
+  
+              if (isSnow) {
+                /* ── Snowflake physics ────────────────────── */
+  
+                /* gravity by depth */
+                const zDepth = (p.z + HALF_DEPTH) / DEPTH   /* 0..1 */
+                const gravity = (0.12 + zDepth * 0.28) * breathFactor
+                p.y += gravity
+  
+                /* multi-frequency wind (5 superimposed sine waves) */
+                let windX = 0
+                for (let i = 0; i < WIND_FREQ.length; i++) {
+                  windX += Math.sin(elapsed * WIND_FREQ[i] + p.phase * WIND_PHASE_MULT[i]) * WIND_AMP[i]
+                }
+                p.x += windX * breathFactor
+  
+                /* Z-axis drift for depth parallax */
+                p.z += Math.sin(elapsed * 0.0005 + p.phase * 1.7) * 0.06 * breathFactor
+  
+                /* reset when falls off bottom */
+                if (p.y > h / 2 + 120) {
+                  const layerIdx = Math.floor(Math.random() * SNOW_LAYERS.length)
+                  const layer = SNOW_LAYERS[layerIdx]
+                  p.y = -(h / 2) - 60
+                  p.x = (Math.random() - 0.5) * Math.min(w, h) * 0.9
+                  p.z = layer.zMin + Math.random() * (layer.zMax - layer.zMin)
+                  p.r = layer.rMin + Math.random() * (layer.rMax - layer.rMin)
+                  p.phase = Math.random() * Math.PI * 2
+                }
+  
+                rx = p.x
+                ry = p.y
+                rz = p.z
+              } else {
+                /* gentle Brownian drift */
+                p.x += Math.sin(elapsed * 0.0003 + p.phase) * p.vx
+                p.y += Math.cos(elapsed * 0.0004 + p.phase) * p.vy
+                p.z += Math.sin(elapsed * 0.0002 + p.phase * 1.3) * p.vz
+  
+                /* Y-axis rotation */
+                rx = p.x * cosA - p.z * sinA
+                ry = p.y
+                rz = p.x * sinA + p.z * cosA
+              }
+  
+              /* breathing modulates Z depth */
+              const bz = rz + breathZ * (rz / HALF_DEPTH) * 0.5
+  
+              /* ── 3D projection ───────────────────────────
+                   sx = (x / z) * focalLength + centerX
+                   scale = focalLength / z                         */
+              const zd = bz + FOCAL_LENGTH   /* shift to positive domain */
+              if (zd <= 0) continue
+              const scale = FOCAL_LENGTH / zd
+              const sx = cx + rx * scale
+              const sy = cy + ry * scale
+  
+              /* depth-normalised [0..1]: 0 = front, 1 = back */
+              const zNorm = Math.max(0, Math.min(1, (bz + HALF_DEPTH) / DEPTH))
+  
+              /* ── colour by depth ───────────────────────── */
+              const rgb = lerpRGB(pal.bright, pal.dim, zNorm)
+              const baseAlpha = isSnow
+                ? (0.75 - zNorm * 0.55) * breathOpacity
+                : 0.55 - zNorm * 0.45
+  
+              /* ── snowflake rendering (isSnow branch) ──── */
+              if (isSnow && sprites) {
+                const sr = Math.max(0.4, p.r * scale)
+                const finalAlpha = Math.min(0.92, baseAlpha)
+  
+                if (sr > 3.5) {
+                  /* ── Large flake: crystal path + glow ───── */
+                  /* glow first */
+                  if (zNorm < 0.6) {
+                    const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, sr * 4)
+                    grad.addColorStop(0, `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.15})`)
+                    grad.addColorStop(1, `rgba(${rgb.r},${rgb.g},${rgb.b},0)`)
+                    ctx.fillStyle = grad
+                    ctx.beginPath()
+                    ctx.arc(sx, sy, sr * 4, 0, Math.PI * 2)
+                    ctx.fill()
+                  }
+                  /* crystal */
+                  ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha})`
+                  ctx.beginPath()
+                  renderCrystalPath(ctx, sr)
+                  ctx.fill()
+                } else if (sr > 1.8) {
+                  /* ── Medium flake: drawImage sprite + tint ── */
+                  const sprite = sr > 2.8 ? sprites.medium : sprites.small
+                  const hs = sprite.width / 2
+                  ctx.globalAlpha = finalAlpha
+                  ctx.drawImage(sprite, sx - hs, sy - hs)
+                  ctx.globalAlpha = 1
+                } else {
+                  /* ── Small / far flake: simple dot ─────── */
+                  ctx.beginPath()
+                  ctx.arc(sx, sy, Math.max(0.5, sr), 0, Math.PI * 2)
+                  ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.8})`
+                  ctx.fill()
+                }
+              } else {
+                /* ── Non-snow rendering (circle) ──────────── */
+                const sr = Math.max(0.3, (p.r * FOCAL_LENGTH) / (FOCAL_LENGTH + bz))
+                const finalAlpha = Math.min(0.85, baseAlpha * (1.0 + (breathZ / 200) * 0.35))
+  
+                ctx.beginPath()
+                ctx.arc(sx, sy, sr, 0, Math.PI * 2)
+                ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha})`
+                ctx.fill()
+  
+                if (zNorm < 0.35 && sr > 0.8) {
+                  ctx.beginPath()
+                  ctx.arc(sx, sy, sr * 2.8, 0, Math.PI * 2)
+                  ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.07})`
+                  ctx.fill()
+                }
+              }
+            }
+  
+            /* ── Post-processing for snow mode ────────────── */
+  
+            if (isSnow) {
+              /* 1. Global radial gradient shadow at bottom
+                    (simulates moonlight behind clouds)          */
+              const shadowGrad = ctx.createRadialGradient(
+                w / 2, h * 0.85, 0,
+                w / 2, h * 0.85, w * 0.7,
+              )
+              shadowGrad.addColorStop(0, "rgba(20, 30, 60, 0)")
+              shadowGrad.addColorStop(0.6, `rgba(10, 20, 45, ${0.12 * breathOpacity})`)
+              shadowGrad.addColorStop(1, `rgba(5, 10, 30, ${0.25 * breathOpacity})`)
+              ctx.fillStyle = shadowGrad
+              ctx.fillRect(0, 0, w, h)
+  
+              /* 2. Snow mist layer at bottom edge
+                    alpha modulated by breathing rhythm           */
+              const mistH = Math.min(120, h * 0.08)
+              const mistAlpha = 0.08 + (1 - breathOpacity) * 0.12
+              const mistGrad = ctx.createLinearGradient(0, h - mistH * 2, 0, h)
+              mistGrad.addColorStop(0, "rgba(200, 220, 255, 0)")
+              mistGrad.addColorStop(0.5, `rgba(200, 220, 255, ${mistAlpha * 0.5})`)
+              mistGrad.addColorStop(1, `rgba(200, 220, 255, ${mistAlpha})`)
+              ctx.fillStyle = mistGrad
+              ctx.fillRect(0, h - mistH * 2, w, mistH * 2)
+            }
+  
+            rid.current = requestAnimationFrame(draw)
+          } catch (frameErr) {
+            console.error("[BackgroundCanvas] draw error:", frameErr)
+            /* ensure next frame is always scheduled even after error */
+            rid.current = requestAnimationFrame(draw)
           }
         }
-      }
-
-      /* ── Post-processing for snow mode ────────────── */
-
-      if (isSnow) {
-        /* 1. Global radial gradient shadow at bottom
-              (simulates moonlight behind clouds)          */
-        const shadowGrad = ctx.createRadialGradient(
-          w / 2, h * 0.85, 0,
-          w / 2, h * 0.85, w * 0.7,
-        )
-        shadowGrad.addColorStop(0, "rgba(20, 30, 60, 0)")
-        shadowGrad.addColorStop(0.6, `rgba(10, 20, 45, ${0.12 * breathOpacity})`)
-        shadowGrad.addColorStop(1, `rgba(5, 10, 30, ${0.25 * breathOpacity})`)
-        ctx.fillStyle = shadowGrad
-        ctx.fillRect(0, 0, w, h)
-
-        /* 2. Snow mist layer at bottom edge
-              alpha modulated by breathing rhythm           */
-        const mistH = Math.min(120, h * 0.08)
-        const mistAlpha = 0.08 + (1 - breathOpacity) * 0.12
-        const mistGrad = ctx.createLinearGradient(0, h - mistH * 2, 0, h)
-        mistGrad.addColorStop(0, "rgba(200, 220, 255, 0)")
-        mistGrad.addColorStop(0.5, `rgba(200, 220, 255, ${mistAlpha * 0.5})`)
-        mistGrad.addColorStop(1, `rgba(200, 220, 255, ${mistAlpha})`)
-        ctx.fillStyle = mistGrad
-        ctx.fillRect(0, h - mistH * 2, w, mistH * 2)
-      }
-
+  
       rid.current = requestAnimationFrame(draw)
-    }
 
-    rid.current = requestAnimationFrame(draw)
-
-    return () => {
-      cancelAnimationFrame(rid.current)
-      window.removeEventListener("resize", resize)
-      t0.current = 0
+      return () => {
+        cancelAnimationFrame(rid.current)
+        window.removeEventListener("resize", resize)
+        t0.current = 0
+      }
+    } catch (err) {
+      console.error("[BackgroundCanvas] effect error:", err)
     }
   }, [theme])
 
