@@ -133,7 +133,7 @@ function createSnowSprite(radius: number, blurPx: number, color: string): HTMLCa
   /* ── radial glow behind crystal ── */
   const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius + blurPx)
   grad.addColorStop(0, color)
-  grad.addColorStop(0.4, color.replace("0.", "0.3."))  /* partial transparency */
+  grad.addColorStop(0.4, "rgba(220,235,255,0.25)")
   grad.addColorStop(1, "rgba(0,0,0,0)")
   ctx.fillStyle = grad
   ctx.beginPath()
