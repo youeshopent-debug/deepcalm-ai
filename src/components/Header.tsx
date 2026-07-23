@@ -10,35 +10,33 @@ export default function Header() {
   const { tt, locale } = useLanguage()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-dc-deep/60 backdrop-blur-xl">
-      {/* 渐变覆盖层：确保导航文字在任何亮色背景上保持可读 */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent pointer-events-none -z-10" />
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/60 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center justify-between h-12">
           <div className="flex items-center gap-6">
             <Link href={`/${locale}`} className="flex items-center gap-2 group">
-              <div className="w-7 h-7 rounded-full bg-dc-accent/20 flex items-center justify-center group-hover:bg-dc-accent/30 transition-colors">
-                <Moon className="w-3.5 h-3.5 text-dc-accent" />
+              <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors">
+                <Moon className="w-3.5 h-3.5 text-emerald-300" />
               </div>
-              <span className="text-base font-semibold text-dc-text tracking-tight">
-                DeepCalm<span className="text-dc-accent"> AI</span>
+              <span className="text-base font-semibold text-white tracking-tight">
+                DeepCalm<span className="text-emerald-300"> AI</span>
               </span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-5 text-sm text-dc-muted">
-              <Link href={`/${locale}`} className="hover:text-dc-text transition-colors">
+            <nav className="hidden md:flex items-center gap-5 text-sm text-white/65">
+              <Link href={`/${locale}`} className="hover:text-white transition-colors">
                 {tt("nav.home")}
               </Link>
-              <Link href={`/${locale}/guide`} className="hover:text-dc-text transition-colors">
+              <Link href={`/${locale}/guide`} className="hover:text-white transition-colors">
                 {tt("nav.guide")}
               </Link>
-              <Link href={`/${locale}/about`} className="hover:text-dc-text transition-colors">
+              <Link href={`/${locale}/about`} className="hover:text-white transition-colors">
                 {tt("nav.about")}
               </Link>
-              <Link href={`/${locale}/privacy`} className="hover:text-dc-text transition-colors">
+              <Link href={`/${locale}/privacy`} className="hover:text-white transition-colors">
                 {tt("nav.privacy")}
               </Link>
-              <Link href={`/${locale}/terms`} className="hover:text-dc-text transition-colors">
+              <Link href={`/${locale}/terms`} className="hover:text-white transition-colors">
                 {tt("nav.terms")}
               </Link>
             </nav>
