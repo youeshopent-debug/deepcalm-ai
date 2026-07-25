@@ -1,8 +1,8 @@
 "use client"
 
-import { useRef, useEffect } from "react"
-import { useTheme, type ThemeType } from "@/context/ThemeContext"
-import { audioEngine } from "@/lib/audioEngine"
+import { useTheme, type ThemeType } from "@/context/ThemeContext";
+import { audioEngine } from "@/lib/audioEngine";
+import { useEffect, useRef } from "react";
 
 /* ── Breathing constants ─────────────────────────── */
 const BREATH_MS = 19000
@@ -15,12 +15,12 @@ const DEPTH = 1000
 const HALF_DEPTH = 500
 
 /* ── General particle counts (non-snow) ───────────── */
-const COUNT_DESKTOP = 280
-const COUNT_MOBILE = 140
+const COUNT_DESKTOP = 180
+const COUNT_MOBILE = 100
 
 /* ── Snowflake particle counts (per NotebookLM spec) ─ */
-const SNOW_DESKTOP = 400
-const SNOW_MOBILE = 180
+const SNOW_DESKTOP = 250
+const SNOW_MOBILE = 120
 
 /* ── 3-layer snowflake depth bands ───────────────────
      Far:   high transparency, very slow, tiny particles
@@ -35,9 +35,9 @@ interface LayerDef {
   ratio: number       /* fraction of total count */
 }
 const SNOW_LAYERS: LayerDef[] = [
-  { zMin:  150, zMax:  500, rMin: 0.8, rMax: 1.8, alphaBase: 0.30, alphaRange: 0.20, speed: 0.50, swayAmp: 0.20, ratio: 0.45 },
-  { zMin: -150, zMax:  150, rMin: 2.0, rMax: 4.0, alphaBase: 0.55, alphaRange: 0.25, speed: 1.00, swayAmp: 0.40, ratio: 0.35 },
-  { zMin: -500, zMax: -150, rMin: 4.0, rMax: 7.0, alphaBase: 0.75, alphaRange: 0.20, speed: 1.50, swayAmp: 0.70, ratio: 0.20 },
+  { zMin:  150, zMax:  500, rMin: 0.8, rMax: 1.8, alphaBase: 0.20, alphaRange: 0.15, speed: 0.50, swayAmp: 0.20, ratio: 0.45 },
+  { zMin: -150, zMax:  150, rMin: 2.0, rMax: 4.0, alphaBase: 0.40, alphaRange: 0.18, speed: 1.00, swayAmp: 0.40, ratio: 0.35 },
+  { zMin: -500, zMax: -150, rMin: 4.0, rMax: 7.0, alphaBase: 0.55, alphaRange: 0.15, speed: 1.50, swayAmp: 0.70, ratio: 0.20 },
 ]
 
 /* ── Simplex Noise (3D) ─────────────────────────────
@@ -422,8 +422,8 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
               /* ── colour by depth ───────────────────────── */
               const rgb = lerpRGB(pal.bright, pal.dim, zNorm)
               const baseAlpha = isSnow
-                ? (0.75 - zNorm * 0.55) * breathOpacity
-                : 0.55 - zNorm * 0.45
+                ? (0.65 - zNorm * 0.45) * breathOpacity
+                : 0.40 - zNorm * 0.35
   
               /* ── snowflake rendering (isSnow branch) ──── */
               if (isSnow && sprites) {
@@ -465,17 +465,17 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
               } else {
                 /* ── Non-snow rendering (circle) ──────────── */
                 const sr = Math.max(0.3, (p.r * FOCAL_LENGTH) / (FOCAL_LENGTH + bz))
-                const finalAlpha = Math.min(0.85, baseAlpha * (1.0 + (breathZ / 200) * 0.35))
-  
+                const finalAlpha = Math.min(0.65, baseAlpha * (1.0 + (breathZ / 200) * 0.35))
+
                 ctx.beginPath()
                 ctx.arc(sx, sy, sr, 0, Math.PI * 2)
                 ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha})`
                 ctx.fill()
-  
+
                 if (zNorm < 0.35 && sr > 0.8) {
                   ctx.beginPath()
-                  ctx.arc(sx, sy, sr * 2.8, 0, Math.PI * 2)
-                  ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.07})`
+                  ctx.arc(sx, sy, sr * 2.0, 0, Math.PI * 2)
+                  ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.04})`
                   ctx.fill()
                 }
               }

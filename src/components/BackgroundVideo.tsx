@@ -28,13 +28,13 @@ const THEME_OVERLAY_COLORS: Record<VisualTheme, string> = {
 
 const THEME_RADIALS: Record<VisualTheme, string> = {
   forest:
-    "radial-gradient(ellipse at top, rgba(126,184,255,0.10), transparent 60%), radial-gradient(ellipse at bottom, rgba(78,205,196,0.06), transparent 70%)",
+    "radial-gradient(ellipse at top, rgba(126,184,255,0.06), transparent 60%), radial-gradient(ellipse at bottom, rgba(78,205,196,0.04), transparent 70%)",
   twilight:
-    "radial-gradient(ellipse at top, rgba(200,160,220,0.10), transparent 55%), radial-gradient(ellipse at bottom, rgba(255,180,100,0.06), transparent 65%)",
+    "radial-gradient(ellipse at top, rgba(200,160,220,0.06), transparent 55%), radial-gradient(ellipse at bottom, rgba(255,180,100,0.04), transparent 65%)",
   deepsea:
-    "radial-gradient(ellipse at top, rgba(40,120,210,0.12), transparent 55%), radial-gradient(ellipse at bottom, rgba(20,60,120,0.08), transparent 65%)",
+    "radial-gradient(ellipse at top, rgba(40,120,210,0.08), transparent 55%), radial-gradient(ellipse at bottom, rgba(20,60,120,0.05), transparent 65%)",
   starry:
-    "radial-gradient(ellipse at top, rgba(160,120,240,0.10), transparent 55%), radial-gradient(ellipse at bottom, rgba(100,60,180,0.06), transparent 65%)",
+    "radial-gradient(ellipse at top, rgba(160,120,240,0.06), transparent 55%), radial-gradient(ellipse at bottom, rgba(100,60,180,0.04), transparent 65%)",
 }
 
 export default function BackgroundVideo({
