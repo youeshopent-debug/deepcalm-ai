@@ -1,7 +1,7 @@
 "use client"
 
-import { useRef, useEffect } from "react"
-import { useTheme, type ThemeType } from "@/context/ThemeContext"
+import { useTheme, type ThemeType } from "@/context/ThemeContext";
+import { useEffect, useRef } from "react";
 
 const BREATH_MS = 19000
 const T_INHALE = 0.21
@@ -20,8 +20,8 @@ function dots(count: number, w: number, h: number): Dot[] {
     y: Math.random() * h,
     sx: (Math.random() - 0.5) * 0.3,
     sy: (Math.random() - 0.5) * 0.3,
-    r: 1.5 + Math.random() * 2.5,
-    a: 0.04 + Math.random() * 0.06,
+    r: 1.0 + Math.random() * 1.5,
+    a: 0.02 + Math.random() * 0.04,
     phase: Math.random() * Math.PI * 2,
   }))
 }
@@ -49,7 +49,7 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
     const ctx = c.getContext("2d")
     if (!ctx) return
 
-    const count = videoMode ? 12 : 60
+    const count = videoMode ? 8 : 40
     const resize = () => {
       c.width = window.innerWidth
       c.height = window.innerHeight
@@ -76,7 +76,7 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
 
       const cx = c.width / 2
       const cy = c.height / 2
-      const drift = (scale - 1) * 80
+      const drift = (scale - 1) * 40
 
       for (const p of pRef.current) {
         const dx = p.x - cx
@@ -92,7 +92,7 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
         p.x += Math.sin(now * 0.0005 + p.phase) * p.sx
         p.y += Math.cos(now * 0.0007 + p.phase) * p.sy
 
-        const alpha = p.a * Math.min(1.4, scale + 0.2)
+        const alpha = p.a * scale
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r * scale, 0, Math.PI * 2)
         ctx.fillStyle = color(theme, Math.max(0, Math.min(1, alpha)))

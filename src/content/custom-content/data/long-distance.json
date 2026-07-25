@@ -1,0 +1,20 @@
+{
+  "zh": {
+    "science": "## 异地恋 → 长期分离的神经化学适应\n\n异地恋的挑战不仅是情感上的，更是神经化学层面的。长期分离影响**催产素**（oxytocin）和**多巴胺**（dopamine）的分泌节律。催产素是"依恋激素"，在身体接触时大量释放；多巴胺是"奖赏激素"，在共享积极体验时释放。\n\n异地伴侣面对的是**感觉剥夺**——不是感官层面的，而是社交奖赏系统的剥夺。大脑逐渐适应了低水平的催产素状态，这可能导致情感钝化（emotional blunting）——不是不爱了，而是神经系统在长期分离中重新校准了基线。这也是为什么异地重逢初期常常感到"陌生"——神经系统需要时间重新同步。",
+    "fitness": "## 异地依恋维持 · 每日情感同步协议\n\n**核心原理**：异地关系不是克服距离，而是建立新的同步模式。定期、有结构的互动比频繁但随机的联系更有效。\n\n• **每日同步**：固定时间段的深度通话（不是"在干嘛"而是"今天最触动你的瞬间"）\n• **共享体验协议**：每周一次远程同步观影/听播客/读同一篇文章后讨论\n• **触觉替代训练**：使用同步震动手环（如Lovense/Pillow Talk），一方触发另一方同步感知\n• **未来叙事练习**：每月一起细化"下次见面"的行动计划（不是空泛的"好想你"，而是具体到"到机场后第一个拥抱要持续多久"）\n\n**关键指标**：每周至少一次触发"情感同步时刻"——双方同时感到"他/她懂"。",
+    "faq": [
+      ["异地久了感觉变淡了，是不爱了吗？", "大概率不是。这是神经系统对低剂量接触的适应——类似于长期不吃辣后对辣的敏感度下降。恢复接触后（见面或高质量视频通话），催产素水平回升，感觉通常会恢复。建议做一次"暂停陌生感协议"：视频时一起做同一件事（甚至一起沉默看书）。"],
+      ["时差让沟通时间很少怎么办？", "质量驱动而非数量。每天留15分钟的重叠窗口——不是碎片化消息，而是集中在15分钟的全息关注。非重叠时间可以用异步语音消息替代文字，语音保留了更多的情感线索。"],
+      ["异地恋如何建立信任？", "信任在异地中不是"不怀疑"，而是"可预测性"。建立透明的日常节奏预报——不要求实时报备，而是提前分享明天的安排。信任来自可预测的透明，而非被动的检查。"]
+    ]
+  },
+  "en": {
+    "science": "## Long-Distance Relationships → Neurochemical Adaptation to Prolonged Separation\n\nThe challenge of long-distance relationships is not just emotional—it's neurochemical. Prolonged separation affects the secretion rhythms of **oxytocin** (the \"attachment hormone,\" released abundantly during physical touch) and **dopamine** (the \"reward hormone,\" released during shared positive experiences).\n\nLong-distance partners face **reward deprivation**—not sensory, but deprivation of the social reward system. The brain gradually adapts to low oxytocin states, which can lead to emotional blunting—not a loss of love, but the nervous system recalibrating its baseline under prolonged separation. This is why reunions often feel awkward at first—the nervous system needs time to resynchronize.",
+    "fitness": "## Attachment Maintenance · Daily Emotion Synchronization Protocol\n\n**Core principle**: Long-distance relationships aren't about overcoming distance, but establishing new synchronization patterns. Regular, structured interaction is more effective than frequent but random contact.\n\n• **Daily Sync**: Fixed deep conversation window (not \"what are you doing\" but \"what moment touched you most today\")\n• **Shared Experience Protocol**: Weekly remote synchronized movie-watching/podcast-listening/same-article reading with discussion\n• **Tactile Substitution Practice**: Use synchronized vibration bracelets—one triggers, other feels simultaneously\n• **Future Narrative Exercise**: Monthly detailed planning of \"next meeting\" (not vague \"I miss you\" but specific down to \"how long the first hug at the airport should last\")\n\n**Key metric**: At least one \"emotion synchronization moment\" per week—both feeling simultaneously understood.",
+    "faq": [
+      ["Feelings fade after long-distance. Is it over?", "Probably not. This is the nervous system adapting to low-dose contact—like losing tolerance for spicy food after years without it. When contact resumes (meeting or high-quality video calls), oxytocin levels typically recover. Try a 'pause unfamiliarity protocol': video-call while doing the same activity, even silent reading together."],
+      ["What if time zones leave little overlap?", "Quality over quantity. Reserve 15 minutes of overlapping window daily—not fragmented messages, but focused full-attention contact. For non-overlap hours, use async voice messages instead of text—voice preserves far more emotional cues."],
+      ["How do you build trust in long-distance?", "Trust in LDR isn't 'not suspecting'—it's predictability. Establish transparent daily rhythm previews—not real-time check-ins, but sharing tomorrow's plan in advance. Trust comes from predictable transparency, not passive surveillance."]
+    ]
+  }
+}
