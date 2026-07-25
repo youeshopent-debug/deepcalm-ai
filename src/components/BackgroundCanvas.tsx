@@ -15,12 +15,12 @@ const DEPTH = 1000
 const HALF_DEPTH = 500
 
 /* ── General particle counts (non-snow) ───────────── */
-const COUNT_DESKTOP = 180
-const COUNT_MOBILE = 100
+const COUNT_DESKTOP = 80
+const COUNT_MOBILE = 50
 
 /* ── Snowflake particle counts (per NotebookLM spec) ─ */
-const SNOW_DESKTOP = 250
-const SNOW_MOBILE = 120
+const SNOW_DESKTOP = 120
+const SNOW_MOBILE = 60
 
 /* ── 3-layer snowflake depth bands ───────────────────
      Far:   high transparency, very slow, tiny particles
@@ -35,9 +35,9 @@ interface LayerDef {
   ratio: number       /* fraction of total count */
 }
 const SNOW_LAYERS: LayerDef[] = [
-  { zMin:  150, zMax:  500, rMin: 0.8, rMax: 1.8, alphaBase: 0.20, alphaRange: 0.15, speed: 0.50, swayAmp: 0.20, ratio: 0.45 },
-  { zMin: -150, zMax:  150, rMin: 2.0, rMax: 4.0, alphaBase: 0.40, alphaRange: 0.18, speed: 1.00, swayAmp: 0.40, ratio: 0.35 },
-  { zMin: -500, zMax: -150, rMin: 4.0, rMax: 7.0, alphaBase: 0.55, alphaRange: 0.15, speed: 1.50, swayAmp: 0.70, ratio: 0.20 },
+  { zMin:  150, zMax:  500, rMin: 0.8, rMax: 1.8, alphaBase: 0.10, alphaRange: 0.08, speed: 0.50, swayAmp: 0.20, ratio: 0.45 },
+  { zMin: -150, zMax:  150, rMin: 2.0, rMax: 4.0, alphaBase: 0.22, alphaRange: 0.10, speed: 1.00, swayAmp: 0.40, ratio: 0.35 },
+  { zMin: -500, zMax: -150, rMin: 4.0, rMax: 7.0, alphaBase: 0.30, alphaRange: 0.08, speed: 1.50, swayAmp: 0.70, ratio: 0.20 },
 ]
 
 /* ── Simplex Noise (3D) ─────────────────────────────
@@ -422,20 +422,20 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
               /* ── colour by depth ───────────────────────── */
               const rgb = lerpRGB(pal.bright, pal.dim, zNorm)
               const baseAlpha = isSnow
-                ? (0.65 - zNorm * 0.45) * breathOpacity
-                : 0.40 - zNorm * 0.35
+                ? (0.45 - zNorm * 0.35) * breathOpacity
+                : 0.22 - zNorm * 0.18
   
               /* ── snowflake rendering (isSnow branch) ──── */
               if (isSnow && sprites) {
                 const sr = Math.max(0.4, p.r * scale)
-                const finalAlpha = Math.min(0.92, baseAlpha)
+                const finalAlpha = Math.min(0.50, baseAlpha)
   
                 if (sr > 3.5) {
                   /* ── Large flake: crystal path + glow ───── */
                   /* glow first */
                   if (zNorm < 0.6) {
                     const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, sr * 4)
-                    grad.addColorStop(0, `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.15})`)
+                    grad.addColorStop(0, `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.08})`)
                     grad.addColorStop(1, `rgba(${rgb.r},${rgb.g},${rgb.b},0)`)
                     ctx.fillStyle = grad
                     ctx.beginPath()
@@ -465,7 +465,7 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
               } else {
                 /* ── Non-snow rendering (circle) ──────────── */
                 const sr = Math.max(0.3, (p.r * FOCAL_LENGTH) / (FOCAL_LENGTH + bz))
-                const finalAlpha = Math.min(0.65, baseAlpha * (1.0 + (breathZ / 200) * 0.35))
+                const finalAlpha = Math.min(0.35, baseAlpha * (1.0 + (breathZ / 200) * 0.35))
 
                 ctx.beginPath()
                 ctx.arc(sx, sy, sr, 0, Math.PI * 2)
@@ -474,8 +474,8 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
 
                 if (zNorm < 0.35 && sr > 0.8) {
                   ctx.beginPath()
-                  ctx.arc(sx, sy, sr * 2.0, 0, Math.PI * 2)
-                  ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.04})`
+                  ctx.arc(sx, sy, sr * 1.5, 0, Math.PI * 2)
+                  ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${finalAlpha * 0.02})`
                   ctx.fill()
                 }
               }
@@ -491,15 +491,15 @@ export default function BackgroundCanvas({ videoMode }: { videoMode?: boolean })
                 w / 2, h * 0.85, w * 0.7,
               )
               shadowGrad.addColorStop(0, "rgba(20, 30, 60, 0)")
-              shadowGrad.addColorStop(0.6, `rgba(10, 20, 45, ${0.12 * breathOpacity})`)
-              shadowGrad.addColorStop(1, `rgba(5, 10, 30, ${0.25 * breathOpacity})`)
+              shadowGrad.addColorStop(0.6, `rgba(10, 20, 45, ${0.06 * breathOpacity})`)
+              shadowGrad.addColorStop(1, `rgba(5, 10, 30, ${0.12 * breathOpacity})`)
               ctx.fillStyle = shadowGrad
               ctx.fillRect(0, 0, w, h)
-  
+
               /* 2. Snow mist layer at bottom edge
                     alpha modulated by breathing rhythm           */
               const mistH = Math.min(120, h * 0.08)
-              const mistAlpha = 0.08 + (1 - breathOpacity) * 0.12
+              const mistAlpha = 0.04 + (1 - breathOpacity) * 0.06
               const mistGrad = ctx.createLinearGradient(0, h - mistH * 2, 0, h)
               mistGrad.addColorStop(0, "rgba(200, 220, 255, 0)")
               mistGrad.addColorStop(0.5, `rgba(200, 220, 255, ${mistAlpha * 0.5})`)

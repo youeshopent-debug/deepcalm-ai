@@ -149,7 +149,7 @@ export default function BackgroundVideo({
       <div className="absolute inset-0 backdrop-blur-[2px] pointer-events-none" />
 
       {/* 暗色柔化覆盖层: 进一步抑制颗粒感 */}
-      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/25 pointer-events-none" />
 
       {/* Theme-aware overlay */}
       <div
