@@ -92,15 +92,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     keywords: guide.keywords,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/guide/${slug}`,
+      canonical: `https://deepcalm-ai.com/${lang}/guide/${slug}`,
       languages: {
-        zh: `/zh/guide/${slug}`,
-        en: `/en/guide/${slug}`,
-        ms: `/ms/guide/${slug}`,
-        ja: `/ja/guide/${slug}`,
-        ko: `/ko/guide/${slug}`,
-        th: `/th/guide/${slug}`,
-        es: `/es/guide/${slug}`,
+        zh: `https://deepcalm-ai.com/zh/guide/${slug}`,
+        en: `https://deepcalm-ai.com/en/guide/${slug}`,
+        ms: `https://deepcalm-ai.com/ms/guide/${slug}`,
+        ja: `https://deepcalm-ai.com/ja/guide/${slug}`,
+        ko: `https://deepcalm-ai.com/ko/guide/${slug}`,
+        th: `https://deepcalm-ai.com/th/guide/${slug}`,
+        es: `https://deepcalm-ai.com/es/guide/${slug}`,
       },
     },
     openGraph: {
@@ -117,26 +117,26 @@ export default async function GuideDetailPage({ params }: { params: Promise<{ la
   const dict = await getDict(lang as Locale)
 
   return (
-    <div className="min-h-screen bg-nord-bg">
+    <div className="min-h-screen bg-slate-50">
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <Link
           href={`/${lang}/guide`}
-          className="inline-flex items-center gap-2 text-nord-accent hover:underline mb-8"
+          className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-800 mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           {dict.guide.backToList}
         </Link>
-        <span className="text-xs font-medium text-nord-accent uppercase tracking-wider">
+        <span className="text-xs font-medium text-blue-700 uppercase tracking-wider">
           {dict.guide[`category_${guide.category}` as keyof typeof dict.guide] as string}
         </span>
-        <h1 className="text-3xl sm:text-4xl font-bold text-nord-text mt-2 mb-4">{guide.title}</h1>
-        <p className="text-nord-text/60 mb-8">{guide.description}</p>
-        <div className="prose prose-invert max-w-none
-            prose-headings:text-nord-text prose-headings:font-semibold
-            prose-p:text-nord-text/70 prose-p:leading-relaxed
-            prose-strong:text-nord-text
-            prose-ul:text-nord-text/70
-            prose-li:text-nord-text/70">
+        <h1 className="text-3xl sm:text-4xl font-bold text-blue-900 mt-2 mb-4">{guide.title}</h1>
+        <p className="text-slate-600 mb-8">{guide.description}</p>
+        <div className="prose prose-slate max-w-none
+            prose-headings:text-blue-900 prose-headings:font-bold
+            prose-p:text-slate-800 prose-p:leading-relaxed
+            prose-strong:text-slate-800
+            prose-ul:text-slate-800
+            prose-li:text-slate-800">
           {guide.sections.map((s, i) => (
             <div key={i}>
               <h2>{s.heading}</h2>
@@ -144,8 +144,8 @@ export default async function GuideDetailPage({ params }: { params: Promise<{ la
             </div>
           ))}
         </div>
-        <div className="mt-12 p-6 bg-nord-card rounded-xl border border-nord-border/30">
-          <p className="text-nord-text/60 text-sm">{dict.guide.helpText}</p>
+        <div className="mt-12 p-6 bg-white/95 backdrop-blur-[50px] rounded-xl border border-slate-200/30 shadow-lg">
+          <p className="text-slate-600 text-sm">{dict.guide.helpText}</p>
         </div>
 
         <ScientificGuide articles={getGuideScientificArticles(lang)} />

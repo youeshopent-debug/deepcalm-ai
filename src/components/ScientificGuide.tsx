@@ -5,9 +5,9 @@ import { useLanguage } from "@/context/LanguageContext"
 
 function FindingCard({ text }: { text: string }) {
   return (
-    <div className="flex gap-3 p-4 bg-nord-accent/[0.04] border border-nord-accent/10 rounded-xl">
-      <Quote className="w-4 h-4 text-nord-accent flex-shrink-0 mt-0.5" />
-      <p className="text-sm text-nord-text/80 leading-relaxed">{text}</p>
+    <div className="flex gap-3 p-4 bg-sky-50/80 border border-sky-200/30 rounded-xl">
+      <Quote className="w-4 h-4 text-blue-700 flex-shrink-0 mt-0.5" />
+      <p className="text-sm text-slate-800 leading-relaxed">{text}</p>
     </div>
   )
 }
@@ -35,31 +35,31 @@ function ArticleCard({
   index: number
 }) {
   return (
-    <article className="p-6 sm:p-10 bg-nord-card border border-nord-border rounded-2xl hover:border-nord-accent/20 transition-all duration-500">
+    <article className="p-6 sm:p-10 bg-white/98 backdrop-blur-[100px] border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] hover:border-slate-300/50 transition-all duration-500">
       <div className="flex items-start gap-4 sm:gap-6 mb-7">
-        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-nord-accent/10 flex items-center justify-center mt-1">
-          <Icon className="w-5.5 h-5.5 text-nord-accent" />
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-blue-100/60 flex items-center justify-center mt-1">
+          <Icon className="w-5.5 h-5.5 text-blue-700" />
         </div>
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-nord-text leading-snug">{article.heading}</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-blue-900 leading-snug">{article.heading}</h2>
         </div>
       </div>
       <div className="space-y-5">
         {article.paragraphs.map((p, i) => (
-          <p key={i} className="text-sm text-nord-muted leading-relaxed">{p}</p>
+          <p key={i} className="text-sm text-slate-800 leading-relaxed">{p}</p>
         ))}
       </div>
 
       <div className="mt-8 space-y-3">
-        <h3 className="text-sm font-semibold text-nord-accent uppercase tracking-wider mb-4">Key Findings</h3>
+        <h3 className="text-sm font-bold text-blue-900 uppercase tracking-wider mb-4">Key Findings</h3>
         {article.findings.map((f, i) => (
           <FindingCard key={i} text={f} />
         ))}
       </div>
 
-      <div className="mt-6 flex items-start gap-2 p-3 bg-nord-surface/50 rounded-lg">
-        <BookOpen className="w-4 h-4 text-nord-muted flex-shrink-0 mt-0.5" />
-        <p className="text-xs text-nord-muted/70 leading-relaxed">{article.reference}</p>
+      <div className="mt-6 flex items-start gap-2 p-3 bg-slate-100/80 backdrop-blur-[50px] rounded-lg">
+        <BookOpen className="w-4 h-4 text-slate-500 flex-shrink-0 mt-0.5" />
+        <p className="text-xs text-slate-600/80 leading-relaxed">{article.reference}</p>
       </div>
     </article>
   )
@@ -70,7 +70,7 @@ export default function ScientificGuide({ articles }: ScientificGuideProps) {
 
   if (articles && articles.length > 0) {
     return (
-      <section id="scientific-guide" className="py-24 bg-gradient-to-b from-transparent via-nord-accent/[0.02] to-transparent">
+      <section id="scientific-guide" className="py-24 bg-gradient-to-b from-transparent via-blue-500/[0.03] to-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-20">
             {articles.map((article, i) => (
@@ -88,7 +88,7 @@ export default function ScientificGuide({ articles }: ScientificGuideProps) {
   }
 
   return (
-    <section id="scientific-guide" className="py-24 bg-gradient-to-b from-transparent via-nord-accent/[0.02] to-transparent">
+    <section id="scientific-guide" className="py-24 bg-gradient-to-b from-transparent via-blue-500/[0.03] to-transparent">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-20">
           <ArticleCard

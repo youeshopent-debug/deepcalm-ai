@@ -1,0 +1,10 @@
+# Cloudflare Pages static redirects
+# These serve as fallback for the _middleware.js locale detection.
+# The middleware handles dynamic locale detection; these catch any missed routes.
+
+# Static assets that shouldn't have locale prefix
+/ads/*      /ads/:splat  200
+/images/*   /images/:splat  200
+/audio/*    /audio/:splat  200
+/videos/*   /videos/:splat  200
+/social     /social  200

@@ -1,0 +1,5 @@
+# Cloudflare Pages custom headers
+# Applied to the static export output
+
+/videos/*
+  X-Robots-Tag: noindex, noarchive

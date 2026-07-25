@@ -45,7 +45,7 @@ export default function GlobeLangSwitcher() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-dc-text/60 hover:text-dc-text hover:bg-white/5 transition-colors text-sm"
+        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/5 transition-colors text-sm"
         aria-label="Switch language"
       >
         <Globe className="w-4 h-4" />

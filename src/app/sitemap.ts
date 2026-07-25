@@ -1,123 +1,70 @@
-import type { MetadataRoute } from "next"
-import { getGuides } from "@/content/guides"
-import { getAnxietyScenarios } from "@/content/anxiety-scenarios"
 import { getAllSlugs } from "@/content/topics"
+import type { Locale } from "@/types"
+import type { MetadataRoute } from "next"
 
-export const dynamic = "force-dynamic"
+const BASE_URL = "https://deepcalm-ai.com"
+const locales: Locale[] = ["zh", "en", "ms", "ja", "ko", "th", "es"]
 
-const LANGS = ["zh", "en", "ms", "ja", "ko", "th", "es"]
-const BASE = "https://deepcalm-ai.com"
-
-function langAlternates(path: string = ""): Record<string, string> {
-  return Object.fromEntries(LANGS.map((lang) => [lang, `${BASE}/${lang}${path}`]))
-}
+/** 静态引导页 slug（不在 topicMeta 中，属于独立页面） */
+const STATIC_GUIDE_SLUGS = ["cbt-i-7day-plan", "sleep-science-guide"] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const topicSlugs = getAllSlugs() // 58 个 slug
   const entries: MetadataRoute.Sitemap = []
 
-  for (const lang of LANGS) {
+  // 1. 根页面（每个 locale 首页 + 默认根路径）
+  //    ┌─ 默认根路径: https://deepcalm-ai.com
+  //    ├─ /zh, /en, /ms, /ja, /ko, /th, /es
+  entries.push({
+    url: BASE_URL,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 1.0,
+  })
+  for (const lang of locales) {
     entries.push({
-      url: `${BASE}/${lang}`,
+      url: `${BASE_URL}/${lang}`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 1.0,
-      alternates: { languages: langAlternates() },
-    })
-    entries.push({
-      url: `${BASE}/${lang}/guide`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
       priority: 0.9,
-      alternates: { languages: langAlternates("/guide") },
-    })
-    entries.push({
-      url: `${BASE}/${lang}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.3,
-      alternates: { languages: langAlternates("/privacy") },
-    })
-    entries.push({
-      url: `${BASE}/${lang}/terms`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.3,
-      alternates: { languages: langAlternates("/terms") },
-    })
-    entries.push({
-      url: `${BASE}/${lang}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-      alternates: { languages: langAlternates("/about") },
     })
   }
 
-  try {
-    for (const guide of getGuides()) {
-      for (const lang of LANGS) {
-        entries.push({
-          url: `${BASE}/${lang}/guide/${guide.slug}`,
-          lastModified: new Date(guide.publishedAt),
-          changeFrequency: "weekly",
-          priority: 0.8,
-          alternates: { languages: langAlternates(`/guide/${guide.slug}`) },
-        })
-      }
+  // 2. Topic 页面: /[lang]/topic/[slug] (7 × 58 = 406 条)
+  for (const lang of locales) {
+    for (const slug of topicSlugs) {
+      entries.push({
+        url: `${BASE_URL}/${lang}/topic/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.8,
+      })
     }
-  } catch {}
-
-  try {
-    for (const scenario of getAnxietyScenarios()) {
-      for (const lang of LANGS) {
-        entries.push({
-          url: `${BASE}/${lang}/anxiety/${scenario.slug}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly",
-          priority: 0.8,
-          alternates: { languages: langAlternates(`/anxiety/${scenario.slug}`) },
-        })
-      }
-    }
-  } catch {}
-
-  try {
-    for (const slug of getAllSlugs()) {
-      for (const lang of LANGS) {
-        entries.push({
-          url: `${BASE}/${lang}/topic/${slug}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly",
-          priority: 0.7,
-          alternates: { languages: langAlternates(`/topic/${slug}`) },
-        })
-      }
-    }
-  } catch {}
-
-  for (const lang of LANGS) {
-    entries.push({
-      url: `${BASE}/${lang}/library`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.9,
-      alternates: { languages: langAlternates("/library") },
-    })
   }
 
-  try {
-    for (const slug of getAllSlugs()) {
-      for (const lang of LANGS) {
-        entries.push({
-          url: `${BASE}/${lang}/library/${slug}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly",
-          priority: 0.8,
-          alternates: { languages: langAlternates(`/library/${slug}`) },
-        })
-      }
+  // 3. Library 页面: /[lang]/library/[slug] (7 × 58 = 406 条)
+  for (const lang of locales) {
+    for (const slug of topicSlugs) {
+      entries.push({
+        url: `${BASE_URL}/${lang}/library/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.7,
+      })
     }
-  } catch {}
+  }
+
+  // 4. 独立引导页（不在 topicMeta 内）: /[lang]/library/cbt-i-7day-plan, sleep-science-guide (7 × 2 = 14 条)
+  for (const lang of locales) {
+    for (const slug of STATIC_GUIDE_SLUGS) {
+      entries.push({
+        url: `${BASE_URL}/${lang}/library/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.6,
+      })
+    }
+  }
 
   return entries
 }

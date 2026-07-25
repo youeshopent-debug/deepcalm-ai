@@ -10,25 +10,28 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
-  const dict = await getDict(lang as Locale)
+  const locale = lang as Locale
+  const dict = await getDict(locale)
+  const suffix = locale === "zh" ? "自助指南" : locale === "ms" ? "Panduan Bantuan Diri" : locale === "ja" ? "セルフヘルプガイド" : locale === "ko" ? "셀프헬프 가이드" : locale === "th" ? "คู่มือช่วยเหลือตนเอง" : locale === "es" ? "Guía de Autoayuda" : "Self-Help Guide"
+  const seoTitle = `${dict.guide.meta_title} | ${suffix} - DeepCalm AI`
   return {
-    title: dict.guide.meta_title + " - DeepCalm AI",
+    title: seoTitle,
     description: dict.guide.meta_desc,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/guide`,
+      canonical: `https://deepcalm-ai.com/${lang}/guide`,
       languages: {
-        zh: "/zh/guide",
-        en: "/en/guide",
-        ms: "/ms/guide",
-        ja: "/ja/guide",
-        ko: "/ko/guide",
-        th: "/th/guide",
-        es: "/es/guide",
+        zh: "https://deepcalm-ai.com/zh/guide",
+        en: "https://deepcalm-ai.com/en/guide",
+        ms: "https://deepcalm-ai.com/ms/guide",
+        ja: "https://deepcalm-ai.com/ja/guide",
+        ko: "https://deepcalm-ai.com/ko/guide",
+        th: "https://deepcalm-ai.com/th/guide",
+        es: "https://deepcalm-ai.com/es/guide",
       },
     },
     openGraph: {
-      title: dict.guide.meta_title + " - DeepCalm AI",
+      title: seoTitle,
       description: dict.guide.meta_desc,
     },
   }

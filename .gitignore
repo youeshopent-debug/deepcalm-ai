@@ -23,9 +23,26 @@ take-screenshots.cjs check-zh-site.cjs _stress_test.cjs _resend_setup.cjs _resen
 
 # Build artifacts & reports
 /screenshots/
-/scripts/
+# Build output (Vercel builds from source)
+/out/
+
+# Exception: sitemap generator (needed by Cloudflare Pages build)
+!/scripts/generate-sitemap.ts
 /output/
 *.png
 *.html
 *.pdf
 *.xlsx
+
+# Debug & diagnostic scripts (project root level)
+/_diagnose*.cjs
+/_diagnose*.js
+/_diagnose*.py
+/_fix_*.cjs
+/_fix_*.js
+/_fix_*.py
+/_names.txt
+/test-results/
+/test_artifacts/
+/check_*.py
+/debug_*.py

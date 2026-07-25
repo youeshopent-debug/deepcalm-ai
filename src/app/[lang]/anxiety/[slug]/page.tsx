@@ -33,15 +33,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     keywords: getLocalizedField(lang as Locale, scenario.keywords),
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/anxiety/${slug}`,
+      canonical: `https://deepcalm-ai.com/${lang}/anxiety/${slug}`,
       languages: {
-        zh: `/zh/anxiety/${slug}`,
-        en: `/en/anxiety/${slug}`,
-        ms: `/ms/anxiety/${slug}`,
-        ja: `/ja/anxiety/${slug}`,
-        ko: `/ko/anxiety/${slug}`,
-        th: `/th/anxiety/${slug}`,
-        es: `/es/anxiety/${slug}`,
+        zh: `https://deepcalm-ai.com/zh/anxiety/${slug}`,
+        en: `https://deepcalm-ai.com/en/anxiety/${slug}`,
+        ms: `https://deepcalm-ai.com/ms/anxiety/${slug}`,
+        ja: `https://deepcalm-ai.com/ja/anxiety/${slug}`,
+        ko: `https://deepcalm-ai.com/ko/anxiety/${slug}`,
+        th: `https://deepcalm-ai.com/th/anxiety/${slug}`,
+        es: `https://deepcalm-ai.com/es/anxiety/${slug}`,
       },
     },
     openGraph: {

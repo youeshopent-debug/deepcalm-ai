@@ -1,6 +1,9 @@
+"use client"
+
 import type { Locale } from "@/types"
 import Link from "next/link"
-import { ArrowRight, BookOpen } from "lucide-react"
+import { motion } from "framer-motion"
+import { Sparkles, BookOpen, ArrowRight } from "lucide-react"
 
 const categoryIcon: Record<string, string> = {
   sleep: "🌙", anxiety: "🫀", grief_loss: "💧", loneliness: "🌊",
@@ -20,59 +23,129 @@ const CATEGORY_NAMES: Record<string, Record<Locale, string>> = {
   emotional_health: { zh: "情绪健康", en: "Emotional Health", ms: "Kesihatan Emosi", ja: "感情的健康", ko: "정서 건강", th: "สุขภาพทางอารมณ์", es: "Salud Emocional" },
 }
 
-const gradientByCategory: Record<string, string> = {
-  sleep: "from-indigo-500/10 to-purple-500/10",
-  anxiety: "from-rose-500/10 to-orange-500/10",
-  grief_loss: "from-slate-500/10 to-zinc-500/10",
-  loneliness: "from-sky-500/10 to-teal-500/10",
-  self_worth: "from-emerald-500/10 to-teal-500/10",
-  relationships: "from-pink-500/10 to-rose-500/10",
-  identity: "from-violet-500/10 to-blue-500/10",
-  mindfulness: "from-amber-500/10 to-yellow-500/10",
-  emotional_health: "from-red-500/10 to-rose-500/10",
+/** 每个类别的渐变背景 — 从深到浅的径向渐变，确保文字可读 */
+const CATEGORY_GRADIENTS: Record<string, string> = {
+  sleep: "bg-gradient-to-br from-indigo-600/20 via-indigo-500/5 to-purple-600/10",
+  anxiety: "bg-gradient-to-br from-rose-600/20 via-rose-500/5 to-orange-600/10",
+  grief_loss: "bg-gradient-to-br from-slate-600/20 via-zinc-500/5 to-zinc-600/10",
+  loneliness: "bg-gradient-to-br from-sky-600/20 via-sky-500/5 to-teal-600/10",
+  self_worth: "bg-gradient-to-br from-emerald-600/20 via-emerald-500/5 to-teal-600/10",
+  relationships: "bg-gradient-to-br from-pink-600/20 via-pink-500/5 to-rose-600/10",
+  identity: "bg-gradient-to-br from-violet-600/20 via-violet-500/5 to-blue-600/10",
+  mindfulness: "bg-gradient-to-br from-amber-600/20 via-amber-500/5 to-yellow-600/10",
+  emotional_health: "bg-gradient-to-br from-red-600/20 via-red-500/5 to-rose-600/10",
+}
+
+/** 每个类别的 glow 色值用于按钮和装饰 */
+const CATEGORY_GLOW: Record<string, string> = {
+  sleep: "indigo-400", anxiety: "rose-400", grief_loss: "slate-400",
+  loneliness: "sky-400", self_worth: "emerald-400", relationships: "pink-400",
+  identity: "violet-400", mindfulness: "amber-400", emotional_health: "red-400",
 }
 
 interface LibraryCardProps {
   slug: string
   title: string
+  hook?: string
   description: string
   category: string
   locale: Locale
+  onStartMeditation?: (slug: string, emotion: string) => void
 }
 
-export default function LibraryCard({ slug, title, description, category, locale }: LibraryCardProps) {
-  const gradient = gradientByCategory[category] || "from-nord-accent/10 to-nord-accent/5"
+const READ_LABEL: Record<Locale, string> = {
+  zh: "阅读全文", en: "Read Full Article", ms: "Baca Penuh", ja: "全文を読む", ko: "전문 읽기", th: "อ่านเต็ม", es: "Leer Artículo",
+}
+
+const MEDITATION_LABEL: Record<Locale, string> = {
+  zh: "开始 5 分钟 AI 冥想", en: "Start 5-min AI Meditation", ms: "Mulai Meditasi AI 5 Minit", ja: "5分のAI瞑想を開始",
+  ko: "5분 AI 명상 시작", th: "เริ่มทำสมาธิ AI 5 นาที", es: "Iniciar Meditación AI de 5 Min",
+}
+
+export default function LibraryCard({ slug, title, hook, description, category, locale, onStartMeditation }: LibraryCardProps) {
   const icon = categoryIcon[category] || "📖"
   const catName = CATEGORY_NAMES[category]?.[locale] || category
+  const gradient = CATEGORY_GRADIENTS[category] || "bg-gradient-to-br from-nord-accent/20 to-nord-accent/5"
+  const glow = CATEGORY_GLOW[category] || "nord-accent"
+  const displayTitle = hook || title
+
+  const handleMeditation = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    onStartMeditation?.(slug, displayTitle)
+  }
 
   return (
-    <Link href={`/${locale}/library/${slug}`} className="group block">
-      <div className={`relative h-full p-6 sm:p-7 bg-nord-card border border-nord-border/20 rounded-2xl
-        hover:border-nord-accent/30 transition-all duration-300
-        hover:shadow-[0_0_30px_-6px_rgba(94,129,172,0.15)]
-        before:absolute before:inset-0 before:bg-gradient-to-b ${gradient}
-        before:rounded-2xl before:opacity-0 before:transition-opacity before:duration-300
-        hover:before:opacity-100 overflow-hidden`}>
-        <div className="relative z-10 flex flex-col h-full">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-lg">{icon}</span>
-            <span className="text-[10px] font-medium text-nord-accent uppercase tracking-widest">
-              {catName}
-            </span>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="group"
+    >
+      <Link href={`/${locale}/library/${slug}`} className="block h-full">
+        <div
+          className={`relative h-full rounded-2xl overflow-hidden ${gradient}
+            border border-white/10 hover:border-white/20
+            transition-all duration-500 ease-out
+            hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]
+            flex flex-col`}
+        >
+          {/* 顶部装饰光晕 */}
+          <div className={`absolute -top-20 -right-20 w-40 h-40 rounded-full bg-${glow}/10 blur-3xl pointer-events-none`} />
+          <div className={`absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-${glow}/5 blur-2xl pointer-events-none`} />
+
+          {/* 图标与类目标签 */}
+          <div className="relative z-10 p-5 pb-3">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-2xl">{icon}</span>
+              <span className="text-[10px] font-semibold text-nord-accent uppercase tracking-[0.2em]">
+                {catName}
+              </span>
+            </div>
+
+            {/* 标题 */}
+            <h3 className="text-base font-bold text-nord-text leading-snug mb-2 line-clamp-2">
+              {displayTitle}
+            </h3>
+
+            {/* 描述 */}
+            <p className="text-sm text-nord-text/50 leading-relaxed line-clamp-3">
+              {description}
+            </p>
           </div>
-          <h3 className="text-base font-bold text-nord-text mb-2 group-hover:text-nord-accent transition-colors leading-snug">
-            {title}
-          </h3>
-          <p className="text-sm text-nord-text/50 leading-relaxed line-clamp-3 flex-1">
-            {description}
-          </p>
-          <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-nord-accent/70 group-hover:text-nord-accent transition-colors">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Explore</span>
-            <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+
+          {/* 底部操作区 — 始终保持底部对齐 */}
+          <div className="relative z-10 mt-auto p-5 pt-3 space-y-2.5">
+            {/* 巨幕 CTA — AI 冥想按钮 */}
+            {onStartMeditation && (
+              <button
+                onClick={handleMeditation}
+                className={`w-full flex items-center justify-center gap-2 px-4 py-3
+                  bg-gradient-to-r from-nord-accent to-nord-accent/80
+                  hover:from-nord-accent/90 hover:to-nord-accent/70
+                  text-white text-sm font-semibold
+                  rounded-xl shadow-lg shadow-nord-accent/20
+                  hover:shadow-xl hover:shadow-nord-accent/30
+                  hover:scale-[1.02] active:scale-[0.98]
+                  transition-all duration-300 ease-out`}
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>{MEDITATION_LABEL[locale] || MEDITATION_LABEL.en}</span>
+              </button>
+            )}
+
+            {/* 阅读入口 — 次要操作 */}
+            <div className="flex items-center justify-between text-xs text-nord-text/40 group-hover:text-nord-text/60 transition-colors duration-300 px-1">
+              <span className="flex items-center gap-1.5">
+                <BookOpen className="w-3.5 h-3.5" />
+                {READ_LABEL[locale] || READ_LABEL.en}
+              </span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   )
 }

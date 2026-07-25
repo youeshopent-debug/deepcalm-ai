@@ -31,7 +31,7 @@ export default function SitemapFooter() {
               <ul className="space-y-1">
                 {cat.items.map((slug) => {
                   const topic = getTopicBySlug(slug, locale);
-                  const href = `/${locale}/topic/${slug}`;
+                  const href = `/${locale}/library/${slug}`;
                   return (
                     <li key={slug}>
                       <Link

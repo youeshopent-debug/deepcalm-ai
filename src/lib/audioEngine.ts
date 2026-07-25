@@ -1,5 +1,24 @@
 export type ChannelId = 'rain' | 'wind' | 'fire' | 'stream' | 'birds' | 'insects'
 
+export type BinauralType = 'delta' | 'theta' | 'alpha' | 'beta' | 'gamma'
+
+/**
+ * Per-channel volume multipliers (0..1) for meditation mode.
+ * Only specify channels you want to adjust; unspecified channels keep current volume.
+ */
+export interface MeditationAudioPreset {
+  channels?: Partial<Record<ChannelId, number>>
+  masterVolume?: number  // 0..1, applied on top of existing master volume
+}
+
+export const BINAURAL_FREQUENCIES: Record<BinauralType, { label: string; baseFreq: number; beatFreq: number; description: string }> = {
+  delta:  { label: 'Delta',  baseFreq: 200, beatFreq: 3,   description: 'Deep sleep, restoration' },
+  theta:  { label: 'Theta',  baseFreq: 200, beatFreq: 6,   description: 'Meditation, creativity' },
+  alpha:  { label: 'Alpha',  baseFreq: 200, beatFreq: 10,  description: 'Relaxation, focus' },
+  beta:   { label: 'Beta',   baseFreq: 200, beatFreq: 18,  description: 'Alertness, concentration' },
+  gamma:  { label: 'Gamma',  baseFreq: 200, beatFreq: 40,  description: 'Peak cognition, insight' },
+}
+
 export interface AudioExtension {
   name: string
   generateTrack?: (channelId: ChannelId) => Promise<AudioBuffer | null>
@@ -15,10 +34,19 @@ export class AudioEngine {
   private insectTimer: ReturnType<typeof setTimeout> | null = null
   private extension: AudioExtension | null = null
   private _volume = 0.12
+  private binauralOscillators: { left: OscillatorNode; right: OscillatorNode; panner: StereoPannerNode } | null = null
+  private activeBinaural: BinauralType | null = null
   private pendingAudioData = new Map<ChannelId, ArrayBuffer>()
   private decodingPending = false
   private channelBuffers = new Map<ChannelId, AudioBuffer>()
   private bufferSources = new Map<ChannelId, AudioBufferSourceNode>()
+
+  /** Breathing bridge — set by BreathingGuide, read by BackgroundVideo */
+  breathingPhase: 'inhale' | 'hold' | 'exhale' | 'done' | null = null
+  breathingProgress = 0
+
+  /** Meditation mode flag — set by MeditationController */
+  meditationActive = false
 
   get volume() { return this._volume }
 
@@ -497,6 +525,9 @@ export class AudioEngine {
   private readonly themeAudioMap: Record<string, { on: ChannelId[]; off: ChannelId[] }> = {
     forest: { on: ['birds', 'insects'], off: ['rain', 'wind', 'fire', 'stream'] },
     twilight: { on: ['stream', 'wind'], off: ['rain', 'fire', 'birds', 'insects'] },
+    deepsea: { on: ['stream'], off: ['rain', 'fire', 'wind', 'birds', 'insects'] },
+    starry: { on: ['wind'], off: ['rain', 'fire', 'stream', 'birds', 'insects'] },
+    winter_night: { on: ['wind'], off: ['rain', 'fire', 'stream', 'birds', 'insects'] },
     earth: { on: [], off: ['rain', 'wind', 'fire', 'stream', 'birds', 'insects'] },
     deepcalm: { on: [], off: [] },
   }
@@ -510,6 +541,133 @@ export class AudioEngine {
     cfg.off.forEach(id => {
       if (this.activeChannels.has(id)) this.toggleChannel(id, false)
     })
+  }
+
+  private _savedMasterVolume = 0.12
+  private _savedChannelVolumes = new Map<ChannelId, number>()
+
+  /** Switch to meditation audio preset — reduces channel volumes for immersive calm */
+  setMeditationPreset(preset: MeditationAudioPreset) {
+    this.meditationActive = true
+    if (!this.ctx) return
+
+    // Save current master volume
+    this._savedMasterVolume = this._volume
+
+    // Save current channel volumes and apply preset
+    this.channelGains.forEach((gain, ch) => {
+      this._savedChannelVolumes.set(ch, gain.gain.value)
+      const targetVol = preset.channels?.[ch]
+      if (targetVol !== undefined) {
+        const t = this.ctx!.currentTime
+        gain.gain.linearRampToValueAtTime(Math.max(0, Math.min(1, targetVol)), t + 1.5)
+      }
+    })
+
+    // Apply master volume override if specified
+    if (preset.masterVolume !== undefined) {
+      this.setMasterVolume(Math.max(0, Math.min(1, preset.masterVolume)))
+    }
+  }
+
+  /** Exit meditation mode — restore saved channel volumes */
+  clearMeditationPreset() {
+    this.meditationActive = false
+    if (!this.ctx) return
+
+    this.channelGains.forEach((gain, ch) => {
+      const saved = this._savedChannelVolumes.get(ch)
+      if (saved !== undefined) {
+        const t = this.ctx!.currentTime
+        gain.gain.linearRampToValueAtTime(saved, t + 1.5)
+      }
+    })
+    this._savedChannelVolumes.clear()
+
+    // Restore master volume
+    this.setMasterVolume(this._savedMasterVolume)
+  }
+
+  get activeBinauralType(): BinauralType | null { return this.activeBinaural }
+
+  isBinauralActive(): boolean { return this.activeBinaural !== null }
+
+  startBinaural(type: BinauralType) {
+    this.init()
+    if (!this.ctx || !this.masterGain) return
+
+    // Stop existing binaural
+    this.stopBinaural()
+
+    const cfg = BINAURAL_FREQUENCIES[type]
+    if (!cfg) return
+
+    // Mute all ambient channels when entering binaural mode
+    this.activeChannels.forEach((ch) => {
+      if (this.activeChannels.has(ch)) this.toggleChannel(ch, false)
+    })
+
+    try {
+      const leftOsc = this.ctx.createOscillator()
+      const rightOsc = this.ctx.createOscillator()
+      const leftPanner = this.ctx.createStereoPanner()
+      const rightPanner = this.ctx.createStereoPanner()
+
+      leftOsc.type = 'sine'
+      leftOsc.frequency.value = cfg.baseFreq
+
+      rightOsc.type = 'sine'
+      rightOsc.frequency.value = cfg.baseFreq + cfg.beatFreq
+
+      leftPanner.pan.value = -1 // full left
+      rightPanner.pan.value = 1  // full right
+
+      const leftGain = this.ctx.createGain()
+      leftGain.gain.value = 0.3
+      const rightGain = this.ctx.createGain()
+      rightGain.gain.value = 0.3
+
+      leftOsc.connect(leftGain)
+      leftGain.connect(leftPanner)
+      leftPanner.connect(this.masterGain)
+
+      rightOsc.connect(rightGain)
+      rightGain.connect(rightPanner)
+      rightPanner.connect(this.masterGain)
+
+      leftOsc.start()
+      rightOsc.start()
+
+      this.binauralOscillators = { left: leftOsc, right: rightOsc, panner: leftPanner }
+      this.activeBinaural = type
+    } catch {
+      // Fallback: single tone mono if StereoPanner not supported
+      if (!this.ctx) return
+      try {
+        const osc = this.ctx.createOscillator()
+        osc.type = 'sine'
+        osc.frequency.value = cfg.baseFreq + cfg.beatFreq / 2
+        const gain = this.ctx.createGain()
+        gain.gain.value = 0.2
+        osc.connect(gain)
+        gain.connect(this.masterGain)
+        osc.start()
+        this.binauralOscillators = null
+        this.activeBinaural = type
+      } catch {}
+    }
+  }
+
+  stopBinaural() {
+    if (this.binauralOscillators) {
+      try { this.binauralOscillators.left.stop() } catch {}
+      try { this.binauralOscillators.right.stop() } catch {}
+      this.binauralOscillators.left.disconnect()
+      this.binauralOscillators.right.disconnect()
+      this.binauralOscillators.panner.disconnect()
+      this.binauralOscillators = null
+    }
+    this.activeBinaural = null
   }
 
   startAmbient() {
@@ -528,6 +686,7 @@ export class AudioEngine {
       src.disconnect()
     })
     this.bufferSources.clear()
+    this.stopBinaural()
     this.activeChannels.clear()
     this.channelGains.forEach(g => g.disconnect())
     this.channelGains.clear()

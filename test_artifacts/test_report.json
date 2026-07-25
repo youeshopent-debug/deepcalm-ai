@@ -1,0 +1,42 @@
+{
+  "01_page_loads": {
+    "status": "PASS",
+    "errors": 2
+  },
+  "02_idle_state": {
+    "status": "PASS",
+    "errors": 1
+  },
+  "03_emotion_flow": {
+    "status": "PASS",
+    "errors": 1
+  },
+  "04_custom_text": {
+    "status": "PASS",
+    "errors": 1
+  },
+  "05_keyboard": {
+    "status": "PASS",
+    "errors": 1
+  },
+  "06_double_click": {
+    "status": "PASS",
+    "errors": 1
+  },
+  "07_multi_locale": {
+    "status": "PASS",
+    "errors": 0
+  },
+  "08_responsive": {
+    "status": "PASS",
+    "errors": 0
+  },
+  "09_audio": {
+    "status": "PASS",
+    "errors": 0
+  },
+  "10_error_resilience": {
+    "status": "PASS",
+    "errors": 0
+  }
+}

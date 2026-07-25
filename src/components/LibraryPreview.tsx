@@ -60,30 +60,31 @@ export default function LibraryPreview({ locale }: LibraryPreviewProps) {
 
   return (
     <section className="py-20 sm:py-28 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-nord-bg via-nord-card/30 to-nord-bg pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-dc-deep via-dc-surface/20 to-dc-deep pointer-events-none" />
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-nord-text mb-3">{text.heading}</h2>
-          <p className="text-nord-text/50 max-w-2xl leading-relaxed">{text.sub}</p>
+        <div className="mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-dc-text mb-3">{text.heading}</h2>
+          <p className="text-dc-muted max-w-2xl leading-relaxed">{text.sub}</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           {Object.entries(grouped).map(([category, topics]) => (
             <div key={category}>
-              <span className="text-xs font-medium text-nord-text/40 uppercase tracking-wider block mb-2">
+              <h3 className="text-sm font-semibold text-dc-muted uppercase tracking-wider mb-3">
                 {catLabels[category] || category}
-              </span>
+              </h3>
               <div
-                className="flex gap-2 overflow-x-auto pb-3 scrollbar-thin"
+                className="flex gap-3 overflow-x-auto pb-3 snap-x snap-mandatory scrollbar-thin"
                 style={{ scrollbarWidth: "thin", msOverflowStyle: "auto" }}
               >
                 {topics.map((topic) => (
                   <Link
                     key={topic.slug}
                     href={`/${locale}/library/${topic.slug}`}
-                    className="shrink-0 inline-flex items-center px-3.5 py-2 rounded-full bg-nord-card/60 border border-nord-border/40
-                      text-nord-text/80 text-sm hover:bg-nord-accent/10 hover:border-nord-accent/30 hover:text-nord-accent
-                      transition-all duration-200 whitespace-nowrap"
+                    className="shrink-0 w-56 p-4 rounded-xl bg-dc-surface/60 border border-dc-border/30
+                      hover:bg-dc-accent/5 hover:border-dc-accent/20
+                      text-dc-text text-sm hover:text-dc-accent
+                      transition-all duration-200 snap-start"
                   >
                     {topic.title}
                   </Link>
@@ -93,12 +94,12 @@ export default function LibraryPreview({ locale }: LibraryPreviewProps) {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-12 text-center">
           <Link
             href={`/${locale}/library`}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-nord-accent/10 hover:bg-nord-accent/20
-              text-nord-accent font-medium rounded-xl border border-nord-accent/20
-              hover:border-nord-accent/40 transition-all duration-300 text-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-dc-accent/10 hover:bg-dc-accent/20
+              text-dc-accent font-medium rounded-xl border border-dc-accent/20
+              hover:border-dc-accent/40 transition-all duration-300 text-sm"
           >
             {locale === "zh" ? "浏览全部话题 →" : "Browse all topics →"}
           </Link>

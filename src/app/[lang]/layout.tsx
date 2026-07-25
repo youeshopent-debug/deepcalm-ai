@@ -1,7 +1,8 @@
 import AudioFloatingTray from "@/components/AudioFloatingTray";
-import BackgroundCanvas from "@/components/BackgroundCanvas";
-import BackgroundVideo from "@/components/BackgroundVideo";
+import BackgroundLayer from "@/components/BackgroundLayer";
+import CookieConsent from "@/components/CookieConsent";
 import Header from "@/components/Header";
+import MedicalDisclaimer from "@/components/MedicalDisclaimer";
 import SitemapFooter from "@/components/SitemapFooter";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -15,6 +16,19 @@ export function generateMetadata({ params: { lang } }: { params: { lang: string 
     description:
       "Find your calm in the quiet hours. AI-powered emotional support, sleep guidance, and a community that breathes with you.",
     metadataBase: new URL("https://deepcalm-ai.com"),
+    alternates: {
+      canonical: `/${lang}`,
+      languages: {
+        "zh": "/zh",
+        "en": "/en",
+        "ms": "/ms",
+        "ja": "/ja",
+        "ko": "/ko",
+        "th": "/th",
+        "es": "/es",
+        "x-default": "/en",
+      },
+    },
   }
 }
 
@@ -31,13 +45,14 @@ export default function LangLayout({
   return (
     <LanguageProvider initialLocale={safeLocale} key={lang}>
       <ThemeProvider>
-        <div className="dark min-h-screen bg-dc-deep text-dc-text">
-          <BackgroundVideo src="/videos/forest-bg.mp4" overlayOpacity={0.6} />
-          <BackgroundCanvas videoMode={true} />
+        <div className="dark min-h-screen bg-white/95 backdrop-blur-3xl text-slate-800">
+          <BackgroundLayer />
           <Header />
           {children}
           <SitemapFooter />
+          <MedicalDisclaimer locale={safeLocale} />
           <ThemeSwitcher />
+          <CookieConsent />
           <AudioFloatingTray />
         </div>
       </ThemeProvider>

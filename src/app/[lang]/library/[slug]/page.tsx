@@ -1,10 +1,21 @@
 import type { Locale } from "@/types"
-import { getAllSlugs, getTopicBySlug, getTopicContent, getTopicsByCategory } from "@/content/topics"
+import { getAllSlugs, getTopicBySlug, getTopicContent } from "@/content/topics"
+import { getRecommendations } from "@/lib/recommendation-engine"
 import { getDict, tt } from "@/lib/getDict"
 import { notFound } from "next/navigation"
 import Breadcrumb from "@/components/Breadcrumb"
 import LibraryCard from "@/components/LibraryCard"
 import AiEntrance from "@/components/AiEntrance"
+import ExpertBadge from "@/components/ExpertBadge"
+import ExternalReferences from "@/components/ExternalReferences"
+import SsrAccordion from "@/components/SsrAccordion"
+import KnowledgeMap from "@/components/KnowledgeMap"
+import SleepStreakBadge from "@/components/SleepStreakBadge"
+import PrintPdfButtons from "@/components/PrintPdfButtons"
+import TableOfContents from "@/components/TableOfContents"
+import { TopicJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd"
+import { extractHeadings } from "@/lib/extractHeadings"
+import Link from "next/link"
 import { BookOpen } from "lucide-react"
 
 const categoryIcon: Record<string, string> = {
@@ -53,21 +64,25 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }) {
   const { lang, slug } = await params
-  const topic = getTopicBySlug(slug, lang as Locale)
+  const locale = lang as Locale
+  const topic = getTopicBySlug(slug, locale)
   if (!topic) return {}
+  const catName = CATEGORY_NAMES[topic.category]?.[locale] || topic.category
+  const suffix = locale === "zh" ? "心理健康指南" : locale === "ms" ? "Panduan Kesihatan Mental" : locale === "ja" ? "メンタルヘルスガイド" : locale === "ko" ? "정신 건강 가이드" : locale === "th" ? "คู่มือสุขภาพจิต" : locale === "es" ? "Guía de Salud Mental" : "Mental Health Guide"
+  const seoTitle = `${topic.title} | ${catName} ${suffix} - DeepCalm AI`
   return {
-    title: `${topic.title} - DeepCalm AI`,
+    title: seoTitle,
     description: topic.description,
     keywords: topic.keywords,
     metadataBase: new URL("https://deepcalm-ai.com"),
     alternates: {
-      canonical: `/${lang}/library/${slug}`,
+      canonical: `https://deepcalm-ai.com/${lang}/library/${slug}`,
       languages: {
-        zh: `/zh/library/${slug}`, en: `/en/library/${slug}`, ms: `/ms/library/${slug}`,
-        ja: `/ja/library/${slug}`, ko: `/ko/library/${slug}`, th: `/th/library/${slug}`, es: `/es/library/${slug}`,
+        zh: `https://deepcalm-ai.com/zh/library/${slug}`, en: `https://deepcalm-ai.com/en/library/${slug}`, ms: `https://deepcalm-ai.com/ms/library/${slug}`,
+        ja: `https://deepcalm-ai.com/ja/library/${slug}`, ko: `https://deepcalm-ai.com/ko/library/${slug}`, th: `https://deepcalm-ai.com/th/library/${slug}`, es: `https://deepcalm-ai.com/es/library/${slug}`,
       },
     },
-    openGraph: { title: `${topic.title} - DeepCalm AI`, description: topic.description },
+    openGraph: { title: seoTitle, description: topic.description },
   }
 }
 
@@ -82,22 +97,22 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
   const dictZh = getDict("zh")
   const content = getTopicContent(slug, locale)
 
-  const catColor = categoryColors[topic.category] || "from-nord-accent/10 to-nord-accent/5"
+  const catColor = categoryColors[topic.category] || "from-sky-500/10 to-sky-500/5"
   const icon = categoryIcon[topic.category] || "📖"
   const catName = CATEGORY_NAMES[topic.category]?.[locale] || topic.category
 
-  const related = getTopicsByCategory(topic.category, locale)
-    .filter((t) => t.slug !== slug)
-    .slice(0, 3)
+  const related = getRecommendations(slug, locale, 6)
 
   const t = (key: string, fallback: string) => tt(dict, key) || tt(dictEn, key) || tt(dictZh, key) || fallback
 
+  const headings = extractHeadings(content)
+
   return (
-    <div className="min-h-screen bg-nord-bg">
+    <div className="min-h-screen bg-slate-50">
       <section className="py-24 relative">
         <div className={`absolute inset-0 bg-gradient-to-b ${catColor}`} />
 
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb
             items={[
               { label: "Library", href: `/${locale}/library` },
@@ -108,78 +123,138 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
           />
 
           <div className="mb-10">
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-nord-accent uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-700 uppercase tracking-wider">
               <BookOpen className="w-3.5 h-3.5" />
               {catName}
             </span>
-            <h1 className="text-3xl sm:text-4xl font-bold text-nord-text mt-3 mb-4">
+            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">
               {icon} {topic.title}
             </h1>
-            <p className="text-nord-text/60 leading-relaxed">{topic.description}</p>
+            <p className="text-slate-600 leading-relaxed">{topic.description}</p>
           </div>
 
-          <div className="space-y-8">
-            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-4">
-                {locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
-              </h2>
-              <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed">
-                {content.science.split("\n").filter(Boolean).map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
+          <ExpertBadge locale={locale} />
+
+          {/* P3-B: 在沉浸模式中阅读 — 快捷入口 */}
+          <div className="mt-4 text-center">
+            <Link
+              href={`/${locale}/sanctuary`}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-dc-accent/10 hover:bg-dc-accent/20 text-dc-accent text-sm font-medium border border-dc-accent/20 hover:border-dc-accent/40 transition-all"
+            >
+              🌙 {locale === "zh" ? "在沉浸模式中阅读" : locale === "ms" ? "Baca dalam Mod Imersif" : locale === "ja" ? "没入モードで読む" : locale === "ko" ? "몰입 모드로 읽기" : locale === "th" ? "อ่านในโหมดดื่มด่ำ" : locale === "es" ? "Leer en modo inmersivo" : "Read in Immersive Mode"}
+            </Link>
+          </div>
+
+          <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-8">
+            {/* TOC Sidebar - desktop sticky, mobile collapsible */}
+            <div className="lg:order-1">
+              <TableOfContents headings={headings} locale={locale} />
             </div>
 
-            <div className="p-6 sm:p-8 bg-gradient-to-br from-nord-accent/[0.06] to-nord-card border border-nord-accent/15 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-4">
-                {locale === "zh" ? "🏋️ 日常健身指南" : locale === "ms" ? "🏋️ Panduan Kecergasan" : "🏋️ Emotional Fitness Guide"}
-              </h2>
-              <div className="prose prose-invert max-w-none prose-p:text-nord-text/70 prose-p:leading-relaxed prose-strong:text-nord-text">
-                {content.fitnessGuide.split("\n").map((line, i) => {
-                  if (line.startsWith("## ")) return <h3 key={i} className="text-base font-semibold text-nord-text mt-4 mb-2">{line.slice(3)}</h3>
-                  if (/^\d+\./.test(line.trim())) return <p key={i} className="text-nord-text/70 leading-relaxed mb-2">{line}</p>
-                  if (line.trim() === "") return null
-                  return <p key={i} className="text-nord-text/70 leading-relaxed">{line}</p>
-                })}
-              </div>
-            </div>
+            {/* Main Content */}
+            <div className="lg:order-2 min-w-0">
+              <div className="space-y-8 max-w-3xl">
+                {/* Science Section */}
+                <div id="science" className="scroll-mt-24">
+                  <SsrAccordion
+                    title={locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
+                    className="!bg-white/98 !backdrop-blur-[100px] !border-slate-200/30 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+                  >
+                    <div className="prose prose-invert max-w-none prose-p:text-slate-800 prose-p:leading-relaxed">
+                      {content.science.split("\n").filter(Boolean).map((p, i) => (
+                        <p key={i}>{p}</p>
+                      ))}
+                    </div>
+                    {topic.references && topic.references.length > 0 && (
+                      <ExternalReferences references={topic.references} locale={locale} />
+                    )}
+                  </SsrAccordion>
+                </div>
 
-            <div className="p-6 sm:p-8 bg-nord-card border border-nord-border/30 rounded-2xl">
-              <h2 className="text-lg font-bold text-nord-text mb-6">
-                {locale === "zh" ? "❓ 常见问题" : locale === "ms" ? "❓ Soalan Lazim" : "❓ FAQ"}
-              </h2>
-              <div className="space-y-4">
-                {content.faqItems.map((item, i) => (
-                  <div key={i} className="p-4 bg-nord-bg/50 rounded-xl border border-nord-border/20">
-                    <p className="text-nord-text font-medium text-sm mb-2">{item.q}</p>
-                    <p className="text-nord-text/60 text-sm leading-relaxed">{item.a}</p>
+                {/* Fitness Guide Section */}
+                <div className="p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-sky-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-lg font-bold text-slate-900 mb-4">
+                    {locale === "zh" ? "🏋️ 日常健身指南" : locale === "ms" ? "🏋️ Panduan Kecergasan" : "🏋️ Emotional Fitness Guide"}
+                  </h2>
+                  <div className="prose prose-invert max-w-none prose-p:text-slate-800 prose-p:leading-relaxed prose-strong:text-slate-900">
+                    {content.fitnessGuide.split("\n").map((line, i) => {
+                      if (line.startsWith("## ")) {
+                        const text = line.slice(3).trim()
+                        const id = text.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, "-").replace(/^-+|-+$/g, "")
+                        return <h3 key={i} id={id} className="text-base font-semibold text-slate-900 mt-4 mb-2 scroll-mt-24">{text}</h3>
+                      }
+                      if (/^\d+\./.test(line.trim())) return <p key={i} className="text-slate-800 leading-relaxed mb-2">{line}</p>
+                      if (line.trim() === "") return null
+                      return <p key={i} className="text-slate-800 leading-relaxed">{line}</p>
+                    })}
                   </div>
-                ))}
+                </div>
+
+                {/* FAQ Section */}
+                <div id="faq" className="p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] scroll-mt-24">
+                  <h2 className="text-lg font-bold text-slate-900 mb-6">
+                    {locale === "zh" ? "❓ 常见问题" : locale === "ms" ? "❓ Soalan Lazim" : "❓ FAQ"}
+                  </h2>
+                  <div className="space-y-4">
+                    {content.faqItems.map((item, i) => (
+                      <div key={i} id={`faq-${i}`} className="p-4 bg-slate-100/80 rounded-xl border border-slate-200/40 scroll-mt-24">
+                        <p className="text-slate-900 font-medium text-sm mb-2">{item.q}</p>
+                        <p className="text-slate-700 text-sm leading-relaxed">{item.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+
+              <PrintPdfButtons locale={locale} slug={slug} />
+
+              <AiEntrance locale={locale} />
+
+              <KnowledgeMap slug={slug} locale={locale} />
+
+              {related.length > 0 && (
+                <div className="mt-16">
+                  <h2 className="text-lg font-bold text-slate-900 mb-6">
+                    {locale === "zh" ? "📖 相关阅读" : locale === "ms" ? "📖 Bacaan Berkaitan" : "📖 Related Reading"}
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {related.map((r) => (
+                      <LibraryCard
+                        key={r.slug}
+                        slug={r.slug}
+                        title={r.title}
+                        description={r.description}
+                        category={r.category}
+                        locale={locale}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 守夜勋章 — 每日阅读习惯游戏化 */}
+              <SleepStreakBadge locale={locale} />
             </div>
           </div>
 
-          <AiEntrance locale={locale} />
-
-          {related.length > 0 && (
-            <div className="mt-16">
-              <h2 className="text-lg font-bold text-nord-text mb-6">
-                {locale === "zh" ? "📖 相关阅读" : locale === "ms" ? "📖 Bacaan Berkaitan" : "📖 Related Reading"}
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {related.map((r) => (
-                  <LibraryCard
-                    key={r.slug}
-                    slug={r.slug}
-                    title={r.title}
-                    description={r.description}
-                    category={r.category}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+          <BreadcrumbJsonLd
+            items={[
+              { name: catName === "睡眠" ? "Library" : "Library", url: `https://deepcalm-ai.com/${locale}/library` },
+              { name: catName, url: `https://deepcalm-ai.com/${locale}/library#${topic.category}` },
+              { name: topic.title, url: `https://deepcalm-ai.com/${locale}/library/${slug}` },
+            ]}
+          />
+          <TopicJsonLd
+            locale={locale}
+            slug={slug}
+            topic={{
+              title: topic.title,
+              description: topic.description,
+              keywords: topic.keywords,
+              category: topic.category,
+            }}
+            faqItems={content.faqItems.map((item) => ({ q: item.q, a: item.a }))}
+          />
         </div>
       </section>
     </div>

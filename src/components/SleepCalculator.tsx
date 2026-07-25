@@ -50,22 +50,22 @@ export default function SleepCalculator() {
 
   return (
     <div>
-      <div className="p-6 glass rounded-xl mb-8">
+      <div className="p-6 bg-slate-800/90 backdrop-blur-xl rounded-xl border border-slate-600/30 mb-8">
         <div className="flex items-center gap-2 mb-6">
-          <Clock className="w-5 h-5 text-dc-accent" />
-          <span className="text-sm font-medium text-dc-text">{tt('sleepCalculator.wake_label')}</span>
+          <Clock className="w-5 h-5 text-blue-400" />
+          <span className="text-sm font-medium text-slate-100">{tt('sleepCalculator.wake_label')}</span>
         </div>
 
         <div className="text-center mb-6">
-          <div className="text-4xl font-light text-dc-text tracking-widest tabular-nums">
+          <div className="text-4xl font-light text-white tracking-widest tabular-nums">
             {displayTime}
           </div>
-          <div className="text-xs text-dc-muted mt-1">{tt('sleepCalculator.wake_time_hint')}</div>
+          <div className="text-xs text-slate-300 mt-1">{tt('sleepCalculator.wake_time_hint')}</div>
         </div>
 
         <div className="space-y-4">
           <div>
-            <div className="flex justify-between text-xs text-dc-muted mb-1">
+            <div className="flex justify-between text-xs text-slate-400 mb-1">
               <span>00</span>
               <span>12</span>
               <span>23</span>
@@ -83,7 +83,7 @@ export default function SleepCalculator() {
             />
           </div>
           <div>
-            <div className="flex justify-between text-xs text-dc-muted mb-1">
+            <div className="flex justify-between text-xs text-slate-400 mb-1">
               <span>00</span>
               <span>30</span>
               <span>55</span>
@@ -105,31 +105,31 @@ export default function SleepCalculator() {
 
       {results.length > 0 && (
         <div className="space-y-4 animate-slide-up">
-          <h4 className="text-sm font-medium text-dc-text mb-3">{tt('sleepCalculator.result_title')}</h4>
+          <h4 className="text-sm font-bold text-slate-100 mb-3">{tt('sleepCalculator.result_title')}</h4>
           {results.map((r, i) => (
             <div
               key={i}
-              className="p-4 glass rounded-xl hover:bg-white/[0.03] transition-all duration-300"
+              className="p-4 bg-slate-800/80 backdrop-blur-sm rounded-xl border border-slate-600/20 hover:bg-slate-800 transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-dc-accent/10 flex items-center justify-center">
-                    <Moon className="w-5 h-5 text-dc-accent" />
+                  <div className="w-10 h-10 rounded-full bg-blue-500/15 flex items-center justify-center">
+                    <Moon className="w-5 h-5 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-dc-text text-sm font-medium">{r.bedtime}</p>
-                    <p className="text-xs text-dc-muted">
+                    <p className="text-slate-100 text-sm font-medium">{r.bedtime}</p>
+                    <p className="text-xs text-slate-300">
                       {r.cycles} × 90min = {r.cycles * 90}min {tt('sleepCalculator.cycles')}
                     </p>
                   </div>
                 </div>
                 <span
-                  className={`text-xs px-3 py-1 rounded-full ${
+                  className={`text-xs px-3 py-1 rounded-full font-semibold ${
                     r.cycles === 6
-                      ? 'bg-green-500/10 text-green-400'
+                      ? 'bg-emerald-500/15 text-emerald-300'
                       : r.cycles === 5
-                        ? 'bg-dc-accent/10 text-dc-accent'
-                        : 'bg-yellow-500/10 text-yellow-400'
+                        ? 'bg-blue-500/15 text-blue-300'
+                        : 'bg-amber-500/15 text-amber-300'
                   }`}
                 >
                   {r.cycles === 6
@@ -140,7 +140,7 @@ export default function SleepCalculator() {
                 </span>
               </div>
               <CycleDiagram cycles={r.cycles} />
-              <div className="flex items-center gap-3 mt-2 text-[10px] text-dc-muted">
+              <div className="flex items-center gap-3 mt-2 text-[10px] text-slate-400">
                 <span className="flex items-center gap-1">
                   <span className="w-2 h-2 rounded-sm bg-[hsla(200,50%,35%,0.5)]" /> {tt('sleepCalculator.deep_sleep')}
                 </span>

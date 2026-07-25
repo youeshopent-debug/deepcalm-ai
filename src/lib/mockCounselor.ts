@@ -305,6 +305,64 @@ const chatFallbacks: Record<Locale, string> = {
   es: "Estoy aquí para escuchar. Cuéntame más—¿qué está pesando en tu corazón?",
 }
 
+/**
+ * 7-Locale Mock Structured Questions for Data Collection Phase (Rounds 1-3).
+ * Mirrors STRUCTURED_QUESTIONS from counselorSystemPrompts.ts but uses
+ * simpler, more generic fallback questions for offline/API-down scenarios.
+ */
+const MOCK_STRUCTURED_QUESTIONS: Record<Locale, [string, string, string]> = {
+  zh: [
+    "我们先从基础数据开始。你通常需要多长时间才能入睡？你的作息时间是否规律？",
+    "了解。近期有什么主要的压力来源吗？这种压力持续了多久？",
+    "感谢你的坦诚。关于睡眠质量，能描述一下你夜间多梦的情况吗？是否经常在凌晨醒来且难以再次入睡？",
+  ],
+  en: [
+    "Let's start with baseline data. How long does it typically take you to fall asleep? Is your sleep schedule regular?",
+    "I see. What are the main sources of stress you're currently facing? How long has this been going on?",
+    "Thank you for your honesty. Regarding sleep quality — could you describe your dream patterns? Do you frequently wake up during early morning hours?",
+  ],
+  ms: [
+    "Mari kita mulakan dengan data asas. Berapa lama masa yang biasa anda ambil untuk tidur? Adakah jadual tidur anda tetap?",
+    "Saya faham. Apakah sumber tekanan utama yang anda hadapi? Berapa lama ini telah berlaku?",
+    "Terima kasih atas kejujuran anda. Mengenai kualiti tidur — boleh terangkan corak mimpi anda? Adakah anda kerap bangun pada awal pagi?",
+  ],
+  ja: [
+    "基礎データから始めましょう。通常、入眠までにどのくらい時間がかかりますか？就寝時間は規則的ですか？",
+    "わかりました。現在直面している主なストレス要因は何ですか？それはどのくらい続いていますか？",
+    "正直なお話をありがとうございます。睡眠の質について——夢のパターンを説明していただけますか？早朝に頻繁に目が覚めますか？",
+  ],
+  ko: [
+    "기초 데이터부터 시작하겠습니다. 일반적으로 잠드는 데 얼마나 걸리나요? 취침 시간이 규칙적인가요?",
+    "알겠습니다. 현재 직면한 주요 스트레스 요인은 무엇인가요? 이것이 얼마나 지속되었나요?",
+    "솔직한 답변 감사합니다. 수면 질에 관해 — 꿈 패턴을 설명해 주시겠어요? 이른 아침에 자주 깨시나요?",
+  ],
+  th: [
+    "เริ่มจากข้อมูลพื้นฐาน เวลาที่คุณใช้ในการหลับโดยปกติประมาณกี่นาที? ตารางการนอนของคุณสม่ำเสมอหรือไม่?",
+    "เข้าใจแล้ว อะไรคือแหล่งที่มาหลักของความเครียดที่คุณเผชิญอยู่? สิ่งนี้เกิดขึ้นมานานแค่ไหน?",
+    "ขอบคุณสำหรับความซื่อสัตย์ของคุณ เกี่ยวกับคุณภาพการนอน — คุณช่วยอธิบายรูปแบบความฝันของคุณได้ไหม? คุณตื่นกลางดึกบ่อยไหม?",
+  ],
+  es: [
+    "Empecemos con los datos básicos. ¿Cuánto tiempo sueles tardar en quedarte dormido? ¿Tu horario de sueño es regular?",
+    "Entiendo. ¿Cuáles son las principales fuentes de estrés que enfrentas actualmente? ¿Cuánto tiempo ha estado ocurriendo esto?",
+    "Gracias por tu sinceridad. Sobre la calidad del sueño — ¿podrías describir tus patrones de sueños? ¿Te despiertas frecuentemente durante la madrugada?",
+  ],
+}
+
+/**
+ * 7-Locale Science Principle Intros for the 【科学原理对齐】 section.
+ * Used only in fallback mode (API down) to provide a semblance of
+ * the knowledge-base anchoring that the real LLM would generate.
+ */
+const MOCK_SCIENCE_INTROS: Record<Locale, string> = {
+  zh: "从神经科学角度看，持续焦虑会导致皮质醇节律紊乱——正常情况下皮质醇在早晨最高、夜间最低，但慢性压力会使其在凌晨仍维持高水平，干扰深度睡眠和REM周期的正常切换。同时，杏仁核过度激活使大脑在夜间处于警戒状态，形成「焦虑→失眠→更焦虑」的恶性循环。认知行为疗法（CBT-I）通过刺激控制重建「床=睡眠」的条件反射，是国际失眠指南推荐的一线非药物方案。",
+  en: "From a neuroscience perspective, sustained anxiety disrupts cortisol rhythm — normally peaking in the morning and lowest at night. Chronic stress maintains elevated cortisol into early morning, interfering with deep sleep and REM cycle transitions. Concurrent amygdala hyperactivation keeps the brain alert, creating an 'anxiety → insomnia → more anxiety' cycle. CBT-I rebuilds the 'bed = sleep' conditioned reflex through stimulus control and is the first-line non-pharmacological treatment per global insomnia guidelines.",
+  ms: "Dari segi neurosains, kebimbangan berterusan mengganggu irama kortisol — biasanya memuncak pada waktu pagi dan terendah pada waktu malam. Tekanan kronik mengekalkan kortisol tinggi hingga awal pagi, mengganggu tidur nyenyak dan peralihan kitaran REM. Hiperaktif amigdala serentak mengekalkan otak dalam keadaan waspada, mewujudkan kitaran 'kebimbangan → insomnia → lebih kebimbangan'.",
+  ja: "神経科学的観点から、持続的な不安はコルチゾールリズムを乱します——通常は朝にピークで夜に最低ですが、慢性ストレスは早朝までコルチゾールを高値に維持し、深い睡眠とREMサイクルの移行を妨害します。同時に扁桃体の過剰活性化により脳が警戒状態を維持し、「不安→不眠→さらなる不安」の悪循環を形成します。",
+  ko: "신경과학적 관점에서 지속적인 불안은 코르티솔 리듬을 교란합니다 — 일반적으로 아침에 최고, 밤에 최저이지만 만성 스트레스는 이른 아침까지 코르티솔을 높게 유지하여 깊은 수면과 REM 주기 전환을 방해합니다. 동시에 편도체 과활성화로 뇌가 경계 상태를 유지하여 '불안→불면→더 큰 불안'의 악순환을 만듭니다.",
+  th: "จากมุมมองทางประสาทวิทยาศาสตร์ ความวิตกกังวลอย่างต่อเนื่องรบกวนจังหวะคอร์ติซอล — ปกติจะสูงสุดในตอนเช้าและต่ำสุดในตอนกลางคืน แต่ความเครียดเรื้อรังทำให้คอร์ติซอลสูงจนถึงเช้าตรู่ รบกวนการนอนหลับลึกและการเปลี่ยนผ่านของรอบ REM การกระตุ้นอะมิกดาลามากเกินไปทำให้สมองตื่นตัว สร้างวงจร 'วิตกกังวล→นอนไม่หลับ→วิตกกังวลมากขึ้น'",
+  es: "Desde la neurociencia, la ansiedad sostenida altera el ritmo de cortisol — normalmente máximo por la mañana y mínimo por la noche. El estrés crónico mantiene el cortisol elevado hasta la madrugada, interfiriendo con el sueño profundo y las transiciones del ciclo REM. La hiperactivación de la amígdala mantiene el cerebro en alerta, creando un círculo vicioso 'ansiedad → insomnio → más ansiedad'.",
+}
+
 function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)]
 }
@@ -329,39 +387,96 @@ export function mockAnalyze(locale: Locale = "zh", _text?: string): CounselorRes
   }
 }
 
+/**
+ * Generate locale-specific analysis section content for the 3-part mock output.
+ * Mirrors original 7-branch templates with locale-specific phrasing.
+ */
+function generateMockAnalysis(
+  locale: Locale,
+  keyword: string,
+  encouragement: string,
+  pattern: string,
+  zhLineBreak: string
+): string {
+  if (!keyword) return encouragement
+
+  const templates: Record<Locale, string> = {
+    zh: `${encouragement}${zhLineBreak}我听到你提到「${keyword}」。有时当我们深陷其中，很容易滑向「如果……就完了」的灾难化思维。${pattern}${zhLineBreak}如果你愿意，我们可以一起试试三件小事：`,
+    en: `${encouragement}${zhLineBreak}I hear you mentioning "${keyword}". Sometimes when we're in it, it's easy to slide into catastrophic thinking. ${pattern}${zhLineBreak}If you're open to it, let's try three small things together:`,
+    ms: `${encouragement}${zhLineBreak}Saya dengar awak sebut "${keyword}". Kadang-kadang bila kita berada dalam situasi ini, mudah untuk jatuh ke dalam pemikiran bencana. ${pattern}${zhLineBreak}Kalau awak sudi, jom cuba tiga perkara kecil bersama:`,
+    ja: `${encouragement}${zhLineBreak}「${keyword}」という言葉をお聞きしています。時々、私たちは破局的思考に陥りがちです。${pattern}${zhLineBreak}よろしければ、3つの小さなことを一緒に試してみませんか：`,
+    ko: `${encouragement}${zhLineBreak}"${keyword}"에 대해 말씀하셨네요. 때로는 우리가 파국적 사고에 빠지기 쉽습니다. ${pattern}${zhLineBreak}함께 세 가지 작은 일을 시도해볼까요:`,
+    th: `${encouragement}${zhLineBreak}ฉันได้ยินคุณพูดถึง "${keyword}" บางครั้งเมื่อเราอยู่ในสถานการณ์นั้น มันง่ายที่จะคิดแบบหายนะ ${pattern}${zhLineBreak}ถ้าคุณพร้อม ลองทำสามสิ่งเล็กๆ ด้วยกันไหม:`,
+    es: `${encouragement}${zhLineBreak}Escucho que mencionas "${keyword}". A veces cuando estamos inmersos en esto, es fácil caer en el pensamiento catastrófico. ${pattern}${zhLineBreak}Si te parece bien, probemos tres pequeñas cosas juntos:`,
+  }
+
+  return templates[locale] || templates.zh
+}
+
+/**
+ * 7-Locale section labels for the 3-part structured output.
+ * Must stay in sync with DIAGNOSIS_SECTION_LABELS in counselorSystemPrompts.ts.
+ */
+const MOCK_SECTION_LABELS: Record<Locale, { analysis: string; science: string; action: string }> = {
+  zh: { analysis: "【现状解析】", science: "【科学原理对齐】", action: "【即时行动方案】" },
+  en: { analysis: "【Current Situation Analysis】", science: "【Scientific Principle Alignment】", action: "【Immediate Action Plan】" },
+  ms: { analysis: "【Analisis Situasi Semasa】", science: "【Penjajaran Prinsip Saintifik】", action: "【Rancangan Tindakan Segera】" },
+  ja: { analysis: "【現状分析】", science: "【科学的原理の整合】", action: "【即時行動計画】" },
+  ko: { analysis: "【현황 분석】", science: "【과학 원리 정렬】", action: "【즉시 실행 계획】" },
+  th: { analysis: "【การวิเคราะห์สถานการณ์ปัจจุบัน】", science: "【การเชื่อมโยงหลักการทางวิทยาศาสตร์】", action: "【แผนปฏิบัติการทันที】" },
+  es: { analysis: "【Análisis de la Situación Actual】", science: "【Alineación con Principios Científicos】", action: "【Plan de Acción Inmediato】" },
+}
+
+/**
+ * [CRITICAL: RESPONSE_LANGUAGE_LOCK]
+ * Enhanced mock reply with 3-phase output strategy:
+ * - Rounds 1-3 (Data Collection): Returns structured questioning per MOCK_STRUCTURED_QUESTIONS
+ * - Rounds 4+ (Diagnosis Output): Returns 3-part structured text with
+ *   【现状解析】/【科学原理对齐】/【即时行动方案】sections
+ *
+ * The section labels align with DIAGNOSIS_SECTION_LABELS in counselorSystemPrompts.ts
+ * so parseStructuredResponse() can extract sections in both online & fallback modes.
+ */
 export function mockChatReply(
   locale: Locale = "zh",
   text?: string,
-  history?: { role: string; content: string }[]
+  history?: { role: string; content: string }[],
+  dialogueRound: number = 1
 ): string {
   const data = localizedData[locale] || localizedData.zh
-  const keyword = text?.slice(0, 36) || (history && history.length > 0 ? history[history.length - 1].content.slice(0, 36) : "")
+
+  // ─── PHASE 1: Data Collection (Rounds 1-3) ───
+  if (dialogueRound <= 3) {
+    const questions = MOCK_STRUCTURED_QUESTIONS[locale] || MOCK_STRUCTURED_QUESTIONS.zh
+    const idx = Math.min(dialogueRound - 1, 2)
+    return questions[idx] || chatFallbacks[locale] || chatFallbacks.zh
+  }
+
+  // ─── PHASE 2: Diagnosis Output (Round 4+) ───
+  const keyword =
+    text?.slice(0, 36) ||
+    (history && history.length > 0
+      ? history[history.length - 1].content.slice(0, 36)
+      : "")
 
   const encouragement = pick(data.encouragements)
   const pattern = pick(data.patterns)
-
   const zhLineBreak = "\n\n"
+  const labels = MOCK_SECTION_LABELS[locale] || MOCK_SECTION_LABELS.zh
 
-  if (keyword && locale === "zh") {
-    return `${encouragement}${zhLineBreak}我听到你提到「${keyword}」。有时当我们深陷其中，很容易滑向"如果……就完了"的灾难化思维。${pattern}${zhLineBreak}如果你愿意，我们可以一起试试三件小事：\n1. 闭上眼睛，慢慢做三次深呼吸——吸气4秒，屏住，呼气7秒\n2. 拿起手机，用三个词写下此刻脑海中最担心的那个想法\n3. 给自己倒一杯温水，双手握住杯子，感受它的温度\n\n一步一步来，不用急。`
-  }
-  if (keyword && locale === "en") {
-    return `${encouragement}${zhLineBreak}I hear you mentioning "${keyword}". Sometimes when we're in it, it's easy to slide into "if this happens, everything is over" thinking. ${pattern}${zhLineBreak}If you're open to it, let's try three small things together:\n1. Close your eyes, take three slow deep breaths — 4 seconds in, hold, 7 seconds out\n2. Pick up your phone, write down the worry in three words\n3. Pour yourself a glass of water, hold it in both hands, feel its warmth\n\nOne step at a time. No rush.`
-  }
-  if (keyword && locale === "ms") {
-    return `${encouragement}${zhLineBreak}Saya dengar awak sebut "${keyword}". Kadang-kadang bila kita berada dalam situasi ini, mudah untuk jatuh ke dalam pemikiran "kalau ini berlaku, semuanya habis". ${pattern}${zhLineBreak}Kalau awak sudi, jom cuba tiga perkara kecil bersama:\n1. Tutup mata, tarik nafas dalam tiga kali — tarik 4 saat, tahan, hembus 7 saat\n2. Ambil telefon, tulis kebimbangan itu dalam tiga patah perkataan\n3. Tuang segelas air, pegang dengan dua tangan, rasa kehangatannya\n\nLangkah demi langkah. Jangan tergesa-gesa.`
-  }
-  if (keyword && locale === "ja") {
-    return `${encouragement}${zhLineBreak}「${keyword}」という言葉をお聞きしています。時々、私たちは「もしこうなったらもう終わりだ」という破局的思考に陥りがちです。${pattern}${zhLineBreak}よろしければ、3つの小さなことを一緒に試してみませんか：\n1. 目を閉じて、ゆっくりと深呼吸を3回——4秒吸って、止めて、7秒で吐く\n2. スマホを手に取り、今の心配事を3つの言葉で書き出す\n3. コップに水を注ぎ、両手で包み込み、その温もりを感じる\n\n一歩ずつでいいんです。急がなくて大丈夫。`
-  }
-  if (keyword && locale === "ko") {
-    return `${encouragement}${zhLineBreak}"${keyword}"에 대해 말씀하셨네요. 때로는 우리가 그 상황에 빠지면 "이렇게 되면 끝이야"라는 파국적 사고에 빠지기 쉽습니다. ${pattern}${zhLineBreak}함께 세 가지 작은 일을 시도해볼까요:\n1. 눈을 감고 천천히 세 번 깊게 숨을 쉬어보세요 — 4초 들이마시고, 멈추고, 7초 내쉬기\n2. 핸드폰을 들어 지금 가장 걱정되는 생각을 세 단어로 적어보세요\n3. 물 한 잔을 따라 두 손으로 감싸고 그 온기를 느껴보세요\n\n한 걸음씩 천천히. 서두르지 마세요.`
-  }
-  if (keyword && locale === "th") {
-    return `${encouragement}${zhLineBreak}ฉันได้ยินคุณพูดถึง "${keyword}" บางครั้งเมื่อเราอยู่ในสถานการณ์นั้น มันง่ายที่จะคิดแบบหายนะ — "ถ้าเป็นแบบนี้คงจบเห่" ${pattern}${zhLineBreak}ถ้าคุณพร้อม ลองทำสามสิ่งเล็กๆ ด้วยกันไหม:\n1. หลับตา หายใจลึกๆ ช้าๆ สามครั้ง — หายใจเข้า 4 วินาที กลั้นไว้ หายใจออก 7 วินาที\n2. หยิบโทรศัพท์ขึ้นมา เขียนความกังวลนั้นเป็นสามคำ\n3. เทน้ำหนึ่งแก้ว ถือด้วยสองมือ สัมผัสความอุ่น\n\nทีละก้าว ไม่ต้องรีบ`
-  }
-  if (keyword && locale === "es") {
-    return `${encouragement}${zhLineBreak}Escucho que mencionas "${keyword}". A veces cuando estamos inmersos en esto, es fácil caer en el pensamiento catastrófico de "si esto pasa, todo se acaba". ${pattern}${zhLineBreak}Si te parece bien, probemos tres pequeñas cosas juntos:\n1. Cierra los ojos, toma tres respiraciones profundas y lentas — inhala 4 segundos, sostén, exhala 7 segundos\n2. Toma tu teléfono, escribe la preocupación en tres palabras\n3. Sírvete un vaso de agua, sosténlo con ambas manos, siente su calidez\n\nPaso a paso. Sin prisas.`
-  }
-  return encouragement
+  // Build Analysis section
+  const analysisContent = generateMockAnalysis(locale, keyword, encouragement, pattern, zhLineBreak)
+
+  // Build Science section
+  const scienceContent = MOCK_SCIENCE_INTROS[locale] || MOCK_SCIENCE_INTROS.zh
+
+  // Build Action section
+  const allFirst = data.stepsSets.map(s => s[0])
+  const allSecond = data.stepsSets.map(s => s[1])
+  const allThird = data.stepsSets.map(s => s[2])
+  const steps = [pick(allFirst), pick(allSecond), pick(allThird)]
+  const stepsText = steps.map((s, i) => `${i + 1}. ${s}`).join("\n")
+  const actionContent = `${pick(data.dailyNotes)}\n\n${stepsText}`
+
+  return `${labels.analysis}\n${analysisContent}\n\n${labels.science}\n${scienceContent}\n\n${labels.action}\n${actionContent}`
 }
