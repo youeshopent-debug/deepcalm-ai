@@ -45,7 +45,7 @@ export default function LangLayout({
   return (
     <LanguageProvider initialLocale={safeLocale} key={lang}>
       <ThemeProvider>
-        <div className="dark min-h-screen bg-white/95 backdrop-blur-3xl text-slate-800">
+        <div className="dark min-h-screen bg-slate-900/75 text-slate-100">
           <BackgroundLayer />
           <Header />
           {children}
