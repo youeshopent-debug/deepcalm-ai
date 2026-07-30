@@ -48,10 +48,10 @@ export default function AudioMixer() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
       {expanded && (
-        <div className="glass p-3 rounded-2xl flex flex-col gap-2 min-w-[180px] backdrop-blur-xl bg-black/30 transition-all duration-300">
+        <div className="glass p-3 rounded-2xl flex flex-col gap-2 min-w-[180px] backdrop-blur-xl bg-white/90 transition-all duration-300">
           <div className="flex items-center justify-between px-1 mb-1">
-            <span className="text-xs text-white/50">Audio Mixer</span>
-            <button onClick={() => setExpanded(false)} className="text-white/40 hover:text-white/70 transition-colors">
+            <span className="text-xs text-gray-500">Audio Mixer</span>
+            <button onClick={() => setExpanded(false)} className="text-gray-400 hover:text-gray-700 transition-colors">
               <X size={14} />
             </button>
           </div>
@@ -61,11 +61,11 @@ export default function AudioMixer() {
               <button
                 key={id}
                 onClick={() => toggle(id)}
-                className="flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-300 hover:bg-white/10"
+                className="flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-300 hover:bg-gray-100"
                 style={isOn ? { backgroundColor: color + '20' } : {}}
               >
-                <Icon size={16} style={{ color: isOn ? color : 'rgba(255,255,255,0.4)' }} />
-                <span className="text-sm flex-1 text-left" style={{ color: isOn ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.5)' }}>
+                <Icon size={16} style={{ color: isOn ? color : 'rgba(0,0,0,0.4)' }} />
+                <span className="text-sm flex-1 text-left" style={{ color: isOn ? 'rgba(0,0,0,0.85)' : 'rgba(0,0,0,0.5)' }}>
                   {tt(labelKey)}
                 </span>
                 <div className={`w-2 h-2 rounded-full transition-all duration-500 ${isOn ? 'opacity-100' : 'opacity-0'}`}
@@ -74,7 +74,7 @@ export default function AudioMixer() {
             )
           })}
           <div className="flex items-center gap-2 px-3 mt-1">
-            <Volume2 size={14} className="text-white/40" />
+            <Volume2 size={14} className="text-gray-400" />
             <input
               type="range"
               min="0"
@@ -82,17 +82,17 @@ export default function AudioMixer() {
               step="0.05"
               value={volume}
               onChange={handleVolume}
-              className="flex-1 h-1 accent-white/60"
+              className="flex-1 h-1 accent-gray-400"
             />
           </div>
         </div>
       )}
       <button
         onClick={() => setExpanded(v => !v)}
-        className="glass w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl bg-black/30 hover:bg-black/50 transition-all duration-300 group"
+        className="glass w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl bg-white/90 hover:bg-gray-100 transition-all duration-300 group"
       >
         <span className="relative flex items-center justify-center">
-          <Volume2 size={20} className="text-white/50 group-hover:text-white/80 transition-colors duration-300" />
+          <Volume2 size={20} className="text-gray-500 group-hover:text-gray-800 transition-colors duration-300" />
           {active.size > 0 && (
             <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full animate-pulse"
               style={{ backgroundColor: TRACKS.find(t => active.has(t.id))?.color || 'white' }} />

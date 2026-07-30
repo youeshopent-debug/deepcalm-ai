@@ -17,26 +17,26 @@ export default function Footer() {
   const { locale, tt } = useLanguage()
 
   return (
-    <footer className="relative border-t border-white/10 bg-black/30 backdrop-blur-xl">
+    <footer className="relative border-t border-gray-200 bg-white/80 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
-            <h3 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
               {tt("footer.tools_title")}
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href={`/${locale}/#ai-counselor`} className="text-sm text-white/40 hover:text-white/70 transition-colors">
+                <Link href={`/${locale}/#ai-counselor`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   {tt("footer.ai_counselor")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/#tools`} className="text-sm text-white/40 hover:text-white/70 transition-colors">
+                <Link href={`/${locale}/#tools`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   {tt("footer.sleep_calculator")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/#daily-checkin`} className="text-sm text-white/40 hover:text-white/70 transition-colors">
+                <Link href={`/${locale}/#daily-checkin`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   {tt("footer.daily_checkin")}
                 </Link>
               </li>
@@ -44,13 +44,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
               {tt("footer.support_title")}
             </h3>
             <ul className="space-y-3">
               {anxietyScenarios.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/${locale}/anxiety/${s.slug}`} className="text-sm text-white/40 hover:text-white/70 transition-colors">
+                  <Link href={`/${locale}/anxiety/${s.slug}`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                     {tt(`footer.${s.key}`)}
                   </Link>
                 </li>
@@ -59,27 +59,27 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
               {tt("footer.legal_title")}
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href={`/${locale}/privacy`} className="text-sm text-white/40 hover:text-white/70 transition-colors">
+                <Link href={`/${locale}/privacy`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   {tt("footer.privacy")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/terms`} className="text-sm text-white/40 hover:text-white/70 transition-colors">
+                <Link href={`/${locale}/terms`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   {tt("footer.terms")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/guide`} className="text-sm text-white/40 hover:text-white/70 transition-colors">
+                <Link href={`/${locale}/guide`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   {tt("footer.guide")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/about`} className="text-sm text-white/40 hover:text-white/70 transition-colors">
+                <Link href={`/${locale}/about`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   {tt("footer.about")}
                 </Link>
               </li>
@@ -87,13 +87,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10">
+        <div className="mt-16 pt-8 border-t border-gray-200">
           <div className="flex flex-col items-center text-center gap-4">
-            <div className="flex items-center gap-2 text-white/50">
-              <Heart className="w-4 h-4 text-white/40" />
+            <div className="flex items-center gap-2 text-gray-500">
+              <Heart className="w-4 h-4 text-gray-400" />
               <span className="text-sm">{tt("footer.tagline")}</span>
             </div>
-            <p className="text-xs text-white/30 max-w-2xl">
+            <p className="text-xs text-gray-400 max-w-2xl">
               {tt("footer.disclaimer")}
             </p>
             <div className="flex items-center gap-3 text-xs text-white/30">

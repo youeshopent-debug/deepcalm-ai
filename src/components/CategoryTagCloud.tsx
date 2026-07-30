@@ -60,7 +60,7 @@ export default function CategoryTagCloud({ categories, activeCategory, onChange,
           >
             <span className="text-base leading-none">{cat.icon}</span>
             <span>{cat.name}</span>
-            <span className={`text-xs ml-0.5 ${isActive ? "text-white/70" : "text-nord-text/25"}`}>
+            <span className={`text-xs ml-0.5 ${isActive ? "text-white/70" : "text-gray-400"}`}>
               ({cat.count})
             </span>
           </button>

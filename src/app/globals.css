@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --dc-deep: #1A2238;
-  --dc-surface: #0F1729;
-  --dc-card: rgba(26, 34, 56, 0.95);
-  --dc-border: rgba(168, 200, 255, 0.08);
-  --dc-border-glow: rgba(128, 180, 255, 0.15);
-  --dc-text: #F0F4FA;
-  --dc-muted: rgba(190, 210, 240, 0.75);
-  --dc-accent: #7EB8FF;
-  --dc-accent-soft: rgba(126, 184, 255, 0.12);
-  --dc-danger: #FF6B6B;
-  --dc-success: #4ECDC4;
-  --dc-aurora-1: rgba(126, 184, 255, 0.15);
-  --dc-aurora-2: rgba(106, 90, 205, 0.1);
-  --dc-aurora-3: rgba(78, 205, 196, 0.08);
-  --dc-glow: rgba(126, 184, 255, 0.06);
+  --dc-deep: #F1F5F9;
+  --dc-surface: #E2E8F0;
+  --dc-card: rgba(255, 255, 255, 0.85);
+  --dc-border: rgba(0, 0, 0, 0.08);
+  --dc-border-glow: rgba(0, 0, 0, 0.12);
+  --dc-text: #111827;
+  --dc-muted: rgba(55, 65, 81, 0.7);
+  --dc-accent: #3B82F6;
+  --dc-accent-soft: rgba(59, 130, 246, 0.12);
+  --dc-danger: #EF4444;
+  --dc-success: #10B981;
+  --dc-aurora-1: rgba(59, 130, 246, 0.08);
+  --dc-aurora-2: rgba(99, 102, 241, 0.06);
+  --dc-aurora-3: rgba(16, 185, 129, 0.05);
+  --dc-glow: rgba(59, 130, 246, 0.04);
 }
 
 [data-theme="forest"] {
@@ -184,13 +184,13 @@ body {
   }
 
   .glass-strong {
-    background: var(--dc-card);
+    background: rgba(255, 255, 255, 0.90);
     backdrop-filter: blur(32px) saturate(1.4);
     -webkit-backdrop-filter: blur(32px) saturate(1.4);
     box-shadow:
-      0 0 0 0.5px rgba(126, 184, 255, 0.2),
-      0 8px 40px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      0 0 0 0.5px rgba(0, 0, 0, 0.10),
+      0 8px 40px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
 
   .biophilic-bg {
