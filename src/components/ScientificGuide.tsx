@@ -35,7 +35,7 @@ function ArticleCard({
   index: number
 }) {
   return (
-    <article className="p-6 sm:p-10 bg-white/98 backdrop-blur-[100px] border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] hover:border-slate-300/50 transition-all duration-500">
+    <article className="p-6 sm:p-10 bg-white/98 backdrop-blur-3xl border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] hover:border-slate-300/50 transition-all duration-500">
       <div className="flex items-start gap-4 sm:gap-6 mb-7">
         <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-blue-100/60 flex items-center justify-center mt-1">
           <Icon className="w-5.5 h-5.5 text-blue-700" />
