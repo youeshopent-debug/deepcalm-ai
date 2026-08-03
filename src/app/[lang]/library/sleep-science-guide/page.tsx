@@ -141,7 +141,7 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
               return (
                 <div
                   key={idx}
-                  className={`p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-slate-200/20 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]`}
+                  className={`p-6 sm:p-8 bg-white/98 backdrop-blur-3xl border border-slate-200/20 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]`}
                 >
                   <h2 className="text-lg font-bold text-slate-900 mb-4 inline-flex items-center gap-2">
                     {section.icon}

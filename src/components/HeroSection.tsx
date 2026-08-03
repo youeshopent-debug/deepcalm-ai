@@ -47,7 +47,7 @@ export default function HeroSection({
 
   return (
     <>
-      <section className="relative min-h-[38vh] sm:min-h-[45vh] flex items-center justify-center overflow-hidden pt-14">
+      <section className="relative min-h-[27vh] sm:min-h-[32vh] flex items-center justify-center overflow-hidden pt-14">
         <div className="aurora-gradient pointer-events-none absolute inset-0" />
 
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">

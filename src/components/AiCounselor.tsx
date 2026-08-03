@@ -299,7 +299,7 @@ function MeditationPromptCard({
 
 /* ── Main Component ── */
 
-export default function AiCounselor() {
+export default function AiCounselor({ initialPrompt }: { initialPrompt?: string }) {
   const { tt, locale } = useLanguage()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
@@ -316,6 +316,7 @@ export default function AiCounselor() {
   const memorySavedRef = useRef(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const shareRef = useRef<HTMLDivElement>(null)
+  const initialPromptConsumedRef = useRef(false)
 
   // ── P0/P1 New State ──
   const [dialogueRound, setDialogueRound] = useState(1)
@@ -341,8 +342,8 @@ export default function AiCounselor() {
 
   /* ── Handle Send (P0: System Prompt Injection + P1: Anxiety Detection) ── */
 
-  const handleSend = async () => {
-    const text = input.trim()
+  const handleSend = async (textOverride?: string) => {
+    const text = (textOverride ?? input).trim()
     if (!text || isAnalyzing) return
     setInput("")
     setShowWelcome(false)
@@ -437,6 +438,17 @@ export default function AiCounselor() {
 
     setIsAnalyzing(false)
   }
+
+  /* ── Auto-consume initialPrompt (topic-context injection) ── */
+  useEffect(() => {
+    if (initialPrompt && !initialPromptConsumedRef.current) {
+      initialPromptConsumedRef.current = true
+      setShowWelcome(false)
+      setDrawerOpen(true)
+      handleSend(initialPrompt)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialPrompt])
 
   /* ── Decompose (existing) ── */
 
@@ -788,7 +800,7 @@ export default function AiCounselor() {
               </button>
             )}
             <button
-              onClick={handleSend}
+              onClick={() => handleSend()}
               disabled={!input.trim() || isAnalyzing}
               className="px-4 sm:px-5 py-2.5 rounded-xl bg-dc-accent text-dc-deep text-sm sm:text-base font-medium disabled:opacity-30 disabled:cursor-not-allowed hover:bg-dc-accent/90 transition-all duration-300 shrink-0"
             >

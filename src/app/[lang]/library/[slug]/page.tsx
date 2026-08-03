@@ -158,7 +158,7 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
                 <div id="science" className="scroll-mt-24">
                   <SsrAccordion
                     title={locale === "zh" ? "🔬 科学原理" : locale === "ms" ? "🔬 Sains" : "🔬 The Science"}
-                    className="!bg-white/98 !backdrop-blur-[100px] !border-slate-200/30 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+                    className="!bg-white/98 !backdrop-blur-3xl !border-slate-200/30 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
                   >
                     <div className="prose prose-invert max-w-none prose-p:text-slate-800 prose-p:leading-relaxed">
                       {content.science.split("\n").filter(Boolean).map((p, i) => (
@@ -172,7 +172,7 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
                 </div>
 
                 {/* Fitness Guide Section */}
-                <div className="p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-sky-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+                <div className="p-6 sm:p-8 bg-white/98 backdrop-blur-3xl border border-sky-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
                   <h2 className="text-lg font-bold text-slate-900 mb-4">
                     {locale === "zh" ? "🏋️ 日常健身指南" : locale === "ms" ? "🏋️ Panduan Kecergasan" : "🏋️ Emotional Fitness Guide"}
                   </h2>
@@ -191,7 +191,7 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
                 </div>
 
                 {/* FAQ Section */}
-                <div id="faq" className="p-6 sm:p-8 bg-white/98 backdrop-blur-[100px] border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] scroll-mt-24">
+                <div id="faq" className="p-6 sm:p-8 bg-white/98 backdrop-blur-3xl border border-slate-200/30 rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] scroll-mt-24">
                   <h2 className="text-lg font-bold text-slate-900 mb-6">
                     {locale === "zh" ? "❓ 常见问题" : locale === "ms" ? "❓ Soalan Lazim" : "❓ FAQ"}
                   </h2>
@@ -208,7 +208,24 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
 
               <PrintPdfButtons locale={locale} slug={slug} />
 
-              <AiEntrance locale={locale} />
+              <AiEntrance
+                locale={locale}
+                topicPrompt={
+                  locale === "zh"
+                    ? `我想了解「${topic.title}」的循证应对方案，请帮我做一次针对性的心理状态分析。`
+                    : locale === "ms"
+                      ? `Saya ingin memahami strategi berasaskan bukti untuk "${topic.title}". Sila lakukan analisis psikologi yang disasarkan.`
+                      : locale === "ja"
+                        ? `「${topic.title}」のエビデンスに基づく対処法を知りたいです。的を絞った心理状態の分析をお願いします。`
+                        : locale === "ko"
+                          ? `"${topic.title}"에 대한 근거 기반 대처 방안을 알고 싶습니다. 맞춤형 심리 상태 분석을 부탁드립니다.`
+                          : locale === "th"
+                            ? `ฉันต้องการทราบแนวทางรับมือตามหลักฐานสำหรับ "${topic.title}" กรุณาวิเคราะห์สภาพจิตใจแบบเฉพาะเจาะจง`
+                            : locale === "es"
+                              ? `Quiero conocer estrategias basadas en evidencia para "${topic.title}". Por favor, haz un análisis psicológico específico.`
+                              : `I want to understand evidence-based coping strategies for "${topic.title}". Please do a targeted psychological analysis.`
+                }
+              />
 
               <KnowledgeMap slug={slug} locale={locale} />
 

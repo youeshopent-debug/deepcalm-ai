@@ -2,6 +2,10 @@
 # These serve as fallback for the _middleware.js locale detection.
 # The middleware handles dynamic locale detection; these catch any missed routes.
 
+# HTTPS 强制合规：所有 http 请求 301 永久重定向至 https
+# Cloudflare Pages 默认已启用自动 HTTPS 重定向，此规则作为显式兜底。
+http://*:301  https://:splat
+
 # Static assets that shouldn't have locale prefix
 /ads/*      /ads/:splat  200
 /images/*   /images/:splat  200

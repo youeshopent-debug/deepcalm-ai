@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import type { Locale } from "@/types"
 import ActionableToolCards from "./ActionableToolCards"
 import AiCounselor from "./AiCounselor"
@@ -29,7 +29,21 @@ export default function InteractiveAreas({
 }) {
   const [showBreathing, setShowBreathing] = useState(false)
   const [showMeditation, setShowMeditation] = useState(false)
+  const [initialPrompt, setInitialPrompt] = useState<string | undefined>(undefined)
   const labels = MEDITATION_LABELS[lang] || MEDITATION_LABELS.en
+
+  /* ── 读取 URL query 中的 AI 上下文（?ai=...），注入 AiCounselor ── */
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const ai = params.get("ai")
+      if (ai && ai.trim()) {
+        setInitialPrompt(decodeURIComponent(ai))
+      }
+    } catch {
+      /* 静默降级：无 query 时保持默认欢迎态 */
+    }
+  }, [])
 
   return (
     <>
@@ -73,7 +87,7 @@ export default function InteractiveAreas({
       {/* AI Counselor */}
       <section id="ai-counselor" className="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 pt-10">
         <div className="w-full">
-          <AiCounselor />
+          <AiCounselor initialPrompt={initialPrompt} />
         </div>
       </section>
 

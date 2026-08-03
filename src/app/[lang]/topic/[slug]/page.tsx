@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SsrAccordion from "@/components/SsrAccordion";
 import { TopicJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
+import AiEntrance from "@/components/AiEntrance";
 
 const categoryColors: Record<string, string> = {
   sleep: "from-indigo-500/10 to-purple-500/10",
@@ -207,6 +208,26 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
                 </div>
               )
             })()}
+
+            {/* ── AI 诊断入口：携带话题上下文跳转首页 AI 咨询区 ── */}
+            <AiEntrance
+              locale={locale}
+              topicPrompt={
+                locale === "zh"
+                  ? `我想了解「${topic.title}」的循证应对方案，请帮我做一次针对性的心理状态分析。`
+                  : locale === "ms"
+                    ? `Saya ingin memahami strategi berasaskan bukti untuk "${topic.title}". Sila lakukan analisis psikologi yang disasarkan.`
+                    : locale === "ja"
+                      ? `「${topic.title}」のエビデンスに基づく対処法を知りたいです。的を絞った心理状態の分析をお願いします。`
+                      : locale === "ko"
+                        ? `"${topic.title}"에 대한 근거 기반 대처 방안을 알고 싶습니다. 맞춤형 심리 상태 분석을 부탁드립니다.`
+                        : locale === "th"
+                          ? `ฉันต้องการทราบแนวทางรับมือตามหลักฐานสำหรับ "${topic.title}" กรุณาวิเคราะห์สภาพจิตใจแบบเฉพาะเจาะจง`
+                          : locale === "es"
+                            ? `Quiero conocer estrategias basadas en evidencia para "${topic.title}". Por favor, haz un análisis psicológico específico.`
+                            : `I want to understand evidence-based coping strategies for "${topic.title}". Please do a targeted psychological analysis.`
+              }
+            />
           </div>
         </div>
       </section>

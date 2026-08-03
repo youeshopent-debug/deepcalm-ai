@@ -177,15 +177,15 @@ export default function ResonanceWall() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-dc-text">
+        <h2 className="text-2xl font-bold text-slate-900">
           {tt("resonanceWall.title")}
         </h2>
-        <p className="mt-1 text-sm text-dc-muted">
+        <p className="mt-1 text-sm text-slate-600">
           {tt("resonanceWall.subtitle")}
         </p>
         <div className="mt-3 inline-flex items-center gap-2 glass rounded-full px-4 py-1.5">
           <span className="w-2 h-2 rounded-full bg-dc-success animate-pulse" />
-          <span className="text-xs text-dc-muted">
+          <span className="text-xs text-slate-600">
             {tt("resonanceWall.counter").replace("{n}", globalCount.toLocaleString())}
           </span>
         </div>
@@ -203,15 +203,15 @@ export default function ResonanceWall() {
                   className={msg.fading ? "animate-fade-out-glow" : "animate-fade-in-glow"}
                 >
                   <div className="glass rounded-xl px-3 py-2 inline-block max-w-[85%] group">
-                    <p className="text-sm text-dc-text">{msg.text}</p>
+                    <p className="text-sm text-slate-800">{msg.text}</p>
                     {t === "loading" && (
-                      <p className="text-xs text-dc-accent/60 italic mt-1">translating...</p>
+                      <p className="text-xs text-slate-500 italic mt-1">translating...</p>
                     )}
                     {showTranslate && (
-                      <p className="text-xs text-dc-accent/80 italic mt-1">{t}</p>
+                      <p className="text-xs text-slate-600 italic mt-1">{t}</p>
                     )}
                     <div className="flex items-center justify-between mt-0.5">
-                      <p className="text-[10px] text-dc-muted/40">
+                      <p className="text-[10px] text-slate-500">
                         {new Date(msg.timestamp).toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -221,8 +221,8 @@ export default function ResonanceWall() {
                         onClick={() => handleTranslate(msg.id, msg.text)}
                         className={`text-[10px] transition-colors opacity-0 group-hover:opacity-100 ${
                           showTranslate
-                            ? "text-dc-accent"
-                            : "text-dc-muted/40 hover:text-dc-accent"
+                            ? "text-slate-700"
+                            : "text-slate-500 hover:text-slate-700"
                         }`}
                         title={showTranslate ? "Show original" : "Translate"}
                       >
@@ -243,7 +243,7 @@ export default function ResonanceWall() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder={tt("resonanceWall.placeholder")}
-            className="flex-1 glass rounded-xl px-4 py-2.5 text-sm text-dc-text placeholder:text-dc-muted/40 outline-none focus:ring-1 focus:ring-dc-accent/30 transition-all"
+            className="flex-1 glass rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:ring-1 focus:ring-dc-accent/30 transition-all"
           />
           <button
             onClick={handleSend}

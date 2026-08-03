@@ -10,6 +10,16 @@ const DEFAULT_LOCALE = "en"
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // ── HTTPS 强制合规：所有 http 请求 301 永久重定向至 https ──
+  // 置于 locale 逻辑之前，确保任何明文请求先升级为加密通道。
+  // 静态资源（_next 等）同样跳转，由 CDN/边缘层统一处理，避免混合内容。
+  if (request.nextUrl.protocol === "http:") {
+    const httpsUrl = request.nextUrl.clone()
+    httpsUrl.protocol = "https:"
+    httpsUrl.port = ""
+    return NextResponse.redirect(httpsUrl, 301)
+  }
+
   if (SKIP_PATTERN.test(pathname)) {
     return NextResponse.next()
   }
