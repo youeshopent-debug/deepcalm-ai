@@ -7,6 +7,7 @@ import Breadcrumb from "@/components/Breadcrumb"
 import LibraryCard from "@/components/LibraryCard"
 import AiEntrance from "@/components/AiEntrance"
 import ExpertBadge from "@/components/ExpertBadge"
+import MedicallyReviewed from "@/components/MedicallyReviewed"
 import ExternalReferences from "@/components/ExternalReferences"
 import SsrAccordion from "@/components/SsrAccordion"
 import KnowledgeMap from "@/components/KnowledgeMap"
@@ -131,6 +132,11 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
               {icon} {topic.title}
             </h1>
             <p className="text-slate-600 leading-relaxed">{topic.description}</p>
+          </div>
+
+          {/* ── YMYL 医学审核委员会浮动卡片 ── */}
+          <div className="mb-6">
+            <MedicallyReviewed locale={locale} />
           </div>
 
           <ExpertBadge locale={locale} />

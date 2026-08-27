@@ -1,4 +1,5 @@
 import type { Locale } from "@/types"
+import { PRIMARY_REVIEWER } from "@/data/medical-review-board"
 
 const BASE = "https://deepcalm-ai.com"
 
@@ -155,10 +156,13 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, refe
       },
       author: {
         "@type": "Person",
-        "@id": `${BASE}#person`,
-        name: "DeepCalm AI Health Team",
-        url: `${BASE}/en/about`,
-        description: "AI-powered emotional support and mental wellness platform team, combining expertise in clinical psychology, neuroscience, and AI technology.",
+        "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
+        name: PRIMARY_REVIEWER.name,
+        url: PRIMARY_REVIEWER.linkedin,
+        jobTitle: PRIMARY_REVIEWER.title.en,
+        description: PRIMARY_REVIEWER.bio.en,
+        sameAs: PRIMARY_REVIEWER.linkedin,
+        knowsAbout: PRIMARY_REVIEWER.specialties.en,
       },
       publisher: {
         "@type": "Organization",
@@ -183,14 +187,20 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, refe
       mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
       author: {
         "@type": "Person",
-        "@id": `${BASE}#person`,
-        name: "DeepCalm AI Health Team",
-        url: `${BASE}/en/about`,
+        "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
+        name: PRIMARY_REVIEWER.name,
+        url: PRIMARY_REVIEWER.linkedin,
+        jobTitle: PRIMARY_REVIEWER.title.en,
       },
       reviewedBy: {
         "@type": "Person",
-        name: "DeepCalm AI Clinical Review Board",
-        description: "Multidisciplinary team of clinical psychologists, neuroscientists, and mental health researchers ensuring evidence-based accuracy of all content.",
+        "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
+        name: PRIMARY_REVIEWER.name,
+        url: PRIMARY_REVIEWER.linkedin,
+        jobTitle: PRIMARY_REVIEWER.title.en,
+        description: PRIMARY_REVIEWER.bio.en,
+        sameAs: PRIMARY_REVIEWER.linkedin,
+        knowsAbout: PRIMARY_REVIEWER.specialties.en,
       },
       lastReviewed: today,
       medicalSpecialty: {
@@ -262,7 +272,13 @@ export function SanctuaryWebPageJsonLd({ locale }: { locale: Locale }) {
     dateModified: today,
     reviewedBy: {
       "@type": "Person",
-      name: "DeepCalm AI Clinical Review Board",
+      "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
+      name: PRIMARY_REVIEWER.name,
+      url: PRIMARY_REVIEWER.linkedin,
+      jobTitle: PRIMARY_REVIEWER.title.en,
+      description: PRIMARY_REVIEWER.bio.en,
+      sameAs: PRIMARY_REVIEWER.linkedin,
+      knowsAbout: PRIMARY_REVIEWER.specialties.en,
     },
     lastReviewed: today,
     audience: {
@@ -314,9 +330,13 @@ export function MedicalWebPageJsonLd({ locale }: { locale: Locale }) {
     mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
     reviewedBy: {
       "@type": "Person",
-      name: "DeepCalm AI Clinical Review Board",
-      description:
-        "Multidisciplinary team of clinical psychologists, neuroscientists, and mental health researchers ensuring evidence-based accuracy of all content.",
+      "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
+      name: PRIMARY_REVIEWER.name,
+      url: PRIMARY_REVIEWER.linkedin,
+      jobTitle: PRIMARY_REVIEWER.title.en,
+      description: PRIMARY_REVIEWER.bio.en,
+      sameAs: PRIMARY_REVIEWER.linkedin,
+      knowsAbout: PRIMARY_REVIEWER.specialties.en,
     },
     lastReviewed: today,
     medicalSpecialty: {

@@ -19,7 +19,7 @@ export interface MeditationInput {
   emotion?: string
   topicSlug?: string
   locale: Locale
-  duration?: "short" | "medium" | "long"
+  duration?: "micro" | "short" | "medium" | "long"
 }
 
 export interface MeditationLine {
@@ -42,6 +42,7 @@ export interface MeditationScript {
 /* ── Duration mapping ── */
 
 const DURATION_MAP: Record<string, number> = {
+  micro: 60,
   short: 180,
   medium: 300,
   long: 480,
@@ -194,6 +195,27 @@ const FALLBACK_SCRIPTS: Partial<Record<Locale, MeditationScript[]>> = {
 }
 
 function getFallbackScript(input: MeditationInput): MeditationScript {
+  // ── Micro (60s) mode: return a compact breath-only script ──
+  if (input.duration === "micro") {
+    const theme = inferTheme(input)
+    const zh = input.locale === "zh"
+    return {
+      title: zh ? "一分钟呼吸" : "One-Minute Breath",
+      lines: [
+        { text: zh ? "坐直或躺下……轻轻闭上眼睛……" : "Sit or lie down… gently close your eyes…", startAt: 0, breathInstruction: "inhale", durationSec: 10 },
+        { text: zh ? "深深吸气……感受空气充满胸腔……" : "Breathe in deeply… feel the air fill your chest…", startAt: 10, breathInstruction: "inhale", durationSec: 8 },
+        { text: zh ? "屏住……" : "Hold…", startAt: 18, breathInstruction: "hold", durationSec: 6 },
+        { text: zh ? "缓缓呼气……让紧张随之离开……" : "Exhale slowly… let the tension drift away…", startAt: 24, breathInstruction: "exhale", durationSec: 10 },
+        { text: zh ? "再吸一口气……感受此刻的平静……" : "Take another breath… feel the calm of this moment…", startAt: 34, breathInstruction: "inhale", durationSec: 10 },
+        { text: zh ? "呼气……放松肩膀……" : "Exhale… relax your shoulders…", startAt: 44, breathInstruction: "exhale", durationSec: 10 },
+        { text: zh ? "当你准备好……慢慢睁开眼睛……" : "When you're ready… slowly open your eyes…", startAt: 54, breathInstruction: "neutral", durationSec: 6 },
+      ],
+      visualTheme: theme,
+      audioPreset: "relaxation",
+      totalSeconds: 60,
+    }
+  }
+
   const scripts = FALLBACK_SCRIPTS[input.locale] || FALLBACK_SCRIPTS.en || FALLBACK_SCRIPTS.zh!
   if (!scripts) {
     return {
@@ -233,9 +255,24 @@ export async function generateMeditationScript(input: MeditationInput): Promise<
     if (res.ok) {
       const data = await res.json()
       if (data.script && data.script.lines && data.script.lines.length >= 5) {
-        return {
-          script: data.script,
-          usage: data.usage || { model: "cf-function", inputTokens: 0, outputTokens: 0, cost: 0 },
+        // Micro (60s) mode: trim the returned script to fit within 60 seconds
+        if (input.duration === "micro") {
+          const trimmedLines = data.script.lines.filter((l: { startAt: number }) => l.startAt < 60)
+          if (trimmedLines.length >= 3) {
+            return {
+              script: {
+                ...data.script,
+                lines: trimmedLines,
+                totalSeconds: 60,
+              },
+              usage: data.usage || { model: "cf-function", inputTokens: 0, outputTokens: 0, cost: 0 },
+            }
+          }
+        } else {
+          return {
+            script: data.script,
+            usage: data.usage || { model: "cf-function", inputTokens: 0, outputTokens: 0, cost: 0 },
+          }
         }
       }
     }

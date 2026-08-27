@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import SsrAccordion from "@/components/SsrAccordion";
 import { TopicJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import AiEntrance from "@/components/AiEntrance";
+import MedicallyReviewed from "@/components/MedicallyReviewed";
 
 const categoryColors: Record<string, string> = {
   sleep: "from-indigo-500/10 to-purple-500/10",
@@ -130,6 +131,11 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
               {categoryIcon[topic.category] || "📖"} {topic.title}
             </h1>
             <p className="text-slate-800 leading-relaxed">{topic.description}</p>
+          </div>
+
+          {/* ── YMYL 医学审核委员会浮动卡片 ── */}
+          <div className="mb-8">
+            <MedicallyReviewed locale={locale} />
           </div>
 
           <div className="space-y-8">

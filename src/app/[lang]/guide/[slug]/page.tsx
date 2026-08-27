@@ -5,6 +5,7 @@ import ScientificGuide from "@/components/ScientificGuide"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { notFound } from "next/navigation"
+import MedicallyReviewed from "@/components/MedicallyReviewed"
 
 function getGuideScientificArticles(lang: string) {
   const isZH = lang === "zh"
@@ -131,6 +132,12 @@ export default async function GuideDetailPage({ params }: { params: Promise<{ la
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold text-blue-900 mt-2 mb-4">{guide.title}</h1>
         <p className="text-slate-600 mb-8">{guide.description}</p>
+
+        {/* ── YMYL 医学审核委员会浮动卡片 ── */}
+        <div className="mb-8">
+          <MedicallyReviewed locale={lang as Locale} />
+        </div>
+
         <div className="prose prose-slate max-w-none
             prose-headings:text-blue-900 prose-headings:font-bold
             prose-p:text-slate-800 prose-p:leading-relaxed

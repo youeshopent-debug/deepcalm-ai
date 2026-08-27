@@ -7,6 +7,7 @@ import LibraryCard from "@/components/LibraryCard"
 import LibrarySearchBar from "@/components/LibrarySearchBar"
 import CategoryTagCloud from "@/components/CategoryTagCloud"
 import MeditationController from "@/components/MeditationController"
+import AiCounselor from "@/components/AiCounselor"
 import type { CategoryInfo } from "@/components/CategoryTagCloud"
 import { CATEGORY_NAMES, CATEGORY_INTROS, categoryIcon } from "@/lib/library-constants"
 
@@ -26,6 +27,8 @@ export default function LibraryFilterableGrid({
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const [meditatingSlug, setMeditatingSlug] = useState<string | null>(null)
   const [meditatingEmotion, setMeditatingEmotion] = useState<string>("")
+  const [counselingSlug, setCounselingSlug] = useState<string | null>(null)
+  const [counselingTitle, setCounselingTitle] = useState<string>("")
 
   const filteredSections = useMemo(() => {
     if (activeCategory === null) return categoriesWithTopics
@@ -40,6 +43,16 @@ export default function LibraryFilterableGrid({
   const handleCloseMeditation = () => {
     setMeditatingSlug(null)
     setMeditatingEmotion("")
+  }
+
+  const handleStartCounseling = (slug: string, title: string) => {
+    setCounselingSlug(slug)
+    setCounselingTitle(title)
+  }
+
+  const handleCloseCounseling = () => {
+    setCounselingSlug(null)
+    setCounselingTitle("")
   }
 
   return (
@@ -79,6 +92,7 @@ export default function LibraryFilterableGrid({
                     category={topic.category}
                     locale={locale}
                     onStartMeditation={handleStartMeditation}
+                    onStartCounseling={handleStartCounseling}
                   />
                 ))}
               </div>
@@ -98,6 +112,23 @@ export default function LibraryFilterableGrid({
             <MeditationController
               onClose={handleCloseMeditation}
               initialEmotion={meditatingEmotion}
+              duration="micro"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* AiCounselor overlay — 针对话题的 AI 导师咨询 */}
+      {counselingSlug && (
+        <div className="fixed inset-0 z-40">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={handleCloseCounseling}
+          />
+          <div className="relative z-10 h-full">
+            <AiCounselor
+              initialPrompt={counselingTitle}
+              onClose={handleCloseCounseling}
             />
           </div>
         </div>

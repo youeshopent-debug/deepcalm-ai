@@ -79,9 +79,10 @@ const EMOTION_THEME_HINT: Record<string, VisualTheme> = {
   relax: "forest",
 }
 
-export default function MeditationController({ onClose, initialEmotion }: {
+export default function MeditationController({ onClose, initialEmotion, duration }: {
   onClose: () => void
   initialEmotion?: string
+  duration?: "micro" | "short" | "medium" | "long"
 }) {
   const { locale } = useLanguage()
   const { setTheme } = useTheme()
@@ -177,7 +178,7 @@ export default function MeditationController({ onClose, initialEmotion }: {
     const input: MeditationInput = {
       emotion: emotion || "放松身心",
       locale,
-      duration: "medium",
+      duration: duration || "medium",
     }
 
     try {
@@ -216,7 +217,7 @@ export default function MeditationController({ onClose, initialEmotion }: {
     } catch {
       // On failure, try one more time with a fallback emotion
       try {
-        const { script: s } = await generateMeditationScript({ emotion: "放松", locale, duration: "short" })
+        const { script: s } = await generateMeditationScript({ emotion: "放松", locale, duration: duration || "short" })
         setScript(s)
         scriptRef.current = s
         setTheme(s.visualTheme)

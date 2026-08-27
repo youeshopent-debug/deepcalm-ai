@@ -299,7 +299,7 @@ function MeditationPromptCard({
 
 /* ── Main Component ── */
 
-export default function AiCounselor({ initialPrompt }: { initialPrompt?: string }) {
+export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?: string; onClose?: () => void }) {
   const { tt, locale } = useLanguage()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
@@ -577,7 +577,10 @@ export default function AiCounselor({ initialPrompt }: { initialPrompt?: string 
           <div className="flex items-center gap-2">
             {drawerOpen && (
               <button
-                onClick={() => setDrawerOpen(false)}
+                onClick={() => {
+                  setDrawerOpen(false)
+                  onClose?.()
+                }}
                 className="p-2 rounded-full hover:bg-dc-accent/10 transition-colors"
               >
                 <X className="w-5 h-5 text-dc-muted" />

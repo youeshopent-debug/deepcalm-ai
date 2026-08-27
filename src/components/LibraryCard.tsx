@@ -3,13 +3,8 @@
 import type { Locale } from "@/types"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Sparkles, BookOpen, ArrowRight } from "lucide-react"
-
-const categoryIcon: Record<string, string> = {
-  sleep: "🌙", anxiety: "🫀", grief_loss: "💧", loneliness: "🌊",
-  self_worth: "✨", relationships: "💞", identity: "🎭",
-  mindfulness: "🧘", emotional_health: "💪",
-}
+import { BookOpen, ArrowRight, Wind, MessageCircleHeart } from "lucide-react"
+import TopicIcon from "@/components/TopicIcon"
 
 const CATEGORY_NAMES: Record<string, Record<Locale, string>> = {
   sleep: { zh: "睡眠", en: "Sleep", ms: "Tidur", ja: "睡眠", ko: "수면", th: "การนอนหลับ", es: "Sueño" },
@@ -51,19 +46,24 @@ interface LibraryCardProps {
   category: string
   locale: Locale
   onStartMeditation?: (slug: string, emotion: string) => void
+  onStartCounseling?: (slug: string, title: string) => void
 }
 
 const READ_LABEL: Record<Locale, string> = {
   zh: "阅读全文", en: "Read Full Article", ms: "Baca Penuh", ja: "全文を読む", ko: "전문 읽기", th: "อ่านเต็ม", es: "Leer Artículo",
 }
 
-const MEDITATION_LABEL: Record<Locale, string> = {
-  zh: "开始 5 分钟 AI 冥想", en: "Start 5-min AI Meditation", ms: "Mulai Meditasi AI 5 Minit", ja: "5分のAI瞑想を開始",
-  ko: "5분 AI 명상 시작", th: "เริ่มทำสมาธิ AI 5 นาที", es: "Iniciar Meditación AI de 5 Min",
+const BREATH_LABEL: Record<Locale, string> = {
+  zh: "开始 1 分钟呼吸练习", en: "Start 1-min Breathing", ms: "Mulai Pernafasan 1 Minit", ja: "1分の呼吸練習を開始",
+  ko: "1분 호흡 연습 시작", th: "เริ่มฝึกหายใจ 1 นาที", es: "Iniciar Respiración de 1 Min",
 }
 
-export default function LibraryCard({ slug, title, hook, description, category, locale, onStartMeditation }: LibraryCardProps) {
-  const icon = categoryIcon[category] || "📖"
+const COUNSEL_LABEL: Record<Locale, string> = {
+  zh: "咨询 AI 导师", en: "Ask AI Mentor", ms: "Tanya Mentor AI", ja: "AIメンターに相談",
+  ko: "AI 멘토에게 문의", th: "ปรึกษา AI Mentor", es: "Consultar Mentor IA",
+}
+
+export default function LibraryCard({ slug, title, hook, description, category, locale, onStartMeditation, onStartCounseling }: LibraryCardProps) {
   const catName = CATEGORY_NAMES[category]?.[locale] || category
   const gradient = CATEGORY_GRADIENTS[category] || "bg-gradient-to-br from-nord-accent/20 to-nord-accent/5"
   const glow = CATEGORY_GLOW[category] || "nord-accent"
@@ -75,77 +75,105 @@ export default function LibraryCard({ slug, title, hook, description, category, 
     onStartMeditation?.(slug, displayTitle)
   }
 
+  const handleCounseling = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    onStartCounseling?.(slug, displayTitle)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="group"
+      className="group h-full"
     >
-      <Link href={`/${locale}/library/${slug}`} className="block h-full">
-        <div
-          className={`relative h-full rounded-2xl overflow-hidden ${gradient}
-            border border-white/10 hover:border-white/20
-            transition-all duration-500 ease-out
-            hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]
-            flex flex-col`}
-        >
-          {/* 顶部装饰光晕 */}
-          <div className={`absolute -top-20 -right-20 w-40 h-40 rounded-full bg-${glow}/10 blur-3xl pointer-events-none`} />
-          <div className={`absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-${glow}/5 blur-2xl pointer-events-none`} />
+      <div
+        className={`relative h-full rounded-2xl overflow-hidden ${gradient}
+          border border-white/10 hover:border-white/20
+          backdrop-blur-xl bg-white/[0.02]
+          transition-all duration-500 ease-out
+          hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]
+          hover:-translate-y-1
+          flex flex-col`}
+      >
+        {/* 顶部装饰光晕 */}
+        <div className={`absolute -top-20 -right-20 w-40 h-40 rounded-full bg-${glow}/10 blur-3xl pointer-events-none`} />
+        <div className={`absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-${glow}/5 blur-2xl pointer-events-none`} />
 
-          {/* 图标与类目标签 */}
-          <div className="relative z-10 p-5 pb-3">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-2xl">{icon}</span>
-              <span className="text-[10px] font-semibold text-nord-accent uppercase tracking-[0.2em]">
-                {catName}
-              </span>
-            </div>
-
-            {/* 标题 */}
-            <h3 className="text-base font-bold text-nord-text leading-snug mb-2 line-clamp-2">
-              {displayTitle}
-            </h3>
-
-            {/* 描述 */}
-            <p className="text-sm text-nord-text/50 leading-relaxed line-clamp-3">
-              {description}
-            </p>
+        {/* 图标与类目标签 */}
+        <div className="relative z-10 p-5 pb-3">
+          <div className="flex items-center gap-3 mb-3">
+            <TopicIcon category={category} className="w-10 h-10 shrink-0" />
+            <span className="text-[10px] font-semibold text-nord-accent uppercase tracking-[0.2em]">
+              {catName}
+            </span>
           </div>
 
-          {/* 底部操作区 — 始终保持底部对齐 */}
-          <div className="relative z-10 mt-auto p-5 pt-3 space-y-2.5">
-            {/* 巨幕 CTA — AI 冥想按钮 */}
+          {/* 标题 */}
+          <h3 className="text-base font-bold text-nord-text leading-snug mb-2 line-clamp-2">
+            {displayTitle}
+          </h3>
+
+          {/* 描述 */}
+          <p className="text-sm text-nord-text/50 leading-relaxed line-clamp-3">
+            {description}
+          </p>
+        </div>
+
+        {/* 底部操作区 — 始终保持底部对齐 */}
+        <div className="relative z-10 mt-auto p-5 pt-3 space-y-2.5">
+          {/* 双快捷按钮 — 1分钟呼吸 + AI 导师咨询 */}
+          <div className="grid grid-cols-2 gap-2">
             {onStartMeditation && (
               <button
                 onClick={handleMeditation}
-                className={`w-full flex items-center justify-center gap-2 px-4 py-3
+                className={`flex items-center justify-center gap-1.5 px-3 py-2.5
                   bg-gradient-to-r from-nord-accent to-nord-accent/80
                   hover:from-nord-accent/90 hover:to-nord-accent/70
-                  text-white text-sm font-semibold
+                  text-white text-xs font-semibold
                   rounded-xl shadow-lg shadow-nord-accent/20
                   hover:shadow-xl hover:shadow-nord-accent/30
                   hover:scale-[1.02] active:scale-[0.98]
                   transition-all duration-300 ease-out`}
               >
-                <Sparkles className="w-4 h-4" />
-                <span>{MEDITATION_LABEL[locale] || MEDITATION_LABEL.en}</span>
+                <Wind className="w-4 h-4 shrink-0" />
+                <span className="truncate">{BREATH_LABEL[locale] || BREATH_LABEL.en}</span>
               </button>
             )}
 
-            {/* 阅读入口 — 次要操作 */}
-            <div className="flex items-center justify-between text-xs text-nord-text/40 group-hover:text-nord-text/60 transition-colors duration-300 px-1">
-              <span className="flex items-center gap-1.5">
-                <BookOpen className="w-3.5 h-3.5" />
-                {READ_LABEL[locale] || READ_LABEL.en}
-              </span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-            </div>
+            {onStartCounseling && (
+              <button
+                onClick={handleCounseling}
+                className={`flex items-center justify-center gap-1.5 px-3 py-2.5
+                  bg-white/5 hover:bg-white/10
+                  border border-white/15 hover:border-white/30
+                  text-nord-text/80 hover:text-nord-text
+                  text-xs font-semibold
+                  rounded-xl
+                  hover:scale-[1.02] active:scale-[0.98]
+                  transition-all duration-300 ease-out`}
+              >
+                <MessageCircleHeart className="w-4 h-4 shrink-0" />
+                <span className="truncate">{COUNSEL_LABEL[locale] || COUNSEL_LABEL.en}</span>
+              </button>
+            )}
           </div>
+
+          {/* 阅读入口 — 次要操作 */}
+          <Link
+            href={`/${locale}/library/${slug}`}
+            className="flex items-center justify-between text-xs text-nord-text/40 group-hover:text-nord-text/60 transition-colors duration-300 px-1 pt-1"
+          >
+            <span className="flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5" />
+              {READ_LABEL[locale] || READ_LABEL.en}
+            </span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+          </Link>
         </div>
-      </Link>
+      </div>
     </motion.div>
   )
 }

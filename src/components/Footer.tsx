@@ -83,6 +83,16 @@ export default function Footer() {
                   {tt("footer.about")}
                 </Link>
               </li>
+              <li>
+                <Link href={`/${locale}/editorial-policy`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  {tt("footer.editorial_policy")}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/science-trust`} className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  {tt("footer.science_trust")}
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -94,7 +104,7 @@ export default function Footer() {
               <span className="text-sm">{tt("footer.tagline")}</span>
             </div>
             <p className="text-xs text-gray-400 max-w-2xl">
-              {tt("footer.disclaimer")}
+              {tt("counselor.disclaimer")}
             </p>
             <div className="flex items-center gap-3 text-xs text-white/30">
               <span>{tt("footer.copyright")}</span>

@@ -5,6 +5,7 @@ import Link from "next/link"
 import Breadcrumb from "@/components/Breadcrumb"
 import { MedicalWebPageJsonLd, FaqJsonLd, type FaqItem } from "@/components/JsonLd"
 import { ArrowLeft, BookOpen, Brain, Moon, Heart, Sparkles, Shield, Sunrise, Activity } from "lucide-react"
+import MedicallyReviewed from "@/components/MedicallyReviewed"
 
 const ALL_LOCALES: Locale[] = ["zh", "en", "ms", "ja", "ko", "th", "es"]
 
@@ -131,6 +132,11 @@ export default async function SleepScienceGuidePage({ params }: { params: Promis
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">{title}</h1>
             <p className="text-slate-800 leading-relaxed">{intro}</p>
+          </div>
+
+          {/* ── YMYL 医学审核委员会浮动卡片 ── */}
+          <div className="mb-8">
+            <MedicallyReviewed locale={locale} />
           </div>
 
           <div className="space-y-8">
