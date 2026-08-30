@@ -12,3 +12,6 @@ http://*:301  https://:splat
 /audio/*    /audio/:splat  200
 /videos/*   /videos/:splat  200
 /social     /social  200
+
+# 多语言 ads.txt 所有权验证：所有语言子路由重写至根 ads.txt（200 无重定向）
+/(zh|en|ms|ja|ko|th|es)/ads.txt  /ads.txt  200
