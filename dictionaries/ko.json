@@ -144,7 +144,9 @@
   },
   "guide": {
     "title": "사용자 가이드",
-    "description": "DeepCalm 사용법을 배우고 정신 건강 여정을 시작하세요"
+    "description": "DeepCalm 사용법을 배우고 정신 건강 여정을 시작하세요",
+    "meta_title": "정신 건강 가이드 - 근거에 기반한 실천 지식",
+    "meta_desc": "DeepCalm AI 정신 건강 가이드에서 수면 과학, 명상, 불안 관리, 호흡법에 관한 근거 기반의 실용적인 조언을 확인하세요."
   },
   "about": {
     "meta_title": "DeepCalm AI 소개 — 모두를 위한 정신 건강 지원",
