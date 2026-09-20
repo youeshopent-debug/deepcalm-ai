@@ -21,7 +21,7 @@ const SCIENCE: Record<string, Record<string, string>> = {
 
 临床实践中，针对{{T}}的循证干预首选认知行为疗法（CBT-I）。CBT-I包括刺激控制（仅在困倦时上床）、睡眠限制（压缩卧床时间以增强睡眠驱动力）、认知重构（纠正关于睡眠的功能失调信念）、放松训练和睡眠卫生教育等多个组分。临床研究显示CBT-I的长期效果甚至优于安眠药物，且不存在药物依赖和耐受性问题。
 
-近年来，正念减压（MBSR）和接纳承诺疗法（ACT）在睡眠领域的应用也获得了充分证据支持。正念练习通过降低睡前认知唤醒水平（如反复思虑和担忧）、减少对"必须睡着"的焦虑性监控，帮助患者打破"失眠-焦虑-失眠加重"的恶性循环。 #VibeCoding #EmotionalFitness`,
+近年来，正念减压（MBSR）和接纳承诺疗法（ACT）在睡眠领域的应用也获得了充分证据支持。正念练习通过降低睡前认知唤醒水平（如反复思虑和担忧）、减少对"必须睡着"的焦虑性监控，帮助患者打破"失眠-焦虑-失眠加重"的恶性循环。`,
     en: `Sleep is a fundamental physiological process that occupies roughly one-third of our lives. When we discuss {{T}}, understanding its underlying neuroscientific mechanisms is essential.
 
 Human sleep alternates between Non-Rapid Eye Movement (NREM) and Rapid Eye Movement (REM) stages in approximately 90-minute cycles, repeating 4-6 times per night. NREM sleep is further divided into light sleep (N1, N2) and deep slow-wave sleep (N3), the latter being critical for physical restoration and immune function. REM sleep plays a vital role in memory consolidation and emotional regulation.
@@ -32,7 +32,7 @@ From a neurochemical perspective, the sleep-wake cycle is orchestrated by multip
 
 Evidence-based interventions for {{T}} prioritize Cognitive Behavioral Therapy for Insomnia (CBT-I). Core components include stimulus control (going to bed only when sleepy), sleep restriction (consolidating the sleep window), cognitive restructuring (challenging dysfunctional beliefs about sleep), relaxation training, and sleep hygiene education. Clinical trials consistently demonstrate CBT-I's superior long-term efficacy over pharmacological interventions, without risks of dependence or tolerance.
 
-Mindfulness-Based Stress Reduction (MBSR) and Acceptance and Commitment Therapy (ACT) have also accumulated strong evidence in sleep medicine. By reducing pre-sleep cognitive arousal—particularly rumination and anxious monitoring of sleep—mindfulness practices help disrupt the vicious cycle of insomnia-anxiety-worsening insomnia. #VibeCoding #EmotionalFitness`,
+Mindfulness-Based Stress Reduction (MBSR) and Acceptance and Commitment Therapy (ACT) have also accumulated strong evidence in sleep medicine. By reducing pre-sleep cognitive arousal—particularly rumination and anxious monitoring of sleep—mindfulness practices help disrupt the vicious cycle of insomnia-anxiety-worsening insomnia.`,
     ms: `Tidur adalah proses fisiologi asas yang mengisi kira-kira satu pertiga daripada kehidupan kita. Apabila membincangkan {{T}}, memahami mekanisme neurosaintifiknya adalah penting.
 
 Tidur manusia bergilir antara peringkat Pergerakan Mata Bukan Pantas (NREM) dan Pergerakan Mata Pantas (REM) dalam kitaran kira-kira 90 minit, berulang 4-6 kali setiap malam. Tidur NREM dibahagikan kepada tidur ringan dan tidur dalam (gelombang perlahan), yang penting untuk pemulihan fizikal dan fungsi imun. Tidur REM memainkan peranan dalam konsolidasi ingatan dan regulasi emosi.
@@ -43,7 +43,7 @@ Intervensi berasaskan bukti untuk {{T}} mengutamakan Terapi Tingkah Laku Kogniti
 
 Dari perspektif neurokimia, kitaran tidur-jaga dikawal selia oleh pelbagai nukleus batang otak, hipotalamus, dan otak depan basal. Adenosin terkumpul semasa terjaga sebagai molekul tekanan tidur homeostatik; melatonin, dirembeskan oleh kelenjar pineal, memberi isyarat kepada badan untuk berehat pada waktu malam; kortisol memuncak pada waktu pagi untuk menggalakkan kewaspadaan.
 
-Pengurangan Tekanan Berasaskan Kesedaran (MBSR) dan Terapi Penerimaan dan Komitmen (ACT) juga telah mengumpul bukti kukuh dalam perubatan tidur. Dengan mengurangkan pengaktifan kognitif sebelum tidur—terutamanya ruminasi dan pemantauan cemas terhadap tidur—amalan kesedaran membantu memutuskan lingkaran ganas insomnia-kebimbangan-insomnia yang semakin teruk. #VibeCoding #EmotionalFitness`,
+Pengurangan Tekanan Berasaskan Kesedaran (MBSR) dan Terapi Penerimaan dan Komitmen (ACT) juga telah mengumpul bukti kukuh dalam perubatan tidur. Dengan mengurangkan pengaktifan kognitif sebelum tidur—terutamanya ruminasi dan pemantauan cemas terhadap tidur—amalan kesedaran membantu memutuskan lingkaran ganas insomnia-kebimbangan-insomnia yang semakin teruk.`,
     es: `El sueño es un proceso fisiológico fundamental que ocupa aproximadamente un tercio de nuestras vidas. Al hablar de {{T}}, es esencial comprender sus mecanismos neurocientíficos subyacentes.
 
 El sueño humano alterna entre etapas de Movimiento Ocular No Rápido (NREM) y Movimiento Ocular Rápido (REM) en ciclos de aproximadamente 90 minutos, repitiéndose 4-6 veces por noche. El sueño NREM se divide en sueño ligero y sueño profundo de ondas lentas, fundamental para la restauración física y la función inmunológica. El sueño REM desempeña un papel crucial en la consolidación de la memoria y la regulación emocional.
@@ -54,7 +54,7 @@ Las intervenciones basadas en evidencia para {{T}} priorizan la Terapia Cognitiv
 
 Desde una perspectiva neuroquímica, el ciclo sueño-vigilia está orquestado por múltiples núcleos del tronco encefálico, el hipotálamo y el prosencéfalo basal. La adenosina se acumula durante la vigilia como molécula de presión homeostática del sueño; la melatonina, secretada por la glándula pineal, señala al cuerpo el descanso nocturno; el cortisol alcanza su punto máximo por la mañana para promover la alerta.
 
-La Reducción del Estrés Basada en Mindfulness (MBSR) y la Terapia de Aceptación y Compromiso (ACT) también han acumulado evidencia sólida en la medicina del sueño. Al reducir la activación cognitiva previa al sueño—particularmente la rumiación y el monitoreo ansioso del sueño—las prácticas de mindfulness ayudan a romper el círculo vicioso de insomnio-ansiedad-empeoramiento del insomnio. #VibeCoding #EmotionalFitness`,
+La Reducción del Estrés Basada en Mindfulness (MBSR) y la Terapia de Aceptación y Compromiso (ACT) también han acumulado evidencia sólida en la medicina del sueño. Al reducir la activación cognitiva previa al sueño—particularmente la rumiación y el monitoreo ansioso del sueño—las prácticas de mindfulness ayudan a romper el círculo vicioso de insomnio-ansiedad-empeoramiento del insomnio.`,
     ja: `睡眠は心身の健康を支える基本的な生理プロセスであり、私たちの人生の約3分の1を占めています。「{{T}}」について考える際には、神経科学的な観点からその深層メカニズムを理解することが不可欠です。
 
 人間の睡眠は、ノンレム睡眠（NREM）とレム睡眠（REM）が約90分周期で交互に現れ、一晩に4〜6回繰り返されます。NREM睡眠は入眠期、浅睡眠期、深睡眠期（徐波睡眠）に分かれ、深睡眠期は体力回復と免疫機能の修復に不可欠です。一方、レム睡眠は記憶の固定化と感情調節に重要な役割を果たします。
@@ -65,7 +65,7 @@ La Reducción del Estrés Basada en Mindfulness (MBSR) y la Terapia de Aceptaci�
 
 臨床現場では、{{T}}に対するエビデンスに基づく介入として、不眠症のための認知行動療法（CBT-I）が第一選択です。CBT-Iの構成要素には、刺激制御（眠い時だけベッドに入る）、睡眠制限（ベッドでの時間を圧縮して睡眠駆動力を高める）、認知再構成（睡眠に関する機能不全信念を修正する）、リラクセーション訓練、睡眠衛生教育が含まれます。臨床試験では、CBT-Iの長期的効果が薬物療法を上回り、依存や耐性のリスクもないことが一貫して示されています。
 
-近年では、マインドフルネスストレス低減法（MBSR）とアクセプタンス＆コミットメント・セラピー（ACT）の睡眠領域への応用も強力なエビデンスを蓄積しています。#VibeCoding や #EmotionalFitness といった2026年のトレンドと調和するように、マインドフルネス実践は寝前の認知覚醒（反すう思考や「眠らなければ」という不安）を低減し、「不眠-不安-不眠悪化」の悪循環を断ち切るのに役立ちます。`,
+近年では、マインドフルネスストレス低減法（MBSR）とアクセプタンス＆コミットメント・セラピー（ACT）の睡眠領域への応用も強力なエビデンスを蓄積しています。 マインドフルネス実践は寝前の認知覚醒（反すう思考や「眠らなければ」という不安）を低減し、「不眠-不安-不眠悪化」の悪循環を断ち切るのに役立ちます。`,
     ko: `수면은 신체적, 정신적 건강을 유지하는 핵심적인 생리 과정으로, 우리 삶의 약 3분의 1을 차지합니다. 「{{T}}」에 대해 논할 때는 신경과학적 관점에서 그 심층 메커니즘을 이해하는 것이 필수적입니다.
 
 인간의 수면은 비급속안구운동(NREM) 수면과 급속안구운동(REM) 수면이 약 90분 주기로 교대로 나타나며, 밤새 4~6회 반복됩니다. NREM 수면은 입면기, 얕은 수면기, 깊은 수면기(서파수면)로 나뉘며, 깊은 수면기는 신체 회복과 면역 기능 복구에 결정적입니다. REM 수면은 기억 고정화와 감정 조절에 중요한 역할을 합니다.
@@ -76,7 +76,7 @@ La Reducción del Estrés Basada en Mindfulness (MBSR) y la Terapia de Aceptaci�
 
 임상 현장에서 {{T}}에 대한 근거 기반 중재는 불면증 인지행동치료(CBT-I)를 최우선으로 합니다. CBT-I의 구성 요소에는 자극 통제(졸릴 때만 침대에 가기), 수면 제한(침대 시간을 압축하여 수면 충동 강화), 인지 재구성(수면에 대한 기능 장애 신념 교정), 이완 훈련, 수면 위생 교육이 포함됩니다. 임상 시험에서 CBT-I의 장기적 효과가 약물 치료를 능가하며 의존성이나 내성 위험이 없다는 것이 일관되게 입증되었습니다.
 
-최근에는 마음챙김 기반 스트레스 감소(MBSR)와 수용전념치료(ACT)의 수면 분야 적용도 강력한 증거를 축적하고 있습니다. #VibeCoding 및 #EmotionalFitness 와 같은 2026년 트렌드와 조화롭게, 마음챙김 실천은 취침 전 인지적 각성(반추 사고나 '잠을 자야 한다'는 불안)을 줄여 '불면-불안-불면 악화'의 악순환을 차단하는 데 도움을 줍니다.`,
+최근에는 마음챙김 기반 스트레스 감소(MBSR)와 수용전념치료(ACT)의 수면 분야 적용도 강력한 증거를 축적하고 있습니다. 마음챙김 실천은 취침 전 인지적 각성(반추 사고나 '잠을 자야 한다'는 불안)을 줄여 '불면-불안-불면 악화'의 악순환을 차단하는 데 도움을 줍니다.`,
     th: `การนอนหลับเป็นกระบวนการทางสรีรวิทยาพื้นฐานที่สนับสนุนสุขภาพกายและใจ คิดเป็นประมาณหนึ่งในสามของชีวิตเรา เมื่อเราพูดถึง «{{T}}» การทำความเข้าใจกลไกทางประสาทวิทยาศาสตร์นั้นเป็นสิ่งจำเป็น
 
 การนอนหลับของมนุษย์สลับระหว่างการหลับแบบไม่เคลื่อนไหวลูกตาอย่างรวดเร็ว (NREM) และการหลับแบบเคลื่อนไหวลูกตาอย่างรวดเร็ว (REM) ในรอบประมาณ 90 นาที ทำซ้ำ 4-6 ครั้งต่อคืน การหลับ NREM แบ่งออกเป็นระยะหลับตื้นและระยะหลับลึก (คลื่นช้า) ซึ่งมีความสำคัญต่อการฟื้นฟูร่างกายและการทำงานของภูมิคุ้มกัน ส่วนการหลับ REM มีบทบาทสำคัญในการจัดเก็บความทรงจำและการควบคุมอารมณ์
@@ -87,7 +87,7 @@ La Reducción del Estrés Basada en Mindfulness (MBSR) y la Terapia de Aceptaci�
 
 การแทรกแซงที่มีหลักฐานเชิงประจักษ์สำหรับ {{T}} ให้ความสำคัญกับการบำบัดทางความคิดและพฤติกรรมสำหรับอาการนอนไม่หลับ (CBT-I) องค์ประกอบหลักรวมถึงการควบคุมสิ่งกระตุ้น (เข้านอนเมื่อง่วงเท่านั้น) การจำกัดการนอน การปรับโครงสร้างทางความคิด การฝึกผ่อนคลาย และการศึกษาสุขอนามัยการนอนหลับ การทดลองทางคลินิกแสดงให้เห็นอย่างสม่ำเสมอว่า CBT-I มีประสิทธิภาพระยะยาวเหนือกว่าการใช้ยา โดยไม่มีความเสี่ยงต่อการพึ่งพิงหรือดื้อยา
 
-ในช่วงไม่กี่ปีที่ผ่านมา การลดความเครียดด้วยสติ (MBSR) และการบำบัดด้วยการยอมรับและพันธะสัญญา (ACT) ได้สะสมหลักฐานที่แข็งแกร่งในด้านการนอนหลับ สอดคล้องกับเทรนด์ปี 2026 อย่าง #VibeCoding และ #EmotionalFitness การฝึกสติช่วยลดการตื่นตัวทางความคิดก่อนนอน (การครุ่นคิดและความกังวลว่า'ต้องหลับให้ได้') ช่วยทำลายวงจรอุบาทว์ของ'นอนไม่หลับ-วิตกกังวล-นอนไม่หลับหนักขึ้น'`,
+ในช่วงไม่กี่ปีที่ผ่านมา การลดความเครียดด้วยสติ (MBSR) และการบำบัดด้วยการยอมรับและพันธะสัญญา (ACT) ได้สะสมหลักฐานที่แข็งแกร่งในด้านการนอนหลับ และ การฝึกสติช่วยลดการตื่นตัวทางความคิดก่อนนอน (การครุ่นคิดและความกังวลว่า'ต้องหลับให้ได้') ช่วยทำลายวงจรอุบาทว์ของ'นอนไม่หลับ-วิตกกังวล-นอนไม่หลับหนักขึ้น'`,
   },
   anxiety: {
     zh: `焦虑是人类最原始也最复杂的情绪之一，其根源深植于我们大脑的演化遗产中。当我们讨论「{{T}}」时，需要从神经生物学和心理学的交叉视角来理解它。
@@ -98,7 +98,7 @@ La Reducción del Estrés Basada en Mindfulness (MBSR) y la Terapia de Aceptaci�
 
 认知行为疗法（CBT）是治疗焦虑障碍的一线心理干预，其效果已在数百项随机对照试验中得到验证。CBT的核心策略包括：认知重构（识别并挑战焦虑相关的扭曲思维）、暴露疗法（在安全环境下逐步面对恐惧刺激）、行为实验（检验灾难化预测的真实性）和放松训练（腹式呼吸、渐进性肌松）。
 
-正念疗法通过培养对当下经验的非评判性觉察，帮助患者从"自动化焦虑反应"中脱离出来。研究表明，8周的正念减压（MBSR）课程可以显著降低杏仁核的灰质密度，同时增强前额叶皮层和岛叶的活性，从神经可塑性的层面改变大脑的焦虑反应模式。 #VibeCoding #EmotionalFitness`,
+正念疗法通过培养对当下经验的非评判性觉察，帮助患者从"自动化焦虑反应"中脱离出来。研究表明，8周的正念减压（MBSR）课程可以显著降低杏仁核的灰质密度，同时增强前额叶皮层和岛叶的活性，从神经可塑性的层面改变大脑的焦虑反应模式。`,
     en: `Anxiety is among the most primal and complex human emotions, deeply rooted in our evolutionary heritage. When examining {{T}}, a cross-disciplinary understanding bridging neurobiology and psychology is essential.
 
 The neural architecture of anxiety centers on three interconnected regions: the amygdala (serving as the brain's smoke detector for rapid threat identification), the prefrontal cortex (functioning as the executive control center for threat evaluation), and the hippocampus (contextualizing fear memories). In anxiety disorders, this regulatory circuit becomes dysfunctional—the amygdala shows hyperreactivity while prefrontal inhibitory control is attenuated.
@@ -107,7 +107,7 @@ Lifetime prevalence of anxiety disorders globally reaches approximately 28.8%, m
 
 Cognitive Behavioral Therapy (CBT) stands as the first-line psychological intervention for anxiety disorders, validated by hundreds of randomized controlled trials. Core CBT strategies include cognitive restructuring (identifying and challenging distorted threat appraisals), exposure therapy (confronting feared stimuli in a graded, safe manner), behavioral experiments (testing catastrophic predictions against reality), and relaxation training.
 
-Mindfulness-based approaches help individuals disengage from automatic anxiety reactions by cultivating non-judgmental present-moment awareness. Eight-week MBSR programs have been shown to reduce amygdala gray matter density while enhancing prefrontal and insular activity—demonstrating neuroplastic changes in the brain's threat-response circuitry. #VibeCoding #EmotionalFitness`,
+Mindfulness-based approaches help individuals disengage from automatic anxiety reactions by cultivating non-judgmental present-moment awareness. Eight-week MBSR programs have been shown to reduce amygdala gray matter density while enhancing prefrontal and insular activity—demonstrating neuroplastic changes in the brain's threat-response circuitry.`,
     ms: `Kebimbangan adalah antara emosi manusia yang paling primitif dan kompleks, berakar dalam warisan evolusi kita. Apabila mengkaji {{T}}, pemahaman rentas disiplin yang menghubungkan neurobiologi dan psikologi adalah penting.
 
 Seni bina neural kebimbangan berpusat pada tiga kawasan yang saling berkaitan: amigdala (pengesan asap otak untuk pengenalpastian ancaman pantas), korteks prefrontal (pusat kawalan eksekutif untuk penilaian ancaman), dan hippocampus (mengkontekstualkan ingatan ketakutan). Dalam gangguan kebimbangan, litar regulasi ini menjadi tidak berfungsi.
@@ -116,7 +116,7 @@ Prevalens seumur hidup gangguan kebimbangan di peringkat global adalah kira-kira
 
 Terapi Tingkah Laku Kognitif (CBT) adalah intervensi psikologi barisan pertama untuk gangguan kebimbangan, disahkan oleh ratusan ujian terkawal rawak. Strategi CBT teras termasuk restrukturisasi kognitif, terapi pendedahan, eksperimen tingkah laku, dan latihan relaksasi.
 
-Pendekatan berasaskan kesedaran membantu individu melepaskan diri daripada reaksi kebimbangan automatik dengan memupuk kesedaran masa kini tanpa penghakiman. Program MBSR lapan minggu telah terbukti mengurangkan ketumpatan bahan kelabu amigdala sambil meningkatkan aktiviti prefrontal dan insula—menunjukkan perubahan neuroplastik dalam litar tindak balas ancaman otak. #VibeCoding #EmotionalFitness`,
+Pendekatan berasaskan kesedaran membantu individu melepaskan diri daripada reaksi kebimbangan automatik dengan memupuk kesedaran masa kini tanpa penghakiman. Program MBSR lapan minggu telah terbukti mengurangkan ketumpatan bahan kelabu amigdala sambil meningkatkan aktiviti prefrontal dan insula—menunjukkan perubahan neuroplastik dalam litar tindak balas ancaman otak.`,
     es: `La ansiedad es una de las emociones humanas más primitivas y complejas, profundamente arraigada en nuestra herencia evolutiva. Al examinar {{T}}, es esencial un enfoque interdisciplinario que conecte la neurobiología y la psicología.
 
 La arquitectura neuronal de la ansiedad se centra en tres regiones interconectadas: la amígdala (detector de humo del cerebro para la identificación rápida de amenazas), la corteza prefrontal (centro de control ejecutivo para la evaluación de amenazas) y el hipocampo (contextualización de recuerdos de miedo). En los trastornos de ansiedad, este circuito regulador se vuelve disfuncional.
@@ -125,7 +125,7 @@ La prevalencia de por vida de los trastornos de ansiedad a nivel mundial alcanza
 
 La Terapia Cognitivo-Conductual (TCC) es la intervención psicológica de primera línea para los trastornos de ansiedad, validada por cientos de ensayos controlados aleatorios. Las estrategias centrales de la TCC incluyen reestructuración cognitiva, terapia de exposición, experimentos conductuales y entrenamiento en relajación.
 
-Los enfoques basados en mindfulness ayudan a las personas a desconectarse de las reacciones automáticas de ansiedad cultivando una conciencia del momento presente sin juicio. Los programas de MBSR de ocho semanas han demostrado reducir la densidad de materia gris de la amígdala mientras mejoran la actividad prefrontal y de la ínsula—demostrando cambios neuroplásticos en los circuitos de respuesta a amenazas del cerebro. #VibeCoding #EmotionalFitness`,
+Los enfoques basados en mindfulness ayudan a las personas a desconectarse de las reacciones automáticas de ansiedad cultivando una conciencia del momento presente sin juicio. Los programas de MBSR de ocho semanas han demostrado reducir la densidad de materia gris de la amígdala mientras mejoran la actividad prefrontal y de la ínsula—demostrando cambios neuroplásticos en los circuitos de respuesta a amenazas del cerebro.`,
     ja: `不安は人間の最も原始的で複雑な感情の一つであり、その根源は私たちの脳の進化的遺産に深く根ざしています。「{{T}}」を考察するには、神経生物学と心理学の交差する視点から理解することが不可欠です。
 
 不安の神経基盤は、扁桃体（amygdala）、前頭前皮質（prefrontal cortex）、海馬（hippocampus）という3つの主要な脳領域の相互作用に関係しています。扁桃体は脳の「煙探知機」として機能し、潜在的な脅威を素早く識別します。前頭前皮質は「実行制御センター」として脅威の現実性を評価し、扁桃体の反応を調節します。不安障害の患者では、この調節回路が機能不全に陥っています——扁桃体が過剰に活性化し、前頭前皮質による抑制が弱まっています。
@@ -134,7 +134,7 @@ Los enfoques basados en mindfulness ayudan a las personas a desconectarse de las
 
 認知行動療法（CBT）は不安障害に対する第一選択の心理的介入であり、その効果は数百のランダム化比較試験で検証されています。CBTの中核戦略には、認知再構成（不安に関連した歪んだ思考の特定と挑戦）、暴露療法（安全な環境で徐々に恐怖刺激に直面する）、行動実験（破局的な予測の現実性を検証する）、リラクセーション訓練が含まれます。
 
-マインドフルネス療法は、現在の経験に対する非判断的な気づきを養うことで、患者が「自動的な不安反応」から脱却するのを助けます。研究によると、8週間のマインドフルネスストレス低減法（MBSR）プログラムは扁桃体の灰白質密度を有意に低下させると同時に、前頭前皮質と島皮質の活性を高め、神経可塑性のレベルで脳の不安反応パターンを変化させることが示されています。#VibeCoding や #EmotionalFitness といった2026年のトレンドは、テクノロジーと感情的健康の融合を象徴しており、デジタル時代の不安管理に新たな可能性を開いています。`,
+マインドフルネス療法は、現在の経験に対する非判断的な気づきを養うことで、患者が「自動的な不安反応」から脱却するのを助けます。研究によると、8週間のマインドフルネスストレス低減法（MBSR）プログラムは扁桃体の灰白質密度を有意に低下させると同時に、前頭前皮質と島皮質の活性を高め、神経可塑性のレベルで脳の不安反応パターンを変化させることが示されています。 や といった2026年のトレンドは、テクノロジーと感情的健康の融合を象徴しており、デジタル時代の不安管理に新たな可能性を開いています。`,
     ko: `불안은 인간의 가장 원시적이면서도 복잡한 감정 중 하나로, 그 뿌리는 우리 뇌의 진화적 유산에 깊이 자리잡고 있습니다. 「{{T}}」를 고찰할 때는 신경생물학과 심리학의 교차 관점에서 이해하는 것이 필수적입니다.
 
 불안의 신경 기반은 편도체(amygdala), 전전두엽 피질(prefrontal cortex), 해마(hippocampus)라는 세 가지 주요 뇌 영역의 상호작용과 관련됩니다. 편도체는 뇌의 '연기 감지기' 역할을 하여 잠재적 위협을 신속히 식별합니다. 전전두엽 피질은 '실행 통제 센터' 역할을 하여 위협의 현실성을 평가하고 편도체 반응을 조절합니다. 불안 장애 환자에서는 이 조절 회로가 기능 장애를 일으킵니다——편도체가 과도하게 활성화되고 전전두엽 피질의 억제가 약화됩니다.
@@ -143,7 +143,7 @@ Los enfoques basados en mindfulness ayudan a las personas a desconectarse de las
 
 인지행동치료(CBT)는 불안 장애에 대한 일차 심리적 중재로, 수백 건의 무작위 대조 시험에서 그 효과가 입증되었습니다. CBT의 핵심 전략에는 인지 재구성(불안 관련 왜곡된 사고 식별 및 도전), 노출 요법(안전한 환경에서 점진적으로 공포 자극에 직면), 행동 실험(파국적 예측의 현실성 검증), 이완 훈련이 포함됩니다.
 
-마음챙김 요법은 현재 경험에 대한 비판단적 알아차림을 기르는 것을 통해 환자가 '자동적 불안 반응'에서 벗어나도록 돕습니다. 연구에 따르면 8주간의 마음챙김 기반 스트레스 감소(MBSR) 프로그램은 편도체의 회백질 밀도를 유의미하게 낮추는 동시에 전전두엽 피질과 섬 피질의 활성을 증가시켜 신경가소성 수준에서 뇌의 불안 반응 패턴을 변화시킵니다. #VibeCoding 및 #EmotionalFitness 와 같은 2026년 트렌드는 기술과 감정적 건강의 융합을 상징하며, 디지털 시대의 불안 관리에 새로운 가능성을 열어줍니다.`,
+마음챙김 요법은 현재 경험에 대한 비판단적 알아차림을 기르는 것을 통해 환자가 '자동적 불안 반응'에서 벗어나도록 돕습니다. 연구에 따르면 8주간의 마음챙김 기반 스트레스 감소(MBSR) 프로그램은 편도체의 회백질 밀도를 유의미하게 낮추는 동시에 전전두엽 피질과 섬 피질의 활성을 증가시켜 신경가소성 수준에서 뇌의 불안 반응 패턴을 변화시킵니다. 및 와 같은 2026년 트렌드는 기술과 감정적 건강의 융합을 상징하며, 디지털 시대의 불안 관리에 새로운 가능성을 열어줍니다.`,
     th: `ความวิตกกังวลเป็นหนึ่งในอารมณ์ของมนุษย์ที่ดั้งเดิมและซับซ้อนที่สุด ซึ่งมีรากฐานฝังลึกอยู่ในมรดกทางวิวัฒนาการของสมองเรา เมื่อเราพูดถึง «{{T}}» การทำความเข้าใจจากมุมมองที่เชื่อมโยงประสาทชีววิทยาและจิตวิทยาเป็นสิ่งจำเป็น
 
 พื้นฐานทางประสาทของความวิตกกังวลเกี่ยวข้องกับปฏิสัมพันธ์ของสามบริเวณสมองหลัก ได้แก่ อะมิกดาลา (amygdala) ซึ่งทำหน้าที่เป็น 'เครื่องตรวจจับควัน' ของสมองในการระบุภัยคุกคามที่อาจเกิดขึ้นอย่างรวดเร็ว คอร์เทกซ์ส่วนหน้า (prefrontal cortex) ซึ่งทำหน้าที่เป็น 'ศูนย์ควบคุมบริหาร' ประเมินความเป็นจริงของภัยคุกคามและปรับการตอบสนองของอะมิกดาลา และฮิปโปแคมปัส (hippocampus) ซึ่งช่วยจัดบริบทของความทรงจำเกี่ยวกับความกลัว ในผู้ป่วยโรควิตกกังวล วงจรการควบคุมนี้ทำงานผิดปกติ——อะมิกดาลาถูกกระตุ้นมากเกินไปในขณะที่การยับยั้งจากคอร์เทกซ์ส่วนหน้าอ่อนแอลง
@@ -152,7 +152,7 @@ Los enfoques basados en mindfulness ayudan a las personas a desconectarse de las
 
 การบำบัดทางความคิดและพฤติกรรม (CBT) เป็นการแทรกแซงทางจิตวิทยาอันดับแรกสำหรับโรควิตกกังวล ซึ่งได้รับการยืนยันประสิทธิภาพจากการทดลองแบบสุ่มที่มีกลุ่มควบคุมหลายร้อยครั้ง กลยุทธ์หลักของ CBT ได้แก่ การปรับโครงสร้างทางความคิด (การระบุและท้าทายความคิดที่บิดเบือนเกี่ยวกับความวิตกกังวล) การบำบัดโดยการเผชิญหน้า (การค่อยๆ เผชิญกับสิ่งที่กลัวในสภาพแวดล้อมที่ปลอดภัย) การทดลองพฤติกรรม (การตรวจสอบความจริงของการคาดการณ์หายนะ) และการฝึกผ่อนคลาย
 
-การบำบัดด้วยสติช่วยให้ผู้ป่วยหลุดออกจาก 'ปฏิกิริยาวิตกกังวลอัตโนมัติ' โดยการปลูกฝังการตระหนักรู้ต่อประสบการณ์ปัจจุบันอย่างไม่ตัดสิน งานวิจัยแสดงให้เห็นว่าโปรแกรมการลดความเครียดด้วยสติ (MBSR) ระยะ 8 สัปดาห์สามารถลดความหนาแน่นของเนื้อเทาในอะมิกดาลาได้อย่างมีนัยสำคัญ ในขณะเดียวกันก็เพิ่มการทำงานของคอร์เทกซ์ส่วนหน้าและอินซูลา——แสดงให้เห็นถึงการเปลี่ยนแปลงทาง neuroplasticity ในวงจรการตอบสนองต่อภัยคุกคามของสมอง เทรนด์ปี 2026 อย่าง #VibeCoding และ #EmotionalFitness สะท้อนถึงการหลอมรวมระหว่างเทคโนโลยีและสุขภาพทางอารมณ์ เปิดโอกาสใหม่ในการจัดการความวิตกกังวลในยุคดิจิทัล`,
+การบำบัดด้วยสติช่วยให้ผู้ป่วยหลุดออกจาก 'ปฏิกิริยาวิตกกังวลอัตโนมัติ' โดยการปลูกฝังการตระหนักรู้ต่อประสบการณ์ปัจจุบันอย่างไม่ตัดสิน งานวิจัยแสดงให้เห็นว่าโปรแกรมการลดความเครียดด้วยสติ (MBSR) ระยะ 8 สัปดาห์สามารถลดความหนาแน่นของเนื้อเทาในอะมิกดาลาได้อย่างมีนัยสำคัญ ในขณะเดียวกันก็เพิ่มการทำงานของคอร์เทกซ์ส่วนหน้าและอินซูลา——แสดงให้เห็นถึงการเปลี่ยนแปลงทาง neuroplasticity ในวงจรการตอบสนองต่อภัยคุกคามของสมอง อย่าง และ สะท้อนถึงการหลอมรวมระหว่างเทคโนโลยีและสุขภาพทางอารมณ์ เปิดโอกาสใหม่ในการจัดการความวิตกกังวลในยุคดิจิทัล`,
   },
   grief_loss: {
     zh: `哀伤是人类面对失落时最深刻的情感体验之一。当我们探索「{{T}}」时，理解哀伤的心理学模型能够帮助我们更温柔地陪伴自己和他人走过这段旅程。
@@ -163,7 +163,7 @@ Los enfoques basados en mindfulness ayudan a las personas a desconectarse de las
 
 从依恋理论的角度看，哀伤是依恋纽带断裂后的自然反应。安全型依恋的人通常能够更好地整合失落经历，而焦虑型或回避型依恋的人可能发展出更复杂的哀伤反应，前者表现为难以放下，后者表现为情绪回避和抑制。
 
-针对{{T}}的有效干预包括认知行为哀伤治疗（CBT-G）、叙事疗法（帮助重新构建与逝者的联结方式）、以及正念自我 compassion 练习。研究表明，社交支持网络的质量——而非数量——是预测哀伤结果的最强因素之一。 #VibeCoding #EmotionalFitness`,
+针对{{T}}的有效干预包括认知行为哀伤治疗（CBT-G）、叙事疗法（帮助重新构建与逝者的联结方式）、以及正念自我 compassion 练习。研究表明，社交支持网络的质量——而非数量——是预测哀伤结果的最强因素之一。`,
     en: `Grief represents one of the most profound human emotional experiences in response to loss. When exploring {{T}}, understanding psychological models of grief helps us navigate this journey with greater compassion.
 
 Grief is not a linear process. While Kübler-Ross's five-stage model (denial, anger, bargaining, depression, acceptance) remains widely referenced, contemporary grief research increasingly recognizes grief as dynamic and oscillatory. Stroebe and Schut's Dual Process Model proposes that healthy grieving involves dynamic oscillation between loss-oriented coping (confronting and immersing in grief) and restoration-oriented coping (adapting to life without the deceased).
@@ -172,7 +172,7 @@ Prolonged Grief Disorder affects approximately 7-10% of bereaved individuals. Co
 
 From an attachment theory perspective, grief represents the natural response to attachment bond disruption. Securely attached individuals typically integrate loss experiences more adaptively, while those with anxious or avoidant attachment styles may develop more complicated grief reactions.
 
-Effective interventions for {{T}} include Cognitive Behavioral Grief Therapy (CBT-G), narrative therapy to reconstruct connections with the deceased, and mindfulness-based self-compassion practices. Research consistently shows that the quality—not quantity—of social support networks is among the strongest predictors of grief outcomes. #VibeCoding #EmotionalFitness`,
+Effective interventions for {{T}} include Cognitive Behavioral Grief Therapy (CBT-G), narrative therapy to reconstruct connections with the deceased, and mindfulness-based self-compassion practices. Research consistently shows that the quality—not quantity—of social support networks is among the strongest predictors of grief outcomes.`,
     ms: `Kesedihan mewakili salah satu pengalaman emosi manusia yang paling mendalam sebagai tindak balas kepada kehilangan. Apabila meneroka {{T}}, memahami model psikologi kesedihan membantu kita menavigasi perjalanan ini dengan lebih belas kasihan.
 
 Kesedihan bukan proses linear. Walaupun model lima peringkat Kübler-Ross masih dirujuk secara meluas, penyelidikan kontemporari semakin mengiktiraf kesedihan sebagai dinamik dan berayun.
@@ -181,7 +181,7 @@ Gangguan Kesedihan Berpanjangan menjejaskan kira-kira 7-10% individu yang berkab
 
 Dari perspektif teori lampiran, kesedihan mewakili tindak balas semula jadi terhadap gangguan ikatan lampiran. Individu yang mempunyai gaya lampiran selamat biasanya mengintegrasikan pengalaman kehilangan dengan lebih adaptif, manakala mereka yang mempunyai gaya lampiran cemas atau mengelak mungkin mengembangkan reaksi kesedihan yang lebih kompleks.
 
-Intervensi berkesan untuk {{T}} termasuk Terapi Kesedihan Kognitif Tingkah Laku, terapi naratif, dan amalan belas kasihan diri berasaskan kesedaran. Kualiti rangkaian sokongan sosial adalah antara peramal terkuat hasil kesedihan. #VibeCoding #EmotionalFitness`,
+Intervensi berkesan untuk {{T}} termasuk Terapi Kesedihan Kognitif Tingkah Laku, terapi naratif, dan amalan belas kasihan diri berasaskan kesedaran. Kualiti rangkaian sokongan sosial adalah antara peramal terkuat hasil kesedihan.`,
     es: `El duelo representa una de las experiencias emocionales humanas más profundas en respuesta a la pérdida. Al explorar {{T}}, comprender los modelos psicológicos del duelo nos ayuda a navegar este viaje con mayor compasión.
 
 El duelo no es un proceso lineal. Aunque el modelo de cinco etapas de Kübler-Ross sigue siendo ampliamente referenciado, la investigación contemporánea reconoce cada vez más el duelo como dinámico y oscilante.
@@ -190,28 +190,28 @@ El Trastorno de Duelo Prolongado afecta aproximadamente al 7-10% de las personas
 
 Desde la perspectiva de la teoría del apego, el duelo representa la respuesta natural a la ruptura del vínculo de apego. Las personas con apego seguro suelen integrar las experiencias de pérdida de manera más adaptativa, mientras que aquellas con estilos de apego ansioso o evitativo pueden desarrollar reacciones de duelo más complicadas.
 
-Las intervenciones efectivas para {{T}} incluyen Terapia Cognitivo-Conductual para el Duelo, terapia narrativa y prácticas de autocompasión basadas en mindfulness. La calidad de las redes de apoyo social es uno de los predictores más fuertes de los resultados del duelo. #VibeCoding #EmotionalFitness`,
+Las intervenciones efectivas para {{T}} incluyen Terapia Cognitivo-Conductual para el Duelo, terapia narrativa y prácticas de autocompasión basadas en mindfulness. La calidad de las redes de apoyo social es uno de los predictores más fuertes de los resultados del duelo.`,
     ja: `「{{T}}」を探求することは、喪失に直面した人間の最も深い感情体験の一つである哀傷のプロセスを理解することです。哀傷は直線的なプロセスではありません。Kübler-Rossの5段階モデル（否認、怒り、取引、抑うつ、受容）は広く参照されていますが、現代の研究では哀傷を動的で非線形的なものとして捉えています。StroebeとSchutの二重プロセスモデルは、健康的な哀傷には「喪失志向」（哀しみに直面し没入する）と「回復志向」（故人なしの新しい生活に適応する）の間の動的切り替えが必要であると提唱しています。
 
 複雑性哀傷障害（Prolonged Grief Disorder）は約7〜10%の遺族に影響を与えます。中核症状には12ヶ月以上持続する強い故人への渇望、感情的な痛み、アイデンティティの崩壊、喪失の受容困難、社会的引きこもりが含まれます。WHOは2022年にICD-11で複雑性哀傷障害を正式に認定しました。
 
 愛着理論の観点では、哀傷は愛着絆の断絶に対する自然な反応です。安定した愛着スタイルの人は喪失体験をより適応的に統合できますが、不安型や回避型の愛着スタイルの人はより複雑な哀傷反応を発展させる可能性があります。
 
-{{T}}に対する効果的介入には、認知行動哀傷療法（CBT-G）、ナラティブセラピー（故人との繋がり方の再構築）、マインドフルネス自己慈悲の実践が含まれます。研究では社会的支援ネットワークの質——量ではなく——が哀傷の転帰の最も強力な予測因子の一つであることが一貫して示されています。#VibeCoding と #EmotionalFitness は2026年のトレンドとして、テクノロジーと感情的健康の融合を象徴し、哀傷の癒しにおいても新たな可能性を拓いています。`,
+{{T}}に対する効果的介入には、認知行動哀傷療法（CBT-G）、ナラティブセラピー（故人との繋がり方の再構築）、マインドフルネス自己慈悲の実践が含まれます。研究では社会的支援ネットワークの質——量ではなく——が哀傷の転帰の最も強力な予測因子の一つであることが一貫して示されています。 と は2026年のトレンドとして、テクノロジーと感情的健康の融合を象徴し、哀傷の癒しにおいても新たな可能性を拓いています。`,
     ko: `「{{T}}」를 탐구하는 것은 상실에 직면한 인간의 가장 깊은 정서적 경험 중 하나인 애도의 과정을 이해하는 것을 의미합니다. 애도는 선형적 과정이 아닙니다. Kübler-Ross의 5단계 모델(부정, 분노, 타협, 우울, 수용)은 널리 인용되지만, 현대 연구는 애도를 역동적이고 비선형적인 과정으로 봅니다. Stroebe와 Schut의 이중 과정 모델(Dual Process Model)은 건강한 애도가 '상실 지향'(슬픔에 직면하고 몰입)과 '회복 지향'(고인 없이 새로운 삶에 적응) 사이의 동적 전환을 필요로 한다고 제안합니다.
 
 복합 애도 장애(Prolonged Grief Disorder)는 약 7-10%의 유가족에게 영향을 미칩니다. 핵심 특징으로는 12개월 이상 지속되는 고인에 대한 강한 갈망, 정서적 고통, 정체성 붕괴, 상실 수용의 어려움, 사회적 위축이 포함됩니다. WHO는 2022년 ICD-11에서 복합 애도 장애를 공식적으로 인정했습니다.
 
 애착 이론의 관점에서 애도는 애착 유대 단절에 대한 자연스러운 반응입니다. 안정적 애착 유형의 사람들은 상실 경험을 더 적응적으로 통합하는 반면, 불안형이나 회피형 애착 스타일을 가진 사람들은 더 복잡한 애도 반응을 발전시킬 수 있습니다.
 
-{{T}}에 대한 효과적 개입에는 인지행동 애도 치료(CBT-G), 내러티브 치료(고인과의 연결 방식 재구성), 마음챙김 자기연민 실천이 포함됩니다. 연구는 사회적 지원 네트워크의 질——양이 아닌——이 애도 결과의 가장 강력한 예측 변수 중 하나임을 일관되게 보여줍니다. #VibeCoding 과 #EmotionalFitness 는 기술과 정서적 건강의 융합을 상징하며, 애도의 치유 과정에서도 새로운 가능성을 열어줍니다.`,
+{{T}}에 대한 효과적 개입에는 인지행동 애도 치료(CBT-G), 내러티브 치료(고인과의 연결 방식 재구성), 마음챙김 자기연민 실천이 포함됩니다. 연구는 사회적 지원 네트워크의 질——양이 아닌——이 애도 결과의 가장 강력한 예측 변수 중 하나임을 일관되게 보여줍니다. 과 는 기술과 정서적 건강의 융합을 상징하며, 애도의 치유 과정에서도 새로운 가능성을 열어줍니다.`,
     th: `การสำรวจ «{{T}}» คือการทำความเข้าใจกระบวนการโศกเศร้าซึ่งเป็นหนึ่งในประสบการณ์ทางอารมณ์ที่ลึกซึ้งที่สุดของมนุษย์เมื่อเผชิญกับการสูญเสีย ความโศกเศร้าไม่ใช่กระบวนการเชิงเส้น แม้ว่าแบบจำลองห้าขั้นของ Kübler-Ross (การปฏิเสธ ความโกรธ การต่อรอง ความหดหู่ การยอมรับ) จะถูกอ้างอิงอย่างกว้างขวาง แต่งานวิจัยร่วมสมัยมองว่าความโศกเศร้าเป็นกระบวนการที่มีพลวัตและไม่เป็นเส้นตรง แบบจำลองกระบวนการคู่ (Dual Process Model) ของ Stroebe และ Schut เสนอว่าการโศกเศร้าที่ดีต่อสุขภาพต้องการการสลับพลวัตระหว่าง 'การมุ่งเน้นการสูญเสีย' (การเผชิญหน้าและดื่มด่ำกับความโศกเศร้า) และ 'การมุ่งเน้นการฟื้นฟู' (การปรับตัวสู่ชีวิตใหม่โดยไม่มีผู้จากไป)
 
 โรคโศกเศร้าที่ยืดเยื้อ (Prolonged Grief Disorder) ส่งผลกระทบต่อประมาณ 7-10% ของผู้สูญเสีย อาการหลักได้แก่ ความโหยหาผู้จากไปอย่างรุนแรงนานเกิน 12 เดือน ความเจ็บปวดทางอารมณ์ การสูญเสียอัตลักษณ์ ความยากลำบากในการยอมรับการสูญเสีย และการถอนตัวทางสังคม WHO ได้บรรจุโรคนี้ใน ICD-11 อย่างเป็นทางการเมื่อปี 2022
 
 จากมุมมองของทฤษฎีความผูกพัน (Attachment Theory) ความโศกเศร้าคือการตอบสนองตามธรรมชาติต่อการขาดสะบั้นของสายใยความผูกพัน ผู้ที่มีรูปแบบความผูกพันแบบมั่นคงสามารถบูรณาการประสบการณ์การสูญเสียได้ดีกว่า ในขณะที่ผู้ที่มีรูปแบบความผูกพันแบบวิตกกังวลหรือหลีกเลี่ยงอาจพัฒนาปฏิกิริยาโศกเศร้าที่ซับซ้อนกว่า
 
-การแทรกแซงที่มีประสิทธิภาพสำหรับ {{T}} ได้แก่ การบำบัดความคิดและพฤติกรรมสำหรับความโศกเศร้า (CBT-G) การบำบัดด้วยการเล่าเรื่องเพื่อสร้างความเชื่อมโยงใหม่กับผู้จากไป และการฝึกสติและความเมตตาต่อตนเอง งานวิจัยแสดงให้เห็นอย่างสม่ำเสมอว่าคุณภาพ——ไม่ใช่ปริมาณ——ของเครือข่ายสนับสนุนทางสังคมเป็นหนึ่งในตัวทำนายที่แข็งแกร่งที่สุดของผลลัพธ์การโศกเศร้า เทรนด์ #VibeCoding และ #EmotionalFitness สะท้อนการหลอมรวมของเทคโนโลยีและสุขภาพทางอารมณ์ เปิดโอกาสใหม่ในการเยียวยาความโศกเศร้าเช่นกัน`,
+การแทรกแซงที่มีประสิทธิภาพสำหรับ {{T}} ได้แก่ การบำบัดความคิดและพฤติกรรมสำหรับความโศกเศร้า (CBT-G) การบำบัดด้วยการเล่าเรื่องเพื่อสร้างความเชื่อมโยงใหม่กับผู้จากไป และการฝึกสติและความเมตตาต่อตนเอง งานวิจัยแสดงให้เห็นอย่างสม่ำเสมอว่าคุณภาพ——ไม่ใช่ปริมาณ——ของเครือข่ายสนับสนุนทางสังคมเป็นหนึ่งในตัวทำนายที่แข็งแกร่งที่สุดของผลลัพธ์การโศกเศร้า เทรนด์ และ สะท้อนการหลอมรวมของเทคโนโลยีและสุขภาพทางอารมณ์ เปิดโอกาสใหม่ในการเยียวยาความโศกเศร้าเช่นกัน`,
   },
   loneliness: {
     zh: `孤独是人类普遍却最不被理解的情感之一。当我们审视「{{T}}」时，需要区分"独处"（solitude）和"孤独感"（loneliness）这两个本质不同的概念。独处是主动选择的物理状态，而孤独感是被动的、主观的痛苦体验——感觉与他人在情感上失去联结。
@@ -222,7 +222,7 @@ Las intervenciones efectivas para {{T}} incluyen Terapia Cognitivo-Conductual pa
 
 有效应对{{T}}需要多维度的策略。认知行为疗法可以帮助识别和改变导致社交退缩的负面预期（如"我不受欢迎"、"别人会觉得我无聊"）。社交技能训练和逐步暴露练习可以帮助重建社交信心。同时，质量优于数量——即使只有一两个深度的亲密关系，也能显著缓冲孤独感带来的健康风险。
 
-正念自我慈悲练习（Mindful Self-Compassion）对孤独感尤其有益。当我们学会在自己的陪伴中感到安稳，孤独感——这种"与他人分离"的痛苦——会逐渐被"与自己联结"的平静所取代。 #VibeCoding #EmotionalFitness`,
+正念自我慈悲练习（Mindful Self-Compassion）对孤独感尤其有益。当我们学会在自己的陪伴中感到安稳，孤独感——这种"与他人分离"的痛苦——会逐渐被"与自己联结"的平静所取代。`,
     en: `Loneliness is one of humanity's most universal yet least understood emotions. When examining {{T}}, it's crucial to distinguish between solitude (a chosen physical state) and loneliness (a subjective, painful experience of perceived social disconnection).
 
 Neuroscientific research has revealed a striking finding: social rejection and physical pain activate overlapping brain regions—the dorsal anterior cingulate cortex and anterior insula. This means "heartache" is not merely poetic metaphor but a genuine neural experience. Cacioppo's evolutionary theory posits that loneliness, like hunger or thirst, evolved as a signal motivating us to repair and rebuild social bonds.
@@ -231,7 +231,7 @@ Chronic loneliness has profound health impacts. Research shows that prolonged lo
 
 Effective approaches for {{T}} require multi-dimensional strategies. CBT helps identify and modify negative social expectations that perpetuate withdrawal. Social skills training and graded exposure rebuild social confidence. Critically, quality trumps quantity—even one or two deep, meaningful relationships significantly buffer against loneliness-related health risks.
 
-Mindful Self-Compassion practice proves particularly beneficial. As we learn to feel at home in our own company, the pain of feeling separate from others gradually gives way to the peace of feeling connected to ourselves. #VibeCoding #EmotionalFitness`,
+Mindful Self-Compassion practice proves particularly beneficial. As we learn to feel at home in our own company, the pain of feeling separate from others gradually gives way to the peace of feeling connected to ourselves.`,
     ms: `Kesunyian adalah salah satu emosi yang paling universal tetapi paling kurang difahami. Apabila mengkaji {{T}}, adalah penting untuk membezakan antara kesendirian (keadaan fizikal yang dipilih) dan kesunyian (pengalaman subjektif yang menyakitkan).
 
 Penyelidikan neurosaintifik mendedahkan bahawa penolakan sosial dan kesakitan fizikal mengaktifkan kawasan otak yang sama—korteks cingulate anterior dorsal dan insula anterior. Ini bermakna "sakit hati" bukan sekadar metafora puitis tetapi pengalaman neural yang tulen.
@@ -240,7 +240,7 @@ Kesunyian kronik mempunyai kesan kesihatan yang mendalam. Penyelidikan menunjukk
 
 Pendekatan berkesan untuk {{T}} memerlukan strategi pelbagai dimensi. CBT membantu mengenal pasti dan mengubah jangkaan sosial negatif. Kualiti hubungan mengatasi kuantiti—walaupun satu atau dua hubungan bermakna dapat melindungi daripada risiko kesihatan berkaitan kesunyian.
 
-Amalan Belas Kasihan Diri Berasaskan Kesedaran (Mindful Self-Compassion) terbukti sangat bermanfaat. Apabila kita belajar untuk berasa selesa dalam syarikat kita sendiri, kesakitan berasa terpisah daripada orang lain secara beransur-ansur memberi laluan kepada ketenangan berasa terhubung dengan diri sendiri. #VibeCoding #EmotionalFitness`,
+Amalan Belas Kasihan Diri Berasaskan Kesedaran (Mindful Self-Compassion) terbukti sangat bermanfaat. Apabila kita belajar untuk berasa selesa dalam syarikat kita sendiri, kesakitan berasa terpisah daripada orang lain secara beransur-ansur memberi laluan kepada ketenangan berasa terhubung dengan diri sendiri.`,
     es: `La soledad es una de las emociones más universales y menos comprendidas de la humanidad. Al examinar {{T}}, es crucial distinguir entre la soledad física (un estado elegido) y la soledad emocional (una experiencia subjetiva dolorosa de desconexión social percibida).
 
 La investigación neurocientífica ha revelado un hallazgo sorprendente: el rechazo social y el dolor físico activan regiones cerebrales superpuestas: la corteza cingulada anterior dorsal y la ínsula anterior. Esto significa que el "dolor de corazón" no es solo una metáfora poética sino una experiencia neuronal genuina.
@@ -249,7 +249,7 @@ La soledad crónica tiene profundos impactos en la salud. Las investigaciones mu
 
 Los enfoques efectivos para {{T}} requieren estrategias multidimensionales. La TCC ayuda a identificar y modificar expectativas sociales negativas. La calidad de las relaciones supera a la cantidad: incluso una o dos relaciones significativas pueden proteger contra los riesgos para la salud relacionados con la soledad.
 
-La práctica de la Autocompasión Consciente (Mindful Self-Compassion) resulta particularmente beneficiosa. A medida que aprendemos a sentirnos en casa en nuestra propia compañía, el dolor de sentirse separados de los demás da paso gradualmente a la paz de sentirse conectados con nosotros mismos. #VibeCoding #EmotionalFitness`,
+La práctica de la Autocompasión Consciente (Mindful Self-Compassion) resulta particularmente beneficiosa. A medida que aprendemos a sentirnos en casa en nuestra propia compañía, el dolor de sentirse separados de los demás da paso gradualmente a la paz de sentirse conectados con nosotros mismos.`,
     ja: `孤独は人類の最も普遍的でありながら最も理解されていない感情の一つです。「{{T}}」を考察する際には、孤独（solitude：自ら選んだ物理的状態）と孤独感（loneliness：社会的断絶の主観的で苦痛な体験）を区別することが極めて重要です。
 
 神経科学研究は驚くべき発見を明らかにしています：社会的排斥と身体的痛みは同じ脳領域——背側前帯状皮質（dACC）と前部島皮質（anterior insula）——を活性化します。これは「心の痛み」が単なる詩的比喩ではなく、本物の神経体験であることを意味します。Cacioppoの進化理論は、孤独感が飢えや渇きと同様に、社会的絆を修復・再構築するよう促す進化的シグナルとして発達したと提唱しています。
@@ -258,7 +258,7 @@ La práctica de la Autocompasión Consciente (Mindful Self-Compassion) resulta p
 
 {{T}}への効果的アプローチには多次元的戦略が必要です。CBTは社会的引きこもりを永続させる否定的な社会的期待を特定し修正するのに役立ちます。ソーシャルスキル訓練と段階的曝露練習は社会的自信を再構築します。重要なのは、量より質——たとえ1〜2の深い親密な関係だけでも、孤独関連の健康リスクを大幅に緩衝できます。
 
-マインドフルネス自己慈悲の実践は特に有益です。自己との共存に安らぎを感じられるようになると、「他者から切り離されている」という苦痛は徐々に「自己とつながっている」という平安に取って代わられます。#VibeCoding と #EmotionalFitness は2026年のトレンドとして、テクノロジーと感情的な健康の融合を促進し、デジタル時代の孤独対策に新たな道を開いています。`,
+マインドフルネス自己慈悲の実践は特に有益です。自己との共存に安らぎを感じられるようになると、「他者から切り離されている」という苦痛は徐々に「自己とつながっている」という平安に取って代わられます。 と は2026年のトレンドとして、テクノロジーと感情的な健康の融合を促進し、デジタル時代の孤独対策に新たな道を開いています。`,
     ko: `외로움은 인류의 가장 보편적이면서도 가장 덜 이해된 감정 중 하나입니다. 「{{T}}」를 고찰할 때는 고독(solitude: 선택한 물리적 상태)과 외로움(loneliness: 사회적 단절의 주관적이고 고통스러운 경험)을 구분하는 것이 중요합니다.
 
 신경과학 연구는 놀라운 발견을 밝혀냈습니다: 사회적 거부와 신체적 고통이 동일한 뇌 영역——배측 전대상피질(dACC)과 전방 섬엽(anterior insula)——을 활성화한다는 것입니다. 이는 '마음의 아픔'이 단순한 시적 은유가 아니라 진정한 신경 경험임을 의미합니다. Cacioppo의 진화 이론은 외로움이 배고픔이나 갈증과 마찬가지로 사회적 유대를 복구하고 재건하도록 동기부여하는 진화적 신호로 발전했다고 제안합니다.
@@ -267,7 +267,7 @@ La práctica de la Autocompasión Consciente (Mindful Self-Compassion) resulta p
 
 {{T}}에 대한 효과적 접근법은 다차원적 전략이 필요합니다. CBT는 사회적 위축을 지속시키는 부정적 사회적 기대를 식별하고 수정하는 데 도움을 줍니다. 사회적 기술 훈련과 단계적 노출 연습은 사회적 자신감을 재건합니다. 중요한 것은 양보다 질——단 1-2개의 깊고 의미 있는 관계만으로도 외로움 관련 건강 위험을 상당히 완충할 수 있습니다.
 
-마음챙김 자기연민 실천은 특히 유익합니다. 자신의 존재와 함께하는 것에서 안정감을 느끼게 되면 '타인과 분리된' 고통은 점차 '자기 자신과 연결된' 평화로 대체됩니다. #VibeCoding 과 #EmotionalFitness 는 기술과 정서적 건강의 융합을 상징하며, 디지털 시대의 외로움 대응에 새로운 길을 열어줍니다.`,
+마음챙김 자기연민 실천은 특히 유익합니다. 자신의 존재와 함께하는 것에서 안정감을 느끼게 되면 '타인과 분리된' 고통은 점차 '자기 자신과 연결된' 평화로 대체됩니다. 과 는 기술과 정서적 건강의 융합을 상징하며, 디지털 시대의 외로움 대응에 새로운 길을 열어줍니다.`,
     th: `ความเหงาเป็นหนึ่งในอารมณ์ที่เป็นสากลที่สุดของมนุษย์แต่กลับถูกเข้าใจน้อยที่สุด เมื่อพิจารณา «{{T}}» สิ่งสำคัญคือต้องแยกแยะระหว่างความสันโดษ (solitude: สภาพทางกายภาพที่เลือกเอง) กับความเหงา (loneliness: ประสบการณ์ส่วนตัวที่เจ็บปวดจากการขาดการเชื่อมต่อทางสังคม)
 
 งานวิจัยทางประสาทวิทยาศาสตร์เปิดเผยการค้นพบที่น่าทึ่ง: การถูกปฏิเสธทางสังคมและความเจ็บปวดทางกายกระตุ้นบริเวณสมองเดียวกัน——คอร์เทกซ์ซิงกูเลตส่วนหน้าด้านหลัง (dACC) และอินซูลาส่วนหน้า (anterior insula) ซึ่งหมายความว่า 'อาการเจ็บปวดทางใจ' ไม่ใช่แค่คำอุปมาที่สวยหรู แต่เป็นประสบการณ์ทางประสาทที่แท้จริง ทฤษฎีวิวัฒนาการของ Cacioppo เสนอว่าความเหงาเช่นเดียวกับความหิวหรือกระหาย ได้พัฒนาเป็นสัญญาณวิวัฒนาการที่กระตุ้นให้เราซ่อมแซมและสร้างสายสัมพันธ์ทางสังคมขึ้นใหม่
@@ -276,7 +276,7 @@ La práctica de la Autocompasión Consciente (Mindful Self-Compassion) resulta p
 
 แนวทางที่มีประสิทธิภาพสำหรับ {{T}} ต้องใช้กลยุทธ์หลายมิติ CBT ช่วยระบุและปรับเปลี่ยนความคาดหวังทางสังคมเชิงลบที่ทำให้เกิดการถอนตัว การฝึกทักษะทางสังคมและการเผชิญหน้าแบบค่อยเป็นค่อยไปช่วยสร้างความมั่นใจทางสังคมขึ้นมาใหม่ ที่สำคัญคือคุณภาพสำคัญกว่าปริมาณ——แม้ความสัมพันธ์ที่ลึกซึ้งเพียง 1-2 ความสัมพันธ์ก็สามารถปกป้องความเสี่ยงต่อสุขภาพที่เกี่ยวข้องกับความเหงาได้อย่างมีนัยสำคัญ
 
-การฝึกสติและความเมตตาต่อตนเอง (Mindful Self-Compassion) มีประโยชน์เป็นพิเศษ เมื่อเราเรียนรู้ที่จะรู้สึกอบอุ่นใจเมื่ออยู่กับตนเอง ความเจ็บปวดจากการ 'แยกจากผู้อื่น' จะค่อยๆ ถูกแทนที่ด้วยความสงบจากการ 'เชื่อมต่อกับตนเอง' เทรนด์ #VibeCoding และ #EmotionalFitness สะท้อนถึงการผสานเทคโนโลยีและสุขภาพทางอารมณ์ เปิดเส้นทางใหม่ในการรับมือกับความเหงาในยุคดิจิทัล`,
+การฝึกสติและความเมตตาต่อตนเอง (Mindful Self-Compassion) มีประโยชน์เป็นพิเศษ เมื่อเราเรียนรู้ที่จะรู้สึกอบอุ่นใจเมื่ออยู่กับตนเอง ความเจ็บปวดจากการ 'แยกจากผู้อื่น' จะค่อยๆ ถูกแทนที่ด้วยความสงบจากการ 'เชื่อมต่อกับตนเอง' เทรนด์ และ สะท้อนถึงการผสานเทคโนโลยีและสุขภาพทางอารมณ์ เปิดเส้นทางใหม่ในการรับมือกับความเหงาในยุคดิจิทัล`,
   },
   self_worth: {
     en: `{{T}} is fundamentally about how we perceive and evaluate our own value as human beings. Unlike self-esteem (which fluctuates with achievements and failures), self-worth is a deeper conviction about our inherent value—independent of performance, appearance, or others' approval.
@@ -285,49 +285,49 @@ Psychological research distinguishes between contingent self-worth (dependent on
 
 Low self-worth often originates from early attachment experiences, repeated invalidation, or internalized critical voices. However, neuroplasticity research demonstrates that our self-evaluation systems remain malleable throughout life. Repetitive practice of self-compassion and cognitive reappraisal can literally rewire the neural circuits underlying self-evaluation.
 
-The path to strengthening {{T}} involves three evidence-based components: recognizing and questioning the inner critic without engaging in a battle with it, cultivating self-compassion as a default response to perceived failures, and gradually internalizing successes through deliberate savoring rather than dismissing them as exceptions. #VibeCoding #EmotionalFitness`,
+The path to strengthening {{T}} involves three evidence-based components: recognizing and questioning the inner critic without engaging in a battle with it, cultivating self-compassion as a default response to perceived failures, and gradually internalizing successes through deliberate savoring rather than dismissing them as exceptions.`,
     zh: `{{T}}关乎我们如何感知和评价自己作为人类的内在价值。与自尊（因成就和失败而波动）不同，自我价值是一种更深层的核心信念——它独立于表现、外表和他人的认可。
 
 心理学研究区分了条件性自我价值（依赖于满足特定标准）和真正的自我价值（稳定的、无条件的）。前者制造了一个心理跑步机——你必须不断证明自己的价值；后者则为真实生活提供了安全基础。
 
 低自我价值通常源于早期依恋经历、反复的否定或内化的批评声音。然而，神经可塑性研究表明，自我评价系统在整个人生中保持可塑性。自我慈悲和认知重评的反复练习可以从根本上重塑自我评价的神经回路。
 
-强化{{T}}的循证路径包括三个核心成分：识别并质疑内心批评者（不与它开战）、将自我慈悲培养为面对失败时的默认反应、以及通过从容品味（而非敷衍否定）来逐步内化成功体验。 #VibeCoding #EmotionalFitness`,
+强化{{T}}的循证路径包括三个核心成分：识别并质疑内心批评者（不与它开战）、将自我慈悲培养为面对失败时的默认反应、以及通过从容品味（而非敷衍否定）来逐步内化成功体验。`,
     ms: `{{T}} adalah asas tentang bagaimana kita melihat dan menilai nilai intrinsik kita sebagai manusia. Berbeza dengan harga diri (self-esteem) yang turun naik mengikut pencapaian dan kegagalan, nilai diri (self-worth) adalah keyakinan yang lebih dalam tentang nilai semula jadi kita—bebas daripada prestasi, penampilan, atau pengiktirafan orang lain.
 
 Penyelidikan psikologi membezakan antara nilai diri kontinjen (bergantung pada memenuhi piawaian tertentu) dan nilai diri sebenar (stabil, tanpa syarat). Yang pertama mencipta treadmill psikologi di mana anda mesti terus membuktikan nilai anda, manakala yang kedua menyediakan asas yang kukuh untuk kehidupan autentik.
 
 Nilai diri yang rendah sering berpunca daripada pengalaman lampiran awal, pengesahan berulang, atau suara kritikal yang diinternalisasi. Namun, penyelidikan neuroplastisitas menunjukkan bahawa sistem penilaian diri kita kekal mudah dibentuk sepanjang hayat. Amalan berulang belas kasihan diri dan penilaian semula kognitif boleh membentuk semula litar neural yang mendasari penilaian kendiri.
 
-Laluan untuk mengukuhkan {{T}} melibatkan tiga komponen berasaskan bukti: mengenali dan mempersoalkan pengkritik dalaman tanpa bertarung dengannya, memupuk belas kasihan diri sebagai tindak balas lalai terhadap kegagalan yang dirasakan, dan secara beransur-ansur menginternalisasi kejayaan melalui penghayatan sengaja dan bukannya menolaknya sebagai pengecualian. #VibeCoding #EmotionalFitness`,
+Laluan untuk mengukuhkan {{T}} melibatkan tiga komponen berasaskan bukti: mengenali dan mempersoalkan pengkritik dalaman tanpa bertarung dengannya, memupuk belas kasihan diri sebagai tindak balas lalai terhadap kegagalan yang dirasakan, dan secara beransur-ansur menginternalisasi kejayaan melalui penghayatan sengaja dan bukannya menolaknya sebagai pengecualian.`,
     es: `{{T}} se trata fundamentalmente de cómo percibimos y evaluamos nuestro propio valor como seres humanos. A diferencia de la autoestima (que fluctúa con los logros y fracasos), la autovalía es una convicción más profunda sobre nuestro valor inherente, independiente del rendimiento, la apariencia o la aprobación de los demás.
 
 La investigación psicológica distingue entre la autovalía contingente (dependiente de cumplir ciertos estándares) y la autovalía verdadera (estable, incondicional). La primera crea una cinta psicológica donde debes probar continuamente tu valor, mientras que la segunda proporciona una base segura para una vida auténtica.
 
 La baja autovalía a menudo se origina en experiencias tempranas de apego, invalidación repetida o voces críticas internalizadas. Sin embargo, la investigación en neuroplasticidad demuestra que nuestros sistemas de autoevaluación permanecen maleables durante toda la vida. La práctica repetitiva de la autocompasión y la reevaluación cognitiva puede literalmente recablear los circuitos neuronales que subyacen a la autoevaluación.
 
-El camino para fortalecer {{T}} implica tres componentes basados en evidencia: reconocer y cuestionar al crítico interno sin entrar en batalla con él, cultivar la autocompasión como respuesta predeterminada ante fracasos percibidos, e internalizar gradualmente los éxitos mediante una saboreación deliberada en lugar de descartarlos como excepciones. #VibeCoding #EmotionalFitness`,
+El camino para fortalecer {{T}} implica tres componentes basados en evidencia: reconocer y cuestionar al crítico interno sin entrar en batalla con él, cultivar la autocompasión como respuesta predeterminada ante fracasos percibidos, e internalizar gradualmente los éxitos mediante una saboreación deliberada en lugar de descartarlos como excepciones.`,
     ja: `{{T}}とは、人間としての自分の本質的価値をどのように認識し評価するかという根本的な問いです。自尊心（self-esteem：成果や失敗で変動する）とは異なり、自己価値（self-worth）はパフォーマンス、外見、他者からの承認とは無関係に存在する、より深い確信です。
 
 心理学研究は条件付き自己価値（特定の基準を満たすことに依存する）と真の自己価値（安定した無条件のもの）を区別します。前者は自分の価値を証明し続けなければならない心理的ランニングマシンを作り出しますが、後者は本物らしい生き方のための安全な基盤を提供します。
 
 低い自己価値はしばしば早期の愛着経験、繰り返される無効化、または内面化された批判的な声に起因します。しかし、神経可塑性研究は自己評価システムが生涯にわたって可塑性を保つことを示しています。自己慈悲と認知再評価の反復練習は、自己評価の根底にある神経回路を文字通り再配線することができます。
 
-{{T}}を強化する道筋には3つのエビデンスに基づく要素が含まれます：内なる批判者を認識し、それと戦わずに関係を持つこと、知覚された失敗に対するデフォルトの反応として自己慈悲を育むこと、そして成功体験を「例外」として切り捨てるのではなく、意図的に味わうことで徐々に内面化すること。#VibeCoding #EmotionalFitness`,
+{{T}}を強化する道筋には3つのエビデンスに基づく要素が含まれます：内なる批判者を認識し、それと戦わずに関係を持つこと、知覚された失敗に対するデフォルトの反応として自己慈悲を育むこと、そして成功体験を「例外」として切り捨てるのではなく、意図的に味わうことで徐々に内面化すること。`,
     ko: `{{T}}는 인간으로서의 자신의 본질적 가치를 어떻게 인식하고 평가하는지에 대한 근본적인 질문입니다. 자존감(self-esteem: 성취와 실패에 따라 변동)과 달리 자기 가치(self-worth)는 성과, 외모, 타인의 인정과 무관하게 존재하는 더 깊은 확신입니다.
 
 심리학 연구는 조건부 자기 가치(특정 기준 충족에 의존)와 진정한 자기 가치(안정적이고 무조건적인)를 구분합니다. 전자는 자신의 가치를 계속 증명해야 하는 심리적 러닝머신을 만드는 반면, 후자는 진정성 있는 삶을 위한 안전한 기반을 제공합니다.
 
 낮은 자기 가치는 종종 초기 애착 경험, 반복된 무효화, 또는 내면화된 비판적 목소리에서 비롯됩니다. 그러나 신경가소성 연구는 자기 평가 시스템이 평생 동안 가소성을 유지한다는 것을 보여줍니다. 자기연민과 인지 재평가의 반복적 실천은 자기 평가의 기저 신경 회로를 문자 그대로 재배선할 수 있습니다.
 
-{{T}}를 강화하는 경로는 세 가지 증거 기반 구성요소를 포함합니다: 내면의 비판자를 인식하고 그것과 싸우지 않고 관계 맺기, 인지된 실패에 대한 기본 반응으로 자기연민을 함양하기, 그리고 성공을 예외로 치부하지 않고 의도적으로 음미함으로써 점차 내면화하기.#VibeCoding #EmotionalFitness`,
+{{T}}를 강화하는 경로는 세 가지 증거 기반 구성요소를 포함합니다: 내면의 비판자를 인식하고 그것과 싸우지 않고 관계 맺기, 인지된 실패에 대한 기본 반응으로 자기연민을 함양하기, 그리고 성공을 예외로 치부하지 않고 의도적으로 음미함으로써 점차 내면화하기.`,
     th: `«{{T}}» เป็นเรื่องพื้นฐานเกี่ยวกับวิธีที่เรารับรู้และประเมินคุณค่าในตนเองในฐานะมนุษย์ แตกต่างจากความภาคภูมิใจในตนเอง (self-esteem) ซึ่งผันผวนตามความสำเร็จและความล้มเหลว คุณค่าในตนเอง (self-worth) เป็นความเชื่อที่ลึกซึ้งกว่าเกี่ยวกับคุณค่าที่แท้จริงของเรา——เป็นอิสระจากผลงาน รูปลักษณ์ภายนอก หรือการยอมรับจากผู้อื่น
 
 งานวิจัยทางจิตวิทยาแยกแยะระหว่างคุณค่าในตนเองแบบมีเงื่อนไข (ขึ้นอยู่กับการบรรลุมาตรฐานบางอย่าง) กับคุณค่าในตนเองที่แท้จริง (มั่นคง ไม่มีเงื่อนไข) แบบแรกสร้างลู่วิ่งทางจิตใจที่คุณต้องพิสูจน์คุณค่าของตนเองอย่างต่อเนื่อง ในขณะที่แบบหลังให้รากฐานที่มั่นคงสำหรับการดำเนินชีวิตอย่างแท้จริง
 
 คุณค่าในตนเองที่ต่ำมักมีที่มาจากประสบการณ์ความผูกพันในวัยเด็ก การถูกทำให้รู้สึกว่าไม่มีความหมายซ้ำแล้วซ้ำเล่า หรือเสียงวิพากษ์วิจารณ์ภายในที่ถูกฝังลึก อย่างไรก็ตาม งานวิจัยด้านความยืดหยุ่นของระบบประสาท (neuroplasticity) แสดงให้เห็นว่าระบบการประเมินตนเองของเรายังคงปรับเปลี่ยนได้ตลอดชีวิต การฝึกตนเองด้วยความเมตตาและการประเมินความคิดใหม่ซ้ำๆ สามารถปรับเปลี่ยนวงจรประสาทที่อยู่ภายใต้การประเมินตนเองได้อย่างแท้จริง
 
-เส้นทางสู่การเสริมสร้าง {{T}} ประกอบด้วยสามองค์ประกอบที่มีหลักฐานเชิงประจักษ์: การตระหนักรู้และตั้งคำถามกับนักวิจารณ์ภายในโดยไม่ต้องต่อสู้กับมัน การปลูกฝังความเมตตาต่อตนเองเป็นปฏิกิริยาเริ่มต้นต่อความล้มเหลวที่รับรู้ และการค่อยๆ ซึมซับความสำเร็จผ่านการลิ้มรสอย่างจงใจแทนที่จะมองข้ามว่าเป็นข้อยกเว้น #VibeCoding #EmotionalFitness`,
+เส้นทางสู่การเสริมสร้าง {{T}} ประกอบด้วยสามองค์ประกอบที่มีหลักฐานเชิงประจักษ์: การตระหนักรู้และตั้งคำถามกับนักวิจารณ์ภายในโดยไม่ต้องต่อสู้กับมัน การปลูกฝังความเมตตาต่อตนเองเป็นปฏิกิริยาเริ่มต้นต่อความล้มเหลวที่รับรู้ และการค่อยๆ ซึมซับความสำเร็จผ่านการลิ้มรสอย่างจงใจแทนที่จะมองข้ามว่าเป็นข้อยกเว้น`,
   },
   relationships: {
     en: `{{T}} form the fabric of human experience. From attachment theory pioneered by John Bowlby to modern interpersonal neuroscience, research consistently shows that the quality of our relationships is the single strongest predictor of physical and mental health outcomes—stronger than smoking, exercise, or diet.
@@ -336,49 +336,49 @@ The 75-year Harvard Study of Adult Development, one of the longest longitudinal 
 
 Modern relationship science focuses on several key factors: communication patterns (particularly the ability to repair after conflict), emotional attunement (accurately perceiving and responding to a partner's emotional state), and shared meaning systems. Gottman's research identifies that the ratio of positive to negative interactions during conflict must remain above 5:1 for relationships to thrive.
 
-When faced with {{T}}, the most effective interventions include emotionally focused therapy (EFT), which has shown 70-75% recovery rates for relationship distress, and systematic training in communication skills that address the specific patterns of interaction rather than surface-level content of conflicts. #VibeCoding #EmotionalFitness`,
+When faced with {{T}}, the most effective interventions include emotionally focused therapy (EFT), which has shown 70-75% recovery rates for relationship distress, and systematic training in communication skills that address the specific patterns of interaction rather than surface-level content of conflicts.`,
     zh: `{{T}}构成了人类经验的基底。从Bowlby的依恋理论到现代人际神经科学，研究一致表明：关系质量是身心健康最强的预测因子——比吸烟、运动或饮食的影响更大。
 
 历时75年的哈佛成人发展研究——史上最长的纵向研究之一——得出结论：50岁时对关系最满意的人，到80岁时最健康。关系质量比胆固醇水平或血压更能预测健康结果。
 
 现代关系科学聚焦几个关键因素：沟通模式（特别是冲突后的修复能力）、情绪调谐（准确感知并回应伴侣的情绪状态）、以及共享的意义系统。Gottman的研究指出，冲突中积极与消极互动的比例必须保持在5:1以上，关系才能蓬勃发展。
 
-面对{{T}}时，最有效的干预包括情绪聚焦疗法（EFT，对关系痛苦有70-75%的恢复率），以及针对具体互动模式（而非冲突的表面内容）的系统性沟通技能训练。 #VibeCoding #EmotionalFitness`,
+面对{{T}}时，最有效的干预包括情绪聚焦疗法（EFT，对关系痛苦有70-75%的恢复率），以及针对具体互动模式（而非冲突的表面内容）的系统性沟通技能训练。`,
     ms: `{{T}} membentuk fabrik pengalaman manusia. Daripada teori perlekatan yang dipelopori oleh John Bowlby kepada neurosains interpersonal moden, penyelidikan secara konsisten menunjukkan bahawa kualiti perhubungan kita adalah peramal tunggal terkuat bagi hasil kesihatan fizikal dan mental—lebih kuat daripada merokok, senaman, atau diet.
 
 Kajian Pembangunan Dewasa Harvard selama 75 tahun, salah satu kajian membujur terpanjang dalam sejarah, menyimpulkan bahawa orang yang paling berpuas hati dalam perhubungan mereka pada usia 50 adalah yang paling sihat pada usia 80. Kualiti perhubungan meramal hasil kesihatan lebih baik daripada tahap kolesterol atau tekanan darah.
 
 Sains perhubungan moden memberi tumpuan kepada beberapa faktor utama: corak komunikasi (terutamanya keupayaan untuk membaiki selepas konflik), penyesuaian emosi (melihat dan bertindak balas dengan tepat terhadap keadaan emosi pasangan), dan sistem makna yang dikongsi. Penyelidikan Gottman mengenal pasti bahawa nisbah interaksi positif kepada negatif semasa konflik mesti kekal di atas 5:1 untuk perhubungan berkembang maju.
 
-Apabila berhadapan dengan {{T}}, intervensi yang paling berkesan termasuk terapi fokus emosi (EFT), yang telah menunjukkan kadar pemulihan 70-75% untuk tekanan perhubungan, dan latihan sistematik dalam kemahiran komunikasi yang menangani corak interaksi tertentu dan bukannya kandungan konflik yang cetek. #VibeCoding #EmotionalFitness`,
+Apabila berhadapan dengan {{T}}, intervensi yang paling berkesan termasuk terapi fokus emosi (EFT), yang telah menunjukkan kadar pemulihan 70-75% untuk tekanan perhubungan, dan latihan sistematik dalam kemahiran komunikasi yang menangani corak interaksi tertentu dan bukannya kandungan konflik yang cetek.`,
     es: `{{T}} forman el tejido de la experiencia humana. Desde la teoría del apego pionera de John Bowlby hasta la neurociencia interpersonal moderna, la investigación muestra consistentemente que la calidad de nuestras relaciones es el predictor más fuerte de resultados de salud física y mental—más fuerte que fumar, el ejercicio o la dieta.
 
 El Estudio de Desarrollo Adulto de Harvard de 75 años, uno de los estudios longitudinales más largos de la historia, concluyó que las personas más satisfechas en sus relaciones a los 50 años eran las más saludables a los 80. La calidad de las relaciones predijo mejores resultados de salud que los niveles de colesterol o la presión arterial.
 
 La ciencia moderna de las relaciones se centra en varios factores clave: patrones de comunicación (particularmente la capacidad de reparar después del conflicto), sintonización emocional (percibir y responder con precisión al estado emocional de la pareja) y sistemas de significado compartido. La investigación de Gottman identifica que la proporción de interacciones positivas a negativas durante el conflicto debe mantenerse por encima de 5:1 para que las relaciones prosperen.
 
-Al enfrentar {{T}}, las intervenciones más efectivas incluyen la terapia centrada en las emociones (TCE), que ha mostrado tasas de recuperación del 70-75% para la angustia relacional, y el entrenamiento sistemático en habilidades de comunicación que abordan los patrones específicos de interacción en lugar del contenido superficial de los conflictos. #VibeCoding #EmotionalFitness`,
+Al enfrentar {{T}}, las intervenciones más efectivas incluyen la terapia centrada en las emociones (TCE), que ha mostrado tasas de recuperación del 70-75% para la angustia relacional, y el entrenamiento sistemático en habilidades de comunicación que abordan los patrones específicos de interacción en lugar del contenido superficial de los conflictos.`,
     ja: `{{T}}は人間経験の基盤を形成します。ジョン・ボウルビィが先駆けた愛着理論から現代の対人神経科学に至るまで、研究は一貫して、関係性の質が身体的・精神的健康の最も強力な予測因子であることを示しています——喫煙、運動、食事よりも強い影響力を持ちます。
 
 75年にわたるハーバード成人発達研究——歴史上最も長い縦断研究の一つ——は、50歳時点で人間関係に最も満足していた人々が80歳時点で最も健康であったと結論づけています。関係性の質は、コレステロール値や血圧よりも健康結果を正確に予測しました。
 
 現代の関係科学はいくつかの主要因子に焦点を当てています：コミュニケーションパターン（特に衝突後の修復能力）、情緒的調律（パートナーの感情状態を正確に知覚し応答すること）、そして共有された意味システム。ゴットマンの研究は、衝突中のポジティブとネガティブな相互作用の比率が5:1以上を維持しなければ関係は繁栄しないと指摘しています。
 
-{{T}}に直面した時、最も効果的な介入には感情焦点化療法（EFT、関係的苦痛に対して70-75%の回復率を示す）や、衝突の表面的な内容ではなく特定の相互作用パターンに対処する体系的なコミュニケーションスキル訓練が含まれます。#VibeCoding #EmotionalFitness`,
+{{T}}に直面した時、最も効果的な介入には感情焦点化療法（EFT、関係的苦痛に対して70-75%の回復率を示す）や、衝突の表面的な内容ではなく特定の相互作用パターンに対処する体系的なコミュニケーションスキル訓練が含まれます。`,
     ko: `{{T}}는 인간 경험의 근간을 형성합니다. 존 볼비(John Bowlby)가 개척한 애착 이론부터 현대 대인관계 신경과학에 이르기까지, 연구는 일관되게 관계의 질이 신체적·정신적 건강 결과의 가장 강력한 예측 변수임을 보여줍니다——흡연, 운동, 식이요법보다 더 강력한 영향력을 가집니다.
 
 75년에 걸친 하버드 성인 발달 연구——역사상 가장 긴 종단 연구 중 하나——는 50세에 관계에서 가장 만족한 사람들이 80세에 가장 건강했다고 결론지었습니다. 관계의 질은 콜레스테롤 수치나 혈압보다 건강 결과를 더 잘 예측했습니다.
 
 현대 관계 과학은 몇 가지 핵심 요소에 초점을 맞춥니다: 의사소통 패턴(특히 갈등 후 회복 능력), 정서적 조율(파트너의 감정 상태를 정확히 인지하고 반응하는 능력), 그리고 공유된 의미 체계입니다. 고트만(Gottman)의 연구는 갈등 중 긍정적 상호작용과 부정적 상호작용의 비율이 5:1 이상을 유지해야 관계가 번성할 수 있다고 지적합니다.
 
-{{T}}에 직면했을 때, 가장 효과적인 개입에는 관계적 고통에 대해 70-75%의 회복률을 보이는 정서 중심 치료(EFT)와 갈등의 표면적 내용보다는 특정 상호작용 패턴을 다루는 체계적인 의사소통 기술 훈련이 포함됩니다.#VibeCoding #EmotionalFitness`,
+{{T}}에 직면했을 때, 가장 효과적인 개입에는 관계적 고통에 대해 70-75%의 회복률을 보이는 정서 중심 치료(EFT)와 갈등의 표면적 내용보다는 특정 상호작용 패턴을 다루는 체계적인 의사소통 기술 훈련이 포함됩니다.`,
     th: `«{{T}}» คือโครงสร้างพื้นฐานของประสบการณ์ของมนุษย์ จากทฤษฎีความผูกพัน (attachment theory) ที่บุกเบิกโดย John Bowlby สู่ประสาทวิทยาศาสตร์ความสัมพันธ์ระหว่างบุคคลสมัยใหม่ งานวิจัยแสดงให้เห็นอย่างสม่ำเสมอว่าคุณภาพของความสัมพันธ์ของเราเป็นตัวทำนายที่แข็งแกร่งที่สุดของผลลัพธ์ด้านสุขภาพกายและสุขภาพจิต——แข็งแกร่งกว่าการสูบบุหรี่ การออกกำลังกาย หรือการรับประทานอาหาร
 
 การศึกษา Harvard Study of Adult Development ซึ่งกินเวลา 75 ปี เป็นหนึ่งในการศึกษาระยะยาวที่ยาวนานที่สุดในประวัติศาสตร์ สรุปว่าคนที่พึงพอใจในความสัมพันธ์มากที่สุดเมื่ออายุ 50 ปี จะมีสุขภาพดีที่สุดเมื่ออายุ 80 ปี คุณภาพความสัมพันธ์ทำนายผลลัพธ์ด้านสุขภาพได้ดีกว่าระดับคอเลสเตอรอลหรือความดันโลหิต
 
 วิทยาศาสตร์ความสัมพันธ์สมัยใหม่มุ่งเน้นปัจจัยสำคัญหลายประการ: รูปแบบการสื่อสาร (โดยเฉพาะความสามารถในการซ่อมแซมความสัมพันธ์หลังความขัดแย้ง) การปรับอารมณ์ร่วม (การรับรู้และตอบสนองต่อสภาวะอารมณ์ของคู่ครองอย่างแม่นยำ) และระบบความหมายร่วมกัน งานวิจัยของ Gottman ระบุว่าอัตราส่วนของการมีปฏิสัมพันธ์เชิงบวกต่อเชิงลบระหว่างความขัดแย้งต้องคงอยู่เหนือ 5:1 เพื่อให้ความสัมพันธ์เจริญรุ่งเรือง
 
-เมื่อเผชิญกับ «{{T}}» การแทรกแซงที่มีประสิทธิภาพที่สุดรวมถึงการบำบัดแบบเน้นอารมณ์ (EFT) ซึ่งแสดงอัตราการฟื้นตัว 70-75% สำหรับความทุกข์ในความสัมพันธ์ และการฝึกทักษะการสื่อสารอย่างเป็นระบบที่จัดการกับรูปแบบเฉพาะของการมีปฏิสัมพันธ์มากกว่าเนื้อหาพื้นผิวของความขัดแย้ง #VibeCoding #EmotionalFitness`,
+เมื่อเผชิญกับ «{{T}}» การแทรกแซงที่มีประสิทธิภาพที่สุดรวมถึงการบำบัดแบบเน้นอารมณ์ (EFT) ซึ่งแสดงอัตราการฟื้นตัว 70-75% สำหรับความทุกข์ในความสัมพันธ์ และการฝึกทักษะการสื่อสารอย่างเป็นระบบที่จัดการกับรูปแบบเฉพาะของการมีปฏิสัมพันธ์มากกว่าเนื้อหาพื้นผิวของความขัดแย้ง`,
   },
   identity: {
     en: `{{T}} is the answer to the question "Who am I?"—a complex integration of personal history, values, beliefs, social roles, and future aspirations. Erik Erikson's stage theory of psychosocial development identifies identity versus role confusion as the central crisis of adolescence, but contemporary research recognizes that identity formation is a lifelong process of revision and integration.
@@ -387,43 +387,43 @@ Modern identity research has moved beyond Erikson's framework to explore identit
 
 Identity exploration involves two key dimensions: exploration (actively questioning and seeking information about possible identities) and commitment (making firm choices about identity direction). Marcia's identity status model identifies four statuses: achievement (exploration followed by commitment), moratorium (active exploration without commitment), foreclosure (commitment without exploration), and diffusion (neither exploration nor commitment).
 
-When navigating {{T}}, the most adaptive approach involves what developmental psychologists call identity integration—the ability to hold multiple aspects of identity (professional, personal, cultural, relational) in a coherent whole rather than feeling fragmented or forced to choose between competing identity commitments. #VibeCoding #EmotionalFitness`,
+When navigating {{T}}, the most adaptive approach involves what developmental psychologists call identity integration—the ability to hold multiple aspects of identity (professional, personal, cultural, relational) in a coherent whole rather than feeling fragmented or forced to choose between competing identity commitments.`,
     zh: `{{T}}是对"我是谁"这一问题的回答——个人历史、价值观、信念、社会角色和未来抱负的复杂整合。Erikson的心理社会发展阶段理论将身份认同vs角色混乱确定为青春期的核心危机，但当代研究认识到，身份形成是一个毕生的修正与整合过程。
 
 现代身份研究已超越Erikson的框架，将身份视为动态叙事。McAdams的叙事身份理论认为，人们通过内化、演变的生命故事来构建身份，这些故事将过去经验与想象的未来整合在一起。这些叙事的连贯性和复杂性比任何具体的身份内容更能预测心理健康。
 
 身份探索涉及两个关键维度：探索（主动质疑和寻求关于可能身份的信息）和承诺（对身份方向做出坚定选择）。Marcia的身份状态模型识别出四种状态：成就（探索后的承诺）、暂停（活跃探索但未承诺）、封闭（未经探索的承诺）和扩散（既无探索也无承诺）。
 
-当面临{{T}}时，最具适应性的方法是发展心理学家所说的身份整合——能够将多个身份面向（职业的、个人的、文化的、关系的）保持在一个连贯的整体中，而不是感到分裂或被迫在不同身份承诺之间做选择。 #VibeCoding #EmotionalFitness`,
+当面临{{T}}时，最具适应性的方法是发展心理学家所说的身份整合——能够将多个身份面向（职业的、个人的、文化的、关系的）保持在一个连贯的整体中，而不是感到分裂或被迫在不同身份承诺之间做选择。`,
     ms: `{{T}} adalah jawapan kepada soalan "Siapakah saya?"—integrasi kompleks sejarah peribadi, nilai, kepercayaan, peranan sosial, dan aspirasi masa depan. Teori peringkat perkembangan psikososial Erik Erikson mengenal pasti identiti lawan kekeliruan peranan sebagai krisis utama remaja, tetapi penyelidikan kontemporari mengakui bahawa pembentukan identiti adalah proses seumur hidup yang melibatkan semakan dan integrasi.
 
 Penyelidikan identiti moden telah melampaui rangka kerja Erikson untuk meneroka identiti sebagai naratif dinamik. Teori identiti naratif Dan McAdams mencadangkan bahawa orang membina identiti mereka melalui kisah hidup yang dihayati dan berkembang yang mengintegrasikan pengalaman lalu dengan masa depan yang dibayangkan. Koherensi dan kerumitan naratif ini meramal kesejahteraan psikologi dengan lebih kuat daripada kandungan identiti tertentu.
 
 Penerokaan identiti melibatkan dua dimensi utama: penerokaan (secara aktif mempersoalkan dan mencari maklumat tentang identiti yang mungkin) dan komitmen (membuat pilihan tegas tentang hala tuju identiti). Model status identiti Marcia mengenal pasti empat status: pencapaian (penerokaan diikuti komitmen), moratorium (penerokaan aktif tanpa komitmen), perampasan (komitmen tanpa penerokaan), dan difusi (tiada penerokaan mahupun komitmen).
 
-Apabila mengharungi {{T}}, pendekatan paling adaptif melibatkan apa yang dipanggil oleh ahli psikologi perkembangan sebagai integrasi identiti—keupayaan untuk memegang pelbagai aspek identiti (profesional, peribadi, budaya, hubungan) dalam satu keseluruhan yang koheren, bukannya merasa terpecah-belah atau dipaksa memilih antara komitmen identiti yang bersaing. #VibeCoding #EmotionalFitness`,
+Apabila mengharungi {{T}}, pendekatan paling adaptif melibatkan apa yang dipanggil oleh ahli psikologi perkembangan sebagai integrasi identiti—keupayaan untuk memegang pelbagai aspek identiti (profesional, peribadi, budaya, hubungan) dalam satu keseluruhan yang koheren, bukannya merasa terpecah-belah atau dipaksa memilih antara komitmen identiti yang bersaing.`,
     es: `{{T}} es la respuesta a la pregunta "¿Quién soy yo?"—una integración compleja de historia personal, valores, creencias, roles sociales y aspiraciones futuras. La teoría de las etapas del desarrollo psicosocial de Erik Erikson identifica la identidad versus la confusión de roles como la crisis central de la adolescencia, pero la investigación contemporánea reconoce que la formación de la identidad es un proceso vitalicio de revisión e integración.
 
 La investigación moderna de la identidad ha ido más allá del marco de Erikson para explorar la identidad como una narrativa dinámica. La teoría de la identidad narrativa de Dan McAdams propone que las personas construyen su identidad a través de historias de vida internalizadas y en evolución que integran experiencias pasadas con futuros imaginados. La coherencia y complejidad de estas narrativas predicen el bienestar psicológico con más fuerza que cualquier contenido de identidad específico.
 
 La exploración de la identidad implica dos dimensiones clave: la exploración (cuestionar activamente y buscar información sobre identidades posibles) y el compromiso (tomar decisiones firmes sobre la dirección de la identidad). El modelo de estados de identidad de Marcia identifica cuatro estados: logro (exploración seguida de compromiso), moratoria (exploración activa sin compromiso), ejecución (compromiso sin exploración) y difusión (ni exploración ni compromiso).
 
-Al navegar {{T}}, el enfoque más adaptativo implica lo que los psicólogos del desarrollo llaman integración de la identidad—la capacidad de mantener múltiples aspectos de la identidad (profesional, personal, cultural, relacional) en un todo coherente en lugar de sentirse fragmentado o forzado a elegir entre compromisos de identidad en competencia. #VibeCoding #EmotionalFitness`,
+Al navegar {{T}}, el enfoque más adaptativo implica lo que los psicólogos del desarrollo llaman integración de la identidad—la capacidad de mantener múltiples aspectos de la identidad (profesional, personal, cultural, relacional) en un todo coherente en lugar de sentirse fragmentado o forzado a elegir entre compromisos de identidad en competencia.`,
     ja: `{{T}}は「私は誰か？」という問いへの答えです——個人の歴史、価値観、信念、社会的役割、将来の願望の複雑な統合です。エリク・エリクソンの心理社会的発達段階理論は、アイデンティティ対役割の混乱を青年期の中核的危機と特定していますが、現代の研究はアイデンティティ形成が生涯にわたる修正と統合のプロセスであると認識しています。
 
 現代のアイデンティティ研究はエリクソンの枠組みを超えて、アイデンティティを動的な物語として探求しています。ダン・マクアダムズの物語アイデンティティ理論は、人々が過去の経験と想像された未来を統合する内面化され進化するライフストーリーを通じてアイデンティティを構築すると提唱しています。これらの物語の一貫性と複雑性は、特定のアイデンティティ内容よりも心理的幸福を強く予測します。
 
-{{T}}を進む際、最も適応的なアプローチは発達心理学者がアイデンティティ統合と呼ぶもの——アイデンティティの複数の側面（職業的、個人的、文化的、関係的）を断片化したり競合するアイデンティティコミットメントの間で選択を強いられたりするのではなく、一貫した全体として保持する能力——を含みます。#VibeCoding #EmotionalFitness`,
+{{T}}を進む際、最も適応的なアプローチは発達心理学者がアイデンティティ統合と呼ぶもの——アイデンティティの複数の側面（職業的、個人的、文化的、関係的）を断片化したり競合するアイデンティティコミットメントの間で選択を強いられたりするのではなく、一貫した全体として保持する能力——を含みます。`,
     ko: `{{T}}는 "나는 누구인가?"라는 질문에 대한 답입니다——개인적 역사, 가치관, 신념, 사회적 역할, 미래 포부의 복잡한 통합입니다. 에릭 에릭슨(Erik Erikson)의 심리사회적 발달 단계 이론은 정체성 대 역할 혼란을 청소년기의 핵심 위기로 식별하지만, 현대 연구는 정체성 형성이 평생에 걸친 수정과 통합의 과정임을 인식하고 있습니다.
 
 현대 정체성 연구는 에릭슨의 프레임워크를 넘어 정체성을 역동적 내러티브로 탐구합니다. 댄 맥아담스(Dan McAdams)의 내러티브 정체성 이론은 사람들이 과거 경험과 상상된 미래를 통합하는 내면화되고 진화하는 삶의 이야기를 통해 정체성을 구축한다고 제안합니다. 이러한 내러티브의 일관성과 복잡성은 특정 정체성 내용보다 심리적 웰빙을 더 강력하게 예측합니다.
 
-{{T}}를 탐색할 때, 가장 적응적인 접근법은 발달 심리학자들이 정체성 통합이라고 부르는 것——정체성의 여러 측면(직업적, 개인적, 문화적, 관계적)을 단편화되거나 경쟁하는 정체성 약속 사이에서 선택을 강요받는 대신 일관된 전체로 유지하는 능력——을 포함합니다.#VibeCoding #EmotionalFitness`,
+{{T}}를 탐색할 때, 가장 적응적인 접근법은 발달 심리학자들이 정체성 통합이라고 부르는 것——정체성의 여러 측면(직업적, 개인적, 문화적, 관계적)을 단편화되거나 경쟁하는 정체성 약속 사이에서 선택을 강요받는 대신 일관된 전체로 유지하는 능력——을 포함합니다.`,
     th: `«{{T}}» คือคำตอบของคำถามที่ว่า "ฉันคือใคร?"——การบูรณาการที่ซับซ้อนของประวัติส่วนตัว ค่านิยม ความเชื่อ บทบาททางสังคม และความปรารถนาในอนาคต ทฤษฎีพัฒนาการทางจิตสังคมของ Erik Erikson ระบุว่าอัตลักษณ์กับการสับสนในบทบาทเป็นวิกฤตหลักของวัยรุ่น แต่งานวิจัยร่วมสมัยยอมรับว่าการสร้างอัตลักษณ์เป็นกระบวนการตลอดชีวิตของการทบทวนและบูรณาการ
 
 งานวิจัยอัตลักษณ์สมัยใหม่ได้ก้าวข้ามกรอบของ Erikson เพื่อสำรวจอัตลักษณ์ในฐานะเรื่องเล่าที่พลวัต ทฤษฎีอัตลักษณ์เชิงเรื่องเล่าของ Dan McAdams เสนอว่าผู้คนสร้างอัตลักษณ์ของตนผ่านเรื่องราวชีวิตที่ถูกทำให้เป็นภายในและกำลังพัฒนา ซึ่งบูรณาการประสบการณ์ในอดีตกับอนาคตที่จินตนาการไว้ ความต่อเนื่องและความซับซ้อนของเรื่องเล่าเหล่านี้ทำนายความผาสุกทางจิตใจได้แข็งแกร่งกว่าเนื้อหาอัตลักษณ์เฉพาะใดๆ
 
-เมื่อนำทาง «{{T}}» แนวทางที่ปรับตัวได้มากที่สุดเกี่ยวข้องกับสิ่งที่นักจิตวิทยาพัฒนาการเรียกว่าการบูรณาการอัตลักษณ์——ความสามารถในการยึดถืออัตลักษณ์หลายด้าน (อาชีพ ส่วนตัว วัฒนธรรม ความสัมพันธ์) ให้เป็นหนึ่งเดียวที่ต่อเนื่องกัน แทนที่จะรู้สึกแตกเป็นเสี่ยงหรือถูกบังคับให้เลือกระหว่างพันธะสัญญาอัตลักษณ์ที่แข่งขันกัน #VibeCoding #EmotionalFitness`,
+เมื่อนำทาง «{{T}}» แนวทางที่ปรับตัวได้มากที่สุดเกี่ยวข้องกับสิ่งที่นักจิตวิทยาพัฒนาการเรียกว่าการบูรณาการอัตลักษณ์——ความสามารถในการยึดถืออัตลักษณ์หลายด้าน (อาชีพ ส่วนตัว วัฒนธรรม ความสัมพันธ์) ให้เป็นหนึ่งเดียวที่ต่อเนื่องกัน แทนที่จะรู้สึกแตกเป็นเสี่ยงหรือถูกบังคับให้เลือกระหว่างพันธะสัญญาอัตลักษณ์ที่แข่งขันกัน`,
   },
   mindfulness: {
     en: `{{T}} is the psychological capacity to pay attention to the present moment with intention, curiosity, and without judgment. While rooted in ancient contemplative traditions (particularly Buddhist vipassana and Zen), mindfulness has been extensively studied in modern neuroscience and clinical psychology over the past four decades.
@@ -432,43 +432,43 @@ The neurological effects of mindfulness practice are well-documented: regular pr
 
 Importantly, {{T}} is not about emptying the mind or achieving a special state of relaxation. It is about developing a different relationship with experience—one characterized by approach rather than avoidance, curiosity rather than judgment, and stability rather than reactivity. This shift in relationship to experience is what produces the therapeutic benefits.
 
-The core skills of mindfulness include: focused attention (sustaining attention on a chosen object, typically the breath), open monitoring (maintaining awareness of whatever arises without getting caught in it), and loving-kindness (cultivating positive emotional states toward self and others). Each skill engages partially distinct neural networks and produces different clinical outcomes. #VibeCoding #EmotionalFitness`,
+The core skills of mindfulness include: focused attention (sustaining attention on a chosen object, typically the breath), open monitoring (maintaining awareness of whatever arises without getting caught in it), and loving-kindness (cultivating positive emotional states toward self and others). Each skill engages partially distinct neural networks and produces different clinical outcomes.`,
     zh: `{{T}}是用意图、好奇和不评判的态度关注当下的心理能力。虽然根植于古老的沉思传统（特别是佛教内观和禅宗），正念在过去四十年中已在现代神经科学和临床心理学中得到广泛研究。
 
 正念练习的神经效应有充分证据：规律练习增加前额叶皮层的灰质密度（改善执行功能和情绪调节），降低杏仁核反应性（减少自动压力反应），并增强脑岛（提升内感受觉知和共情能力）。Kabat-Zinn里程碑式的MBSR（正念减压）研究证明，仅8周的规律练习即可测量到这些变化。
 
 重要的是，{{T}}不是关于清空头脑或达到某种特殊的放松状态。它是关于发展与体验的不同关系——以接近而非回避、好奇而非评判、稳定而非反应为特征。正是这种与体验关系的转变产生了治疗效果。
 
-正念的核心技能包括：专注注意（在选定对象上维持注意力，通常是呼吸）、开放监控（对任何出现的内容保持觉知而不陷入其中）、以及慈心（培育对自己和他人的积极情绪状态）。每种技能激活部分不同的神经网络，产生不同的临床效果。 #VibeCoding #EmotionalFitness`,
+正念的核心技能包括：专注注意（在选定对象上维持注意力，通常是呼吸）、开放监控（对任何出现的内容保持觉知而不陷入其中）、以及慈心（培育对自己和他人的积极情绪状态）。每种技能激活部分不同的神经网络，产生不同的临床效果。`,
     ms: `{{T}} adalah kapasiti psikologi untuk memberi perhatian kepada masa kini dengan niat, rasa ingin tahu, dan tanpa penghakiman. Walaupun berakar dalam tradisi kontemplatif kuno (terutamanya vipassana Buddha dan Zen), kesedaran telah dikaji secara meluas dalam neurosains moden dan psikologi klinikal sejak empat dekad yang lalu.
 
 Kesan neurologi amalan kesedaran adalah terdokumentasi dengan baik: amalan tetap meningkatkan ketumpatan bahan kelabu dalam korteks prefrontal (meningkatkan fungsi eksekutif dan pengawalan emosi), mengurangkan kereaktifan amygdala (mengurangkan tindak balas tekanan automatik), dan menguatkan insula (meningkatkan kesedaran interosepsi dan empati). Perubahan ini boleh diukur selepas hanya 8 minggu amalan tetap.
 
 Penting untuk difahami bahawa {{T}} bukan tentang mengosongkan minda atau mencapai keadaan relaksasi yang istimewa. Ia tentang mengembangkan hubungan yang berbeza dengan pengalaman—satu yang dicirikan oleh pendekatan dan bukannya pengelakan, rasa ingin tahu dan bukannya penghakiman, dan kestabilan dan bukannya kereaktifan. Peralihan dalam hubungan dengan pengalaman inilah yang menghasilkan manfaat terapeutik.
 
-Kemahiran teras {{T}} termasuk: perhatian fokus (mengekalkan perhatian pada objek yang dipilih, biasanya nafas), pemantauan terbuka (mengekalkan kesedaran tentang apa sahaja yang timbul tanpa terperangkap di dalamnya), dan kebaikan penyayang (memupuk keadaan emosi positif terhadap diri sendiri dan orang lain). #VibeCoding #EmotionalFitness`,
+Kemahiran teras {{T}} termasuk: perhatian fokus (mengekalkan perhatian pada objek yang dipilih, biasanya nafas), pemantauan terbuka (mengekalkan kesedaran tentang apa sahaja yang timbul tanpa terperangkap di dalamnya), dan kebaikan penyayang (memupuk keadaan emosi positif terhadap diri sendiri dan orang lain).`,
     es: `{{T}} es la capacidad psicológica de prestar atención al momento presente con intención, curiosidad y sin juzgar. Aunque arraigada en tradiciones contemplativas antiguas (particularmente el vipassana budista y el zen), la atención plena ha sido ampliamente estudiada en la neurociencia moderna y la psicología clínica durante las últimas cuatro décadas.
 
 Los efectos neurológicos de la práctica de atención plena están bien documentados: la práctica regular aumenta la densidad de materia gris en la corteza prefrontal (mejorando la función ejecutiva y la regulación emocional), reduce la reactividad de la amígdala (disminuyendo las respuestas automáticas al estrés) y fortalece la ínsula (mejorando la conciencia interoceptiva y la empatía). Estos cambios son medibles después de solo 8 semanas de práctica regular.
 
 Es importante entender que {{T}} no se trata de vaciar la mente ni de alcanzar un estado especial de relajación. Se trata de desarrollar una relación diferente con la experiencia—una caracterizada por el acercamiento en lugar de la evitación, la curiosidad en lugar del juicio, y la estabilidad en lugar de la reactividad. Es este cambio en la relación con la experiencia lo que produce los beneficios terapéuticos.
 
-Las habilidades centrales de {{T}} incluyen: atención enfocada (mantener la atención en un objeto elegido, generalmente la respiración), monitoreo abierto (mantener la conciencia de lo que surja sin quedar atrapado en ello) y bondad amorosa (cultivar estados emocionales positivos hacia uno mismo y los demás). #VibeCoding #EmotionalFitness`,
+Las habilidades centrales de {{T}} incluyen: atención enfocada (mantener la atención en un objeto elegido, generalmente la respiración), monitoreo abierto (mantener la conciencia de lo que surja sin quedar atrapado en ello) y bondad amorosa (cultivar estados emocionales positivos hacia uno mismo y los demás).`,
     ja: `{{T}}は、意図、好奇心、判断しない態度で現在の瞬間に注意を払う心理的能力です。古代の観想伝統（特に仏教のヴィパッサナーと禅）に根ざしていますが、マインドフルネスは過去40年にわたって現代の神経科学と臨床心理学で広く研究されてきました。
 
 マインドフルネス実践の神経学的効果は十分に文書化されています：定期的な実践は前頭前皮質の灰白質密度を増加させ（実行機能と感情調節の改善）、扁桃体反応性を低下させ（自動ストレス反応の軽減）、島を強化します（内受容感覚と共感の向上）。これらの変化は、Kabat-Zinnの画期的なMBSR（マインドフルネスベースのストレス低減）研究で実証されたように、わずか8週間の定期実践で測定可能です。
 
-{{T}}の中核的スキルには以下が含まれます：集中注意（選択した対象、通常は呼吸に注意を維持する）、オープンモニタリング（何が生じてもそれに捉われずに気づきを維持する）、そして慈愛（自己と他者に対するポジティブな感情状態を育む）。#VibeCoding #EmotionalFitness`,
+{{T}}の中核的スキルには以下が含まれます：集中注意（選択した対象、通常は呼吸に注意を維持する）、オープンモニタリング（何が生じてもそれに捉われずに気づきを維持する）、そして慈愛（自己と他者に対するポジティブな感情状態を育む）。`,
     ko: `{{T}}는 의도, 호기심, 판단하지 않는 태도로 현재 순간에 주의를 기울이는 심리적 능력입니다. 고대의 명상 전통(특히 불교 위파사나와 선)에 뿌리를 두고 있지만, 마음챙김은 지난 40년 동안 현대 신경과학과 임상 심리학에서 광범위하게 연구되어 왔습니다.
 
 마음챙김 수행의 신경학적 효과는 잘 문서화되어 있습니다: 정기적인 수행은 전전두엽 피질의 회백질 밀도를 증가시키고(실행 기능과 정서 조절 개선), 편도체 반응성을 감소시키며(자동 스트레스 반응 감소), 섬엽을 강화합니다(내수용 감각과 공감 능력 향상). 이러한 변화는 Kabat-Zinn의 획기적인 MBSR(마음챙김 기반 스트레스 감소) 연구에서 입증된 바와 같이 단 8주의 정기적인 수행 후에 측정 가능합니다.
 
-{{T}}의 핵심 기술에는 다음이 포함됩니다: 집중 주의(선택한 대상, 일반적으로 호흡에 주의 유지), 개방 모니터링(발생하는 모든 것에 대한 알아차림 유지, 거기에 빠지지 않음), 그리고 자애(자기 자신과 타인에 대한 긍정적 감정 상태 함양).#VibeCoding #EmotionalFitness`,
+{{T}}의 핵심 기술에는 다음이 포함됩니다: 집중 주의(선택한 대상, 일반적으로 호흡에 주의 유지), 개방 모니터링(발생하는 모든 것에 대한 알아차림 유지, 거기에 빠지지 않음), 그리고 자애(자기 자신과 타인에 대한 긍정적 감정 상태 함양).`,
     th: `«{{T}}» คือความสามารถทางจิตวิทยาในการใส่ใจกับช่วงเวลาปัจจุบันอย่างตั้งใจ ด้วยความอยากรู้ และปราศจากการตัดสิน แม้ว่าจะมีรากฐานในประเพณีการฝึกจิตแบบโบราณ (โดยเฉพาะวิปัสสนาทางพุทธศาสนาและเซน) แต่การเจริญสติได้รับการศึกษาอย่างกว้างขวางในประสาทวิทยาศาสตร์สมัยใหม่และจิตวิทยาคลินิกในช่วงสี่ทศวรรษที่ผ่านมา
 
 ผลทางระบบประสาทของการฝึกสติได้รับการบันทึกไว้เป็นอย่างดี: การฝึกเป็นประจำจะเพิ่มความหนาแน่นของสสารสีเทาในคอร์เทกซ์ส่วนหน้า ( prefrontal cortex) (ปรับปรุงการทำงานของบริหารและการควบคุมอารมณ์) ลดปฏิกิริยาของอะมิกดาลา (ลดการตอบสนองความเครียดอัตโนมัติ) และเสริมสร้างอินซูลา (เพิ่มการรับรู้ภายในและความเห็นอกเห็นใจ) การเปลี่ยนแปลงเหล่านี้สามารถวัดได้หลังจากฝึกเพียง 8 สัปดาห์
 
-ทักษะหลักของ «{{T}}» ได้แก่: การใส่ใจแบบจดจ่อ (การรักษาความสนใจไว้ที่วัตถุที่เลือก โดยปกติคือลมหายใจ) การเฝ้าดูแบบเปิด (การรักษาความตระหนักรู้ต่อสิ่งที่เกิดขึ้นโดยไม่เข้าไปติดอยู่ในนั้น) และเมตตา (การปลูกฝังสภาวะอารมณ์เชิงบวกต่อตนเองและผู้อื่น) #VibeCoding #EmotionalFitness`,
+ทักษะหลักของ «{{T}}» ได้แก่: การใส่ใจแบบจดจ่อ (การรักษาความสนใจไว้ที่วัตถุที่เลือก โดยปกติคือลมหายใจ) การเฝ้าดูแบบเปิด (การรักษาความตระหนักรู้ต่อสิ่งที่เกิดขึ้นโดยไม่เข้าไปติดอยู่ในนั้น) และเมตตา (การปลูกฝังสภาวะอารมณ์เชิงบวกต่อตนเองและผู้อื่น)`,
   },
   emotional_health: {
     en: `{{T}} refers to the capacity to experience, understand, regulate, and express emotions in ways that promote well-being and adaptive functioning. It is not the absence of negative emotions but the flexibility to respond to emotional experiences effectively rather than reactively.
@@ -477,49 +477,49 @@ The component model of emotional health includes four interrelated skills. Emoti
 
 Gross's process model of emotion regulation identifies five families of strategies organized by when they intervene in the emotion-generative process: situation selection, situation modification, attentional deployment, cognitive change, and response modulation. Cognitive reappraisal (changing how we think about a situation) is consistently associated with better emotional health outcomes, while expressive suppression (hiding emotional expression) is associated with worse outcomes.
 
-To improve {{T}}, the most effective approaches include cognitive-behavioral therapy (which modifies maladaptive cognitive appraisals), dialectical behavior therapy skills (particularly distress tolerance and emotion regulation modules), and acceptance and commitment therapy (which enhances psychological flexibility in relating to emotions). #VibeCoding #EmotionalFitness`,
+To improve {{T}}, the most effective approaches include cognitive-behavioral therapy (which modifies maladaptive cognitive appraisals), dialectical behavior therapy skills (particularly distress tolerance and emotion regulation modules), and acceptance and commitment therapy (which enhances psychological flexibility in relating to emotions).`,
     zh: `{{T}}是以促进幸福和适应性功能的方式体验、理解、调节和表达情绪的能力。它不是没有负性情绪，而是灵活有效地回应情绪体验而非被动反应的能力。
 
 情绪健康的成分模型包括四个相互关联的技能。情绪觉察是准确识别和标记情绪的能力——这是跨不同人群预测心理健康结果的强因子。情绪理解是对情绪的原因、功能和轨迹的理解。情绪接纳是允许情绪存在，不与它战斗、不压抑、也不被它控制。情绪调节包括用于影响情绪强度、持续时间和表达方式的策略。
 
 Gross的情绪调节过程模型识别了五类策略，按它们在情绪生成过程中的干预时机组织：情境选择、情境修正、注意部署、认知改变和反应调节。认知重评（改变我们对情境的思考方式）始终与更好的情绪健康结果相关，而表达抑制（隐藏情绪表达）与更差的结果相关。
 
-改善{{T}}的最有效方法包括：认知行为疗法（修正适应不良的认知评估）、辩证行为疗法技能（特别是痛苦耐受和情绪调节模块）、以及接纳承诺疗法（增强与情绪相关的心理灵活性）。 #VibeCoding #EmotionalFitness`,
+改善{{T}}的最有效方法包括：认知行为疗法（修正适应不良的认知评估）、辩证行为疗法技能（特别是痛苦耐受和情绪调节模块）、以及接纳承诺疗法（增强与情绪相关的心理灵活性）。`,
     ms: `{{T}} merujuk kepada kapasiti untuk mengalami, memahami, mengawal, dan meluahkan emosi dengan cara yang menggalakkan kesejahteraan dan fungsi adaptif. Ia bukan ketiadaan emosi negatif tetapi fleksibiliti untuk bertindak balas terhadap pengalaman emosi secara berkesan dan bukannya secara reaktif.
 
 Model komponen kesihatan emosi merangkumi empat kemahiran yang saling berkaitan. Kesedaran emosi adalah keupayaan untuk mengenal pasti dan melabel emosi dengan tepat semasa ia berlaku—kemahiran yang meramalkan hasil kesihatan mental yang lebih baik. Pemahaman emosi merujuk kepada pemahaman tentang punca, fungsi, dan trajektori emosi. Penerimaan emosi melibatkan membenarkan emosi hadir tanpa melawannya, menekannya, atau dikawal olehnya. Regulasi emosi merangkumi strategi yang digunakan untuk mempengaruhi intensiti, tempoh, dan ekspresi emosi.
 
 Model proses Gross tentang regulasi emosi mengenal pasti lima keluarga strategi: pemilihan situasi, pengubahsuaian situasi, pengaturan perhatian, perubahan kognitif, dan modulasi respons. Penilaian semula kognitif secara konsisten dikaitkan dengan hasil kesihatan emosi yang lebih baik, manakala penindasan ekspresif dikaitkan dengan hasil yang lebih buruk.
 
-Untuk meningkatkan {{T}}, pendekatan paling berkesan termasuk terapi kognitif-tingkah laku, kemahiran terapi tingkah laku dialektik, dan terapi penerimaan dan komitmen. #VibeCoding #EmotionalFitness`,
+Untuk meningkatkan {{T}}, pendekatan paling berkesan termasuk terapi kognitif-tingkah laku, kemahiran terapi tingkah laku dialektik, dan terapi penerimaan dan komitmen.`,
     es: `{{T}} se refiere a la capacidad de experimentar, comprender, regular y expresar emociones de manera que promuevan el bienestar y el funcionamiento adaptativo. No es la ausencia de emociones negativas sino la flexibilidad para responder a las experiencias emocionales de forma eficaz en lugar de reactiva.
 
 El modelo de componentes de la salud emocional incluye cuatro habilidades interrelacionadas. La conciencia emocional es la capacidad de identificar y etiquetar con precisión las emociones a medida que ocurren—una habilidad que predice mejores resultados de salud mental en diversas poblaciones. La comprensión emocional se refiere al conocimiento de las causas, funciones y trayectorias de las emociones. La aceptación emocional implica permitir que las emociones estén presentes sin luchar contra ellas, suprimirlas o ser controlado por ellas. La regulación emocional abarca las estrategias utilizadas para influir en la intensidad, duración y expresión de las emociones.
 
 El modelo de proceso de Gross sobre la regulación emocional identifica cinco familias de estrategias organizadas por cuándo intervienen en el proceso generativo de emociones: selección de la situación, modificación de la situación, despliegue atencional, cambio cognitivo y modulación de la respuesta. La reevaluación cognitiva (cambiar cómo pensamos sobre una situación) se asocia consistentemente con mejores resultados de salud emocional, mientras que la supresión expresiva (ocultar la expresión emocional) se asocia con peores resultados.
 
-Para mejorar {{T}}, los enfoques más eficaces incluyen la terapia cognitivo-conductual (que modifica las valoraciones cognitivas desadaptativas), las habilidades de terapia dialéctica conductual (particularmente los módulos de tolerancia al malestar y regulación emocional), y la terapia de aceptación y compromiso (que mejora la flexibilidad psicológica en relación con las emociones). #VibeCoding #EmotionalFitness`,
+Para mejorar {{T}}, los enfoques más eficaces incluyen la terapia cognitivo-conductual (que modifica las valoraciones cognitivas desadaptativas), las habilidades de terapia dialéctica conductual (particularmente los módulos de tolerancia al malestar y regulación emocional), y la terapia de aceptación y compromiso (que mejora la flexibilidad psicológica en relación con las emociones).`,
     ja: `{{T}}とは、幸福感と適応的な機能を促進する方法で感情を体験、理解、調節、表現する能力を指します。否定的な感情がないことではなく、感情体験に反応的ではなく効果的に応答する柔軟性です。
 
 感情的健康の成分モデルには、相互に関連する4つのスキルが含まれます。感情認識は、感情が発生したときに正確に識別しラベル付けする能力であり、多様な集団にわたってより良いメンタルヘルス結果を予測するスキルです。感情理解は、感情の原因、機能、軌跡の理解を指します。感情受容は、感情と戦ったり、抑圧したり、コントロールされたりせずに、感情が存在することを許可することを含みます。感情調節は、感情の強度、持続時間、表現に影響を与えるために使用される戦略を包含します。
 
 Grossの感情調節プロセスモデルは、感情生成プロセスに介入するタイミングによって組織化された5つの戦略ファミリーを特定しています：状況選択、状況修正、注意配分、認知変化、反応調整。認知的再評価（状況についての考え方を変えること）は一貫してより良い感情的健康結果と関連していますが、表出抑制（感情表現を隠すこと）はより悪い結果と関連しています。
 
-{{T}}を改善するための最も効果的なアプローチには、認知行動療法（不適応な認知評価を修正する）、弁証法的行動療法スキル（特に苦痛耐性と感情調節モジュール）、およびアクセプタンス＆コミットメント・セラピー（感情との関係における心理的柔軟性を高める）が含まれます。#VibeCoding #EmotionalFitness`,
+{{T}}を改善するための最も効果的なアプローチには、認知行動療法（不適応な認知評価を修正する）、弁証法的行動療法スキル（特に苦痛耐性と感情調節モジュール）、およびアクセプタンス＆コミットメント・セラピー（感情との関係における心理的柔軟性を高める）が含まれます。`,
     ko: `{{T}}는 웰빙과 적응적 기능을 촉진하는 방식으로 감정을 경험하고, 이해하고, 조절하고, 표현하는 능력을 말합니다. 부정적인 감정이 없는 것이 아니라 감정적 경험에 반응적으로가 아니라 효과적으로 대응하는 유연성입니다.
 
 정서적 건강의 구성 요소 모델에는 상호 관련된 네 가지 기술이 포함됩니다. 감정 인식은 감정이 발생할 때 정확하게 식별하고 명명하는 능력으로, 다양한 인구 집단에서 더 나은 정신 건강 결과를 예측하는 기술입니다. 감정 이해는 감정의 원인, 기능, 궤적에 대한 이해를 말합니다. 감정 수용은 감정과 싸우거나, 억압하거나, 통제당하지 않고 감정이 존재하도록 허용하는 것을 포함합니다. 감정 조절은 감정의 강도, 지속 시간, 표현에 영향을 미치는 데 사용되는 전략을 포함합니다.
 
 Gross의 감정 조절 과정 모델은 감정 생성 과정에 개입하는 시점에 따라 조직된 5가지 전략군을 식별합니다: 상황 선택, 상황 수정, 주의 배치, 인지 변화, 반응 조절. 인지 재평가(상황에 대한 생각 방식을 바꾸는 것)는 일관되게 더 나은 정서적 건강 결과와 관련이 있는 반면, 표현 억제(감정 표현을 숨기는 것)는 더 나쁜 결과와 관련이 있습니다.
 
-{{T}}를 개선하기 위한 가장 효과적인 접근법에는 인지 행동 치료(부적응적 인지 평가를 수정), 변증법적 행동 치료 기술(특히 고통 내성 및 감정 조절 모듈), 수용 전념 치료(감정과 관련된 심리적 유연성 향상)가 포함됩니다.#VibeCoding #EmotionalFitness`,
+{{T}}를 개선하기 위한 가장 효과적인 접근법에는 인지 행동 치료(부적응적 인지 평가를 수정), 변증법적 행동 치료 기술(특히 고통 내성 및 감정 조절 모듈), 수용 전념 치료(감정과 관련된 심리적 유연성 향상)가 포함됩니다.`,
     th: `{{T}} หมายถึงความสามารถในการประสบ เข้าใจ ควบคุม และแสดงอารมณ์ในวิธีที่ส่งเสริมความเป็นอยู่ที่ดีและการทำงานที่ปรับตัวได้ มันไม่ใช่การไม่มีอารมณ์เชิงลบ แต่เป็นความยืดหยุ่นในการตอบสนองต่อประสบการณ์ทางอารมณ์อย่างมีประสิทธิภาพแทนที่จะตอบสนองแบบอัตโนมัติ
 
 แบบจำลององค์ประกอบของสุขภาพทางอารมณ์ประกอบด้วยทักษะสี่ประการที่สัมพันธ์กัน การตระหนักรู้อารมณ์คือความสามารถในการระบุและติดฉลากอารมณ์อย่างแม่นยำเมื่อเกิดขึ้น—ทักษะที่ทำนายผลลัพธ์สุขภาพจิตที่ดีขึ้นในประชากรที่หลากหลาย ความเข้าใจอารมณ์หมายถึงความเข้าใจในสาเหตุ หน้าที่ และวิถีของอารมณ์ การยอมรับอารมณ์เกี่ยวข้องกับการปล่อยให้อารมณ์ดำรงอยู่โดยไม่ต่อสู้กับมัน กดมัน หรือถูกควบคุมโดยมัน การควบคุมอารมณ์ครอบคลุมกลยุทธ์ที่ใช้เพื่อมีอิทธิพลต่อความรุนแรง ระยะเวลา และการแสดงออกของอารมณ์
 
 แบบจำลองกระบวนการของ Gross เกี่ยวกับการควบคุมอารมณ์ระบุกลยุทธ์ห้าตระกูลที่จัดระเบียบตามเวลาที่แทรกแซงในกระบวนการสร้างอารมณ์: การเลือกสถานการณ์ การปรับเปลี่ยนสถานการณ์ การจัดการความสนใจ การเปลี่ยนแปลงความคิด และการปรับเปลี่ยนการตอบสนอง การประเมินความคิดใหม่ (การเปลี่ยนวิธีที่เราคิดเกี่ยวกับสถานการณ์) สัมพันธ์กับผลลัพธ์สุขภาพทางอารมณ์ที่ดีขึ้นอย่างสม่ำเสมอ ในขณะที่การกดการแสดงออก (การซ่อนการแสดงออกทางอารมณ์) สัมพันธ์กับผลลัพธ์ที่แย่ลง
 
-เพื่อปรับปรุง{{T}} วิธีการที่มีประสิทธิภาพมากที่สุดรวมถึงการบำบัดทางความคิดและพฤติกรรม (ซึ่งปรับเปลี่ยนการประเมินความคิดที่ปรับตัวไม่ดี) ทักษะการบำบัดพฤติกรรมวิภาษวิธี (โดยเฉพาะโมดูลการทนต่อความทุกข์และการควบคุมอารมณ์) และการบำบัดการยอมรับและความมุ่งมั่น (ซึ่งเพิ่มความยืดหยุ่นทางจิตวิทยาในการเกี่ยวข้องกับอารมณ์) #VibeCoding #EmotionalFitness`,
+เพื่อปรับปรุง{{T}} วิธีการที่มีประสิทธิภาพมากที่สุดรวมถึงการบำบัดทางความคิดและพฤติกรรม (ซึ่งปรับเปลี่ยนการประเมินความคิดที่ปรับตัวไม่ดี) ทักษะการบำบัดพฤติกรรมวิภาษวิธี (โดยเฉพาะโมดูลการทนต่อความทุกข์และการควบคุมอารมณ์) และการบำบัดการยอมรับและความมุ่งมั่น (ซึ่งเพิ่มความยืดหยุ่นทางจิตวิทยาในการเกี่ยวข้องกับอารมณ์)`,
   },
 }
 
@@ -567,22 +567,22 @@ const FITNESS: Record<string, Record<string, string>> = {
 4. **Registro de Eficiencia del Sueño**: Mantenga un diario del sueño durante 2 semanas. Cuando la eficiencia del sueño sea inferior al 85%, retrase la hora de acostarse entre 15 y 30 minutos.`,
     ja: `エビデンスに基づく{{T}}のための日々の練習（CBT-Iとマインドフルネスを統合）：
 
-1. **刺激コントロール**: 眠いときだけベッドに入る。20分以内に入眠できない場合は起きてリラックス活動を行う。ベッドでの作業やスマホ使用を避ける。#VibeCoding
+1. **刺激コントロール**: 眠いときだけベッドに入る。20分以内に入眠できない場合は起きてリラックス活動を行う。ベッドでの作業やスマホ使用を避ける。
 2. **朝の光曝露**: 起床後30分以内に自然光を15-30分浴びる。光は概日リズムの最も強力な調整因子。
 3. **就寝前ボディスキャン**: 寝る前に10分間のボディスキャン瞑想を実践。足指から頭頂部へ徐々に注意を移動。
-4. **睡眠効率記録**: 2週間睡眠日誌をつけ、睡眠効率を計算。85%未満の場合は就寝時間を15-30分遅らせる。#EmotionalFitness`,
+4. **睡眠効率記録**: 2週間睡眠日誌をつけ、睡眠効率を計算。85%未満の場合は就寝時間を15-30分遅らせる。`,
     ko: `{{T}}를 위한 증거 기반 일상练习(CBT-I와 마음챙김 통합):
 
-1. **자극 통제**: 졸릴 때만 침대에 간다. 20분 내에 잠들지 못하면 일어나서 이완 활동을 한다. 침대에서 일하거나 휴대폰 사용을 피한다.#VibeCoding
+1. **자극 통제**: 졸릴 때만 침대에 간다. 20분 내에 잠들지 못하면 일어나서 이완 활동을 한다. 침대에서 일하거나 휴대폰 사용을 피한다.
 2. **아침 햇빛 노출**: 기상 후 30분 이내에 자연광을 15-30분간 쬔다. 빛은 일주기 리듬의 가장 강력한 조절 인자다.
 3. **취침 전 바디스캔**: 자기 전 10분간 바디스캔 명상을 실천한다. 발가락에서 정수리까지 주의를 이동시킨다.
-4. **수면 효율 기록**: 2주간 수면 일지를 기록하고 효율을 계산한다. 85% 미만이면 취침 시간을 15-30분 늦춘다.#EmotionalFitness`,
+4. **수면 효율 기록**: 2주간 수면 일지를 기록하고 효율을 계산한다. 85% 미만이면 취침 시간을 15-30분 늦춘다.`,
     th: `แนวปฏิบัติรายวันตามหลักฐานสำหรับ{{T}} ผสาน CBT-I และสติ:
 
-1. **การควบคุมสิ่งเร้า**: เข้านอนเมื่อง่วงเท่านั้น ถ้านอนไม่หลับใน 20 นาที ให้ลุกขึ้นทำกิจกรรมผ่อนคลาย หลีกเลี่ยงการทำงานหรือใช้โทรศัพท์บนเตียง #VibeCoding
+1. **การควบคุมสิ่งเร้า**: เข้านอนเมื่อง่วงเท่านั้น ถ้านอนไม่หลับใน 20 นาที ให้ลุกขึ้นทำกิจกรรมผ่อนคลาย หลีกเลี่ยงการทำงานหรือใช้โทรศัพท์บนเตียง
 2. **การรับแสงเช้า**: ภายใน 30 นาทีหลังตื่น ให้รับแสงธรรมชาติ 15-30 นาที แสงเป็นตัวปรับจังหวะชีวภาพที่ทรงพลังที่สุด
 3. **การสแกนร่างกายก่อนนอน**: ฝึกสมาธิสแกนร่างกาย 10 นาทีก่อนนอน เริ่มจากปลายเท้า ค่อยๆ เลื่อนความสนใจขึ้นสู่ส่วนบนของศีรษะ
-4. **บันทึกประสิทธิภาพการนอน**: บันทึกการนอน 2 สัปดาห์ คำนวณประสิทธิภาพ เมื่อต่ำกว่า 85% ให้เลื่อนเวลาเข้านอนช้าลง 15-30 นาที #EmotionalFitness`,
+4. **บันทึกประสิทธิภาพการนอน**: บันทึกการนอน 2 สัปดาห์ คำนวณประสิทธิภาพ เมื่อต่ำกว่า 85% ให้เลื่อนเวลาเข้านอนช้าลง 15-30 นาที`,
   },
   anxiety: {
     zh: `针对{{T}}的循证日常训练，整合CBT和正念技巧：
@@ -631,25 +631,25 @@ const FITNESS: Record<string, Record<string, string>> = {
 5. **Práctica de Anclaje**: Redirija la atención a la sensación física de sus pies en contacto con el suelo. Note la temperatura, la textura, la presión.`,
     ja: `エビデンスに基づく{{T}}のための日々の練習（CBTとマインドフルネス技法を統合）：
 
-1. **4-7-8呼吸法**: 4秒吸入、7秒停止、8秒吐息。4-5サイクル繰り返す。長い呼気パターンが副交感神経系を活性化。#VibeCoding
+1. **4-7-8呼吸法**: 4秒吸入、7秒停止、8秒吐息。4-5サイクル繰り返す。長い呼気パターンが副交感神経系を活性化。
 2. **認知再構成ワークシート**: 4列の記録を作成。トリガー状況、自動思考、認知の歪みの種類、バランスの取れた再評価。
 3. **段階的曝露階層**: 低から高へ不安誘発シナリオをリスト化。レベル1から開始、不安が半減するまで続ける。
 4. **山の瞑想**: 自分を安定した山として視覚化。感情は通過する天気。不安な思考はただの通過する雲。
-5. **グラウンディング練習**: 足が地面に触れる感覚に注意を向ける。温度、質感、圧力に気づく。#EmotionalFitness`,
+5. **グラウンディング練習**: 足が地面に触れる感覚に注意を向ける。温度、質感、圧力に気づく。`,
     ko: `{{T}}를 위한 증거 기반 일상练习(CBT와 마음챙김 기법 통합):
 
-1. **4-7-8 호흡법**: 4초 들이마시기, 7초 멈추기, 8초 내쉬기. 4-5회 반복. 긴 호기는 부교감 신경계를 활성화한다.#VibeCoding
+1. **4-7-8 호흡법**: 4초 들이마시기, 7초 멈추기, 8초 내쉬기. 4-5회 반복. 긴 호기는 부교감 신경계를 활성화한다.
 2. **인지 재구성 워크시트**: 4열 기록 작성. 촉발 상황, 자동적 사고, 인지 왜곡 유형, 균형 잡힌 재평가.
 3. **단계적 노출 계층**: 낮은 불안부터 높은 불안 순으로 시나리오 나열. 1단계부터 시작, 불안이 반으로 줄 때까지 유지.
 4. **산 명상**: 자신을 안정된 산으로 시각화. 감정은 지나가는 날씨. 불안한 생각은 그냥 지나가는 구름.
-5. **그라운딩 연습**: 발이 땅에 닿는 신체 감각에 주의 환기. 온도, 질감, 압력 알아차리기.#EmotionalFitness`,
+5. **그라운딩 연습**: 발이 땅에 닿는 신체 감각에 주의 환기. 온도, 질감, 압력 알아차리기.`,
     th: `แนวปฏิบัติรายวันตามหลักฐานสำหรับ{{T}} ผสานเทคนิค CBT และสติ:
 
-1. **การหายใจ 4-7-8**: หายใจเข้า 4 วินาที กลั้น 7 วินาที หายใจออก 8 วินาที ทำซ้ำ 4-5 รอบ รูปแบบการหายใจออกยาวนี้กระตุ้นระบบประสาทพาราซิมพาเทติก #VibeCoding
+1. **การหายใจ 4-7-8**: หายใจเข้า 4 วินาที กลั้น 7 วินาที หายใจออก 8 วินาที ทำซ้ำ 4-5 รอบ รูปแบบการหายใจออกยาวนี้กระตุ้นระบบประสาทพาราซิมพาเทติก
 2. **แบบฝึกหัดปรับโครงสร้างความคิด**: สร้างบันทึก 4 คอลัมน์ สถานการณ์กระตุ้น ความคิดอัตโนมัติ ประเภทการบิดเบือนทางความคิด การประเมินใหม่ที่สมดุล
 3. **ลำดับชั้นการเผชิญหน้าแบบค่อยเป็นค่อยไป**: 列出สถานการณ์ที่กระตุ้นความวิตกกังวลจากน้อย到มาก เริ่มที่ระดับ 1 อยู่จนความวิตกลดลงครึ่งหนึ่ง
 4. **การทำสมาธิภูเขา**: มองตนเองเป็นภูเขาที่มั่นคง อารมณ์ผ่านไปเหมือนสภาพอากาศ ความคิดวิตกเป็นเพียงเมฆที่ผ่านไป
-5. **การฝึก grounding**: เปลี่ยนความสนใจไปที่ความรู้สึกทางกายของเท้าที่สัมผัสพื้น สังเกตอุณหภูมิ พื้นผิว แรงกด #EmotionalFitness`,
+5. **การฝึก grounding**: เปลี่ยนความสนใจไปที่ความรู้สึกทางกายของเท้าที่สัมผัสพื้น สังเกตอุณหภูมิ พื้นผิว แรงกด`,
   },
   grief_loss: {
     zh: `针对{{T}}的日常练习，基于双程模型和自我慈悲：
@@ -698,25 +698,25 @@ const FITNESS: Record<string, Record<string, string>> = {
 5. **Evaluación de la Red de Apoyo**: Evalúe quién le hace sentir comprendido. Contacte a quienes ofrecen seguridad cuando la energía lo permita.`,
     ja: `{{T}}のための日々の練習（二重プロセスモデルと自己慈愛に基づく）：
 
-1. **揺れ動く時間練習**: 毎日2つの時間を確保。最初の10分は悲しみに没頭。次の10分は回復志向の活動。#VibeCoding
+1. **揺れ動く時間練習**: 毎日2つの時間を確保。最初の10分は悲しみに没頭。次の10分は回復志向の活動。
 2. **継続的絆日記**: 故人が日常生活にどのように現れるかを記録。象徴的なつながりを維持することが健康的だと研究が示す。
 3. **悲しみの身体的气づき**: 毎日5分間、悲しみが物理的にどこにあるかをマインドフルに身体をスキャン。
 4. **自己慈愛の一時停止**: 手を胸に置き、優しさで苦しみを認識する。
-5. **社会的サポート評価**: 誰があなたを理解しているかを評価。エネルギーが許すときに安全を提供する人に連絡。#EmotionalFitness`,
+5. **社会的サポート評価**: 誰があなたを理解しているかを評価。エネルギーが許すときに安全を提供する人に連絡。`,
     ko: `{{T}}를 위한 일상练习(이중 과정 모델과 자기 연민 기반):
 
-1. **흔들림 시간 연습**: 매일 두 시간 확보. 처음 10분은 슬픔에 몰입. 다음 10분은 회복 중심 활동.#VibeCoding
+1. **흔들림 시간 연습**: 매일 두 시간 확보. 처음 10분은 슬픔에 몰입. 다음 10분은 회복 중심 활동.
 2. **지속적 유대 일기**: 고인이 일상에 어떻게 나타나는지 기록. 상징적 연결 유지가 건강하다는 연구 결과.
 3. **슬픔의 신체적 알아차림**: 매일 5분간 슬픔이 신체 어디에 있는지 마음챙김 스캔.
 4. **자기 연민의 멈춤**: 가슴에 손을 얹고 친절로 고통 인정.
-5. **사회적 지지망 평가**: 누가 당신을 이해하게 하는지 평가. 에너지가 허락할 때 안전을 제공하는 사람에게 연락.#EmotionalFitness`,
+5. **사회적 지지망 평가**: 누가 당신을 이해하게 하는지 평가. 에너지가 허락할 때 안전을 제공하는 사람에게 연락.`,
     th: `แนวปฏิบัติรายวันสำหรับ{{T}} ตามแบบจำลองกระบวนการคู่และความเมตตาต่อตนเอง:
 
-1. **การฝึกเวลาสลับ**: จัดสรรเวลา 2 ช่วงต่อวัน 10 นาทีแรกจมอยู่กับความเศร้า 10 นาทีหลังทำกิจกรรมฟื้นฟู #VibeCoding
+1. **การฝึกเวลาสลับ**: จัดสรรเวลา 2 ช่วงต่อวัน 10 นาทีแรกจมอยู่กับความเศร้า 10 นาทีหลังทำกิจกรรมฟื้นฟู
 2. **บันทึกความผูกพันต่อเนื่อง**: บันทึกว่าผู้จากไปปรากฏในชีวิตประจำวันอย่างไร งานวิจัยแสดงว่าการรักษาความเชื่อมโยงเชิงสัญลักษณ์นั้นดีต่อสุขภาพ
 3. **การรับรู้ความเศร้าทางร่างกาย**: ใช้เวลา 5 นาทีสแกนร่างกายด้วยสติ หาความเศร้าอยู่ที่ไหนทางกายภาพ
 4. **การหยุดด้วยความเมตตาตนเอง**: วางมือบนหน้าอกและรับรู้ความทุกข์ด้วยความกรุณา
-5. **การประเมินเครือข่ายสนับสนุน**: ประเมินว่าใครทำให้คุณรู้สึกเข้าใจ ติดต่อผู้ที่ให้ความปลอดภัยเมื่อพลังงานเอื้ออำนวย #EmotionalFitness`,
+5. **การประเมินเครือข่ายสนับสนุน**: ประเมินว่าใครทำให้คุณรู้สึกเข้าใจ ติดต่อผู้ที่ให้ความปลอดภัยเมื่อพลังงานเอื้ออำนวย`,
   },
   loneliness: {
     zh: `针对{{T}}的日常练习，整合社交重建和自我慈悲策略：
@@ -765,25 +765,25 @@ const FITNESS: Record<string, Record<string, string>> = {
 5. **Tarea de Exploración Comunitaria**: Explore un punto de conexión social potencial cada semana. La exposición regular de baja presión es más efectiva.`,
     ja: `{{T}}のための日々の練習（社会的再接続と自己慈愛戦略を統合）：
 
-1. **マイクロ接続チャレンジ**: 毎日意図的なマイクロ社会的相互交流を1回以上完了—バリスタに微笑む、友人に音声メッセージを送る。#VibeCoding
+1. **マイクロ接続チャレンジ**: 毎日意図的なマイクロ社会的相互交流を1回以上完了—バリスタに微笑む、友人に音声メッセージを送る。
 2. **質の高い孤独の練習**: 週2回の電話なしの有意義な活動。その後の気分を記録。
 3. **社会的信念探求ワークシート**: 孤独の背後にある中核的信念を特定。支持する証拠と矛盾する証拠を検討。
 4. **段階的社会的曝露**: 社会的曝露梯子を構築。各ステップ後に実際の結果と予測結果を記録。
-5. **コミュニティ探求タスク**: 毎週1つの潜在的な社会的接続ポイントを探索。定期的で低圧力の曝露が最も効果的。#EmotionalFitness`,
+5. **コミュニティ探求タスク**: 毎週1つの潜在的な社会的接続ポイントを探索。定期的で低圧力の曝露が最も効果的。`,
     ko: `{{T}}를 위한 일상练习(사회적 재연결과 자기 연민 전략 통합):
 
-1. **미세 연결 도전**: 매일 의도적인 미시 사회적 상호작용 1회 완료—바리스타에게 미소, 친구에게 음성 메시지.#VibeCoding
+1. **미세 연결 도전**: 매일 의도적인 미시 사회적 상호작용 1회 완료—바리스타에게 미소, 친구에게 음성 메시지.
 2. **질 높은 고독 연습**: 주 2회 전화 없는 의미 있는 활동. 이후 기분 기록.
 3. **사회적 신념 탐색 워크시트**: 외로움 뒤의 핵심 신념 파악. 지지 증거와 반증 검토.
 4. **단계적 사회적 노출**: 사회적 노출 사다리 구축. 각 단계 후 실제 결과와 예측 결과 기록.
-5. **커뮤니티 탐색 과제**: 매주 잠재적 사회적 연결 지점 1곳 탐색. 정기적 저압력 노출이 가장 효과적.#EmotionalFitness`,
+5. **커뮤니티 탐색 과제**: 매주 잠재적 사회적 연결 지점 1곳 탐색. 정기적 저압력 노출이 가장 효과적.`,
     th: `แนวปฏิบัติรายวันสำหรับ{{T}} ผสานกลยุทธ์การเชื่อมต่อทางสังคมและความเมตตาต่อตนเอง:
 
-1. **ความท้าทายการเชื่อมต่อระดับจุลภาค**: ทำปฏิสัมพันธ์ทางสังคมระดับจุลภาคอย่างตั้งใจวันละ 1 ครั้ง—ยิ้มให้บาริสตา ส่งข้อความเสียงถึงเพื่อน #VibeCoding
+1. **ความท้าทายการเชื่อมต่อระดับจุลภาค**: ทำปฏิสัมพันธ์ทางสังคมระดับจุลภาคอย่างตั้งใจวันละ 1 ครั้ง—ยิ้มให้บาริสตา ส่งข้อความเสียงถึงเพื่อน
 2. **การฝึกอยู่อย่างโดดเดี่ยวที่มีคุณภาพ**: จัดสรร 2 ครั้งต่อสัปดาห์ ไม่มีโทรศัพท์ จมอยู่ในกิจกรรมที่มีความหมาย บันทึกความรู้สึกหลังทำ
 3. **แบบสำรวจความเชื่อทางสังคม**: ระบุความเชื่อหลักที่อยู่เบื้องหลังความเหงา ตรวจสอบหลักฐานที่สนับสนุนและขัดแย้ง
 4. **การเผชิญหน้าทางสังคมแบบค่อยเป็นค่อยไป**: สร้างบันไดการเผชิญหน้าทางสังคม บันทึกผลลัพธ์จริงเทียบกับที่คาดการณ์ไว้
-5. **ภารกิจสำรวจชุมชน**: สำรวจจุดเชื่อมต่อทางสังคมที่มีศักยภาพ 1 แห่งต่อสัปดาห์ การเปิดรับแสงอย่างสม่ำเสมอและแรงดันต่ำมีประสิทธิภาพมากที่สุด #EmotionalFitness`,
+5. **ภารกิจสำรวจชุมชน**: สำรวจจุดเชื่อมต่อทางสังคมที่มีศักยภาพ 1 แห่งต่อสัปดาห์ การเปิดรับแสงอย่างสม่ำเสมอและแรงดันต่ำมีประสิทธิภาพมากที่สุด`,
   },
   self_worth: {
     zh: `针对{{T}}的日常练习，整合认知重构和自我慈悲策略：
@@ -824,25 +824,25 @@ const FITNESS: Record<string, Record<string, string>> = {
 5. **Pausa de Autocompasión**: Coloque una mano sobre su corazón y reconozca que su valor no está determinado por el rendimiento actual.`,
     ja: `{{T}}のための日々の練習（認知再構成と自己慈愛戦略を統合）：
 
-1. **自己価値日記**: 毎日うまくやったことを3つ記録。それらが反映する内面的な資質に気づく。#VibeCoding
+1. **自己価値日記**: 毎日うまくやったことを3つ記録。それらが反映する内面的な資質に気づく。
 2. **内なる批判者への気づき**: 「自分は十分じゃない」という声を内なる批判者として認識。真実ではない。
 3. **社会的比較からの解放**: 比較している自分に気づいたら「この比較は役に立つ？」と自問。
 4. **能力の証拠リスト**: 様々な領域でのスキルと達成をリスト化。自己疑念が湧いたら見返す。
-5. **自己慈愛の一時停止**: 手を胸に置き「自分の価値は今のパフォーマンスで決まらない」と認識。#EmotionalFitness`,
+5. **自己慈愛の一時停止**: 手を胸に置き「自分の価値は今のパフォーマンスで決まらない」と認識。`,
     ko: `{{T}}를 위한 일상练习(인지 재구성과 자기 연민 전략 통합):
 
-1. **자기가치 일기**: 매일 잘한 일 3개 기록. 그것이 반영하는 내적 자질 인식.#VibeCoding
+1. **자기가치 일기**: 매일 잘한 일 3개 기록. 그것이 반영하는 내적 자질 인식.
 2. **내면 비판자 인식**: "넌 충분하지 않아"라는 소리를 내면 비판자로 인식. 진실이 아니다.
 3. **사회적 비교 탈피**: 비교하는 자신 발견 시 "이 비교가 도움이 될까?" 자문.
 4. **능력 증거 목록**: 다양한 영역의 기술과 성과 목록화. 자기 의심 시 참조.
-5. **자기 연민의 멈춤**: 가슴에 손 얹고 "내 가치는 지금 성과로 결정되지 않는다" 인식.#EmotionalFitness`,
+5. **자기 연민의 멈춤**: 가슴에 손 얹고 "내 가치는 지금 성과로 결정되지 않는다" 인식.`,
     th: `แนวปฏิบัติรายวันสำหรับ{{T}} ผสานกลยุทธ์การปรับโครงสร้างความคิดและความเมตตาต่อตนเอง:
 
-1. **บันทึกคุณค่าในตนเอง**: บันทึก 3 สิ่งที่คุณทำได้ดีในแต่ละวันและคุณภาพภายในที่สะท้อน #VibeCoding
+1. **บันทึกคุณค่าในตนเอง**: บันทึก 3 สิ่งที่คุณทำได้ดีในแต่ละวันและคุณภาพภายในที่สะท้อน
 2. **การตระหนักรู้ถึงนักวิจารณ์ภายใน**: เมื่อได้ยินเสียง "คุณไม่ดีพอ" ให้รู้ว่านั่นคือนักวิจารณ์ภายใน ไม่ใช่ความจริง
 3. **การปล่อยวางการเปรียบเทียบทางสังคม**: เมื่อสังเกตว่ากำลังเปรียบเทียบ ให้ถาม: การเปรียบเทียบนี้มีประโยชน์หรือไม่?
 4. **รายการหลักฐานความสามารถ**: 列出ทักษะและความสำเร็จในด้านต่างๆ กลับมาดูเมื่อความสงสัยในตนเองเกิดขึ้น
-5. **การหยุดด้วยความเมตตาตนเอง**: วางมือบนหน้าอกและรับรู้ว่าคุณค่าไม่ได้ถูกกำหนดโดยผลงานในขณะนี้ #EmotionalFitness`,
+5. **การหยุดด้วยความเมตตาตนเอง**: วางมือบนหน้าอกและรับรู้ว่าคุณค่าไม่ได้ถูกกำหนดโดยผลงานในขณะนี้`,
   },
   relationships: {
     zh: `针对{{T}}的日常练习，整合依恋理论和人际沟通技巧：
@@ -883,25 +883,25 @@ const FITNESS: Record<string, Record<string, string>> = {
 5. **Ensayo de Establecimiento de Límites**: Practique límites suaves pero firmes al menos una vez por semana.`,
     ja: `{{T}}のための日々の練習（愛着理論と対人コミュニケーションスキルを統合）：
 
-1. **積極的接続の儀式**: 毎日1回「接続のコミュニケーション」を開始。感情や好奇心を共有。#VibeCoding
+1. **積極的接続の儀式**: 毎日1回「接続のコミュニケーション」を開始。感情や好奇心を共有。
 2. **衝突後の修復練習**: 24時間以内に修復試行。自分の役割を認める＋関係の価値を表現＋再接続を招待。
 3. **感謝表現日記**: 毎日相手への感謝を1つ記録。週2-3回実際に伝える。
 4. **感情同調練習**: 毎日5分の「純粋な傾聴」—遮らず、理解し共感するだけ。
-5. **境界設定リハーサル**: 週1回、穏やかで確固とした境界設定を練習。#EmotionalFitness`,
+5. **境界設定リハーサル**: 週1回、穏やかで確固とした境界設定を練習。`,
     ko: `{{T}}를 위한 일상练习(애착 이론과 대인 커뮤니케이션 기술 통합):
 
-1. **적극적 연결 의식**: 매일 1회 "연결 커뮤니케이션" 시작. 감정이나 호기심 공유.#VibeCoding
+1. **적극적 연결 의식**: 매일 1회 "연결 커뮤니케이션" 시작. 감정이나 호기심 공유.
 2. **갈등 후 복구 연습**: 24시간 내 복구 시도. 자신의 역할 인정 + 관계 가치 표현 + 재연결 초대.
 3. **감사 표현 일기**: 매일 상대방에 대한 감사 1개 기록. 주 2-3회 실제로 전달.
 4. **감정 조율 연습**: 매일 5분 "순수한 경청"—방해하지 않고 이해하고 공감만.
-5. **경계 설정 리허설**: 주 1회 부드럽지만 확고한 경계 설정 연습.#EmotionalFitness`,
+5. **경계 설정 리허설**: 주 1회 부드럽지만 확고한 경계 설정 연습.`,
     th: `แนวปฏิบัติรายวันสำหรับ{{T}} ผสานทฤษฎีความผูกพันและทักษะการสื่อสารระหว่างบุคคล:
 
-1. **พิธีกรรมการเชื่อมต่อที่กระตือรือร้น**: เริ่มต้น "การสื่อสารเชื่อมต่อ" วันละ 1 ครั้ง—แบ่งปันความรู้สึกหรือความอยากรู้ #VibeCoding
+1. **พิธีกรรมการเชื่อมต่อที่กระตือรือร้น**: เริ่มต้น "การสื่อสารเชื่อมต่อ" วันละ 1 ครั้ง—แบ่งปันความรู้สึกหรือความอยากรู้
 2. **การฝึกซ่อมแซมหลังความขัดแย้ง**: ภายใน 24 ชั่วโมง พยายามซ่อมแซมด้วยการยอมรับบทบาทของคุณ + แสดงคุณค่าของความสัมพันธ์ + เชิญชวนเชื่อมต่อใหม่
 3. **บันทึกความกตัญญู**: บันทึกสิ่งที่ชื่นชมเกี่ยวกับอีกฝ่ายทุกวัน แสดงออก 2-3 ครั้งต่อสัปดาห์
 4. **การฝึกปรับอารมณ์ให้สอดคล้อง**: 5 นาทีของ "การฟังอย่างบริสุทธิ์" ทุกวัน—ไม่ขัดจังหวะ แค่เข้าใจและเห็นอกเห็นใจ
-5. **การฝึกตั้งขอบเขต**: ฝึกตั้งขอบเขตที่นุ่มนวลแต่แน่วแน่อย่างน้อยสัปดาห์ละครั้ง #EmotionalFitness`,
+5. **การฝึกตั้งขอบเขต**: ฝึกตั้งขอบเขตที่นุ่มนวลแต่แน่วแน่อย่างน้อยสัปดาห์ละครั้ง`,
   },
   identity: {
     zh: `针对{{T}}的日常练习，整合叙事认同和自我探索方法：
@@ -942,18 +942,18 @@ const FITNESS: Record<string, Record<string, string>> = {
 5. **Diario de Exploración de Identidad**: 30 minutos semanales respondiendo: ¿Cuándo sentí "este es el verdadero yo"? ¿Qué situaciones me confundieron? ¿Qué aprendí?`,
     ja: `{{T}}のための日々の練習（ナラティブ・アイデンティティと自己探求アプローチを統合）：
 
-1. **ライフタイムラインマッピング**: 人生のタイムラインを描き、5-8の重要な転機をマーク。#VibeCoding
+1. **ライフタイムラインマッピング**: 人生のタイムラインを描き、5-8の重要な転機をマーク。
 2. **アイデンティティ円グラフ**: 円を描き、自分の異なるアイデンティティセグメントに分割。
 3. **価値観明確化カード**: 20-30の価値観リストから最も重要な5つを選択し優先順位付け。
 4. **「可能性のある自己」ライティング**: 最も望むバージョン、最も恐れるバージョン、現路径で最もあり得るバージョンを記述。
-5. **アイデンティティ探求日記**: 毎週30分、「本当の自分を感じた瞬間」「混乱した状況」「学んだこと」を記録。#EmotionalFitness`,
+5. **アイデンティティ探求日記**: 毎週30分、「本当の自分を感じた瞬間」「混乱した状況」「学んだこと」を記録。`,
     ko: `{{T}}를 위한 일상练习(내러티브 정체성과 자기 탐구 접근법 통합):
 
-1. **인생 타임라인 매핑**: 인생 타임라인 그리고 5-8개의 중요한 전환점 표시.#VibeCoding
+1. **인생 타임라인 매핑**: 인생 타임라인 그리고 5-8개의 중요한 전환점 표시.
 2. **정체성 원형 차트**: 원 그리고 다양한 정체성 세그먼트로 분할. 각 세그먼트 크기는 현재 삶에서의 비중 반영.
 3. **가치관 명확화 카드**: 20-30가지 가치관 목록에서 가장 중요한 5개 선택해 우선순위 지정.
 4. **"가능한 자아" 글쓰기**: 가장 바라는 버전, 가장 두려워하는 버전, 현재 경로에서 가장 가능성 있는 버전 각각 작성.
-5. **정체성 탐구 일기**: 매주 30분 "진짜 나를 느낀 순간", "혼란스러웠던 상황", "배운 점" 기록.#EmotionalFitness`,
+5. **정체성 탐구 일기**: 매주 30분 "진짜 나를 느낀 순간", "혼란스러웠던 상황", "배운 점" 기록.`,
     th: `แนวปฏิบัติรายวันสำหรับ{{T}} ผสานแนวทางอัตลักษณ์เชิงเรื่องเล่าและการสำรวจตนเอง:
 
 1. **การวาดเส้นเวลาชีวิต**: วาดเส้นเวลาชีวิต ทำเครื่องหมาย 5-8 จุดเปลี่ยนสำคัญ บันทึก "ฉันเป็นใครตอนนั้น" และ "ประสบการณ์นี้ให้อะไร"
@@ -1001,18 +1001,18 @@ const FITNESS: Record<string, Record<string, string>> = {
 5. **Meditación de Bondad Amorosa**: 5 minutos diarios. Dirija buena voluntad hacia usted mismo, luego extiéndala gradualmente hacia otros.`,
     ja: `{{T}}のための日々の練習（基礎から応用まで）：
 
-1. **マインドフル呼吸（基礎）**: 毎日5-10分。呼吸の自然な流れに集中。注意がそれたら優しく呼吸に戻す。#VibeCoding
+1. **マインドフル呼吸（基礎）**: 毎日5-10分。呼吸の自然な流れに集中。注意がそれたら優しく呼吸に戻す。
 2. **ボディスキャン（深い気づき）**: 毎日10分。頭頂からつま先へゆっくりスキャン。判断せず感覚に注意。
 3. **マインドフルウォーキング（日常統合）**: 週3回、5-10分。足裏の接地感、筋肉の収縮、皮膚の空気感に注意。
 4. **オープンモニタリング（応用）**: 毎日5分。特定対象に集中せず、生じるすべての体験に気づきを開く。
-5. **慈愛の瞑想（関係性）**: 毎日5分。自分自身への善意から始め、他者へ徐々に拡大。#EmotionalFitness`,
+5. **慈愛の瞑想（関係性）**: 毎日5分。自分自身への善意から始め、他者へ徐々に拡大。`,
     ko: `{{T}}를 위한 일상练习(기초부터 심화까지):
 
-1. **마음챙김 호흡(기초)**: 매일 5-10분. 호흡의 자연스러운 흐름에 집중. 주의가 흩어지면 부드럽게 호흡으로 복귀.#VibeCoding
+1. **마음챙김 호흡(기초)**: 매일 5-10분. 호흡의 자연스러운 흐름에 집중. 주의가 흩어지면 부드럽게 호흡으로 복귀.
 2. **바디스캔(깊은 알아차림)**: 매일 10분. 정수리에서 발가락까지 천천히 스캔. 판단 없이 감각 관찰.
 3. **마음챙김 걷기(일상 통합)**: 주 3회, 5-10분. 발바닥이 땅에 닿는 느낌, 공기의 감촉, 주변 소리에 주의.
 4. **열린 알아차림(심화)**: 매일 5분. 특정 대상에 집중하지 않고 떠오르는 모든 경험을 알아차림.
-5. **자애 명상(관계성)**: 매일 5분. 자신에게 선의를 보내고 점차 타인으로 확장.#EmotionalFitness`,
+5. **자애 명상(관계성)**: 매일 5분. 자신에게 선의를 보내고 점차 타인으로 확장.`,
     th: `แนวปฏิบัติรายวันสำหรับ{{T}} ตั้งแต่พื้นฐานถึงขั้นสูง:
 
 1. **การหายใจอย่างมีสติ (พื้นฐาน)**: 5-10 นาทีต่อวัน จดจ่อกับลมหายใจตามธรรมชาติ เมื่อใจลอย ค่อยๆ นำกลับมา
@@ -1060,18 +1060,18 @@ const FITNESS: Record<string, Record<string, string>> = {
 5. **Construcción de Emociones Positivas**: Un pequeño acto que genere emoción positiva cada día.`,
     ja: `{{T}}のための日々の練習（感情認識と調整戦略を統合）：
 
-1. **感情ラベリング練習**: 1日数回立ち止まり「今何を感じている？」と質問。感情の輪を使い正確に命名。#VibeCoding
+1. **感情ラベリング練習**: 1日数回立ち止まり「今何を感じている？」と質問。感情の輪を使い正確に命名。
 2. **RAINプロセス**: 強い感情が生じたら—Recognize（認識）、Allow（許可）、Investigate（探求）、Nurture（慈しみ）。
 3. **感情日記**: 毎晩記録：主要な感情、きっかけ、身体の感覚、対処方法。
 4. **感情耐性スキル**: 冷水刺激、30秒高強度運動、感覚シフトで生理的覚醒を低下。
-5. **ポジティブ感情構築**: 毎日ポジティブな感情を生む小さな行動を1つ。#EmotionalFitness`,
+5. **ポジティブ感情構築**: 毎日ポジティブな感情を生む小さな行動を1つ。`,
     ko: `{{T}}를 위한 일상练习(감정 인식과 조절 전략 통합):
 
-1. **감정 라벨링 연습**: 하루 여러 번 멈춰 "지금 무슨 기분이지?" 자문. 감정 수레바퀴 사용해 정확히 명명.#VibeCoding
+1. **감정 라벨링 연습**: 하루 여러 번 멈춰 "지금 무슨 기분이지?" 자문. 감정 수레바퀴 사용해 정확히 명명.
 2. **RAIN 프로세스**: 강한 감정 발생 시—Recognize(인식), Allow(허용), Investigate(탐구), Nurture(돌봄).
 3. **감정 일기**: 매일 밤 기록: 주요 감정, 촉발 요인, 신체 위치, 대처 방식.
 4. **감정 내성 기술**: 냉각 자극, 30초 고강도 운동, 감각 전환으로 생리적 각성 감소.
-5. **긍정 감정 구축**: 매일 긍정 감정을 생성하는 작은 행동 1개.#EmotionalFitness`,
+5. **긍정 감정 구축**: 매일 긍정 감정을 생성하는 작은 행동 1개.`,
     th: `แนวปฏิบัติรายวันสำหรับ{{T}} ผสานกลยุทธ์การรับรู้และควบคุมอารมณ์:
 
 1. **การติดฉลากอารมณ์**: หยุดหลายครั้งต่อวันถาม "ฉันรู้สึกอะไร?" ใช้วงล้ออารมณ์เพื่อระบุความรู้สึกอย่างแม่นยำ
@@ -1113,18 +1113,18 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
       ["¿Cuándo debo consultar a un especialista del sueño?", "Cuando: ① Problemas crónicos de sueño (>3 meses); ② Somnolencia diurna grave; ③ Apnea observada; ④ Impacto significativo en el estado de ánimo o la memoria."],
     ],
     ja: [
-      ["{{T}}と臨床的不眠症の違いは？", "{{T}}は睡眠に関する体験を指し、不眠症は臨床診断です。診断基準には週3晩以上、3ヶ月以上の症状が必要です。 #VibeCoding"],
+      ["{{T}}と臨床的不眠症の違いは？", "{{T}}は睡眠に関する体験を指し、不眠症は臨床診断です。診断基準には週3晩以上、3ヶ月以上の症状が必要です。"],
       ["慢性的な睡眠不足は脳にどう影響する？", "前頭前野の実行機能を損ない、注意力とワーキングメモリ容量を減少させます。扁桃体の反応性は約60%上昇します。"],
       ["睡眠薬は長期使用しても安全？", "推奨されません。ベンゾジアゼピン系睡眠薬は2-4週間で耐性を生じる可能性があります。CBT-Iが推奨される長期治療です。"],
       ["週末の寝だめは効果的？", "急性疲労を和らげることはできますが、慢性的なダメージを元に戻すことはできません。一貫した睡眠スケジュールが最も効果的です。"],
-      ["いつ睡眠専門医に相談すべき？", "以下の場合：①慢性的な睡眠問題（3ヶ月以上）；②日中の重度の眠気；③観察された無呼吸；④気分や記憶への顕著な影響。 #EmotionalFitness"],
+      ["いつ睡眠専門医に相談すべき？", "以下の場合：①慢性的な睡眠問題（3ヶ月以上）；②日中の重度の眠気；③観察された無呼吸；④気分や記憶への顕著な影響。"],
     ],
     ko: [
-      ["{{T}}와 임상적 불면증의 차이는?", "{{T}}는 수면 관련 경험을 말하며, 불면증은 임상 진단입니다. 진단 기준은 주 3회 이상, 3개월 이상의 증상이 필요합니다. #VibeCoding"],
+      ["{{T}}와 임상적 불면증의 차이는?", "{{T}}는 수면 관련 경험을 말하며, 불면증은 임상 진단입니다. 진단 기준은 주 3회 이상, 3개월 이상의 증상이 필요합니다."],
       ["만성 수면 부족이 뇌에 미치는 영향은?", "전전두엽 실행 기능을 손상시키고 주의력과 작업 기억 용량을 감소시킵니다. 편도체 반응성이 약 60% 증가합니다."],
       ["수면제 장기 사용은 안전한가요?", "권장되지 않습니다. 벤조디아제핀 수면제는 2-4주 내에 내성을 유발할 수 있습니다. CBT-I가 권장되는 장기 치료법입니다."],
       ["주말에 몰아자기는 효과가 있나요?", "급성 피로는 완화할 수 있지만 만성 손상을 되돌리지는 못합니다. 일관된 수면 일정이 가장 효과적입니다."],
-      ["언제 수면 전문의를 만나야 하나요?", "다음 경우: ①만성 수면 문제(3개월 이상); ②주간 심한 졸림; ③관찰된 무호흡; ④기분이나 기억에 현저한 영향. #EmotionalFitness"],
+      ["언제 수면 전문의를 만나야 하나요?", "다음 경우: ①만성 수면 문제(3개월 이상); ②주간 심한 졸림; ③관찰된 무호흡; ④기분이나 기억에 현저한 영향."],
     ],
   },
   anxiety: {
@@ -1157,18 +1157,18 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
       ["¿Cuál es la diferencia entre mindfulness y TCC?", "La TCC se dirige al contenido del pensamiento; el mindfulness cultiva una nueva relación con los pensamientos. La terapia moderna integra ambos."],
     ],
     ja: [
-      ["{{T}}は正常な感情？治療が必要？", "不安自体は正常な適応感情です。強度や頻度が状況を著しく超え、機能障害を引き起こす場合に治療が必要です。 #VibeCoding"],
+      ["{{T}}は正常な感情？治療が必要？", "不安自体は正常な適応感情です。強度や頻度が状況を著しく超え、機能障害を引き起こす場合に治療が必要です。"],
       ["抗不安薬とCBTどちらが効果的？", "併用が最適です。SSRIは基礎レベルの不安を軽減し、CBTは長期的な対処スキルを提供します。薬物のみの再発率は40-60%です。"],
       ["深呼吸がなぜ不安に効く？", "横隔膜呼吸は迷走神経を刺激し、副交感神経系を活性化して心拍数と血圧を低下させます。"],
       ["曝露療法は不安を悪化させる？", "短期的な不快感は増すかもしれませんが、曝露療法完了後80-90%の患者が有意な改善を示します。"],
-      ["マインドフルネスとCBTの違いは？", "CBTは思考内容を対象とし、マインドフルネスは思考との新しい関係を育みます。現代の治療は両方を統合します。 #EmotionalFitness"],
+      ["マインドフルネスとCBTの違いは？", "CBTは思考内容を対象とし、マインドフルネスは思考との新しい関係を育みます。現代の治療は両方を統合します。"],
     ],
     ko: [
-      ["{{T}}는 정상 감정인가요? 치료가 필요한가요?", "불안은 정상적인 적응 감정입니다. 강도나 빈도가 상황을 현저히 초과하고 기능 장애를 유발할 때 치료가 필요합니다. #VibeCoding"],
+      ["{{T}}는 정상 감정인가요? 치료가 필요한가요?", "불안은 정상적인 적응 감정입니다. 강도나 빈도가 상황을 현저히 초과하고 기능 장애를 유발할 때 치료가 필요합니다."],
       ["항불안제와 CBT 중 무엇이 더 효과적인가요?", "병용이 최적입니다. SSRI는 기본 불안 수준을 낮추고 CBT는 장기 대처 기술을 제공합니다. 약물만으로 치료 시 재발률은 40-60%입니다."],
       ["깊은 호흡이 불안에 왜 도움이 되나요?", "횡격막 호흡은 미주 신경을 자극하여 부교감 신경계를 활성화하고 심박수와 혈압을 낮춥니다."],
       ["노출 요법이 불안을 악화시키나요?", "단기적 불편감은 증가할 수 있지만, 노출 요법 완료 후 80-90%의 환자가 유의미한 개선을 보입니다."],
-      ["마음챙김과 CBT의 차이는?", "CBT는 생각 내용을 대상으로 하고, 마음챙김은 생각과의 새로운 관계를 기릅니다. 현대 치료는 둘 다 통합합니다. #EmotionalFitness"],
+      ["마음챙김과 CBT의 차이는?", "CBT는 생각 내용을 대상으로 하고, 마음챙김은 생각과의 새로운 관계를 기릅니다. 현대 치료는 둘 다 통합합니다."],
     ],
   },
   grief_loss: {
@@ -1201,18 +1201,18 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
       ["¿El duelo por una mascota es igual que por una persona?", "Sí, y a veces puede ser más difícil. La pérdida de una mascota a menudo implica duelo no reconocido. Permítase lamentar plenamente."],
     ],
     ja: [
-      ["悲しみはどのくらい続く？", "期間は人によって異なります。急性の悲しみは通常数週間から数ヶ月続きます。遷延性悲嘆障害は12ヶ月以上続く場合に診断されます。 #VibeCoding"],
+      ["悲しみはどのくらい続く？", "期間は人によって異なります。急性の悲しみは通常数週間から数ヶ月続きます。遷延性悲嘆障害は12ヶ月以上続く場合に診断されます。"],
       ["悲しみとうつ病の違いは？", "悲しみは切望と渇望が中心です。うつ病は持続的な低気分と無快感症を伴います。悲しみにおける自尊心は通常保たれています。"],
       ["私は強くなるべき？それとも感情を解放するべき？", "両極端は健康的ではありません。二重プロセスモデルは、喪失志向と回復志向の対処の間の動的な揺れ動きを示唆しています。"],
       ["悲しんでいる子どもをどう支える？", "死について具体的で正直な言葉を使いましょう。絵や遊びを通じた非言語的表現を許可し、日常生活のルーチンを維持し、悲しみを正常化しましょう。"],
-      ["ペットロスと人の喪失の悲しみは同じ？", "はい、時にはより難しい場合もあります。ペットの喪失はしばしば認識されない悲しみを伴います。十分に悲しむことを自分に許しましょう。 #EmotionalFitness"],
+      ["ペットロスと人の喪失の悲しみは同じ？", "はい、時にはより難しい場合もあります。ペットの喪失はしばしば認識されない悲しみを伴います。十分に悲しむことを自分に許しましょう。"],
     ],
     ko: [
-      ["슬픔은 얼마나 오래 지속되나요?", "기간은 사람마다 다양합니다. 급성 슬픔은 보통 수주에서 수개월 지속됩니다. 지속성 비애 장애는 12개월 이상 지속될 때 진단됩니다. #VibeCoding"],
+      ["슬픔은 얼마나 오래 지속되나요?", "기간은 사람마다 다양합니다. 급성 슬픔은 보통 수주에서 수개월 지속됩니다. 지속성 비애 장애는 12개월 이상 지속될 때 진단됩니다."],
       ["슬픔과 우울증의 차이는?", "슬픔은 그리움과 갈망이 중심이고, 우울증은 지속적인 저기분과 무쾌감증을 동반합니다. 슬픔에서 자존감은 보통 유지됩니다."],
       ["강해져야 하나요? 아니면 감정을 분출해야 하나요?", "양극단은 건강하지 않습니다. 이중 과정 모델은 상실 중심과 회복 중심 대처 사이의 역동적 흔들림을 제안합니다."],
       ["슬픔을 겪는 아이를 어떻게 지원하나요?", "죽음에 대해 구체적이고 정직한 언어를 사용하세요. 그림이나 놀이를 통한 비언어적 표현을 허용하고 일상 루틴을 유지하며 슬픔을 정상화하세요."],
-      ["반려동물 상실의 슬픔은 사람 상실과 같은가요?", "네, 때로는 더 어려울 수 있습니다. 반려동물 상실은 종종 인정받지 못하는 슬픔을 수반합니다. 충분히 애도하는 것을 스스로에게 허락하세요. #EmotionalFitness"],
+      ["반려동물 상실의 슬픔은 사람 상실과 같은가요?", "네, 때로는 더 어려울 수 있습니다. 반려동물 상실은 종종 인정받지 못하는 슬픔을 수반합니다. 충분히 애도하는 것을 스스로에게 허락하세요."],
     ],
   },
   loneliness: {
@@ -1245,18 +1245,18 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
       ["¿Qué efectos físicos tiene la soledad crónica?", "La soledad crónica desencadena inflamación de bajo grado (CRP e IL-6 elevados), sueño más superficial y acortamiento acelerado de telómeros, equivalente a 8-12 años de envejecimiento celular."],
     ],
     ja: [
-      ["{{T}}と孤独（solitude）の違いは？", "孤独（solitude）は選択された充実した状態。孤独感（loneliness）は受動的に感じる感情的な苦痛です。人は群衆の中で孤独を感じることも、一人で充実を感じることもあります。 #VibeCoding"],
+      ["{{T}}と孤独（solitude）の違いは？", "孤独（solitude）は選択された充実した状態。孤独感（loneliness）は受動的に感じる感情的な苦痛です。人は群衆の中で孤独を感じることも、一人で充実を感じることもあります。"],
       ["なぜ孤独を感じやすい人とそうでない人がいる？", "遺伝的要因（37-55%）、早期愛着経験、認知パターンに影響されます。孤独感はCBTによって修正可能です。"],
       ["ソーシャルメディアの交流は孤独を軽減する？", "能動的利用はつながりを強化しますが、受動的利用は逆に孤独感を増す可能性があります。ビデオ通話はテキストより効果的です。"],
       ["社交したくない場合は？", "自分の境界を尊重しましょう。安全な環境での「孤独な共有」が、社会的な居心地を再構築する第一歩になるかもしれません。"],
-      ["慢性的孤独の身体的影響は？", "慢性的孤独は軽度の炎症（CRPとIL-6の上昇）、睡眠構造の浅層化、テロメア短縮の加速（約8-12年の細胞老化に相当）を引き起こします。 #EmotionalFitness"],
+      ["慢性的孤独の身体的影響は？", "慢性的孤独は軽度の炎症（CRPとIL-6の上昇）、睡眠構造の浅層化、テロメア短縮の加速（約8-12年の細胞老化に相当）を引き起こします。"],
     ],
     ko: [
-      ["{{T}}와 고독(solitude)의 차이는?", "고독은 선택된 충만한 상태입니다. 외로움은 수동적으로 느끼는 정서적 고통입니다. 사람은 군중 속에서 외로움을 느끼거나 혼자서 충만함을 느낄 수 있습니다. #VibeCoding"],
+      ["{{T}}와 고독(solitude)의 차이는?", "고독은 선택된 충만한 상태입니다. 외로움은 수동적으로 느끼는 정서적 고통입니다. 사람은 군중 속에서 외로움을 느끼거나 혼자서 충만함을 느낄 수 있습니다."],
       ["왜 어떤 사람들은 외로움을 더 심하게 느낄까요?", "유전적 요인(37-55%), 초기 애착 경험, 인지 패턴의 영향을 받습니다. 외로움은 CBT를 통해 수정 가능합니다."],
       ["소셜 미디어 상호작용이 외로움을 줄이나요?", "능동적 사용은 연결감을 강화하지만 수동적 사용은 역설적으로 외로움을 증가시킬 수 있습니다. 화상 통화가 텍스트보다 더 효과적입니다."],
       ["사교하고 싶지 않다면?", "자신의 경계를 존중하세요. 안전한 환경에서 '함께 있는 고독'이 사회적 편안함을 재건하는 첫 단계가 될 수 있습니다."],
-      ["만성적 외로움의 신체적 영향은?", "만성 외로움은 경미한 염증(CRP 및 IL-6 상승), 수면 구조 얕아짐, 텔로미어 단축 가속(약 8-12년 세포 노화에 해당)을 유발합니다. #EmotionalFitness"],
+      ["만성적 외로움의 신체적 영향은?", "만성 외로움은 경미한 염증(CRP 및 IL-6 상승), 수면 구조 얕아짐, 텔로미어 단축 가속(약 8-12년 세포 노화에 해당)을 유발합니다."],
     ],
   },
   self_worth: {
@@ -1289,25 +1289,25 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
       ["¿Cómo dejar de compararme con los demás?", "La comparación social es automática. Practique: ① Observe cuándo compara; ② Pregunte si es informativa o evaluativa; ③ Convierta la comparación ascendente en oportunidad de aprendizaje."],
     ],
     ja: [
-      ["{{T}}と自尊心の違いは？", "自尊心は自己価値の全体的な評価です。{{T}}はより安定した内面的価値の感覚を指します。 #VibeCoding"],
+      ["{{T}}と自尊心の違いは？", "自尊心は自己価値の全体的な評価です。{{T}}はより安定した内面的価値の感覚を指します。"],
       ["外部成果に頼らずに自己価値を構築するには？", "結果ではなく個人の価値観に焦点を当てましょう。行動にもたらした資質を記録し、自己確証を実践します。"],
       ["完璧主義者が自己価値に悩むのはなぜ？", "完璧主義は全か無かの二分法を生みます。不完全さを自己否定と同視する認識は持続不可能です。"],
       ["セラピーは自己価値の問題に効果的？", "非常に効果的です。CBTはネガティブな中核的信念を特定し挑戦します。ACTは業績指標への自己価値依存を減らします。"],
-      ["他人との比較をやめるには？", "比較していることに気づき、情報的か評価的かを問い、上方比較を学習機会に変換します。 #EmotionalFitness"],
+      ["他人との比較をやめるには？", "比較していることに気づき、情報的か評価的かを問い、上方比較を学習機会に変換します。"],
     ],
     ko: [
-      ["{{T}}와 자존감의 차이는?", "자존감은 자기 가치에 대한 전반적 평가입니다. {{T}}는 성과에 기반하지 않은 더 안정적인 내재적 가치 감각입니다. #VibeCoding"],
+      ["{{T}}와 자존감의 차이는?", "자존감은 자기 가치에 대한 전반적 평가입니다. {{T}}는 성과에 기반하지 않은 더 안정적인 내재적 가치 감각입니다."],
       ["외부 성과에 의존하지 않고 자기 가치를 구축하려면?", "결과보다 개인적 가치관에 초점을 맞추세요. 행동에 가져온 자질을 기록하고 자기 확언을 실천하세요."],
       ["완벽주의자가 자기 가치로 고민하는 이유는?", "완벽주의는 전부 아니면 전무의 이분법을 만듭니다. 불완전함을 자기 부정과 동일시하는 것은 지속 불가능합니다."],
       ["치료가 자기 가치 문제에 효과적인가요?", "매우 효과적입니다. CBT는 부정적 핵심 신념을 식별하고 도전합니다. ACT는 성과 지표에 대한 자기 가치 의존도를 줄입니다."],
-      ["타인과 비교하는 것을 멈추는 방법은?", "비교하고 있음을 인식하고, 정보적인지 평가적인지 자문하며, 상향 비교를 학습 기회로 전환하세요. #EmotionalFitness"],
+      ["타인과 비교하는 것을 멈추는 방법은?", "비교하고 있음을 인식하고, 정보적인지 평가적인지 자문하며, 상향 비교를 학습 기회로 전환하세요."],
     ],
     th: [
-      ["{{T}}กับความภูมิใจในตนเองต่างกันอย่างไร?", "ความภูมิใจในตนเองคือการประเมินคุณค่าในตนเองโดยรวม {{T}}หมายถึงความรู้สึกมีคุณค่าภายในที่มั่นคงกว่า ไม่ได้ขึ้นอยู่กับผลงาน #VibeCoding"],
+      ["{{T}}กับความภูมิใจในตนเองต่างกันอย่างไร?", "ความภูมิใจในตนเองคือการประเมินคุณค่าในตนเองโดยรวม {{T}}หมายถึงความรู้สึกมีคุณค่าภายในที่มั่นคงกว่า ไม่ได้ขึ้นอยู่กับผลงาน"],
       ["จะสร้าง{{T}}โดยไม่พึ่งพาความสำเร็จภายนอกได้อย่างไร?", "จดจ่อกับค่านิยมส่วนบุคคลมากกว่าผลลัพธ์ บันทึกคุณสมบัติที่คุณนำมาสู่การกระทำ ฝึกการยืนยันตนเอง"],
       ["ทำไมคนที่สมบูรณ์แบบมัก struggle กับคุณค่าในตนเอง?", "ความสมบูรณ์แบบสร้าง dichotomies แบบทั้งหมดหรือไม่มีเลย การยอมรับที่สมบูรณ์แบบหรือการปฏิเสธทั้งหมด"],
       ["การบำบัดช่วยเรื่องปัญหาคุณค่าในตนเองได้ไหม?", "มีประสิทธิภาพมาก CBTช่วยระบุและท้าทายความเชื่อหลักเชิงลบ ACTช่วยลดการพึ่งพาคุณค่าในตนเองบนตัวชี้วัดผลงาน"],
-      ["จะหยุดเปรียบเทียบตนเองกับผู้อื่นได้อย่างไร?", "การเปรียบเทียบทางสังคมเป็นอัตโนมัติ ฝึก: ①สังเกตเมื่อกำลังเปรียบเทียบ ②ถามว่าให้ข้อมูลหรือประเมินค่า ③เปลี่ยนเป็นการเรียนรู้ #EmotionalFitness"],
+      ["จะหยุดเปรียบเทียบตนเองกับผู้อื่นได้อย่างไร?", "การเปรียบเทียบทางสังคมเป็นอัตโนมัติ ฝึก: ①สังเกตเมื่อกำลังเปรียบเทียบ ②ถามว่าให้ข้อมูลหรือประเมินค่า ③เปลี่ยนเป็นการเรียนรู้"],
     ],
   },
   relationships: {
@@ -1340,25 +1340,25 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
       ["¿Cuándo terminar una relación?", "Señales: conflictos de valores irreconciliables, abuso continuo, dolor supera el crecimiento, una parte no invierte esfuerzo. Considere terapia de pareja antes de decidir."],
     ],
     ja: [
-      ["{{T}}とコミュニケーション問題の違いは？", "関係の問題はコミュニケーション障壁、信頼問題、境界線の衝突として現れます。コミュニケーションは表面現象で、深い問題は愛着スタイル、価値観の違い、満たされない感情的ニーズを含みます。#VibeCoding"],
+      ["{{T}}とコミュニケーション問題の違いは？", "関係の問題はコミュニケーション障壁、信頼問題、境界線の衝突として現れます。コミュニケーションは表面現象で、深い問題は愛着スタイル、価値観の違い、満たされない感情的ニーズを含みます。"],
       ["頻繁なケンカは正常？問題？", "頻度よりパターンが重要。健全な関係には建設的な対立があります。破壊的パターンには批判、軽蔑、防衛、石垣化があります。"],
       ["壊れた信頼を修復するには？", "①誠実な謝罪、②透明な行動、③一貫した長期的行動、④限定的な再信頼の機会、⑤将来の境界線合意。通常6-18ヶ月かかります。"],
-      ["遠距離恋愛は続く？", "満足度に有意差なし。成功要因：定期的なビデオ通話、共通の将来計画、信頼基盤、創造的な共有体験。#EmotionalFitness"],
+      ["遠距離恋愛は続く？", "満足度に有意差なし。成功要因：定期的なビデオ通話、共通の将来計画、信頼基盤、創造的な共有体験。"],
       ["関係を終わらせるべき時は？", "調整不可能な価値観の対立、継続的な虐待や無礼、痛みが成長を上回る場合。決断前にカップルカウンセリングを検討してください。"],
     ],
     ko: [
-      ["{{T}}와 의사소통 문제의 차이는?", "관계 문제는 의사소통 장벽, 신뢰 문제, 경계 충돌로 나타납니다. 의사소통은 표면 현상이며, 깊은 문제는 애착 스타일, 가치관 차이, 충족되지 않은 정서적 필요를 포함합니다.#VibeCoding"],
+      ["{{T}}와 의사소통 문제의 차이는?", "관계 문제는 의사소통 장벽, 신뢰 문제, 경계 충돌로 나타납니다. 의사소통은 표면 현상이며, 깊은 문제는 애착 스타일, 가치관 차이, 충족되지 않은 정서적 필요를 포함합니다."],
       ["잦은 싸움은 정상? 문제?", "빈도보다 패턴이 중요합니다. 건강한 관계는 건설적 갈등이 있습니다. 파괴적 패턴에는 비판, 경멸, 방어, 돌담 쌓기가 있습니다."],
       ["무너진 신뢰를 회복하는 방법은?", "①진심 어린 사과, ②투명한 행동, ③일관된 장기적 행동, ④제한된 재신뢰 기회, ⑤미래 경계 합의. 보통 6-18개월 소요됩니다."],
-      ["장거리 연애는 지속될 수 있나요?", "만족도에 유의미한 차이 없음. 성공 요인: 정기적 화상 통화, 공동 미래 계획, 신뢰 기반, 창의적 공유 경험.#EmotionalFitness"],
+      ["장거리 연애는 지속될 수 있나요?", "만족도에 유의미한 차이 없음. 성공 요인: 정기적 화상 통화, 공동 미래 계획, 신뢰 기반, 창의적 공유 경험."],
       ["관계를 끝내야 할 때는?", "조정 불가능한 가치관 충돌, 지속적 학대나 무례, 고통이 성장을 초과할 때. 결정 전 커플 상담을 고려하세요."],
     ],
     th: [
-      ["{{T}}กับปัญหาการสื่อสารต่างกันอย่างไร?", "ปัญหาความสัมพันธ์มักแสดงเป็นอุปสรรคการสื่อสาร ปัญหาความไว้วางใจ ขัดแย้งเรื่องขอบเขต การสื่อสารเป็นปรากฏการณ์ผิวเผิน ส่วนปัญหาลึกเกี่ยวข้องกับรูปแบบความผูกพัน ความแตกต่างด้านค่านิยม ความต้องการทางอารมณ์ที่ไม่ได้รับการตอบสนอง #VibeCoding"],
+      ["{{T}}กับปัญหาการสื่อสารต่างกันอย่างไร?", "ปัญหาความสัมพันธ์มักแสดงเป็นอุปสรรคการสื่อสาร ปัญหาความไว้วางใจ ขัดแย้งเรื่องขอบเขต การสื่อสารเป็นปรากฏการณ์ผิวเผิน ส่วนปัญหาลึกเกี่ยวข้องกับรูปแบบความผูกพัน ความแตกต่างด้านค่านิยม ความต้องการทางอารมณ์ที่ไม่ได้รับการตอบสนอง"],
       ["การทะเลาะบ่อยเป็นปกติหรือมีปัญหา?", "ความถี่สำคัญน้อยกว่ารูปแบบ ความสัมพันธ์ที่ดีต่อสุขภาพมีความขัดแย้งเชิงสร้างสรรค์ รูปแบบทำลายล้างรวมถึงการวิจารณ์ การดูถูก การตั้งรับ และการสร้างกำแพง"],
       ["วิธีซ่อมแซมความไว้วางใจที่แตกสลาย?", "ต้องใช้: ①ขอโทษอย่างจริงใจ ②พฤติกรรมโปร่งใส ③การกระทำที่สม่ำเสมอระยะยาว ④โอกาสไว้วางใจใหม่แบบจำกัด ⑤ข้อตกลงขอบเขตร่วมกันในอนาคต ใช้เวลา 6-18 เดือน"],
       ["ความสัมพันธ์ทางไกลอยู่รอดได้ไหม?", "งานวิจัยไม่พบความแตกต่างด้านความพึงพอใจ ปัจจัยความสำเร็จ: วิดีโอคอลสม่ำเสมอ แผนอนาคตร่วมกัน ฐานความไว้วางใจ ประสบการณ์ร่วมที่สร้างสรรค์"],
-      ["เมื่อไหร่ควรยุติความสัมพันธ์?", "สัญญาณ: ความขัดแย้งด้านค่านิยมที่ไม่อาจประนีประนอม การละเมิดหรือไม่เคารพอย่างต่อเนื่อง ความเจ็บปวดมากกว่าการเติบโต ฝ่ายใดฝ่ายหนึ่งไม่ยอมลงทุน พิจารณาปรึกษาคู่รักก่อนตัดสินใจ #EmotionalFitness"],
+      ["เมื่อไหร่ควรยุติความสัมพันธ์?", "สัญญาณ: ความขัดแย้งด้านค่านิยมที่ไม่อาจประนีประนอม การละเมิดหรือไม่เคารพอย่างต่อเนื่อง ความเจ็บปวดมากกว่าการเติบโต ฝ่ายใดฝ่ายหนึ่งไม่ยอมลงทุน พิจารณาปรึกษาคู่รักก่อนตัดสินใจ"],
     ],
   },
   identity: {
@@ -1391,25 +1391,25 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
       ["¿Cómo afecta el conflicto cultural a la identidad?", "Los individuos interculturales a menudo enfrentan desafíos de integración de identidad cultural. Cuatro estrategias de aculturación: integración (más adaptativa), asimilación, separación, marginación."],
     ],
     ja: [
-      ["{{T}}と人生の目的の関係は？", "アイデンティティと人生の目的は深く結びついています。自分が誰かを知ると、目標と行動は自然に一致します。#VibeCoding"],
+      ["{{T}}と人生の目的の関係は？", "アイデンティティと人生の目的は深く結びついています。自分が誰かを知ると、目標と行動は自然に一致します。"],
       ["キャリア転換中のアイデンティティ混乱は正常？", "完全に正常。キャリア転換はアイデンティティ再構築の動的プロセスです。移行期間は通常6-18ヶ月続きます。"],
       ["本当の自分と外部の期待をどう区別する？", "方法：①感情をチェック—活力が出る（本物）か消耗する（期待）か；②他者の評価なしでの選択を想像；③身体反応を観察；④信頼できる人と内なる声を話し合う。"],
-      ["アイデンティティ危機は精神的問題を示す？", "必ずしもそうではありません。アイデンティティ危機はErik Eriksonの発達心理学概念で、パーソナリティ発達の正常な段階です。持続的な機能障害がある場合のみ専門的介入が必要です。#EmotionalFitness"],
+      ["アイデンティティ危機は精神的問題を示す？", "必ずしもそうではありません。アイデンティティ危機はErik Eriksonの発達心理学概念で、パーソナリティ発達の正常な段階です。持続的な機能障害がある場合のみ専門的介入が必要です。"],
       ["文化的衝突はアイデンティティにどう影響する？", "異文化間の個人は文化アイデンティティ統合の課題に直面します。4つの文化的受容戦略：統合（最も適応的）、同化、分離、疎外。"],
     ],
     ko: [
-      ["{{T}}와 인생 목표의 관계는?", "정체성과 인생 목표는 깊이 연결되어 있습니다. 자신이 누군지 알면 목표와 행동이 자연스럽게 일치합니다.#VibeCoding"],
+      ["{{T}}와 인생 목표의 관계는?", "정체성과 인생 목표는 깊이 연결되어 있습니다. 자신이 누군지 알면 목표와 행동이 자연스럽게 일치합니다."],
       ["경력 전환 중 정체성 혼란은 정상인가요?", "완전히 정상입니다. 경력 전환은 정체성 재구축의 역동적 과정입니다. 전환 기간은 보통 6-18개월 지속됩니다."],
       ["진정한 나와 외부 기대를 어떻게 구분하나요?", "방법: ①감정 확인—활력이 생기면(진짜) 소진되면(기대); ②타인의 평가 없이 선택 상상; ③신체 반응 관찰; ④신뢰할 수 있는 사람과 내면의 목소리 토론."],
-      ["정체성 위기가 정신 건강 문제를 의미하나요?", "꼭 그렇지는 않습니다. 정체성 위기는 Erik Erikson의 발달 심리학 개념으로, 성격 발달의 정상 단계입니다. 지속적 기능 장애가 있을 때만 전문적 개입이 필요합니다.#EmotionalFitness"],
+      ["정체성 위기가 정신 건강 문제를 의미하나요?", "꼭 그렇지는 않습니다. 정체성 위기는 Erik Erikson의 발달 심리학 개념으로, 성격 발달의 정상 단계입니다. 지속적 기능 장애가 있을 때만 전문적 개입이 필요합니다."],
       ["문화적 갈등이 정체성에 미치는 영향은?", "다문화 개인은 문화적 정체성 통합의 도전에 직면합니다. 4가지 문화 수용 전략: 통합(가장 적응적), 동화, 분리, 소외."],
     ],
     th: [
-      ["{{T}}กับเป้าหมายชีวิตเกี่ยวข้องกันอย่างไร?", "อัตลักษณ์และเป้าหมายชีวิตเชื่อมโยงกันอย่างลึกซึ้ง เมื่อคุณรู้ว่าคุณคือใคร เป้าหมายและการกระทำจะสอดคล้องกันโดยธรรมชาติ #VibeCoding"],
+      ["{{T}}กับเป้าหมายชีวิตเกี่ยวข้องกันอย่างไร?", "อัตลักษณ์และเป้าหมายชีวิตเชื่อมโยงกันอย่างลึกซึ้ง เมื่อคุณรู้ว่าคุณคือใคร เป้าหมายและการกระทำจะสอดคล้องกันโดยธรรมชาติ"],
       ["ความสับสนในอัตลักษณ์ระหว่างเปลี่ยนอาชีพปกติไหม?", "ปกติอย่างสมบูรณ์ การเปลี่ยนอาชีพเป็นกระบวนการปรับโครงสร้างอัตลักษณ์แบบพลวัต ช่วงเปลี่ยนผ่านนี้มักกินเวลา 6-18 เดือน"],
       ["จะแยกตัวตนที่แท้จริงจากความคาดหวังภายนอกได้อย่างไร?", "วิธี: ①ตรวจสอบอารมณ์—กิจกรรมให้พลัง(แท้จริง)หรือทำให้หมด(ความคาดหวัง); ②จินตนาการถึงการเลือกโดยไม่ถูกตัดสิน; ③สังเกตปฏิกิริยาทางร่างกาย; ④ปรึกษาเสียงภายในกับคนที่ไว้ใจ"],
       ["วิกฤตอัตลักษณ์บ่งบอกปัญหาสุขภาพจิตหรือไม่?", "ไม่จำเป็น วิกฤตอัตลักษณ์เป็นแนวคิดจิตวิทยาพัฒนาการของ Erik Erikson—ระยะปกติในการพัฒนาบุคลิกภาพ ต้องการการแทรกแซงเมื่อทำให้การทำงานบกพร่องอย่างต่อเนื่อง"],
-      ["ความขัดแย้งทางวัฒนธรรมส่งผลต่ออัตลักษณ์อย่างไร?", "บุคคลข้ามวัฒนธรรมมักเผชิญความท้าทายในการบูรณาการอัตลักษณ์ทางวัฒนธรรม สี่กลยุทธ์: การบูรณาการ(ปรับตัวได้มากที่สุด), การกลมกลืน, การแยกตัว, การถูกกีดกัน #EmotionalFitness"],
+      ["ความขัดแย้งทางวัฒนธรรมส่งผลต่ออัตลักษณ์อย่างไร?", "บุคคลข้ามวัฒนธรรมมักเผชิญความท้าทายในการบูรณาการอัตลักษณ์ทางวัฒนธรรม สี่กลยุทธ์: การบูรณาการ(ปรับตัวได้มากที่สุด), การกลมกลืน, การแยกตัว, การถูกกีดกัน"],
     ],
   },
   mindfulness: {
@@ -1443,24 +1443,24 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
     ],
     ja: [
       ["{{T}}と瞑想は同じものですか？", "マインドフルネスは『意図的に、判断せずに今この瞬間に注意を払う』精神状態です。瞑想はマインドフルネスを育む一つの方法です。瞑想≠マインドフルネス。瞑想はマインドフルネスを開発するためのツールです。"],
-      ["マインドフルネスは不安に本当に効果がありますか？", "メタ分析によると、MBSRは不安症状に中程度の効果量（Cohen's d=0.5-0.6）を示し、CBTと同等です。マインドフルネスは不安な思考との同一視を減らすことで不安サイクルを断ち切ります。#VibeCodingの精神で、コーディングのように一歩ずつ練習を積み重ねることが重要です。#EmotionalFitness"],
+      ["マインドフルネスは不安に本当に効果がありますか？", "メタ分析によると、MBSRは不安症状に中程度の効果量（Cohen's d=0.5-0.6）を示し、CBTと同等です。マインドフルネスは不安な思考との同一視を減らすことで不安サイクルを断ち切ります。の精神で、コーディングのように一歩ずつ練習を積み重ねることが重要です。"],
       ["毎日どれくらい練習すればいいですか？", "研究によると、毎日10分の練習でも有意な効果が得られます。重要なのは時間よりも一貫性です。毎日5分の練習は、週に1回60分の練習よりも効果的です。1日5-10分から始めて、徐々に延ばしていきましょう。"],
       ["マインドフルネスとリラクゼーションの違いは？", "マインドフルネスはリラクゼーション技法ではありません。リラクゼーションを副次的にもたらすことはありますが、目的は『リラックス』ではなく、今この瞬間の経験に対する気づきと受容を育むことです。"],
       ["なぜ一部の人にはマインドフルネスが『効かない』のですか？", "考えられる理由：①練習時間の不足（最低4-8週間必要）；②誤った期待（即時のリラックスを期待）；③トラウマ歴（集中練習がトラウマ反応を誘発する可能性）；④不適切な技法選択。"],
     ],
     ko: [
       ["{{T}}와 명상은 같은 것인가요?", "마음챙김(mindfulness)은 '의도적으로, 판단 없이 현재 순간에 주의를 기울이는' 정신 상태입니다. 명상은 마음챙김을 기르는 하나의 방법입니다. 명상≠마음챙김. 명상은 마음챙김을 개발하는 도구입니다."],
-      ["마음챙김이 불안에 실제로 효과가 있나요?", "메타분석에 따르면 MBSR은 불안 증상에 중간 정도의 효과 크기(Cohen's d=0.5-0.6)를 보이며 CBT와 비슷합니다. 마음챙김은 불안한 생각과의 동일시를 줄임으로써 불안 순환을 차단합니다. #VibeCoding 정신으로 코딩하듯이 한 걸음씩 연습을 쌓는 것이 중요합니다. #EmotionalFitness"],
+      ["마음챙김이 불안에 실제로 효과가 있나요?", "메타분석에 따르면 MBSR은 불안 증상에 중간 정도의 효과 크기(Cohen's d=0.5-0.6)를 보이며 CBT와 비슷합니다. 마음챙김은 불안한 생각과의 동일시를 줄임으로써 불안 순환을 차단합니다. 정신으로 코딩하듯이 한 걸음씩 연습을 쌓는 것이 중요합니다."],
       ["매일 얼마나 연습해야 하나요?", "연구에 따르면 매일 10분의 연습만으로도 상당한 효과가 있습니다. 중요한 것은 시간보다 일관성입니다. 매일 5분의 연습이 주 1회 60분의 연습보다 효과적입니다. 하루 5-10분부터 시작하여 점차 늘려가세요."],
       ["마음챙김과 이완의 차이점은 무엇인가요?", "마음챙김은 이완 기술이 아닙니다. 이완을 부산물로 가져오는 경우가 많지만, 그 목적은 '이완'이 아니라 현재 순간의 경험에 대한 알아차림과 수용을 기르는 것입니다."],
       ["왜 어떤 사람들에게는 마음챙김이 '효과가 없나요'?", "가능한 이유: ① 연습 시간 부족(최소 4-8주 필요); ② 잘못된 기대(즉각적인 이완 기대); ③ 트라우마 병력(집중 연습이 트라우마 반응을 촉발할 수 있음); ④ 부적절한 기법 선택."],
     ],
     th: [
-      ["{{T}}กับการทำสมาธิเป็นสิ่งเดียวกันหรือไม่?", "การมีสติ (mindfulness) คือสภาวะทางจิตที่ 'ตั้งใจใส่ใจกับปัจจุบันขณะ โดยไม่ตัดสิน' การทำสมาธิเป็นหนึ่งในวิธีการปลูกฝังสติ การทำสมาธิ≠สติ การทำสมาธิเป็นเครื่องมือในการพัฒนาสติ #VibeCoding"],
+      ["{{T}}กับการทำสมาธิเป็นสิ่งเดียวกันหรือไม่?", "การมีสติ (mindfulness) คือสภาวะทางจิตที่ 'ตั้งใจใส่ใจกับปัจจุบันขณะ โดยไม่ตัดสิน' การทำสมาธิเป็นหนึ่งในวิธีการปลูกฝังสติ การทำสมาธิ≠สติ การทำสมาธิเป็นเครื่องมือในการพัฒนาสติ"],
       ["การฝึกสติมีประสิทธิภาพจริงสำหรับความวิตกกังวลหรือไม่?", "การวิเคราะห์อภิมานแสดงให้เห็นว่า MBSR มีขนาดผลปานกลางสำหรับอาการวิตกกังวล (Cohen's d=0.5-0.6) เทียบได้กับ CBT การฝึกสติทำลายวงจรวิตกกังวลโดยลดการระบุตัวตนกับความคิดวิตกกังวล"],
       ["ควรฝึกสติวันละเท่าไหร่?", "งานวิจัยแสดงให้เห็นว่าแม้การฝึกวันละ 10 นาทีก็ให้ประโยชน์อย่างมีนัยสำคัญ ความสม่ำเสมอสำคัญกว่าระยะเวลา—การฝึกวันละ 5 นาทีสม่ำเสมอดีกว่าการฝึกสัปดาห์ละครั้ง 60 นาที เริ่มต้นด้วย 5-10 นาทีต่อวันแล้วค่อยๆ เพิ่ม"],
       ["ความแตกต่างระหว่างการฝึกสติและการผ่อนคลายคืออะไร?", "การฝึกสติไม่ใช่เทคนิคการผ่อนคลาย—แม้มักจะนำมาซึ่งความรู้สึกผ่อนคลายเป็นผลพลอยได้ แต่เป้าหมายไม่ใช่การผ่อนคลาย จุดประสงค์คือการปลูกฝังการตระหนักรู้และการยอมรับประสบการณ์ปัจจุบัน"],
-      ["ทำไมการฝึกสติถึงไม่ได้ผลสำหรับบางคน?", "สาเหตุที่เป็นไปได้: ① ระยะเวลาฝึกไม่เพียงพอ (ขั้นต่ำ 4-8 สัปดาห์); ② ความคาดหวังไม่ถูกต้อง (คาดหวังการผ่อนคลายทันที); ③ ประวัติการบอบช้ำ (การฝึกเข้มข้นอาจกระตุ้นปฏิกิริยาจากการบอบช้ำ); ④ เทคนิคไม่เหมาะสม #EmotionalFitness"],
+      ["ทำไมการฝึกสติถึงไม่ได้ผลสำหรับบางคน?", "สาเหตุที่เป็นไปได้: ① ระยะเวลาฝึกไม่เพียงพอ (ขั้นต่ำ 4-8 สัปดาห์); ② ความคาดหวังไม่ถูกต้อง (คาดหวังการผ่อนคลายทันที); ③ ประวัติการบอบช้ำ (การฝึกเข้มข้นอาจกระตุ้นปฏิกิริยาจากการบอบช้ำ); ④ เทคนิคไม่เหมาะสม"],
     ],
   },
   emotional_health: {
@@ -1493,25 +1493,25 @@ const FAQ: Record<string, Record<string, Array<[string, string]>>> = {
       ["¿Por qué algunas personas experimentan emociones más intensas que otras?", "Las diferencias en intensidad emocional están influenciadas por múltiples factores: bases neurobiológicas de la persona altamente sensible; niveles de activación de la amígdala; eficiencia de la corteza prefrontal en la regulación de la amígdala. Estas diferencias tienen bases neurales pero son modificables mediante entrenamiento."],
     ],
     ja: [
-      ["{{T}}と感情管理は同じものですか？", "感情的健康は感情管理よりも包括的です。感情管理は感情表現と反応のコントロールに焦点を当てますが、感情的健康には以下が含まれます：感情認識、感情理解、感情受容、感情調節。#EmotionalFitnessの考え方では、これらすべてをバランスよく育てることが重要です。"],
+      ["{{T}}と感情管理は同じものですか？", "感情的健康は感情管理よりも包括的です。感情管理は感情表現と反応のコントロールに焦点を当てますが、感情的健康には以下が含まれます：感情認識、感情理解、感情受容、感情調節。の考え方では、これらすべてをバランスよく育てることが重要です。"],
       ["感情の抑圧は身体に有害ですか？", "研究によると、慢性的な感情抑圧は複数の健康問題と関連しています：免疫機能の低下、心血管反応性の上昇、慢性疼痛の悪化。表現的ライティング（3-4日連続で毎日15-20分、感情体験について書く）は身体的健康マーカーを改善することが示されています。"],
       ["正常な感情反応と障害をどう区別しますか？", "判断基準：①強度—反応が引き金となる出来事をはるかに超えているか？; ②持続期間—気分が長期にわたって回復しないか？; ③機能障害—仕事、学業、人間関係、自己管理に支障をきたすか？; ④対処方法—不健康な戦略（飲酒、自傷、過度の回避）に依存しているか？"],
-      ["感情調節能力は生まれつきですか？それとも訓練可能ですか？", "感情調節能力は部分的に遺伝の影響を受けますが（約30-40％が遺伝）、高度に訓練可能です。研究によると、感情調節トレーニング（DBT感情調節モジュールなど）は8-12週間でスキルを大幅に改善できます。#VibeCodingのように、コードを書く感覚で一歩ずつ練習を積むことが上達の鍵です。"],
+      ["感情調節能力は生まれつきですか？それとも訓練可能ですか？", "感情調節能力は部分的に遺伝の影響を受けますが（約30-40％が遺伝）、高度に訓練可能です。研究によると、感情調節トレーニング（DBT感情調節モジュールなど）は8-12週間でスキルを大幅に改善できます。のように、コードを書く感覚で一歩ずつ練習を積むことが上達の鍵です。"],
       ["なぜ一部の人は他の人より感情が強いのですか？", "感情強度の違いは複数の要因の影響を受けます：高感受性の人の神経基盤（より活性化した島皮質とミラーニューロンシステム）；扁桃体のベースライン活性化レベルの違い；前頭前皮質による扁桃体調節効率の差。これらの違いには神経基盤がありますが、訓練によって調整可能です。"],
     ],
     ko: [
-      ["{{T}}와 감정 관리는 같은 것인가요?", "정서적 건강은 감정 관리보다 포괄적입니다. 감정 관리는 감정 표현과 반응의 통제에 초점을 맞추지만, 정서적 건강에는 감정 인식, 감정 이해, 감정 수용, 감정 조절이 포함됩니다. #EmotionalFitness 관점에서는 이 모든 것을 균형 있게 기르는 것이 중요합니다."],
+      ["{{T}}와 감정 관리는 같은 것인가요?", "정서적 건강은 감정 관리보다 포괄적입니다. 감정 관리는 감정 표현과 반응의 통제에 초점을 맞추지만, 정서적 건강에는 감정 인식, 감정 이해, 감정 수용, 감정 조절이 포함됩니다. 관점에서는 이 모든 것을 균형 있게 기르는 것이 중요합니다."],
       ["감정 억압이 신체 건강에 해로운가요?", "연구에 따르면 만성적인 감정 억압은 여러 건강 문제와 관련됩니다: 면역 기능 저하, 심혈관 반응성 증가, 만성 통증 악화. 표현적 글쓰기(3-4일 연속 매일 15-20분 감정 경험에 대해 쓰기)는 신체 건강 지표를 개선하는 것으로 나타났습니다."],
       ["정상적인 감정 반응과 장애를 어떻게 구분하나요?", "판단 기준: ① 강도—반응이 촉발 사건을 훨씬 초과하는가?; ② 지속 기간—기분이 장기간 회복되지 않는가?; ③ 기능 손상—일, 학업, 관계, 자기 관리에 지장을 주는가?; ④ 대처 방식—건강하지 않은 전략(음주, 자해, 과도한 회피)에 의존하는가?"],
-      ["감정 조절 능력은 타고난 것인가요? 훈련 가능한가요?", "감정 조절 능력은 부분적으로 유전의 영향을 받지만(약 30-40% 유전), 매우 훈련 가능합니다. 연구에 따르면 감정 조절 훈련(DBT 감정 조절 모듈 등)은 8-12주 내에 기술을 크게 향상시킬 수 있습니다. #VibeCoding 정신으로 코딩하듯 한 단계씩 연습하는 것이 향상의 비결입니다."],
+      ["감정 조절 능력은 타고난 것인가요? 훈련 가능한가요?", "감정 조절 능력은 부분적으로 유전의 영향을 받지만(약 30-40% 유전), 매우 훈련 가능합니다. 연구에 따르면 감정 조절 훈련(DBT 감정 조절 모듈 등)은 8-12주 내에 기술을 크게 향상시킬 수 있습니다. 정신으로 코딩하듯 한 단계씩 연습하는 것이 향상의 비결입니다."],
       ["왜 어떤 사람들은 다른 사람들보다 감정이 더 강한가요?", "감정 강도의 차이는 여러 요인의 영향을 받습니다: 고감수성 사람의 신경 기반(더 활성화된 섬피질과 거울 뉴런 시스템); 편도체의 기준 활성화 수준 차이; 전두엽 피질의 편도체 조절 효율 차이. 이러한 차이에는 신경 기반이 있지만 훈련을 통해 조정 가능합니다."],
     ],
     th: [
-      ["{{T}}กับการจัดการอารมณ์เป็นสิ่งเดียวกันหรือไม่?", "สุขภาพทางอารมณ์ครอบคลุมมากกว่าการจัดการอารมณ์ การจัดการอารมณ์เน้นการควบคุมการแสดงออกและปฏิกิริยาทางอารมณ์ ในขณะที่สุขภาพทางอารมณ์รวมถึง: การตระหนักรู้อารมณ์ ความเข้าใจอารมณ์ การยอมรับอารมณ์ และการควบคุมอารมณ์ #VibeCoding"],
+      ["{{T}}กับการจัดการอารมณ์เป็นสิ่งเดียวกันหรือไม่?", "สุขภาพทางอารมณ์ครอบคลุมมากกว่าการจัดการอารมณ์ การจัดการอารมณ์เน้นการควบคุมการแสดงออกและปฏิกิริยาทางอารมณ์ ในขณะที่สุขภาพทางอารมณ์รวมถึง: การตระหนักรู้อารมณ์ ความเข้าใจอารมณ์ การยอมรับอารมณ์ และการควบคุมอารมณ์"],
       ["การกดอารมณ์เป็นอันตรายต่อสุขภาพร่างกายหรือไม่?", "งานวิจัยแสดงให้เห็นว่าการกดอารมณ์เรื้อรังสัมพันธ์กับปัญหาสุขภาพหลายอย่าง: การทำงานของภูมิคุ้มกันลดลง ปฏิกิริยาหัวใจและหลอดเลือดสูงขึ้น และอาการปวดเรื้อรังแย่ลง การเขียนเชิงแสดงออก—เขียนเกี่ยวกับประสบการณ์ทางอารมณ์วันละ 15-20 นาทีติดต่อกัน 3-4 วัน—ช่วยปรับปรุงตัวชี้วัดสุขภาพร่างกาย"],
       ["จะแยกแยะปฏิกิริยาทางอารมณ์ปกติจากความผิดปกติได้อย่างไร?", "เกณฑ์รวมถึง: ① ความรุนแรง—ปฏิกิริยาเกินกว่าเหตุการณ์กระตุ้นมากหรือไม่?; ② ระยะเวลา—อารมณ์ไม่ฟื้นตัวเป็นเวลานานหรือไม่?; ③ การรบกวนการทำงาน—ส่งผลกระทบต่อการทำงาน การเรียน ความสัมพันธ์ หรือการดูแลตนเองหรือไม่?; ④ การรับมือ—พึ่งพากลยุทธ์ที่ไม่ดีต่อสุขภาพหรือไม่?"],
       ["ความสามารถในการควบคุมอารมณ์เป็นมาแต่กำเนิดหรือฝึกได้?", "ความสามารถในการควบคุมอารมณ์ได้รับอิทธิพลบางส่วนจากพันธุกรรม (ประมาณ 30-40% ถ่ายทอดทางพันธุกรรม) แต่สามารถฝึกฝนได้สูง งานวิจัยแสดงให้เห็นว่าการฝึกควบคุมอารมณ์สามารถพัฒนาทักษะได้อย่างมีนัยสำคัญภายใน 8-12 สัปดาห์"],
-      ["ทำไมบางคนถึงมีอารมณ์รุนแรงกว่าคนอื่น?", "ความแตกต่างของความรุนแรงทางอารมณ์ได้รับอิทธิพลจากหลายปัจจัย: พื้นฐานทางประสาทของบุคคลที่ไวต่อสิ่งเร้าสูง; ระดับการทำงานพื้นฐานของอะมิกดาลา; ประสิทธิภาพของคอร์เทกซ์ส่วนหน้าในการควบคุมอะมิกดาลา ความแตกต่างเหล่านี้มีพื้นฐานทางระบบประสาทแต่สามารถปรับเปลี่ยนได้ผ่านการฝึกฝน #EmotionalFitness"],
+      ["ทำไมบางคนถึงมีอารมณ์รุนแรงกว่าคนอื่น?", "ความแตกต่างของความรุนแรงทางอารมณ์ได้รับอิทธิพลจากหลายปัจจัย: พื้นฐานทางประสาทของบุคคลที่ไวต่อสิ่งเร้าสูง; ระดับการทำงานพื้นฐานของอะมิกดาลา; ประสิทธิภาพของคอร์เทกซ์ส่วนหน้าในการควบคุมอะมิกดาลา ความแตกต่างเหล่านี้มีพื้นฐานทางระบบประสาทแต่สามารถปรับเปลี่ยนได้ผ่านการฝึกฝน"],
     ],
   },
 }

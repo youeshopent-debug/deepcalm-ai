@@ -2,7 +2,7 @@ import SocialLanding from "@/components/SocialLanding";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "DeepCalm AI - Sleep Optimization | #EmotionalFitness",
+  title: "DeepCalm AI - Sleep Optimization |",
   description: "53% of global population affected by poor sleep. DeepCalm AI uses 8-model architecture for 100% availability. CBT-I validated: 46% faster sleep onset, 42% anxiety reduction.",
   keywords: "sleep optimization, AI mental health, CBT-I, insomnia, anxiety relief, emotional fitness, AI agents",
   openGraph: {
