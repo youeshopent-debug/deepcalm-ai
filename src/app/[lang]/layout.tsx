@@ -52,7 +52,7 @@ export default function LangLayout({
           <SitemapFooter />
           <MedicalDisclaimer locale={safeLocale} />
           <ThemeSwitcher />
-          <CookieConsent />
+          <CookieConsent locale={safeLocale} />
           <AudioFloatingTray />
         </div>
       </ThemeProvider>
