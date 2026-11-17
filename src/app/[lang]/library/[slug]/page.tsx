@@ -161,6 +161,22 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
             {/* Main Content */}
             <div className="lg:order-2 min-w-0">
               <div className="space-y-8 max-w-3xl">
+                {locale === "zh" && slug === "insomnia" && (
+                  <section aria-labelledby="sleep-tools" className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+                    <h2 id="sleep-tools" className="text-xl font-semibold text-slate-900">今晚放松，明早记一笔</h2>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                      睡前可以试试温和的放松练习。早上起床后，再回想昨晚几点上床、大概多久睡着、夜里醒了几次。估个大概就够了。
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm font-medium text-sky-800">
+                      <Link href="/zh/library/breathwork" className="underline underline-offset-4">查看呼吸放松练习</Link>
+                      <a href="/zh/downloads/sleep-diary.csv" download className="underline underline-offset-4">下载 7 天睡眠日记（CSV）</a>
+                    </div>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      下载后可用 Excel 或其他表格软件填写。填写内容保存在你自己的文件里。
+                    </p>
+                  </section>
+                )}
+
                 {/* Science Section */}
                 <div id="science" className="scroll-mt-24">
                   <SsrAccordion
