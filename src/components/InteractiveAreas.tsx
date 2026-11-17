@@ -62,19 +62,19 @@ export default function InteractiveAreas({
       {/* AI-Guided Meditation Entry */}
       <section className="px-4 sm:px-6 pb-10">
         <div className="max-w-5xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl border border-dc-accent/20 bg-gradient-to-br from-dc-accent/5 via-transparent to-dc-surface/10 p-6 sm:p-8">
+          <div className="relative overflow-hidden rounded-2xl border border-[#c9d9d0] bg-[#f8fcf9] p-6 sm:p-8">
             {/* Decorative glow */}
-            <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-dc-accent/5 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-dc-accent/5 blur-2xl pointer-events-none" />
+            <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-[#c2f4df]/40 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-[#c2f4df]/40 blur-2xl pointer-events-none" />
 
             <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-dc-text mb-2">{labels.title}</h3>
-                <p className="text-sm text-dc-muted leading-relaxed max-w-md">{labels.desc}</p>
+                <h3 className="text-lg font-semibold text-[#172a24] mb-2">{labels.title}</h3>
+                <p className="text-sm text-[#354c42] leading-relaxed max-w-md">{labels.desc}</p>
               </div>
               <button
                 onClick={() => setShowMeditation(true)}
-                className="flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-xl bg-dc-accent/15 hover:bg-dc-accent/25 border border-dc-accent/30 text-dc-accent font-medium text-sm transition-all duration-200 hover:shadow-sm hover:shadow-dc-accent/10"
+                className="flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-xl bg-[#e2f2e9] hover:bg-[#d4ebdf] border border-[#9ab8a8] text-[#214b3a] font-medium text-sm transition-all duration-200 hover:shadow-sm hover:shadow-dc-accent/10"
               >
                 <Sparkles className="w-4 h-4" />
                 {labels.btn}

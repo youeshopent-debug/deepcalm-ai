@@ -34,20 +34,20 @@ export default function Header() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/60 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#132723]/95 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center justify-between h-12">
           <div className="flex items-center gap-6">
             <Link href={`/${locale}`} className="flex items-center gap-2 group">
               <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors">
-                <Moon className="w-3.5 h-3.5 text-emerald-300" />
+                <Moon className="w-3.5 h-3.5 text-[#c2f4df]" />
               </div>
               <span className="text-base font-semibold text-white tracking-tight">
-                DeepCalm<span className="text-emerald-300"> AI</span>
+                DeepCalm<span className="text-[#c2f4df]"> AI</span>
               </span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-5 text-sm text-white/65">
+            <nav className="hidden md:flex items-center gap-5 text-sm text-[#d6e8df]">
               {navItems.map((item) => (
                 <Link key={item.href} href={item.href} className="hover:text-white transition-colors">
                   {item.label}
@@ -64,7 +64,7 @@ export default function Header() {
             <div ref={mobileNavRef} className="relative md:hidden">
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="flex items-center justify-center w-9 h-9 rounded-lg text-white/65 hover:text-white hover:bg-white/10 transition-colors"
+                className="flex items-center justify-center w-9 h-9 rounded-lg text-[#d6e8df] hover:text-white hover:bg-white/10 transition-colors"
                 aria-label={mobileOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-nav-menu"
@@ -75,14 +75,14 @@ export default function Header() {
               {mobileOpen && (
                 <nav
                   id="mobile-nav-menu"
-                  className="absolute right-0 top-full mt-2 w-48 py-2 bg-slate-950/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl animate-fade-in-up"
+                  className="absolute right-0 top-full mt-2 w-48 py-2 bg-[#132723] backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl animate-fade-in-up"
                 >
                   {navItems.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block px-4 py-2.5 text-sm text-white/65 hover:text-white hover:bg-white/5 transition-colors"
+                      className="block px-4 py-2.5 text-sm text-[#d6e8df] hover:text-white hover:bg-white/5 transition-colors"
                     >
                       {item.label}
                     </Link>

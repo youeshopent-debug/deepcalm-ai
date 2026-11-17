@@ -354,26 +354,27 @@ export default function DailyCheckin() {
   return (
     <section id="daily-checkin" className="py-8">
       <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-50 rounded-2xl shadow-2xl border border-slate-200/80">
+        <div className="bg-[#f8fcf9] rounded-2xl shadow-xl border border-[#c9d9d0]">
           <div className="p-6 sm:p-8">
             <div className="text-center mb-8">
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#172a24] mb-2">
                 {tt("dailyCheckin.title")}
               </h2>
-              <p className="text-sm font-medium text-slate-600">{tt("dailyCheckin.subtitle")}</p>
+              <p className="text-sm font-medium text-[#354c42]">{tt("dailyCheckin.subtitle")}</p>
             </div>
 
             <div className="mb-8">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">{tt("dailyCheckin.sleepLabel")}</p>
+              <p className="text-xs font-semibold text-[#486257] uppercase tracking-wider mb-3">{tt("dailyCheckin.sleepLabel")}</p>
               <div className="flex gap-2">
                 {SLEEP_LEVELS.map((s) => (
                   <button
                     key={s}
+                    aria-pressed={sleep === s}
                     onClick={() => setSleep(s)}
                     className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 ${
                       sleep === s
-                        ? "bg-slate-800 text-white shadow-lg"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                        ? "bg-[#c2f4df] text-[#132723] ring-2 ring-inset ring-[#4c7862]"
+                        : "bg-[#eaf2ec] text-[#243f34] hover:bg-[#dcece1]"
                     }`}
                   >
                     {getSleepLabel(s)}
@@ -383,16 +384,17 @@ export default function DailyCheckin() {
             </div>
 
             <div className="mb-8">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">{tt("dailyCheckin.moodLabel")}</p>
+              <p className="text-xs font-semibold text-[#486257] uppercase tracking-wider mb-3">{tt("dailyCheckin.moodLabel")}</p>
               <div className="grid grid-cols-3 gap-2">
                 {MOODS.map((m) => (
                   <button
                     key={m}
+                    aria-pressed={mood === m}
                     onClick={() => setMood(m)}
                     className={`flex flex-col items-center gap-1 px-3 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${
                       mood === m
-                        ? "bg-slate-800 text-white shadow-lg"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                        ? "bg-[#c2f4df] text-[#132723] ring-2 ring-inset ring-[#4c7862]"
+                        : "bg-[#eaf2ec] text-[#243f34] hover:bg-[#dcece1]"
                     }`}
                   >
                     <span className="text-lg">{getMoodEmoji(m)}</span>
@@ -405,7 +407,7 @@ export default function DailyCheckin() {
             <button
               onClick={handleCheckin}
               disabled={!sleep || !mood}
-              className="w-full px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold rounded-xl transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg"
+              className="w-full px-6 py-3 bg-[#214b3a] hover:bg-[#285a46] text-white text-sm font-bold rounded-xl transition-all duration-300 disabled:bg-[#e5ece7] disabled:text-[#53685d] disabled:shadow-none disabled:cursor-not-allowed shadow-lg"
             >
               {tt("dailyCheckin.checkinButton")}
             </button>

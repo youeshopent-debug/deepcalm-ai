@@ -36,7 +36,7 @@ const CARDS: CardDef[] = [
       es: "Protocolo CBT-I para acortar el tiempo de conciliación del sueño",
     },
     badge: "🛡️ CBT-I 导向",
-    badgeStyle: "bg-indigo-500/15 text-indigo-400 border-indigo-500/20",
+    badgeStyle: "bg-indigo-500/15 text-indigo-800 border-indigo-500/20",
     href: "/{locale}/library/cbt-i-7day-plan",
   },
   {
@@ -60,7 +60,7 @@ const CARDS: CardDef[] = [
       es: "Evalúa tu estado de ánimo y obtén guía de respiración al instante",
     },
     badge: "✅ 专家验证",
-    badgeStyle: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
+    badgeStyle: "bg-emerald-500/15 text-emerald-800 border-emerald-500/20",
     action: "breathing",
   },
   {
@@ -84,7 +84,7 @@ const CARDS: CardDef[] = [
       es: "Domina el ciclo de 90 min para un procesamiento emocional de calidad",
     },
     badge: "🛡️ CBT-I 导向",
-    badgeStyle: "bg-indigo-500/15 text-indigo-400 border-indigo-500/20",
+    badgeStyle: "bg-indigo-500/15 text-indigo-800 border-indigo-500/20",
     action: "anchor",
     anchor: "healing-toolbox",
   },
@@ -122,7 +122,7 @@ const CTA_TEXT: Record<number, Record<Locale, string>> = {
 }
 
 const CARD_ICON_WRAPPERS = [
-  "bg-indigo-500/10 text-indigo-400",
+  "bg-indigo-500/10 text-indigo-800",
   "bg-rose-500/10 text-rose-400",
   "bg-amber-500/10 text-amber-400",
 ]
@@ -161,8 +161,8 @@ export default function ActionableToolCards({
             const isButton = card.action === "breathing" || card.action === "anchor"
 
             const sharedClasses =
-              "relative flex flex-col p-4 sm:p-5 rounded-2xl glass border border-dc-border/40 backdrop-blur-xl " +
-              "hover:border-dc-accent/25 hover:bg-dc-accent/[0.03] transition-all duration-300 group cursor-pointer"
+              "relative flex flex-col p-4 sm:p-5 rounded-2xl border border-[#c9d9d0] bg-[#f8fcf9] shadow-sm " +
+              "hover:border-[#789588] hover:bg-[#eef7f1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors group cursor-pointer"
 
             const inner = (
               <>
@@ -181,13 +181,13 @@ export default function ActionableToolCards({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-sm font-semibold text-dc-text mb-1.5 leading-snug">{title}</h3>
+                <h3 className="text-sm font-semibold text-[#172a24] mb-1.5 leading-snug">{title}</h3>
 
                 {/* Hook */}
-                <p className="text-xs text-dc-muted/70 leading-relaxed flex-1">{hook}</p>
+                <p className="text-xs text-[#354c42] leading-relaxed flex-1">{hook}</p>
 
                 {/* CTA Pill */}
-                <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full border bg-dc-accent/15 text-dc-accent border-dc-accent/20 group-hover:bg-dc-accent/25 transition-all duration-200">
+                <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full border bg-[#e2f2e9] text-[#214b3a] border-[#c9d9d0] group-hover:bg-[#d4ebdf] transition-all duration-200">
                   <span>{ctaText}</span>
                   <span className="text-xs group-hover:translate-x-0.5 transition-transform">→</span>
                 </div>
