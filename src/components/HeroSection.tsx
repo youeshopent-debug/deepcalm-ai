@@ -47,20 +47,20 @@ export default function HeroSection({
 
   return (
     <>
-      <section className="relative min-h-[27vh] sm:min-h-[32vh] flex items-center justify-center overflow-hidden pt-14">
+      <section className="relative min-h-[27vh] sm:min-h-[32vh] flex items-center justify-center px-3 pt-16 pb-4 sm:px-6">
         <div className="aurora-gradient pointer-events-none absolute inset-0" />
 
-        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs text-dc-muted tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-dc-accent animate-pulse-soft" />
+        <div className="relative z-20 mx-auto w-full max-w-3xl rounded-3xl border border-[#53746b] bg-[#132723] px-4 py-6 text-center shadow-xl sm:px-8 sm:py-7">
+          <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#25443a] text-xs text-[#d6e8df] tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c2f4df]" />
             Midnight Sanctuary
           </div>
 
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-dc-text animate-breath-glow transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-[#f4faf6] transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
             {title}
           </h1>
 
-          <p className={`mt-5 text-base sm:text-lg text-dc-muted leading-relaxed max-w-xl mx-auto transition-all duration-1000 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <p className={`mt-5 text-base sm:text-lg text-[#d6e8df] leading-relaxed max-w-xl mx-auto transition-all duration-1000 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
             {subtitle}
           </p>
 
@@ -84,8 +84,10 @@ export default function HeroSection({
           {/* Theme selector */}
           <div className="relative mt-6 inline-flex items-center gap-1">
             <button
+              type="button"
+              aria-expanded={themeOpen}
               onClick={() => setThemeOpen((v) => !v)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass border border-dc-border/30 text-dc-muted text-[11px] hover:text-dc-text hover:border-dc-accent/30 transition-all"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-[#91b9ab] bg-[#203b33] px-3 text-sm text-[#f4faf6] transition-colors hover:bg-[#25443a]"
             >
               <span>{currentThemeLabel.icon}</span>
               <span>{currentThemeLabel.label}</span>
@@ -98,15 +100,15 @@ export default function HeroSection({
             </button>
 
             {themeOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 flex gap-1 p-1.5 glass border border-dc-border/30 rounded-xl shadow-xl z-20">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 z-30 mt-2 grid w-56 grid-cols-2 gap-1 rounded-xl border border-[#91b9ab] bg-[#132723] p-1.5 shadow-xl">
                 {THEME_OPTIONS.map((opt) => (
                   <button
                     key={opt.id}
                     onClick={() => { setTheme(opt.id); setThemeOpen(false) }}
                     className={`flex flex-col items-center gap-0.5 px-3 py-2 rounded-lg text-[10px] transition-all ${
                       theme === opt.id
-                        ? "bg-dc-accent/15 text-dc-accent"
-                        : "text-dc-muted hover:text-dc-text hover:bg-dc-surface/60"
+                        ? "bg-[#25443a] text-[#c2f4df]"
+                        : "text-[#f4faf6] hover:bg-[#203b33]"
                     }`}
                   >
                     <span className="text-base">{opt.icon}</span>
