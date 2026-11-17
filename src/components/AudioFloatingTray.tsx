@@ -35,9 +35,6 @@ export default function AudioFloatingTray() {
   const hasInitRef = useRef(false)
   const { theme } = useTheme()
   const { locale } = useLanguage()
-  const label = locale === "zh"
-    ? binauralMode ? "3D 音效" : isAnyPlaying ? "播放中" : "环境音"
-    : binauralMode ? "3D Sound" : isAnyPlaying ? "Playing" : "Ambient"
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -77,6 +74,9 @@ export default function AudioFloatingTray() {
   }, [theme])
 
   const isAnyPlaying = Object.values(channelStates).some((v) => v)
+  const label = locale === "zh"
+    ? binauralMode ? "3D 音效" : isAnyPlaying ? "播放中" : "环境音"
+    : binauralMode ? "3D Sound" : isAnyPlaying ? "Playing" : "Ambient"
 
   function handleChannelToggle(id: ChannelId) {
     audioEngine.init()
