@@ -1,7 +1,6 @@
 "use client"
 
 import { useLanguage } from "@/context/LanguageContext"
-import { mockChatReply } from "@/lib/mockCounselor"
 import { toPng } from "html-to-image"
 import {
   Heart,
@@ -9,38 +8,13 @@ import {
   MessageCircleHeart,
   Sparkles,
   X,
-  Brain,
-  Play,
-  FileText,
 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
-import {
-  buildDiagnosisPayload,
-  parseStructuredResponse,
-  detectAcuteAnxiety,
-  generateDiagnosisReport,
-} from "@/lib/counselor/diagnosisEngine"
-import type {
-  ParsedResponse,
-  DiagnosisReport,
-  AcuteAnxietyResult,
-} from "@/lib/counselor/diagnosisEngine"
-import { saveDiagnosisReport } from "@/lib/meditationHistory"
-import MeditationController from "./MeditationController"
-
 /* ── Types ── */
 
 interface Message {
   role: "user" | "counselor"
   content: string
-  parsed?: ParsedResponse       // 3-part structured rendering data
-}
-
-interface UsageInfo {
-  model: string
-  inputTokens: number
-  outputTokens: number
-  cost: number
 }
 
 interface MemoryData {
@@ -105,227 +79,22 @@ function loadMemory(): MemoryData | null {
   } catch { return null }
 }
 
-/* ── Structured message bubble renderer ── */
-
-function StructuredMessage({ parsed, raw }: { parsed: ParsedResponse; raw: string }) {
-  const hasAnalysis = parsed.analysis.length > 0
-  const hasScience = parsed.scienceAlignment.length > 0
-  const hasAction = parsed.actionPlan.length > 0
-
-  // If no sections were parsed, render raw text
-  if (!hasAnalysis && !hasScience && !hasAction) {
-    return <p className="text-xl leading-relaxed whitespace-pre-wrap">{raw}</p>
-  }
-
-  return (
-    <div className="space-y-3">
-      {hasAnalysis && (
-        <div className="border-l-4 border-blue-400/50 pl-3 py-1">
-          <p className="text-[10px] uppercase tracking-widest text-blue-400/70 font-semibold mb-1">现状解析</p>
-          <p className="text-xl leading-relaxed text-dc-text">{parsed.analysis}</p>
-        </div>
-      )}
-      {hasScience && (
-        <div className="border-l-4 border-emerald-400/50 pl-3 py-1">
-          <p className="text-[10px] uppercase tracking-widest text-emerald-400/70 font-semibold mb-1">科学原理对齐</p>
-          <p className="text-sm leading-relaxed text-dc-muted">{parsed.scienceAlignment}</p>
-        </div>
-      )}
-      {hasAction && (
-        <div className="border-l-4 border-amber-400/50 pl-3 py-1">
-          <p className="text-[10px] uppercase tracking-widest text-amber-400/70 font-semibold mb-1">即时行动方案</p>
-          <p className="text-sm leading-relaxed text-dc-text">{parsed.actionPlan}</p>
-        </div>
-      )}
-    </div>
-  )
-}
-
-/* ── Diagnosis Report Card ── */
-
-function DiagnosisReportCard({
-  report,
-  onClose,
-  locale,
-}: {
-  report: DiagnosisReport
-  onClose: () => void
-  locale: string
-}) {
-  const anxietyColor = report.anxietyIndex >= 70 ? "text-red-400" : report.anxietyIndex >= 40 ? "text-amber-400" : "text-emerald-400"
-  const sleepColor = report.sleepQuality >= 70 ? "text-emerald-400" : report.sleepQuality >= 40 ? "text-amber-400" : "text-red-400"
-
-  const patternLabel = (locale === "zh" ? "检测到认知扭曲" : "Cognitive Patterns Detected")
-  const anxietyLabel = (locale === "zh" ? "焦虑指数" : "Anxiety Index")
-  const sleepLabel = (locale === "zh" ? "睡眠质量" : "Sleep Quality")
-  const summaryLabel = (locale === "zh" ? "诊断摘要" : "Diagnosis Summary")
-  const roundLabel = (locale === "zh" ? "对话轮次" : "Dialogue Rounds")
-  const closeLabel = (locale === "zh" ? "关闭报告" : "Close Report")
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in-glow" onClick={onClose}>
-      <div
-        className="relative w-[90vw] max-w-md max-h-[80vh] overflow-y-auto bg-dc-surface/95 backdrop-blur-xl border border-dc-border rounded-3xl p-6 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5 text-dc-accent" />
-            <h3 className="text-base font-semibold text-dc-text">{locale === "zh" ? "诊断报告" : "Diagnosis Report"}</h3>
-          </div>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-dc-accent/10 transition-colors">
-            <X className="w-4 h-4 text-dc-muted" />
-          </button>
-        </div>
-
-        <div className="space-y-4">
-          {/* Anxiety Index */}
-          <div className="bg-dc-deep/40 rounded-xl p-4">
-            <p className="text-xs text-dc-muted/60 mb-2">{anxietyLabel}</p>
-            <div className="flex items-center gap-3">
-              <span className={`text-2xl font-bold ${anxietyColor}`}>{report.anxietyIndex}</span>
-              <span className="text-xs text-dc-muted/40">/ 100</span>
-              <div className="flex-1 h-2 bg-dc-deep/60 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-700 ${report.anxietyIndex >= 70 ? "bg-red-400" : report.anxietyIndex >= 40 ? "bg-amber-400" : "bg-emerald-400"}`}
-                  style={{ width: `${report.anxietyIndex}%` }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Sleep Quality */}
-          <div className="bg-dc-deep/40 rounded-xl p-4">
-            <p className="text-xs text-dc-muted/60 mb-2">{sleepLabel}</p>
-            <div className="flex items-center gap-3">
-              <span className={`text-2xl font-bold ${sleepColor}`}>{report.sleepQuality}</span>
-              <span className="text-xs text-dc-muted/40">/ 100</span>
-              <div className="flex-1 h-2 bg-dc-deep/60 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-700 ${report.sleepQuality >= 70 ? "bg-emerald-400" : report.sleepQuality >= 40 ? "bg-amber-400" : "bg-red-400"}`}
-                  style={{ width: `${report.sleepQuality}%` }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Cognitive Patterns */}
-          {report.cognitivePatterns.length > 0 && (
-            <div className="bg-dc-deep/40 rounded-xl p-4">
-              <p className="text-xs text-dc-muted/60 mb-2">{patternLabel}: {report.cognitivePatterns.length}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {report.cognitivePatterns.map((p, i) => (
-                  <span key={i} className="px-2 py-0.5 text-[10px] bg-dc-accent/10 text-dc-accent/80 rounded-full">
-                    {p}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Summary */}
-          <div className="bg-dc-deep/40 rounded-xl p-4">
-            <p className="text-xs text-dc-muted/60 mb-1">{summaryLabel}</p>
-            <p className="text-sm text-dc-text/80 leading-relaxed">{report.summary}</p>
-          </div>
-
-          {/* Footer info */}
-          <div className="flex justify-between text-[10px] text-dc-muted/40">
-            <span>{roundLabel}: {report.dialogueRound}</span>
-            <span>{new Date(report.date).toLocaleDateString()}</span>
-          </div>
-
-          <button
-            onClick={onClose}
-            className="w-full py-2.5 rounded-xl bg-dc-accent/15 text-dc-accent text-sm font-medium hover:bg-dc-accent/25 transition-colors"
-          >
-            {closeLabel}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ── Meditation Prompt Card ── */
-
-function MeditationPromptCard({
-  trigger,
-  onStart,
-  onDismiss,
-  locale,
-}: {
-  trigger: AcuteAnxietyResult
-  onStart: () => void
-  onDismiss: () => void
-  locale: string
-}) {
-  const title = locale === "zh" ? "检测到焦虑信号" : "Anxiety Detected"
-  const desc = trigger.reason
-  const actionLabel = locale === "zh" ? "开始冥想引导" : "Start Guided Meditation"
-  const dismissLabel = locale === "zh" ? "稍后再说" : "Later"
-
-  return (
-    <div className="shrink-0 px-4 sm:px-6 py-2 animate-fade-in-glow">
-      <div className="bg-gradient-to-r from-amber-500/10 via-rose-500/10 to-transparent border border-amber-500/20 rounded-2xl px-4 sm:px-6 py-4">
-        <div className="flex items-start gap-3">
-          <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0 mt-0.5">
-            <Brain className="w-4 h-4 text-amber-400" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-amber-300 mb-1">{title}</p>
-            <p className="text-xs text-dc-muted/70 leading-relaxed mb-3">{desc}</p>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={onStart}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 text-xs font-medium hover:bg-amber-500/30 transition-colors"
-              >
-                <Play className="w-3 h-3" />
-                {actionLabel}
-              </button>
-              <button
-                onClick={onDismiss}
-                className="px-3 py-1.5 rounded-lg text-dc-muted/50 text-xs hover:text-dc-muted/80 transition-colors"
-              >
-                {dismissLabel}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 /* ── Main Component ── */
 
 export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?: string; onClose?: () => void }) {
   const { tt, locale } = useLanguage()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
+  const [chatUnavailable, setChatUnavailable] = useState(false)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [showWelcome, setShowWelcome] = useState(true)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [showShareSuccess, setShowShareSuccess] = useState(false)
-  const [lastUsage, setLastUsage] = useState<UsageInfo | null>(null)
-  const [totalCost, setTotalCost] = useState(0)
-  const [showDecompose, setShowDecompose] = useState(false)
-  const [decomposeSteps, setDecomposeSteps] = useState<string[]>([])
-  const [isDecomposing, setIsDecomposing] = useState(false)
   const [returnVisitor, setReturnVisitor] = useState<MemoryData | null>(null)
   const memorySavedRef = useRef(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const shareRef = useRef<HTMLDivElement>(null)
   const initialPromptConsumedRef = useRef(false)
-
-  // ── P0/P1 New State ──
-  const [dialogueRound, setDialogueRound] = useState(1)
-  const [showMeditationPrompt, setShowMeditationPrompt] = useState(false)
-  const [meditationTrigger, setMeditationTrigger] = useState<AcuteAnxietyResult | null>(null)
-  const [showMeditation, setShowMeditation] = useState(false)
-  const [diagnosisReport, setDiagnosisReport] = useState<DiagnosisReport | null>(null)
-  const [showReportCard, setShowReportCard] = useState(false)
-  const [lastParsedResponse, setLastParsedResponse] = useState<ParsedResponse | null>(null)
 
   /** Load memory on mount */
   useEffect(() => {
@@ -340,16 +109,15 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
-  /* ── Handle Send (P0: System Prompt Injection + P1: Anxiety Detection) ── */
+  /* ── Handle Send ── */
 
   const handleSend = async (textOverride?: string) => {
     const text = (textOverride ?? input).trim()
     if (!text || isAnalyzing) return
     setInput("")
+    setChatUnavailable(false)
     setShowWelcome(false)
     setShowShareSuccess(false)
-    // Dismiss meditation prompt on new user message
-    setShowMeditationPrompt(false)
 
     const userMsg: Message = { role: "user", content: text }
     setMessages((prev) => [...prev, userMsg])
@@ -367,119 +135,37 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
     try {
       const history = messages.map((m) => ({ role: m.role, content: m.content }))
 
-      // P0: Build enhanced payload with system prompt injection
-      const payload = buildDiagnosisPayload(text, history, locale, dialogueRound)
-
       const res = await fetch("/api/analyze-anxiety", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ text, history: history.slice(-8), locale }),
       })
 
       if (!res.ok) throw new Error(`API returned ${res.status}`)
 
       const data = await res.json()
-      const responseContent = data.content || ""
+      if (typeof data.content !== "string" || !data.content.trim()) throw new Error("Empty response")
+      setMessages((prev) => [...prev, { role: "counselor", content: data.content }])
 
-      // P0: Parse structured 3-part response
-      const parsed = parseStructuredResponse(responseContent, locale)
-      setLastParsedResponse(parsed)
-
-      const counselorMsg: Message = {
-        role: "counselor",
-        content: responseContent,
-        parsed,
-      }
-      setMessages((prev) => [...prev, counselorMsg])
-
-      if (data.usage) {
-        setLastUsage(data.usage)
-        setTotalCost((prev) => prev + (data.usage.cost || 0))
-      }
-
-      // P1: Detect acute anxiety → trigger meditation prompt
-      const anxietyResult = detectAcuteAnxiety(text, locale)
-      if (anxietyResult.isAcute) {
-        setMeditationTrigger(anxietyResult)
-        setShowMeditationPrompt(true)
-      }
     } catch {
-      // Fallback: use mock with enhanced 3-part structure
-      const fallbackContent = mockChatReply(locale, text)
-      const parsedFallback = parseStructuredResponse(fallbackContent, locale)
-      const fallbackMsg: Message = {
-        role: "counselor",
-        content: fallbackContent,
-        parsed: parsedFallback,
-      }
-      setMessages((prev) => [...prev, fallbackMsg])
+      setMessages((prev) => prev.slice(0, -1))
+      setInput(text)
+      setChatUnavailable(true)
+      setShowWelcome(messages.length === 0)
+    } finally {
+      setIsAnalyzing(false)
     }
-
-    // Advance dialogue round
-    const nextRound = dialogueRound + 1
-    setDialogueRound(nextRound)
-
-    // P1: Generate diagnosis report when entering diagnosis phase (round > 3)
-    if (nextRound > 4) {
-      const allMessages = [...messages, { role: "user" as const, content: text }]
-      const report = generateDiagnosisReport(allMessages, locale, nextRound)
-      setDiagnosisReport(report)
-      saveDiagnosisReport({
-        id: report.id,
-        date: report.date,
-        anxietyIndex: report.anxietyIndex,
-        sleepQuality: report.sleepQuality,
-        cognitivePatterns: report.cognitivePatterns,
-        dialogueRound: report.dialogueRound,
-        summary: report.summary,
-        locale: report.locale,
-      })
-    }
-
-    setIsAnalyzing(false)
   }
 
-  /* ── Auto-consume initialPrompt (topic-context injection) ── */
+  /* ── Prefill the selected topic ── */
   useEffect(() => {
     if (initialPrompt && !initialPromptConsumedRef.current) {
       initialPromptConsumedRef.current = true
-      setShowWelcome(false)
+      setInput(initialPrompt.slice(0, 2000))
       setDrawerOpen(true)
-      handleSend(initialPrompt)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPrompt])
-
-  /* ── Decompose (existing) ── */
-
-  const handleDecompose = async () => {
-    const lastUserMsg = [...messages].reverse().find((m) => m.role === "user")
-    if (!lastUserMsg) return
-    setIsDecomposing(true)
-    try {
-      const res = await fetch("/api/analyze-anxiety/decompose", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: lastUserMsg.content, locale }),
-      })
-      if (!res.ok) throw new Error(`decompose API returned ${res.status}`)
-      const data = await res.json()
-      if (Array.isArray(data.steps) && data.steps.length === 3) {
-        setDecomposeSteps(data.steps)
-        setShowDecompose(true)
-      }
-    } catch {
-      // Silent fail
-    }
-    setIsDecomposing(false)
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSend()
-    }
-  }
 
   /* ── Share (existing) ── */
 
@@ -524,34 +210,6 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
     }
   }
 
-  /* ── Meditation Trigger Handlers ── */
-
-  const handleStartMeditation = () => {
-    setShowMeditation(true)
-    setShowMeditationPrompt(false)
-  }
-
-  const handleDismissMeditation = () => {
-    setShowMeditationPrompt(false)
-    setMeditationTrigger(null)
-  }
-
-  const handleCloseMeditation = () => {
-    setShowMeditation(false)
-  }
-
-  /* ── Diagnosis Report Handlers ── */
-
-  const handleShowReport = () => {
-    if (diagnosisReport) {
-      setShowReportCard(true)
-    }
-  }
-
-  const handleCloseReport = () => {
-    setShowReportCard(false)
-  }
-
   const lastCounselorMsg = [...messages].reverse().find((m) => m.role === "counselor")
 
   return (
@@ -559,10 +217,10 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
       <div
         className={`
           relative z-10 flex flex-col
-          w-full min-h-[70vh] max-h-[85vh]
+          w-full
           ${drawerOpen
-            ? "fixed inset-0 z-50 bg-[#132723] [--dc-text:#f4faf6] [--dc-muted:#d6e8df]"
-            : "max-w-5xl mx-auto min-h-[70vh] max-h-[85vh]"
+            ? "fixed inset-0 z-50 h-[100dvh] bg-[#132723] [--dc-text:#f4faf6] [--dc-muted:#d6e8df]"
+            : "max-w-5xl mx-auto min-h-[28rem] max-h-[85vh]"
           }
         `}
       >
@@ -588,6 +246,12 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
             )}
           </div>
         </div>
+
+        <p className="px-4 pb-3 text-sm text-dc-muted sm:px-6">
+          {locale === "zh"
+            ? "AI 情绪支持。消息会发送至 AI 服务处理，请勿填写个人身份资料。诊疗请咨询专业人员。"
+            : "AI emotional support. Messages are processed by an AI service. Leave out identifying details and seek professional care for diagnosis or treatment."}
+        </p>
 
         {/* Messages Area */}
         <div
@@ -664,12 +328,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
                       }
                     `}
                   >
-                    {/* P0: Render 3-part structure if available */}
-                    {msg.role === "counselor" && msg.parsed ? (
-                      <StructuredMessage parsed={msg.parsed} raw={msg.content} />
-                    ) : (
-                      <p className="whitespace-pre-wrap">{msg.content}</p>
-                    )}
+                    <p className="whitespace-pre-wrap break-words">{msg.content}</p>
                   </div>
                 </div>
               ))}
@@ -690,7 +349,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
           )}
         </div>
 
-        {/* Action Buttons Row (Share + Diagnosis Report + Round indicator) */}
+        {/* Share actions */}
         {!showWelcome && lastCounselorMsg && (
           <div className="px-4 sm:px-6 pb-1 shrink-0">
             <div className="flex items-center gap-2 justify-center flex-wrap">
@@ -702,22 +361,6 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
                 <span>{tt("common.healPoster")}</span>
               </button>
 
-              {/* P1: Diagnosis Report Button */}
-              {diagnosisReport && (
-                <button
-                  onClick={handleShowReport}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-dc-muted hover:text-emerald-400 bg-dc-surface/40 hover:bg-emerald-500/10 rounded-full transition-all duration-300"
-                >
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>{locale === "zh" ? "诊断报告" : "Diagnosis"}</span>
-                </button>
-              )}
-
-              {/* P0: Round Indicator */}
-              <span className="text-[10px] text-dc-muted/30 px-2">
-                {locale === "zh" ? `第${dialogueRound}轮` : `R${dialogueRound}`}
-              </span>
-
               {showShareSuccess && (
                 <span className="text-xs text-emerald-400 animate-fade-in-glow">
                   ✅ {tt("common.healPosterSaved")}
@@ -727,51 +370,10 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
           </div>
         )}
 
-        {/* P1: Meditation Prompt Card */}
-        {showMeditationPrompt && meditationTrigger && !showMeditation && (
-          <MeditationPromptCard
-            trigger={meditationTrigger}
-            onStart={handleStartMeditation}
-            onDismiss={handleDismissMeditation}
-            locale={locale}
-          />
-        )}
-
-        {/* P1: Meditation Controller (overlay) */}
-        {showMeditation && (
-          <div className="fixed inset-0 z-50">
-            <MeditationController
-              onClose={handleCloseMeditation}
-              initialEmotion={meditationTrigger?.emotion ?? "anxiety"}
-            />
-          </div>
-        )}
-
-        {/* Existing Decompose Card */}
-        {showDecompose && decomposeSteps.length === 3 && (
-          <div className="shrink-0 px-4 sm:px-6 py-2 animate-fade-in-glow">
-            <div className="bg-dc-surface/60 backdrop-blur-md border border-dc-border/60 rounded-2xl px-4 sm:px-6 py-4">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-dc-muted/60 font-medium tracking-wide">⚡ 快拆 · 3 步行动</p>
-                <button
-                  onClick={() => setShowDecompose(false)}
-                  className="text-dc-muted/40 hover:text-dc-muted transition-colors"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="space-y-2">
-                {decomposeSteps.map((step, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-dc-accent/20 text-dc-accent text-[10px] font-bold flex items-center justify-center mt-0.5">
-                      {i + 1}
-                    </span>
-                    <p className="text-sm text-dc-text/80 leading-relaxed">{step}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+        {chatUnavailable && (
+          <p role="status" className="px-4 text-sm text-dc-muted sm:px-6">
+            {locale === "zh" ? "AI 暂时无法连接。你的文字已保留，可以稍后重试。" : "AI is temporarily unavailable. Your text is still here. Please try again shortly."}
+          </p>
         )}
 
         {/* Input Area */}
@@ -780,29 +382,16 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
             <input
               type="text"
               value={input}
+              maxLength={2000}
+              disabled={isAnalyzing}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.nativeEvent.isComposing) void handleSend()
+              }}
               placeholder={tt("aiCounselor.placeholder")}
               className="min-w-0 flex-1 bg-transparent text-base text-[#f4faf6] placeholder:text-[#c5dbd1] outline-none sm:text-xl"
               onClick={() => setDrawerOpen(true)}
             />
-            {!showWelcome && messages.filter((m) => m.role === "counselor").length > 0 && (
-              <button
-                onClick={handleDecompose}
-                disabled={isDecomposing}
-                className="px-3 py-2 rounded-xl text-sm font-medium bg-purple-500/15 text-purple-400 hover:bg-purple-500/25 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shrink-0"
-              >
-                {isDecomposing ? (
-                  <span className="flex items-center gap-1">
-                    <span className="w-2 h-2 bg-purple-400/60 rounded-full animate-pulse-soft" />
-                    <span className="w-2 h-2 bg-purple-400/60 rounded-full animate-pulse-soft" style={{ animationDelay: "0.3s" }} />
-                    <span className="w-2 h-2 bg-purple-400/60 rounded-full animate-pulse-soft" style={{ animationDelay: "0.6s" }} />
-                  </span>
-                ) : (
-                  "⚡ 快拆"
-                )}
-              </button>
-            )}
             <button
               onClick={() => handleSend()}
               disabled={!input.trim() || isAnalyzing}
@@ -813,15 +402,6 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
           </div>
         </div>
       </div>
-
-      {/* P1: Diagnosis Report Modal */}
-      {showReportCard && diagnosisReport && (
-        <DiagnosisReportCard
-          report={diagnosisReport}
-          onClose={handleCloseReport}
-          locale={locale}
-        />
-      )}
 
       {/* Share Poster (hidden) */}
       <div
