@@ -4,6 +4,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/pdfs/:lang(zh|en|ms|ja|ko|th|es)/:slug([a-z0-9_-]+).pdf",
+        destination: "/:lang/library/:slug/print",
+        permanent: true,
+      },
+      {
         source: "/:lang(zh|en|ms|ja|ko|th|es)/social",
         destination: "/social",
         permanent: true,
