@@ -1,5 +1,4 @@
 import type { Locale } from "@/types"
-import { PRIMARY_REVIEWER } from "@/data/medical-review-board"
 
 const BASE = "https://deepcalm-ai.com"
 
@@ -117,7 +116,6 @@ interface TopicJsonLdProps {
 export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, references }: TopicJsonLdProps) {
   const pageUrl = `${BASE}/${locale}/topic/${slug}`
   const catLabel = SLUG_TO_EN[topic.category] || topic.category
-  const today = new Date().toISOString().split("T")[0]
 
   const imageUrl = topic.image || `https://deepcalm-ai.com/og-images/library/${slug}.png`
 
@@ -129,8 +127,7 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, refe
       description: topic.description,
       keywords: topic.keywords,
       url: pageUrl,
-      datePublished: datePublished || "2025-01-01",
-      dateModified: today,
+      ...(datePublished ? { datePublished } : {}),
       inLanguage: locale,
       about: { "@type": "Thing", name: catLabel },
       isPartOf: { "@type": "WebPage", "@id": pageUrl, url: pageUrl, inLanguage: locale },
@@ -145,16 +142,6 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, refe
         url: imageUrl,
         width: 1200,
         height: 630,
-      },
-      author: {
-        "@type": "Person",
-        "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
-        name: PRIMARY_REVIEWER.name,
-        url: PRIMARY_REVIEWER.linkedin,
-        jobTitle: PRIMARY_REVIEWER.title.en,
-        description: PRIMARY_REVIEWER.bio.en,
-        sameAs: PRIMARY_REVIEWER.linkedin,
-        knowsAbout: PRIMARY_REVIEWER.specialties.en,
       },
       publisher: {
         "@type": "Organization",
@@ -177,24 +164,6 @@ export function TopicJsonLd({ locale, slug, topic, faqItems, datePublished, refe
       about: { "@type": "MedicalCondition", name: catLabel },
       isPartOf: { "@type": "WebPage", "@id": pageUrl },
       mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
-      author: {
-        "@type": "Person",
-        "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
-        name: PRIMARY_REVIEWER.name,
-        url: PRIMARY_REVIEWER.linkedin,
-        jobTitle: PRIMARY_REVIEWER.title.en,
-      },
-      reviewedBy: {
-        "@type": "Person",
-        "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
-        name: PRIMARY_REVIEWER.name,
-        url: PRIMARY_REVIEWER.linkedin,
-        jobTitle: PRIMARY_REVIEWER.title.en,
-        description: PRIMARY_REVIEWER.bio.en,
-        sameAs: PRIMARY_REVIEWER.linkedin,
-        knowsAbout: PRIMARY_REVIEWER.specialties.en,
-      },
-      lastReviewed: today,
       medicalSpecialty: {
         "@type": "MedicalSpecialty",
         name: "MentalHealth",
@@ -249,7 +218,6 @@ const SANCTUARY_DESC: Record<Locale, string> = {
 
 export function SanctuaryWebPageJsonLd({ locale }: { locale: Locale }) {
   const pageUrl = `${BASE}/${locale}/sanctuary`
-  const today = new Date().toISOString().split("T")[0]
 
   const json = {
     "@context": "https://schema.org",
@@ -261,18 +229,6 @@ export function SanctuaryWebPageJsonLd({ locale }: { locale: Locale }) {
     inLanguage: locale,
     isPartOf: { "@id": `${BASE}#website` },
     about: { "@type": "Thing", name: "Mental Health & Sleep Wellness" },
-    dateModified: today,
-    reviewedBy: {
-      "@type": "Person",
-      "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
-      name: PRIMARY_REVIEWER.name,
-      url: PRIMARY_REVIEWER.linkedin,
-      jobTitle: PRIMARY_REVIEWER.title.en,
-      description: PRIMARY_REVIEWER.bio.en,
-      sameAs: PRIMARY_REVIEWER.linkedin,
-      knowsAbout: PRIMARY_REVIEWER.specialties.en,
-    },
-    lastReviewed: today,
     audience: {
       "@type": "Audience",
       audienceType: "Adults experiencing sleep difficulties, anxiety, or emotional distress",
@@ -307,7 +263,6 @@ export function FaqJsonLd({ items, locale }: { items: FaqItem[]; locale: Locale 
  */
 export function MedicalWebPageJsonLd({ locale }: { locale: Locale }) {
   const pageUrl = `${BASE}/${locale}`
-  const today = new Date().toISOString().split("T")[0]
 
   const json = {
     "@context": "https://schema.org",
@@ -320,17 +275,6 @@ export function MedicalWebPageJsonLd({ locale }: { locale: Locale }) {
     inLanguage: locale,
     about: { "@type": "MedicalCondition", name: "Mental Health" },
     mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
-    reviewedBy: {
-      "@type": "Person",
-      "@id": `${BASE}#reviewer-${PRIMARY_REVIEWER.id}`,
-      name: PRIMARY_REVIEWER.name,
-      url: PRIMARY_REVIEWER.linkedin,
-      jobTitle: PRIMARY_REVIEWER.title.en,
-      description: PRIMARY_REVIEWER.bio.en,
-      sameAs: PRIMARY_REVIEWER.linkedin,
-      knowsAbout: PRIMARY_REVIEWER.specialties.en,
-    },
-    lastReviewed: today,
     medicalSpecialty: {
       "@type": "MedicalSpecialty",
       name: "MentalHealth",
