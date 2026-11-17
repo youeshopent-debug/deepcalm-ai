@@ -50,7 +50,7 @@ export default function HeroSection({
       <section className="relative min-h-[27vh] sm:min-h-[32vh] flex items-center justify-center px-3 pt-16 pb-4 sm:px-6">
         <div className="aurora-gradient pointer-events-none absolute inset-0" />
 
-        <div className="relative z-20 mx-auto w-full max-w-3xl rounded-3xl border border-[#53746b] bg-[#132723] px-4 py-6 text-center shadow-xl sm:px-8 sm:py-7">
+        <div className="relative z-20 mx-auto w-full max-w-3xl rounded-3xl border border-[#53746b] bg-[#132723]/85 px-4 py-6 text-center shadow-xl sm:px-8 sm:py-7">
           <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#25443a] text-xs text-[#d6e8df] tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#c2f4df]" />
             Midnight Sanctuary
