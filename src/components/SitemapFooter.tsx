@@ -16,47 +16,51 @@ const CATEGORY_KEYS: { i18nKey: string; items: string[] }[] = [
   { i18nKey: "sitemap.categories.emotional_health", items: ["anger-management","emotional-regulation","mood-tracking","burnout","resilience"] },
 ];
 
+const linkStyle = "inline-flex min-h-9 items-center rounded-sm py-1 text-sm leading-snug text-[#e2eee8] underline-offset-4 hover:text-white hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c2f4df]"
+
 export default function SitemapFooter() {
   const { tt, locale } = useLanguage();
 
   return (
-    <footer className="w-full border-t border-[var(--dc-border)]/40 bg-[var(--dc-surface)]/60 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">
+    <footer className="relative z-10 w-full border-t border-[#53746b] bg-[#132723] text-[#f4faf6]">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+        <Link href={`/${locale}/library`} className={`${linkStyle} mb-5 gap-2 font-semibold`}>
+          {tt("nav.library")} <span aria-hidden="true" className="text-[#c2f4df]">→</span>
+        </Link>
+        <nav aria-label={tt("nav.library")} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {CATEGORY_KEYS.map((cat) => (
-            <div key={cat.i18nKey}>
-              <h4 className="text-xs font-semibold text-[var(--dc-accent)] uppercase tracking-wider mb-2">
+            <section key={cat.i18nKey} className="min-w-0 rounded-2xl border border-[#53746b] bg-[#203b33] p-4">
+              <h2 className="mb-1 text-base font-semibold text-[#c2f4df]">
                 {tt(cat.i18nKey)}
-              </h4>
-              <ul className="space-y-1">
+              </h2>
+              <ul className="grid grid-cols-2 gap-x-3">
                 {cat.items.map((slug) => {
                   const topic = getTopicBySlug(slug, locale);
                   const href = `/${locale}/library/${slug}`;
                   return (
-                    <li key={slug}>
+                    <li key={slug} className="min-w-0">
                       <Link
                         href={href}
-                        scroll={false}
-                        className="text-[11px] text-[var(--dc-muted)] hover:text-[var(--dc-accent)] transition-colors duration-200"
+                        className={linkStyle}
                       >
-                        {topic?.title || slug.replace(/-/g, " ")}
+                        <span className="min-w-0 break-words">{topic?.title || slug.replace(/-/g, " ")}</span>
                       </Link>
                     </li>
                   );
                 })}
               </ul>
-            </div>
+            </section>
           ))}
-        </div>
+        </nav>
 
-        <div className="mt-6 pt-4 border-t border-[var(--dc-border)]/20 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-[var(--dc-muted)]">
+        <div className="mt-7 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-[#53746b] pt-4 text-sm text-[#d6e8df]">
           <span>&copy; {new Date().getFullYear()} DeepCalm AI &middot; Midnight Sanctuary</span>
-          <div className="flex items-center gap-3">
-            <Link href={`/${locale}`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.home")}</Link>
-            <Link href={`/${locale}/#daily-checkin`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.dailyCheckin")}</Link>
-            <Link href={`/${locale}/privacy`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.privacy")}</Link>
-            <Link href={`/${locale}/terms`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.terms")}</Link>
-            <Link href={`/${locale}/about`} className="hover:text-[var(--dc-accent)] transition-colors">{tt("sitemap.about")}</Link>
+          <div className="flex flex-wrap gap-x-4">
+            <Link href={`/${locale}`} className={linkStyle}>{tt("sitemap.home")}</Link>
+            <Link href={`/${locale}/#daily-checkin`} className={linkStyle}>{tt("sitemap.dailyCheckin")}</Link>
+            <Link href={`/${locale}/privacy`} className={linkStyle}>{tt("sitemap.privacy")}</Link>
+            <Link href={`/${locale}/terms`} className={linkStyle}>{tt("sitemap.terms")}</Link>
+            <Link href={`/${locale}/about`} className={linkStyle}>{tt("sitemap.about")}</Link>
           </div>
         </div>
       </div>
