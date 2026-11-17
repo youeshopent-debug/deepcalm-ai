@@ -2,7 +2,6 @@ import type { Locale } from "@/types"
 import { getDict, tt } from "@/lib/getDict"
 import { notFound } from "next/navigation"
 import Breadcrumb from "@/components/Breadcrumb"
-import ExpertBadge from "@/components/ExpertBadge"
 import AiEntrance from "@/components/AiEntrance"
 import { BreadcrumbJsonLd, TopicJsonLd } from "@/components/JsonLd"
 import { ArrowLeft, CheckCircle, Moon, Sparkles } from "lucide-react"
@@ -213,8 +212,6 @@ export default async function Cbti7DayPlanPage({ params }: { params: Promise<{ l
               </div>
             </div>
           </div>
-
-          <ExpertBadge locale={locale} />
 
           {/* Day-by-day plan */}
           <div className="space-y-6 mb-16">

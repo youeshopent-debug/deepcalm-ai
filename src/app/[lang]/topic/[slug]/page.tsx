@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 import SsrAccordion from "@/components/SsrAccordion";
 import { TopicJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
 import AiEntrance from "@/components/AiEntrance";
-import MedicallyReviewed from "@/components/MedicallyReviewed";
 import ScienceChart from "@/components/ScienceChart";
 import MicroSelfTest from "@/components/MicroSelfTest";
 
@@ -137,11 +136,6 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ la
 
           {/* ── 首屏微自测工具：一键生成专属睡眠报告 ── */}
           <MicroSelfTest locale={locale} />
-
-          {/* ── YMYL 医学审核委员会浮动卡片 ── */}
-          <div className="mb-8">
-            <MedicallyReviewed locale={locale} />
-          </div>
 
           <div className="space-y-8">
             <SsrAccordion
