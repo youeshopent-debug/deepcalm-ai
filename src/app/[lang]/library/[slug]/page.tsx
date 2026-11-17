@@ -165,6 +165,10 @@ export default async function LibraryDetailPage({ params }: { params: Promise<{ 
                     <p className="mt-3 text-xs leading-relaxed text-slate-600">
                       下载后可用 Excel 或其他表格软件填写。填写内容保存在你自己的文件里。
                     </p>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      如果睡眠问题持续并影响日常生活，可向医护专业人员咨询。
+                      <a href="https://doi.org/10.5664/jcsm.8986" className="ml-1 text-sky-800 underline underline-offset-4">AASM 成人慢性失眠临床指南</a>
+                    </p>
                   </section>
                 )}
 

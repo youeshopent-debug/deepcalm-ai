@@ -1,21 +1,15 @@
-import SocialLanding from "@/components/SocialLanding";
-import { Metadata } from "next";
+import SocialLanding from "@/components/SocialLanding"
+import type { Metadata } from "next"
+
+const title = "Sleep Guides and a 7-Day Sleep Diary | DeepCalm AI"
+const description = "Explore breathing exercises, read the insomnia guide, and download a free seven-day sleep diary."
 
 export const metadata: Metadata = {
-  title: "DeepCalm AI - Sleep Optimization |",
-  description: "53% of global population affected by poor sleep. DeepCalm AI uses 8-model architecture for 100% availability. CBT-I validated: 46% faster sleep onset, 42% anxiety reduction.",
-  keywords: "sleep optimization, AI mental health, CBT-I, insomnia, anxiety relief, emotional fitness, AI agents",
-  openGraph: {
-    title: "DeepCalm AI - Your Midnight Sanctuary",
-    description: "Free AI sleep optimization. 8-model architecture. Clinically validated results.",
-    type: "website",
-    images: ["/og-social.png"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "DeepCalm AI - Sleep Optimization",
-    description: "53% affected by poor sleep. AI-powered solution with 46% faster sleep onset.",
-  },
+  title,
+  description,
+  alternates: { canonical: "/social" },
+  openGraph: { title, description, type: "website", images: ["/images/sleep-forest.webp"] },
+  twitter: { card: "summary_large_image", title, description, images: ["/images/sleep-forest.webp"] },
 }
 
 export default function SocialPage() {

@@ -134,24 +134,6 @@ export default function TechArchSection({ dict }: { dict: any }) {
           </div>
         </div>
 
-        {/* Clinical Data */}
-        <div className={`transition-all duration-1000 delay-800 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <div className="glass rounded-xl p-8 text-center">
-            <h3 className="text-lg sm:text-xl font-semibold text-dc-text mb-6">{a.tech_arch_clinical_title}</h3>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 mb-4">
-              <div>
-                <div className="text-4xl sm:text-5xl font-bold text-dc-accent mb-1">{a.tech_arch_clinical_data1}</div>
-                <div className="text-sm text-dc-muted">{a.tech_arch_clinical_data1_desc}</div>
-              </div>
-              <div className="w-px h-12 bg-dc-border hidden sm:block" />
-              <div>
-                <div className="text-4xl sm:text-5xl font-bold text-dc-success mb-1">{a.tech_arch_clinical_data2}</div>
-                <div className="text-sm text-dc-muted">{a.tech_arch_clinical_data2_desc}</div>
-              </div>
-            </div>
-            <p className="text-xs text-dc-muted/60 mt-4">{a.tech_arch_clinical_note}</p>
-          </div>
-        </div>
       </div>
     </section>
   )

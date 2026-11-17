@@ -1,3 +1,4 @@
+import { editorialCopy } from "@/lib/editorial-copy"
 import { PersonJsonLd } from "@/components/JsonLd"
 import { getDict } from "@/lib/getDict"
 import TechArchSection from "@/components/TechArchSection"
@@ -43,6 +44,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
   const { lang } = await params
   const dict = getDict(lang as Locale)
   const d = dict.about || {}
+  const copy = editorialCopy[lang as Locale] ?? editorialCopy.en
 
   const sections = [
     { title: d.section1_title, desc: d.section1_desc },
@@ -69,6 +71,17 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
           </div>
         </section>
       ))}
+
+      <section className="mx-auto max-w-4xl px-4 py-10">
+        <div className="glass rounded-2xl border border-dc-border/40 p-6 sm:p-8">
+          <h2 className="mb-4 text-2xl font-semibold">{copy.references}</h2>
+          <ul className="space-y-3 text-dc-muted">
+            <li><a className="underline underline-offset-4" href="https://doi.org/10.5664/jcsm.8986">AASM · Clinical guideline for chronic insomnia in adults</a></li>
+            <li><a className="underline underline-offset-4" href="https://www.nhs.uk/conditions/insomnia/">NHS · Insomnia</a></li>
+            <li><a className="underline underline-offset-4" href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/breathing-exercises-for-stress/">NHS · Breathing exercises for stress</a></li>
+          </ul>
+        </div>
+      </section>
 
       <TechArchSection dict={dict} />
     </main>
