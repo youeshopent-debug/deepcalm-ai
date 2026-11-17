@@ -122,19 +122,19 @@ function StructuredMessage({ parsed, raw }: { parsed: ParsedResponse; raw: strin
       {hasAnalysis && (
         <div className="border-l-4 border-blue-400/50 pl-3 py-1">
           <p className="text-[10px] uppercase tracking-widest text-blue-400/70 font-semibold mb-1">现状解析</p>
-          <p className="text-xl leading-relaxed text-dc-text/90">{parsed.analysis}</p>
+          <p className="text-xl leading-relaxed text-dc-text">{parsed.analysis}</p>
         </div>
       )}
       {hasScience && (
         <div className="border-l-4 border-emerald-400/50 pl-3 py-1">
           <p className="text-[10px] uppercase tracking-widest text-emerald-400/70 font-semibold mb-1">科学原理对齐</p>
-          <p className="text-sm leading-relaxed text-dc-muted/80">{parsed.scienceAlignment}</p>
+          <p className="text-sm leading-relaxed text-dc-muted">{parsed.scienceAlignment}</p>
         </div>
       )}
       {hasAction && (
         <div className="border-l-4 border-amber-400/50 pl-3 py-1">
           <p className="text-[10px] uppercase tracking-widest text-amber-400/70 font-semibold mb-1">即时行动方案</p>
-          <p className="text-sm leading-relaxed text-dc-text/90">{parsed.actionPlan}</p>
+          <p className="text-sm leading-relaxed text-dc-text">{parsed.actionPlan}</p>
         </div>
       )}
     </div>
@@ -561,7 +561,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
           relative z-10 flex flex-col
           w-full min-h-[70vh] max-h-[85vh]
           ${drawerOpen
-            ? "fixed inset-0 z-50 bg-dc-deep/95 backdrop-blur-xl"
+            ? "fixed inset-0 z-50 bg-[#132723] [--dc-text:#f4faf6] [--dc-muted:#d6e8df]"
             : "max-w-5xl mx-auto min-h-[70vh] max-h-[85vh]"
           }
         `}
@@ -596,14 +596,15 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
         >
           {showWelcome && messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center space-y-6 py-12">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-dc-accent/20 to-transparent flex items-center justify-center animate-breath-orb-4-7">
+              <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-[#6c9a8a] bg-[#29473d]">
+                <span className="absolute inset-0 rounded-full bg-[#bdebd8] motion-safe:animate-breath-orb-4-7 motion-reduce:hidden" />
                 {returnVisitor ? (
-                  <Sparkles className="w-8 h-8 text-dc-accent" />
+                  <Sparkles className="relative h-8 w-8 text-[#bdebd8]" />
                 ) : (
-                  <Heart className="w-8 h-8 text-dc-accent" />
+                  <Heart className="relative h-8 w-8 text-[#bdebd8]" />
                 )}
               </div>
-              <div className="space-y-2">
+              <div className="max-w-3xl space-y-3">
                 {returnVisitor ? (
                   <>
                     <p className="text-xl sm:text-2xl font-medium text-dc-text">
@@ -614,7 +615,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
                         return tmpl.replace("{tag}", phrase)
                       })()}
                     </p>
-                    <p className="text-base text-dc-muted/60 max-w-lg leading-relaxed">
+                    <p className="mx-auto max-w-lg text-base leading-relaxed text-dc-muted">
                       {locale === "zh" ? "今天想聊聊什么？" : locale === "ms" ? "Apa yang anda mahu bincangkan hari ini?" : locale === "ja" ? "今日は何について話しますか？" : locale === "ko" ? "오늘은 무엇에 대해 이야기하고 싶으신가요?" : locale === "th" ? "วันนี้คุณอยากคุยเรื่องอะไร?" : locale === "es" ? "¿De qué te gustaría hablar hoy?" : "What would you like to talk about today?"}
                     </p>
                   </>
@@ -623,7 +624,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
                     <p className="text-xl sm:text-2xl font-medium text-dc-text">
                       {tt("aiCounselor.welcome")}
                     </p>
-                    <p className="text-xl sm:text-2xl text-dc-muted/80 max-w-lg leading-relaxed">
+                    <p className="mx-auto max-w-lg text-base leading-relaxed text-dc-muted sm:text-lg">
                       {tt("aiCounselor.subtitle")}
                     </p>
                   </>
@@ -659,7 +660,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
                       ${
                         msg.role === "user"
                           ? "bg-dc-accent/15 border border-dc-accent/20 text-dc-text rounded-2xl rounded-br-md"
-                          : "glass-strong text-dc-text rounded-2xl rounded-bl-md"
+                          : "border border-[#53746b] bg-[#203b33] text-dc-text [--dc-text:#f4faf6] [--dc-muted:#d6e8df] rounded-2xl rounded-bl-md"
                       }
                     `}
                   >
@@ -674,7 +675,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
               ))}
               {isAnalyzing && (
                 <div className="flex justify-start animate-fade-in-glow">
-                  <div className="glass-strong rounded-2xl rounded-bl-md px-5 py-4">
+                  <div className="rounded-2xl rounded-bl-md border border-[#53746b] bg-[#203b33] px-5 py-4 [--dc-muted:#d6e8df]">
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-dc-accent/60 rounded-full animate-pulse-soft" />
                       <span className="w-2 h-2 bg-dc-accent/60 rounded-full animate-pulse-soft" style={{ animationDelay: "0.3s" }} />
@@ -775,14 +776,14 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
 
         {/* Input Area */}
         <div className="shrink-0 px-4 sm:px-6 py-4 sm:py-5">
-          <div className="flex items-center gap-2 sm:gap-3 bg-dc-surface/60 backdrop-blur-md border border-dc-border rounded-2xl px-4 sm:px-6 py-3 sm:py-4 focus-within:border-dc-accent/40 transition-all duration-300">
+          <div className="flex items-center gap-2 sm:gap-3 bg-[#172e28] border border-[#53746b] rounded-2xl px-4 sm:px-6 py-3 sm:py-4 focus-within:border-[#bdebd8] transition-all duration-300">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={tt("aiCounselor.placeholder")}
-              className="flex-1 bg-transparent text-xl text-dc-text placeholder:text-dc-muted/50 outline-none"
+              className="min-w-0 flex-1 bg-transparent text-base text-[#f4faf6] placeholder:text-[#c5dbd1] outline-none sm:text-xl"
               onClick={() => setDrawerOpen(true)}
             />
             {!showWelcome && messages.filter((m) => m.role === "counselor").length > 0 && (
@@ -805,7 +806,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
             <button
               onClick={() => handleSend()}
               disabled={!input.trim() || isAnalyzing}
-              className="px-4 sm:px-5 py-2.5 rounded-xl bg-dc-accent text-dc-deep text-sm sm:text-base font-medium disabled:opacity-30 disabled:cursor-not-allowed hover:bg-dc-accent/90 transition-all duration-300 shrink-0"
+              className="px-4 sm:px-5 py-2.5 rounded-xl bg-dc-accent text-dc-deep text-sm sm:text-base font-medium disabled:cursor-not-allowed disabled:bg-[#35534a] disabled:text-[#dbe9e2] enabled:hover:bg-dc-accent/90 transition-colors shrink-0"
             >
               {tt("aiCounselor.submit")}
             </button>
