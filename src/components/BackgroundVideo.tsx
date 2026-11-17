@@ -45,39 +45,27 @@ export default function BackgroundVideo({
   breathingProgress = 0,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [mounted, setMounted] = useState(false)
-  const [activated, setActivated] = useState(false)
-  const [loaded, setLoaded] = useState(false)
-  const [videoError, setVideoError] = useState(false)
-  const [prevTheme, setPrevTheme] = useState<VisualTheme | null>(null)
-  const transitioning = prevTheme !== null && prevTheme !== theme
-
-  if (!enabled) return null
+  const [allowMotion, setAllowMotion] = useState(false)
+  const [loadedTheme, setLoadedTheme] = useState<VisualTheme | null>(null)
+  const [failedTheme, setFailedTheme] = useState<VisualTheme | null>(null)
 
   useEffect(() => {
-    setMounted(true)
-    const activate = () => setActivated(true)
-    window.addEventListener("pointerdown", activate, { once: true })
-    window.addEventListener("keydown", activate, { once: true })
-    return () => {
-      window.removeEventListener("pointerdown", activate)
-      window.removeEventListener("keydown", activate)
-    }
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const sync = () => setAllowMotion(!preference.matches)
+    sync()
+    preference.addEventListener("change", sync)
+    return () => preference.removeEventListener("change", sync)
   }, [])
 
-  // Reset loaded state on theme change, fire crossfade
   useEffect(() => {
-    if (prevTheme !== theme) {
-      setPrevTheme(theme)
-      setLoaded(false)
-      setVideoError(false)
-    }
-  }, [theme, prevTheme])
+    setLoadedTheme(null)
+    setFailedTheme(null)
+  }, [theme, allowMotion, enabled])
 
   // Breathing → video playbackRate modulation
   useEffect(() => {
     const vid = videoRef.current
-    if (!vid || !activated) return
+    if (!vid) return
     if (!breathingPhase || breathingPhase === "done") {
       vid.playbackRate = 1.0
       return
@@ -91,7 +79,7 @@ export default function BackgroundVideo({
       // Speed up during exhale: 0.8 → 1.2 over the phase
       vid.playbackRate = 0.8 + breathingProgress * 0.4
     }
-  }, [breathingPhase, breathingProgress, activated])
+  }, [breathingPhase, breathingProgress, allowMotion, theme])
 
   // Compute overlay opacity with subtle breathing modulation
   const baseOverlay = overlayOpacity
@@ -107,10 +95,17 @@ export default function BackgroundVideo({
   }
   const effectiveOverlay = Math.min(Math.max(baseOverlay + breathMod, 0.3), 0.8)
 
+  if (!enabled) return null
+
+  const forestImage = theme === "forest" || theme === "twilight"
+
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#10221c]">
+      {forestImage && (
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url("/images/sleep-forest.webp")' }} />
+      )}
       {/* Video player */}
-      {mounted && activated && !videoError && (
+      {allowMotion && failedTheme !== theme && (
         <video
           ref={videoRef}
           key={theme}
@@ -120,28 +115,11 @@ export default function BackgroundVideo({
           muted
           playsInline
           preload="none"
-          onCanPlay={() => setLoaded(true)}
-          onError={() => setVideoError(true)}
+          onCanPlay={() => setLoadedTheme(theme)}
+          onError={() => setFailedTheme(theme)}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            loaded ? "opacity-100" : "opacity-0"
+            loadedTheme === theme ? "opacity-100" : "opacity-0"
           }`}
-        />
-      )}
-
-      {/* Fallback gradient when video unavailable */}
-      {mounted && activated && videoError && (
-        <div
-          className="absolute inset-0 transition-opacity duration-1000 opacity-100"
-          style={{
-            background: `
-              radial-gradient(ellipse at 50% 0%, ${THEME_OVERLAY_COLORS[theme]}80 0%, transparent 60%),
-              radial-gradient(ellipse at 50% 100%, rgba(10,10,18,0.3) 0%, transparent 50%),
-              ${theme === "forest" ? "#1A2238" :
-                theme === "twilight" ? "#1A1530" :
-                theme === "deepsea" ? "#0A1628" :
-                "#0E0A1E"}
-            `,
-          }}
         />
       )}
 
@@ -149,7 +127,7 @@ export default function BackgroundVideo({
       <div className="absolute inset-0 backdrop-blur-[2px] pointer-events-none" />
 
       {/* 暗色柔化覆盖层: 进一步抑制颗粒感 */}
-      <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/15 pointer-events-none" />
 
       {/* Theme-aware overlay */}
       <div
