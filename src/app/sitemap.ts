@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   }
 
+  for (const lang of locales) {
+    for (const page of ["support", "tools"]) {
+      entries.push({ url: `${BASE_URL}/${lang}/${page}` })
+    }
+  }
+
   // Topic routes declare the corresponding library page as canonical.
   for (const lang of locales) {
     for (const slug of topicSlugs) {

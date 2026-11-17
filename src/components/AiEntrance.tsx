@@ -33,8 +33,8 @@ export default function AiEntrance({ locale, topicPrompt }: AiEntranceProps) {
 
   // 携带话题上下文：跳转首页 AI 诊断区，并通过 query 传递上下文文案
   const href = topicPrompt
-    ? `/${locale}#ai-counselor?ai=${encodeURIComponent(topicPrompt)}`
-    : `/${locale}#ai-counselor`
+    ? `/${locale}/support?ai=${encodeURIComponent(topicPrompt)}`
+    : `/${locale}/support`
 
   return (
     <Link
