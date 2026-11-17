@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const origin = request.headers.get("origin")
   if (origin && origin !== new URL(request.url).origin) return failure(403)
 
-  let body
+  let body: { text?: unknown; locale?: unknown; history?: unknown }
   try {
     const raw = await request.text()
     if (raw.length > 30_000) return failure(413)
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   const apiKey = process.env.OPENAI_API_KEY?.trim()
   if (!apiKey) return failure(503)
 
-  const language = LANGUAGES.get(body.locale) ?? "English"
+  const language = (typeof body.locale === "string" ? LANGUAGES.get(body.locale) : undefined) ?? "English"
   const history = Array.isArray(body.history) ? body.history.slice(-8).flatMap((entry) => {
     if (typeof entry?.content !== "string") return []
     if (entry.role !== "user" && entry.role !== "counselor") return []
