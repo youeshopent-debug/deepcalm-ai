@@ -138,8 +138,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         publisherTitle={publisherTitle}
         publisherIntro={publisherIntro}
         publisherTopics={DEFAULT_PUBLISHER_TOPICS}
-      />
-      <LibraryPreview locale={locale} />
+      >
+        <LibraryPreview locale={locale} />
+      </SanctuaryPage>
     </>
   )
 }
