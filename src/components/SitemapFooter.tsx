@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useLanguage } from "@/context/LanguageContext"
 import { getTopicBySlug } from "@/content/topics"
 
@@ -21,43 +22,49 @@ const linkStyle = "inline-flex min-h-9 items-center rounded-sm py-1 text-sm lead
 export default function SitemapFooter() {
   const { tt, locale } = useLanguage();
 
+  const pathname = usePathname().replace(/\/$/, "")
+  const compact = [`/${locale}`, `/${locale}/tools`, `/${locale}/support`].includes(pathname)
+
   return (
     <footer className="relative z-10 w-full border-t border-[#53746b] bg-[#132723] text-[#f4faf6]">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-        <Link href={`/${locale}/library`} className={`${linkStyle} mb-5 gap-2 font-semibold`}>
-          {tt("nav.library")} <span aria-hidden="true" className="text-[#c2f4df]">→</span>
-        </Link>
-        <nav aria-label={tt("nav.library")} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {CATEGORY_KEYS.map((cat) => (
-            <section key={cat.i18nKey} className="min-w-0 rounded-2xl border border-[#53746b] bg-[#203b33] p-4">
-              <h2 className="mb-1 text-base font-semibold text-[#c2f4df]">
-                {tt(cat.i18nKey)}
-              </h2>
-              <ul className="grid grid-cols-2 gap-x-3">
-                {cat.items.map((slug) => {
-                  const topic = getTopicBySlug(slug, locale);
-                  const href = `/${locale}/library/${slug}`;
-                  return (
-                    <li key={slug} className="min-w-0">
-                      <Link
-                        href={href}
-                        className={linkStyle}
-                      >
-                        <span className="min-w-0 break-words">{topic?.title || slug.replace(/-/g, " ")}</span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          ))}
-        </nav>
+      <div className={`mx-auto max-w-6xl px-4 sm:px-6 ${compact ? "py-3" : "py-8 sm:py-12"}`}>
+        {!compact && <>
+          <Link href={`/${locale}/library`} className={`${linkStyle} mb-5 gap-2 font-semibold`}>
+            {tt("nav.library")} <span aria-hidden="true" className="text-[#c2f4df]">→</span>
+          </Link>
+          <nav aria-label={tt("nav.library")} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {CATEGORY_KEYS.map((cat) => (
+              <section key={cat.i18nKey} className="min-w-0 rounded-2xl border border-[#53746b] bg-[#203b33] p-4">
+                <h2 className="mb-1 text-base font-semibold text-[#c2f4df]">
+                  {tt(cat.i18nKey)}
+                </h2>
+                <ul className="grid grid-cols-2 gap-x-3">
+                  {cat.items.map((slug) => {
+                    const topic = getTopicBySlug(slug, locale);
+                    const href = `/${locale}/library/${slug}`;
+                    return (
+                      <li key={slug} className="min-w-0">
+                        <Link
+                          href={href}
+                          className={linkStyle}
+                        >
+                          <span className="min-w-0 break-words">{topic?.title || slug.replace(/-/g, " ")}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
+            ))}
+          </nav>
+        </>}
 
-        <div className="mt-7 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-[#53746b] pt-4 text-sm text-[#d6e8df]">
+        <div className={`flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-sm text-[#d6e8df] ${compact ? "" : "mt-7 border-t border-[#53746b] pt-4"}`}>
           <span>&copy; {new Date().getFullYear()} DeepCalm AI &middot; Midnight Sanctuary</span>
           <div className="flex flex-wrap gap-x-4">
             <Link href={`/${locale}`} className={linkStyle}>{tt("sitemap.home")}</Link>
-            <Link href={`/${locale}/#daily-checkin`} className={linkStyle}>{tt("sitemap.dailyCheckin")}</Link>
+            <Link href={`/${locale}/tools?tool=checkin#healing-toolbox`} className={linkStyle}>{tt("sitemap.dailyCheckin")}</Link>
+            {compact && <Link href={`/${locale}/sanctuary`} className={linkStyle}>{locale === "zh" ? "心灵庇护所" : "Sanctuary"}</Link>}
             <Link href={`/${locale}/privacy`} className={linkStyle}>{tt("sitemap.privacy")}</Link>
             <Link href={`/${locale}/terms`} className={linkStyle}>{tt("sitemap.terms")}</Link>
             <Link href={`/${locale}/about`} className={linkStyle}>{tt("sitemap.about")}</Link>

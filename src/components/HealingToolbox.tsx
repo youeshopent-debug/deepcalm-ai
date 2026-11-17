@@ -18,8 +18,8 @@ const TAB_LABELS: Record<string, Record<string, string>> = {
   sleep: { zh: "睡眠计算器", en: "Sleep Calculator", ms: "Kalkulator Tidur", ja: "睡眠計算機", ko: "수면 계산기", th: "เครื่องคำนวณการนอน", es: "Calculadora de Sueño" },
 }
 
-export default function HealingToolbox() {
-  const [activeTab, setActiveTab] = useState<TabId>("checkin")
+export default function HealingToolbox({ initialTab = "checkin" }: { initialTab?: TabId }) {
+  const [activeTab, setActiveTab] = useState<TabId>(initialTab)
   const { locale } = useLanguage()
 
   return (
