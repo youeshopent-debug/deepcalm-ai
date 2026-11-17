@@ -50,7 +50,7 @@ export default function SleepCalculator() {
 
   return (
     <div>
-      <div className="p-6 bg-slate-800/90 backdrop-blur-xl rounded-xl border border-slate-600/30 mb-8">
+      <div className="p-6 bg-[#203b33] rounded-xl border border-slate-600/30 mb-8">
         <div className="flex items-center gap-2 mb-6">
           <Clock className="w-5 h-5 text-blue-400" />
           <span className="text-sm font-medium text-slate-100">{tt('sleepCalculator.wake_label')}</span>
@@ -63,53 +63,37 @@ export default function SleepCalculator() {
           <div className="text-xs text-slate-300 mt-1">{tt('sleepCalculator.wake_time_hint')}</div>
         </div>
 
-        <div className="space-y-4">
-          <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
-              <span>00</span>
-              <span>12</span>
-              <span>23</span>
-            </div>
-            <input
-              type="range"
-              min="0"
-              max="23"
-              value={wakeHour}
-              onChange={(e) => setWakeHour(parseInt(e.target.value, 10))}
-              className="w-full h-2 rounded-full appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right, rgba(126,184,255,0.3) ${(wakeHour / 23) * 100}%, rgba(255,255,255,0.1) ${(wakeHour / 23) * 100}%)`,
-              }}
-            />
-          </div>
-          <div>
-            <div className="flex justify-between text-xs text-slate-400 mb-1">
-              <span>00</span>
-              <span>30</span>
-              <span>55</span>
-            </div>
-            <input
-              type="range"
-              min="0"
-              max={MINUTE_STEPS.length - 1}
-              value={wakeMinIdx}
-              onChange={(e) => setWakeMinIdx(parseInt(e.target.value, 10))}
-              className="w-full h-2 rounded-full appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right, rgba(126,184,255,0.3) ${(wakeMinIdx / (MINUTE_STEPS.length - 1)) * 100}%, rgba(255,255,255,0.1) ${(wakeMinIdx / (MINUTE_STEPS.length - 1)) * 100}%)`,
-              }}
-            />
-          </div>
+        <div className="mx-auto grid max-w-xs grid-cols-2 gap-3">
+          <select
+            aria-label={`${tt('sleepCalculator.wake_label')} · HH`}
+            value={wakeHour}
+            onChange={(event) => setWakeHour(Number(event.target.value))}
+            className="min-h-12 rounded-xl border border-[#91b1a2] bg-white px-3 text-center text-xl font-semibold text-[#214b3a]"
+          >
+            {Array.from({ length: 24 }, (_, hour) => (
+              <option key={hour} value={hour}>{String(hour).padStart(2, '0')}</option>
+            ))}
+          </select>
+          <select
+            aria-label={`${tt('sleepCalculator.wake_label')} · MM`}
+            value={wakeMinIdx}
+            onChange={(event) => setWakeMinIdx(Number(event.target.value))}
+            className="min-h-12 rounded-xl border border-[#91b1a2] bg-white px-3 text-center text-xl font-semibold text-[#214b3a]"
+          >
+            {MINUTE_STEPS.map((minute, index) => (
+              <option key={minute} value={index}>{String(minute).padStart(2, '0')}</option>
+            ))}
+          </select>
         </div>
       </div>
 
       {results.length > 0 && (
         <div className="space-y-4 animate-slide-up">
-          <h4 className="text-sm font-bold text-slate-100 mb-3">{tt('sleepCalculator.result_title')}</h4>
+          <h4 className="text-base font-bold text-[#214b3a] mb-3">{tt('sleepCalculator.result_title')}</h4>
           {results.map((r, i) => (
             <div
               key={i}
-              className="p-4 bg-slate-800/80 backdrop-blur-sm rounded-xl border border-slate-600/20 hover:bg-slate-800 transition-all duration-300"
+              className="p-4 bg-[#203b33] rounded-xl border border-slate-600/20 hover:bg-slate-800 transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
@@ -140,7 +124,7 @@ export default function SleepCalculator() {
                 </span>
               </div>
               <CycleDiagram cycles={r.cycles} />
-              <div className="flex items-center gap-3 mt-2 text-[10px] text-slate-400">
+              <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-slate-200">
                 <span className="flex items-center gap-1">
                   <span className="w-2 h-2 rounded-sm bg-[hsla(200,50%,35%,0.5)]" /> {tt('sleepCalculator.deep_sleep')}
                 </span>

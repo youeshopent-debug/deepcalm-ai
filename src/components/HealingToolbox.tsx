@@ -26,7 +26,7 @@ export default function HealingToolbox() {
     <section id="healing-toolbox" className="relative z-10 mx-auto w-full max-w-6xl scroll-mt-16 px-4 py-4 sm:px-6">
       <div className="w-full">
         <div className="overflow-hidden rounded-3xl border border-[#c9d9d0] bg-[#f8fcf9]">
-          <div className="flex border-b border-[#c9d9d0]">
+          <div className="grid grid-cols-2 gap-2 border-b border-[#c9d9d0] bg-[#edf5ef] p-3">
             {TABS.map((tab) => {
               const Icon = tab.icon
               const isActive = activeTab === tab.id
@@ -36,17 +36,14 @@ export default function HealingToolbox() {
                   type="button"
                   aria-pressed={isActive}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex min-w-0 flex-1 items-center justify-center gap-2 px-2 py-3.5 sm:px-4 text-sm font-medium transition-all duration-200 relative ${
+                  className={`flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-xl border px-2 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#214b3a] sm:px-4 sm:text-base ${
                     isActive
-                      ? "bg-[#e2f2e9] text-[#214b3a]"
-                      : "text-[#354c42] hover:bg-[#edf5ef]"
+                      ? "border-[#214b3a] bg-[#214b3a] text-white"
+                      : "border-[#a5c0b2] bg-white text-[#214b3a] hover:bg-[#e2f2e9]"
                   }`}
                 >
                   <Icon className="h-4 w-4 shrink-0" />
                   <span className="min-w-0 break-words">{TAB_LABELS[tab.id][locale] || TAB_LABELS[tab.id].en}</span>
-                  {isActive && (
-                    <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#346653] rounded-full" />
-                  )}
                 </button>
               )
             })}
