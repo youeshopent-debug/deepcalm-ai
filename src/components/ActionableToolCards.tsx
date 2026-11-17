@@ -148,9 +148,9 @@ export default function ActionableToolCards({
   }
 
   return (
-    <section className="relative z-10 w-full px-4 sm:px-6 pb-6">
-      <div className="max-w-3xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+    <section className="relative z-10 w-full pb-4">
+      <div className="w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           {CARDS.map((card, i) => {
             const title = card.title[locale] || card.title.en
             const hook = card.hook[locale] || card.hook.en

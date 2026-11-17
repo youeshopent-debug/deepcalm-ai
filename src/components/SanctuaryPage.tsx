@@ -14,6 +14,7 @@ export default function SanctuaryPage({
   publisherTitle,
   publisherIntro,
   publisherTopics,
+  children,
 }: {
   lang: Locale
   heroTitle: string
@@ -23,6 +24,7 @@ export default function SanctuaryPage({
   publisherTitle: string
   publisherIntro: string
   publisherTopics: PublisherTopic[]
+  children?: React.ReactNode
 }) {
   const featuredInsightTitle =
     lang === "zh"
@@ -43,10 +45,12 @@ export default function SanctuaryPage({
           heroTitle={heroTitle}
           heroSubtitle={heroSubtitle}
           heroCtaText={heroCtaText}
-        />
+        >
+          {children}
+        </InteractiveAreas>
 
         {/* ═══ 入门层：简短疗愈 Intro — SSR visible ═══ */}
-        <section className="px-4 sm:px-6 -mt-6 sm:-mt-8 pb-8">
+        <section className="px-4 pb-8 sm:px-6">
           <div className="max-w-2xl mx-auto">
             <div className="bg-white/98 backdrop-blur-3xl p-6 sm:p-8 rounded-2xl border border-slate-200/20 text-center shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
               <p className="text-base sm:text-lg text-slate-800 leading-relaxed font-light tracking-wide">

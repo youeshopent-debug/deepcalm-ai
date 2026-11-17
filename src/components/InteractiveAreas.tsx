@@ -21,11 +21,13 @@ export default function InteractiveAreas({
   heroTitle,
   heroSubtitle,
   heroCtaText,
+  children,
 }: {
   lang: Locale
   heroTitle: string
   heroSubtitle: string
   heroCtaText: string
+  children?: React.ReactNode
 }) {
   const [showBreathing, setShowBreathing] = useState(false)
   const [showMeditation, setShowMeditation] = useState(false)
@@ -49,19 +51,19 @@ export default function InteractiveAreas({
     <>
       <HeroSection title={heroTitle} subtitle={heroSubtitle} ctaText={heroCtaText} />
 
-      {/* Actionable Tool Cards — triggers BreathingGuide via internal callback */}
-      <section className="px-4 sm:px-6 pb-6">
-        <div className="max-w-5xl mx-auto">
-          <ActionableToolCards
-            locale={lang}
-            onStartBreathing={() => setShowBreathing(true)}
-          />
-        </div>
+      <section className="mx-auto max-w-6xl px-4 pt-2 sm:px-6">
+        <h2 className="mb-3 inline-flex rounded-xl bg-[#132723] px-4 py-2 text-lg font-semibold text-[#f4faf6]">
+          {lang === "zh" ? "睡眠与放松工具" : "Sleep and relaxation tools"}
+        </h2>
+        <ActionableToolCards
+          locale={lang}
+          onStartBreathing={() => setShowBreathing(true)}
+        />
       </section>
 
       {/* AI-Guided Meditation Entry */}
-      <section className="px-4 sm:px-6 pb-10">
-        <div className="max-w-5xl mx-auto">
+      <section className="mx-auto max-w-6xl px-4 pb-5 sm:px-6">
+        <div className="w-full">
           <div className="relative overflow-hidden rounded-2xl border border-[#c9d9d0] bg-[#f8fcf9] p-6 sm:p-8">
             {/* Decorative glow */}
             <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-[#c2f4df]/40 blur-3xl pointer-events-none" />
@@ -85,16 +87,18 @@ export default function InteractiveAreas({
       </section>
 
       {/* AI Counselor */}
-      <section id="ai-counselor" className="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 pt-10">
-        <div className="w-full">
+      <section id="ai-counselor" className="mx-auto max-w-6xl scroll-mt-16 px-4 py-4 sm:px-6">
+        <div className="w-full rounded-3xl border border-[#53746b] bg-[#132723] [--dc-text:#f4faf6] [--dc-muted:#d6e8df] [--dc-accent:#c2f4df] [--dc-deep:#132723] [--dc-surface:#203b33] [--dc-border:#789588]">
           <AiCounselor initialPrompt={initialPrompt} />
         </div>
       </section>
 
       <HealingToolbox />
 
+      {children}
+
       {/* Resonance Wall */}
-      <section id="resonance-wall" className="w-full py-16 sm:py-24 px-4 sm:px-6">
+      <section id="resonance-wall" className="w-full px-4 py-8 sm:px-6 sm:py-10">
         <div className="max-w-2xl mx-auto">
           <ResonanceWall />
         </div>
