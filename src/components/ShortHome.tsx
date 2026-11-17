@@ -42,7 +42,7 @@ export default function ShortHome({ title }: { title: string }) {
 
   const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#c2f4df]"
   return (
-    <main className="relative z-10 mx-auto max-w-6xl px-4 pb-8 pt-20 sm:px-6 sm:pb-10">
+    <main className="short-home relative z-10 mx-auto w-full max-w-6xl grow px-4 pb-8 pt-20 sm:px-6 sm:pb-10">
       <section className="relative isolate flex min-h-[23rem] flex-col items-center justify-center overflow-hidden rounded-3xl border border-[#719486] bg-[#132723] px-5 py-14 text-center sm:min-h-[27rem]">
         <Image src="/images/sleep-forest.webp" alt="" fill priority sizes="(min-width: 1152px) 1104px, 100vw" className="-z-20 object-cover" />
         <div className="absolute inset-0 -z-10 bg-[#0a1d15]/75" />

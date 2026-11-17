@@ -45,7 +45,7 @@ export default function LangLayout({
   return (
     <LanguageProvider initialLocale={safeLocale} key={lang}>
       <ThemeProvider>
-        <div className="dark min-h-screen bg-white/90 text-gray-900">
+        <div className="dark min-h-screen bg-white/90 text-gray-900 has-[>main.short-home]:flex has-[>main.short-home]:min-h-dvh has-[>main.short-home]:flex-col">
           <BackgroundLayer />
           <Header />
           {children}
