@@ -9,31 +9,31 @@ interface LibraryPreviewProps {
 const SECTION_TEXT: Record<Locale, { heading: string; sub: string }> = {
   zh: {
     heading: "深夜智慧馆",
-    sub: "44 篇科学驱动深度文章，覆盖睡眠、焦虑、情绪健康等主题。",
+    sub: "{count} 篇文章，覆盖睡眠、焦虑、情绪健康等主题。",
   },
   en: {
     heading: "Midnight Wisdom Library",
-    sub: "44 science-backed articles on sleep, anxiety, mindfulness, and emotional health.",
+    sub: "{count} articles on sleep, anxiety, mindfulness, and emotional health.",
   },
   ms: {
     heading: "Perpustakaan Kebijaksanaan Tengah Malam",
-    sub: "44 artikel mendalam tentang tidur, kebimbangan, kesedaran, dan kesihatan emosi.",
+    sub: "{count} artikel mendalam tentang tidur, kebimbangan, kesedaran, dan kesihatan emosi.",
   },
   ja: {
     heading: "深夜の知恵図書館",
-    sub: "睡眠科学、認知行動療法、マインドフルネスに基づく44の深い記事。",
+    sub: "睡眠科学、認知行動療法、マインドフルネスに基づく{count}件の記事。",
   },
   ko: {
     heading: "심야 지혜 도서관",
-    sub: "수면 과학, 인지행동치료, 마음챙김에 기반한 44편의 깊이 있는 글.",
+    sub: "수면 과학, 인지행동치료, 마음챙김에 기반한 {count}편의 글.",
   },
   th: {
     heading: "ห้องสมุดแห่งปัญญายามค่ำคืน",
-    sub: "44 บทความเชิงลึกเกี่ยวกับการนอนหลับ ความวิตกกังวล การมีสติ และสุขภาพทางอารมณ์",
+    sub: "{count} บทความเชิงลึกเกี่ยวกับการนอนหลับ ความวิตกกังวล การมีสติ และสุขภาพทางอารมณ์",
   },
   es: {
     heading: "Biblioteca de la Sabiduría Nocturna",
-    sub: "44 artículos profundos sobre sueño, ansiedad, atención plena y salud emocional.",
+    sub: "{count} artículos sobre sueño, ansiedad, atención plena y salud emocional.",
   },
 }
 
@@ -63,7 +63,7 @@ export default function LibraryPreview({ locale }: LibraryPreviewProps) {
       <div className="mx-auto max-w-6xl rounded-3xl border border-[#709488] bg-[#132723]/90 p-4 shadow-xl sm:p-8">
         <header className="mb-7">
           <h2 id="library-preview-heading" className="text-2xl font-bold text-[#f4faf6] sm:text-3xl">{text.heading}</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#d6e8df] sm:text-base">{text.sub}</p>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#d6e8df] sm:text-base">{text.sub.replace("{count}", String(allTopics.length))}</p>
         </header>
 
         <div className="space-y-6">
