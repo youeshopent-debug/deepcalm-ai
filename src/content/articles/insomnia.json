@@ -1,0 +1,58 @@
+{
+  "zh": {
+    "science": "【占位·中文】失眠的生理机制段落。此处后续替换为真实科学正文，纯段落文本，不使用 Markdown 标题语法。",
+    "fitness": "【占位·中文】针对失眠的作息与身体调节建议段落。此处后续替换为真实内容。",
+    "faq": [
+      ["【占位·中文】失眠会自己好吗？", "【占位·中文】回答内容，后续替换为真实答案。"],
+      ["【占位·中文】睡前多久应停止看屏幕？", "【占位·中文】回答内容，后续替换为真实答案。"]
+    ]
+  },
+  "en": {
+    "science": "[PLACEHOLDER · EN] The physiology of insomnia. This will be replaced with the real science copy, plain paragraphs only, no Markdown headings.",
+    "fitness": "[PLACEHOLDER · EN] Sleep-routine and body-regulation guidance for insomnia. To be replaced with real content.",
+    "faq": [
+      ["[PLACEHOLDER · EN] Does insomnia resolve on its own?", "[PLACEHOLDER · EN] Answer text, to be replaced with the real answer."],
+      ["[PLACEHOLDER · EN] How long before bed should screens be off?", "[PLACEHOLDER · EN] Answer text, to be replaced with the real answer."]
+    ]
+  },
+  "ms": {
+    "science": "[PLACEHOLDER · MS] Mekanisme fisiologi insomnia. Akan digantikan dengan teks sains sebenar, perenggan biasa sahaja.",
+    "fitness": "[PLACEHOLDER · MS] Panduan rutin tidur dan pengawalan badan untuk insomnia. Akan digantikan kemudian.",
+    "faq": [
+      ["[PLACEHOLDER · MS] Adakah insomnia hilang dengan sendirinya?", "[PLACEHOLDER · MS] Teks jawapan, akan digantikan kemudian."],
+      ["[PLACEHOLDER · MS] Berapa lama sebelum tidur perlu berhenti skrin?", "[PLACEHOLDER · MS] Teks jawapan, akan digantikan kemudian."]
+    ]
+  },
+  "ja": {
+    "science": "【プレースホルダー・日本語】不眠症の生理学的メカニズムの段落。後日、実際の科学本文に差し替えます。見出し記法は使用しません。",
+    "fitness": "【プレースホルダー・日本語】不眠症のための睡眠習慣と身体調整の提案段落。後日、実際の内容に差し替えます。",
+    "faq": [
+      ["【プレースホルダー・日本語】不眠症は自然に治りますか？", "【プレースホルダー・日本語】回答本文。後日、実際の回答に差し替えます。"],
+      ["【プレースホルダー・日本語】就寝の何時間前に画面をやめるべきですか？", "【プレースホルダー・日本語】回答本文。後日、実際の回答に差し替えます。"]
+    ]
+  },
+  "ko": {
+    "science": "[플레이스홀더 · 한국어] 불면증의 생리학적 기전 문단입니다. 추후 실제 과학 본문으로 교체됩니다. 제목 문법은 사용하지 않습니다.",
+    "fitness": "[플레이스홀더 · 한국어] 불면증을 위한 수면 습관 및 신체 조절 제안 문단입니다. 추후 실제 내용으로 교체됩니다.",
+    "faq": [
+      ["[플레이스홀더 · 한국어] 불면증은 저절로 낫나요?", "[플레이스홀더 · 한국어] 답변 본문. 추후 실제 답변으로 교체됩니다."],
+      ["[플레이스홀더 · 한국어] 잠들기 몇 시간 전에 화면을 꺼야 하나요?", "[플레이스홀더 · 한국어] 답변 본문. 추후 실제 답변으로 교체됩니다."]
+    ]
+  },
+  "th": {
+    "science": "[ตัวอย่าง · ไทย] ย่อหน้าอธิบายกลไกทางสรีรวิทยาของอาการนอนไม่หลับ จะถูกแทนที่ด้วยเนื้อหาวิทยาศาสตร์จริงในภายหลัง ใช้ย่อหน้าธรรมดาเท่านั้น",
+    "fitness": "[ตัวอย่าง · ไทย] ย่อหน้าแนะนำกิจวัตรการนอนและการปรับร่างกายสำหรับอาการนอนไม่หลับ จะถูกแทนที่ในภายหลัง",
+    "faq": [
+      ["[ตัวอย่าง · ไทย] อาการนอนไม่หลับหายเองได้ไหม?", "[ตัวอย่าง · ไทย] เนื้อหาคำตอบ จะถูกแทนที่ด้วยคำตอบจริงในภายหลัง"],
+      ["[ตัวอย่าง · ไทย] ควรหยุดดูหน้าจอก่อนนอนนานเท่าไร?", "[ตัวอย่าง · ไทย] เนื้อหาคำตอบ จะถูกแทนที่ด้วยคำตอบจริงในภายหลัง"]
+    ]
+  },
+  "es": {
+    "science": "[MARCADOR · ES] Párrafo sobre el mecanismo fisiológico del insomnio. Se reemplazará con el texto científico real, solo párrafos planos, sin encabezados Markdown.",
+    "fitness": "[MARCADOR · ES] Párrafo de recomendaciones de rutina de sueño y regulación corporal para el insomnio. Se reemplazará con contenido real.",
+    "faq": [
+      ["[MARCADOR · ES] ¿El insomnio se resuelve solo?", "[MARCADOR · ES] Texto de respuesta, se reemplazará con la respuesta real."],
+      ["[MARCADOR · ES] ¿Cuánto antes de dormir hay que dejar las pantallas?", "[MARCADOR · ES] Texto de respuesta, se reemplazará con la respuesta real."]
+    ]
+  }
+}

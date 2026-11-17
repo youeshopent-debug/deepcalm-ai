@@ -13,6 +13,7 @@
 import type { Locale } from '@/types'
 import type { TopicContent } from './topics'
 import { generateDefaultContent } from './topic-content-templates'
+import { getArticle, resolveArticleLang } from './articles'
 
 /* ================================================================
  * 主题 → 类别映射表（与 topics.ts CATEGORY_MAP 一致）
@@ -699,6 +700,23 @@ export function initCustomContent(
   for (const slug of allSlugs) {
     register(slug, (lang, topic) => {
       const category = SLUG_CATEGORY[slug] || 'sleep'
+
+      // 0. 独立文章优先：若该 slug 在 articles/ 中登记了人工撰写的独立内容，
+      //    则直接返回，完全跳过 generateDefaultContent 的模板生成。
+      //    语言解析走回退链：目标语言 → en → zh；全部不可用时返回 undefined，
+      //    此时继续走下方模板逻辑，保证页面永不空白。
+      const article = getArticle(slug)
+      const articleContent = resolveArticleLang(article, lang)
+      if (articleContent) {
+        return {
+          science: articleContent.science,
+          fitnessGuide: articleContent.fitness,
+          faqItems: articleContent.faq.map(([q, a]) => ({
+            q: q.replace(/\{\{T\}\}/g, topic.title),
+            a: a.replace(/\{\{T\}\}/g, topic.title),
+          })),
+        }
+      }
 
       // 1. 调用 generateDefaultContent 获取类别级基础内容
       //    (含 7 语言 SCIENCE + FITNESS + 5 条类别级 FAQ)
