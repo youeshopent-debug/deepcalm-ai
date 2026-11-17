@@ -59,49 +59,43 @@ export default function LibraryPreview({ locale }: LibraryPreviewProps) {
   }, {})
 
   return (
-    <section className="py-20 sm:py-28 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-dc-deep via-dc-surface/20 to-dc-deep pointer-events-none" />
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-dc-text mb-3">{text.heading}</h2>
-          <p className="text-dc-muted max-w-2xl leading-relaxed">{text.sub}</p>
-        </div>
+    <section aria-labelledby="library-preview-heading" className="relative px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+      <div className="mx-auto max-w-6xl rounded-3xl border border-[#709488] bg-[#132723]/90 p-4 shadow-xl sm:p-8">
+        <header className="mb-7">
+          <h2 id="library-preview-heading" className="text-2xl font-bold text-[#f4faf6] sm:text-3xl">{text.heading}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#d6e8df] sm:text-base">{text.sub}</p>
+        </header>
 
         <div className="space-y-6">
           {Object.entries(grouped).map(([category, topics]) => (
-            <div key={category}>
-              <h3 className="text-sm font-semibold text-dc-muted uppercase tracking-wider mb-3">
+            <div key={category} className="border-t border-[#53746b] pt-4">
+              <h3 className="mb-3 text-sm font-semibold text-[#c2f4df] sm:text-base">
                 {catLabels[category] || category}
               </h3>
-              <div
-                className="flex gap-3 overflow-x-auto pb-3 snap-x snap-mandatory scrollbar-thin"
-                style={{ scrollbarWidth: "thin", msOverflowStyle: "auto" }}
-              >
+              <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 xl:grid-cols-5">
                 {topics.map((topic) => (
-                  <Link
-                    key={topic.slug}
-                    href={`/${locale}/library/${topic.slug}`}
-                    className="shrink-0 w-56 p-4 rounded-xl bg-dc-surface/60 border border-dc-border/30
-                      hover:bg-dc-accent/5 hover:border-dc-accent/20
-                      text-dc-text text-sm hover:text-dc-accent
-                      transition-all duration-200 snap-start"
-                  >
-                    {topic.title}
-                  </Link>
+                  <li key={topic.slug} className="min-w-0">
+                    <Link
+                      href={`/${locale}/library/${topic.slug}`}
+                      className="flex h-full min-h-12 items-center justify-between gap-2 rounded-xl border border-[#c9d9d0] bg-[#f8fcf9] px-3 py-2.5 text-sm font-semibold text-[#172a24] transition-colors hover:bg-[#e2f2e9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c2f4df]"
+                    >
+                      <span className="min-w-0 break-words">{topic.title}</span>
+                      <span aria-hidden="true" className="shrink-0 text-[#346653]">→</span>
+                    </Link>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-7">
           <Link
             href={`/${locale}/library`}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-dc-accent/10 hover:bg-dc-accent/20
-              text-dc-accent font-medium rounded-xl border border-dc-accent/20
-              hover:border-dc-accent/40 transition-all duration-300 text-sm"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#c2f4df] px-5 py-2.5 text-sm font-semibold text-[#132723] transition-colors hover:bg-[#d8f9eb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c2f4df]"
           >
-            {locale === "zh" ? "浏览全部话题 →" : "Browse all topics →"}
+            {locale === "zh" ? "浏览全部话题" : "Browse all topics"}
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>
