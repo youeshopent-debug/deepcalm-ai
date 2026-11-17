@@ -97,10 +97,6 @@ export default function SanctuaryPage({
           topics={publisherTopics}
         />
       </main>
-
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 text-xs text-slate-500/60 pointer-events-none">
-        DeepCalm AI · Midnight Sanctuary
-      </div>
     </div>
   )
 }

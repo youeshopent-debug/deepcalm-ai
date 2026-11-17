@@ -39,11 +39,11 @@ export default function MedicalDisclaimer({ locale }: MedicalDisclaimerProps) {
   const text = DISCLAIMER_TEXT[locale] || DISCLAIMER_TEXT.en
 
   return (
-    <div className="border-t border-nord-border/10 bg-nord-bg/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <p className="text-[11px] leading-relaxed text-nord-text/30 text-center">
-          <span className="font-semibold text-nord-text/40">{text.heading}</span>
-          <span className="mx-1.5 text-nord-text/20">·</span>
+    <div className="relative z-10 border-t border-[#53746b] bg-[#10221e]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-24">
+        <p className="text-xs leading-relaxed text-[#d6e8df] text-center">
+          <span className="font-semibold text-[#f4faf6]">{text.heading}</span>
+          <span className="mx-1.5 text-[#d6e8df]">·</span>
           {text.body}
         </p>
       </div>
