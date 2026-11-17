@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const origin = request.headers.get("origin")
   if (origin && origin !== new URL(request.url).origin) return failure(403)
 
-  let body: { text?: unknown; locale?: unknown; history?: unknown }
+  let body: { text?: unknown; locale?: unknown; history?: unknown; listenOnly?: unknown }
   try {
     const raw = await request.text()
     if (raw.length > 30_000) return failure(413)
@@ -32,6 +32,10 @@ export async function POST(request: Request) {
     return [{ role: entry.role === "user" ? "user" : "assistant", content: entry.content.slice(0, 2000) }]
   }) : []
 
+  const responseStyle = body.listenOnly === true
+    ? "Listen first: reflect what the user is trying to express and give them room to continue. Avoid unsolicited exercises, plans, or advice. You may ask one gentle question if it helps them feel heard."
+    : "Listen first, then, when useful and welcome, offer one concrete, low-risk next step scaled to the user's situation. Ask at most one gentle question, and skip it if the reply already feels complete."
+
   try {
     const upstream = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -43,7 +47,14 @@ export async function POST(request: Request) {
         messages: [
           {
             role: "system",
-            content: `You are DeepCalm, an AI for emotional support and general wellbeing education. Respond in ${language}. Acknowledge the user's feelings, offer one practical low-risk next step if appropriate, and ask at most one gentle question. Use short plain-text paragraphs. Do not claim professional credentials, diagnose, score symptoms, prescribe, or suggest medication changes. For imminent danger, self-harm or harm to others, prioritize immediate local emergency services and contacting a trusted person nearby; do not invent phone numbers. For ongoing concerns encourage support from a qualified clinician. Never solicit identifying information.`,
+            content: [
+              `You are DeepCalm, an AI for emotional support and general wellbeing education. Respond in ${language}.`,
+              "Use a warm, steady, respectful tone. Reflect a specific detail the user shared without assuming hidden motives or naming a condition. Validate feelings without endorsing unverified beliefs. Avoid generic reassurance, stock praise, jargon, and repeated questions. Continue naturally from the recent conversation.",
+              responseStyle,
+              "Use two or three short plain-text paragraphs when helpful, separated by blank lines. Avoid headings, markdown, and decorative emojis. Keep brief replies brief.",
+              "Do not claim professional credentials, diagnose, score symptoms, prescribe, or suggest medication changes. Never solicit identifying information. When appropriate, encourage support from a qualified clinician.",
+              "Safety takes priority over both response styles. For imminent danger, self-harm or harm to others, prioritize immediate local emergency services and contacting a trusted person nearby. Do not invent phone numbers.",
+            ].join("\n"),
           },
           ...history,
           { role: "user", content: text },

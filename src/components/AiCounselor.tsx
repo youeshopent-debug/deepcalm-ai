@@ -81,10 +81,21 @@ function loadMemory(): MemoryData | null {
 
 /* ── Main Component ── */
 
+const LISTEN_LABELS: Record<string, string> = {
+  zh: "先听我说",
+  en: "Just listen",
+  ms: "Dengar dahulu",
+  ja: "まず話を聞いて",
+  ko: "먼저 들어주세요",
+  th: "ขอให้ฟังก่อน",
+  es: "Solo escúchame",
+}
+
 export default function AiCounselor({ initialPrompt, onClose, compact = false }: { initialPrompt?: string; onClose?: () => void; compact?: boolean }) {
   const { tt, locale } = useLanguage()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
+  const [listenOnly, setListenOnly] = useState(false)
   const [chatUnavailable, setChatUnavailable] = useState(false)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [showWelcome, setShowWelcome] = useState(true)
@@ -139,7 +150,7 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
       const res = await fetch("/api/analyze-anxiety", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, history: history.slice(-8), locale }),
+        body: JSON.stringify({ text, history: history.slice(-8), locale, listenOnly }),
       })
 
       if (!res.ok) throw new Error(`API returned ${res.status}`)
@@ -325,7 +336,7 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
                   <div
                     className={`
                       max-w-[85%] sm:max-w-[75%] px-5 py-4
-                      text-xl leading-relaxed
+                      text-base leading-[1.75]
                       ${
                         msg.role === "user"
                           ? "bg-dc-accent/15 border border-dc-accent/20 text-dc-text rounded-2xl rounded-br-md"
@@ -333,7 +344,11 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
                       }
                     `}
                   >
-                    <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                    <div className="space-y-3">
+                      {msg.content.split(/\n[\t ]*\n+/).map((paragraph, index) => (
+                        <p key={index} className="whitespace-pre-wrap break-words">{paragraph}</p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -383,6 +398,15 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
 
         {/* Input Area */}
         <div className="shrink-0 px-4 sm:px-6 py-4 sm:py-5">
+          <button
+            type="button"
+            aria-pressed={listenOnly}
+            disabled={isAnalyzing}
+            onClick={() => setListenOnly((enabled) => !enabled)}
+            className={`mb-2 min-h-10 rounded-full border px-4 text-sm font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bdebd8] disabled:cursor-wait ${listenOnly ? "border-[#bdebd8] bg-[#bdebd8] text-[#132723]" : "border-[#719486] bg-[#203b33] text-[#f4faf6] hover:bg-[#29473d]"}`}
+          >
+            {LISTEN_LABELS[locale] ?? LISTEN_LABELS.en}
+          </button>
           <div className="flex items-center gap-2 sm:gap-3 bg-[#172e28] border border-[#53746b] rounded-2xl px-4 sm:px-6 py-3 sm:py-4 focus-within:border-[#bdebd8] transition-all duration-300">
             <input
               type="text"
