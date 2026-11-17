@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: { unoptimized: true },
+  async redirects() {
+    return [
+      {
+        source: "/:lang(zh|en|ms|ja|ko|th|es)/social",
+        destination: "/social",
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
