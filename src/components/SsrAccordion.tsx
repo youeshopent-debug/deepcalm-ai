@@ -46,15 +46,15 @@ export default function SsrAccordion({
   const toggle = () => setOpen((v) => !v)
 
   return (
-    <div className={`rounded-2xl border border-dc-border/30 bg-dc-surface/30 backdrop-blur-sm ${className}`}>
+    <div className={`rounded-2xl border border-[#c4d8cd] bg-[#f8fcf9] ${className}`}>
       <button
         onClick={toggle}
-        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left text-sm font-semibold text-dc-text hover:text-dc-accent transition-colors"
+        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left text-sm font-semibold text-[#214b3a] hover:bg-[#e9f4ed] rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#214b3a] transition-colors"
         aria-expanded={mounted ? open : undefined}
       >
         <span>{title}</span>
         <ChevronDown
-          className={`w-4 h-4 shrink-0 text-dc-muted transition-transform duration-300 ${
+          className={`w-4 h-4 shrink-0 text-[#36584a] transition-transform duration-300 ${
             mounted && open ? "rotate-180" : ""
           }`}
         />

@@ -98,10 +98,8 @@ export default function InteractiveAreas({
       {children}
 
       {/* Resonance Wall */}
-      <section id="resonance-wall" className="w-full px-4 py-8 sm:px-6 sm:py-10">
-        <div className="max-w-2xl mx-auto">
-          <ResonanceWall />
-        </div>
+      <section id="resonance-wall" aria-labelledby="resonance-wall-title" className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-10">
+        <ResonanceWall />
       </section>
 
       {/* Breathing Guide Modal — triggered by ActionableToolCards */}

@@ -72,53 +72,28 @@ const BRIEFINGS: Record<Locale, string[]> = {
   ],
 }
 
-const WEEKDAY_LABELS: Record<Locale, string[]> = {
-  zh: ["周一·重置", "周二·连接", "周三·释放", "周四·修复", "周五·感恩", "周六·边界", "周日·蓄能"],
-  en: ["Mon · Reset", "Tue · Connect", "Wed · Release", "Thu · Repair", "Fri · Gratitude", "Sat · Boundary", "Sun · Charge"],
-  ms: ["Isn · Set Semula", "Sel · Hubung", "Rab · Lepaskan", "Kha · Baik Pulih", "Jum · Syukur", "Sab · Sempadan", "Ahd · Cas Semula"],
-  ja: ["月·リセット", "火·つながり", "水·解放", "木·修復", "金·感謝", "土·境界", "日·充電"],
-  ko: ["월·리셋", "화·연결", "수·해방", "목·회복", "금·감사", "토·경계", "일·충전"],
-  th: ["จันทร์·รีเซ็ต", "อังคาร·เชื่อมต่อ", "พุธ·ปลดปล่อย", "พฤหัส·ซ่อมแซม", "ศุกร์·ขอบคุณ", "เสาร์·ขอบเขต", "อาทิตย์·ชาร์จ"],
-  es: ["Lun · Reinicio", "Mar · Conexión", "Mié · Libera", "Jue · Repara", "Vie · Gratitud", "Sáb · Límite", "Dom · Recarga"],
-}
-
 interface DailyBriefingProps {
   lang: Locale
 }
 
 export default function DailyBriefing({ lang }: DailyBriefingProps) {
-  const locale = lang as Locale
   const dayOfWeek = new Date().getDay() // 0=Sun ... 6=Sat
   // Adjust: Mon=0, Tue=1, ..., Sun=6
   const adjustedDay = dayOfWeek === 0 ? 6 : dayOfWeek - 1
-  const tips = BRIEFINGS[locale] || BRIEFINGS.en
-  const labels = WEEKDAY_LABELS[locale] || WEEKDAY_LABELS.en
+  const tips = BRIEFINGS[lang] || BRIEFINGS.en
   const tip = tips[adjustedDay] || tips[0]
-  const label = labels[adjustedDay] || labels[0]
 
   return (
-    <section className="px-4 sm:px-6 pb-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="relative overflow-hidden rounded-2xl border border-dc-accent/20 bg-gradient-to-br from-dc-accent/[0.04] via-dc-surface/40 to-dc-surface/20 p-5 sm:p-6">
-          {/* Decorative accent line */}
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-dc-accent/40 to-transparent" />
-
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 shrink-0 w-8 h-8 rounded-lg bg-dc-accent/10 flex items-center justify-center">
-              <span className="text-sm">📋</span>
-            </div>
-            <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-[0.15em] text-dc-accent/60 font-semibold mb-1">
-                {locale === "zh" ? "今日健康简报" : locale === "ms" ? "Ringkasan Kesihatan Harian" : locale === "ja" ? "今日の健康ブリーフィング" : locale === "ko" ? "오늘의 건강 브리핑" : locale === "th" ? "สรุปสุขภาพประจำวัน" : locale === "es" ? "Resumen de Salud de Hoy" : "Daily Health Briefing"}
-              </p>
-              <p className="text-sm text-dc-text/90 leading-relaxed">
-                <span className="inline-block mr-2 text-dc-accent/70 text-xs font-medium bg-dc-accent/10 px-2 py-0.5 rounded-full">
-                  {label}
-                </span>
-                {tip}
-              </p>
-            </div>
-          </div>
+    <section aria-labelledby="daily-briefing" className="mx-auto max-w-3xl px-4 pb-5 sm:px-6">
+      <div className="flex items-start gap-3 rounded-3xl border border-[#b8d3c3] bg-[#e9f4ed] p-5 shadow-xl sm:gap-4 sm:p-8">
+        <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#d4eadd]">📋</span>
+        <div className="min-w-0">
+          <h2 id="daily-briefing" className="text-lg font-semibold text-[#214b3a]">
+            {lang === "zh" ? "今日健康简报" : lang === "ms" ? "Ringkasan Kesihatan Harian" : lang === "ja" ? "今日の健康ブリーフィング" : lang === "ko" ? "오늘의 건강 브리핑" : lang === "th" ? "สรุปสุขภาพประจำวัน" : lang === "es" ? "Resumen de Salud de Hoy" : "Daily Health Briefing"}
+          </h2>
+          <p className="mt-2 text-base leading-relaxed text-[#263e34]">
+            {tip}
+          </p>
         </div>
       </div>
     </section>
