@@ -175,25 +175,25 @@ export default function ResonanceWall() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-[var(--dc-text)]">
+    <div className="rounded-3xl border border-[#53746b] bg-[#132723] p-5 shadow-xl sm:p-8">
+      <div className="mb-5">
+        <h2 id="resonance-wall-title" className="text-2xl font-bold text-[#f4faf6] sm:text-3xl">
           {tt("resonanceWall.title")}
         </h2>
-        <p className="mt-1 text-sm text-[var(--dc-muted)]">
+        <p className="mt-2 text-base leading-relaxed text-[#c5dbd1]">
           {tt("resonanceWall.subtitle")}
         </p>
-        <div className="mt-3 inline-flex items-center gap-2 glass rounded-full px-4 py-1.5">
-          <span className="w-2 h-2 rounded-full bg-dc-success animate-pulse" />
-          <span className="text-xs text-[var(--dc-muted)]">
+        <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#29473d] px-4 py-1.5">
+          <span className="w-2 h-2 rounded-full bg-[#a5dec8]" />
+          <span className="text-xs text-[#c5dbd1]">
             {tt("resonanceWall.counter").replace("{n}", globalCount.toLocaleString())}
           </span>
         </div>
       </div>
 
-      <div className="glass-strong rounded-2xl p-4">
-        <div className="h-[300px] overflow-hidden relative">
-          <div className="absolute inset-0 overflow-y-auto scroll-smooth p-2 space-y-2">
+      <div className="space-y-4">
+        <div className="relative h-[300px] overflow-hidden rounded-2xl bg-[#1b342c]">
+          <div className="absolute inset-0 overflow-y-auto scroll-smooth space-y-2 p-3 sm:p-4">
             {messages.map((msg) => {
               const t = translations[msg.id]
               const showTranslate = t && t !== "loading"
@@ -202,16 +202,16 @@ export default function ResonanceWall() {
                   key={msg.id}
                   className={msg.fading ? "animate-fade-out-glow" : "animate-fade-in-glow"}
                 >
-                  <div className="glass rounded-xl px-3 py-2 inline-block max-w-[85%] group">
-                    <p className="text-sm text-[var(--dc-text)]">{msg.text}</p>
+                  <div className="inline-block max-w-full break-words rounded-xl bg-[#29473d] px-3 py-2 sm:max-w-[85%]">
+                    <p className="text-sm text-[#f4faf6]">{msg.text}</p>
                     {t === "loading" && (
-                      <p className="text-xs text-[var(--dc-muted)] italic mt-1">translating...</p>
+                      <p className="text-xs text-[#c5dbd1] italic mt-1">translating...</p>
                     )}
                     {showTranslate && (
-                      <p className="text-xs text-[var(--dc-muted)] italic mt-1">{t}</p>
+                      <p className="text-xs text-[#c5dbd1] italic mt-1">{t}</p>
                     )}
-                    <div className="flex items-center justify-between mt-0.5">
-                      <p className="text-[10px] text-[var(--dc-muted)]">
+                    <div className="flex items-center justify-between gap-3 mt-1">
+                      <p className="text-xs text-[#c5dbd1]">
                         {new Date(msg.timestamp).toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -219,11 +219,7 @@ export default function ResonanceWall() {
                       </p>
                       <button
                         onClick={() => handleTranslate(msg.id, msg.text)}
-                        className={`text-[10px] transition-colors opacity-0 group-hover:opacity-100 ${
-                          showTranslate
-                            ? "text-[var(--dc-text)]"
-                            : "text-[var(--dc-muted)] hover:text-[var(--dc-text)]"
-                        }`}
+                        className="inline-flex min-h-8 min-w-8 items-center justify-center rounded-md bg-[#1b342c] text-sm hover:bg-[#132723] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a5dec8]"
                         title={showTranslate ? "Show original" : "Translate"}
                       >
                         🌐
@@ -236,19 +232,20 @@ export default function ResonanceWall() {
           </div>
         </div>
 
-        <div className="mt-3 flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
+            aria-label={tt("resonanceWall.placeholder")}
             placeholder={tt("resonanceWall.placeholder")}
-            className="flex-1 glass rounded-xl px-4 py-2.5 text-sm text-[var(--dc-text)] placeholder:text-[var(--dc-muted)] outline-none focus:ring-1 focus:ring-dc-accent/30 transition-all"
+            className="min-h-11 min-w-40 flex-1 rounded-xl border border-[#76958a] bg-[#1b342c] px-4 py-2.5 text-base text-[#f4faf6] placeholder:text-[#c5dbd1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a5dec8]"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim()}
-            className="px-4 py-2.5 rounded-xl bg-dc-accent text-dc-deep text-sm font-medium hover:bg-dc-accent/90 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="min-h-11 shrink-0 rounded-xl bg-[#bdebd8] px-4 py-2.5 text-sm font-semibold text-[#132723] hover:bg-[#d6f4e7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a5dec8] disabled:cursor-not-allowed disabled:bg-[#35534a] disabled:text-[#dbe9e2]"
           >
             {tt("resonanceWall.submit")}
           </button>
