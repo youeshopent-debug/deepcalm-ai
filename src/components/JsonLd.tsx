@@ -37,14 +37,6 @@ export function WebsiteJsonLd() {
     description:
       "AI-powered emotional support, breathing exercises, and mental wellness guidance. Find your calm in the quiet hours.",
     inLanguage: ["zh", "en", "ms", "ja", "ko", "th", "es"],
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${BASE}/{lang}/topic/{search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />
 }

@@ -79,6 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     alternates: {
       canonical: `https://deepcalm-ai.com/${lang}/library/${slug}`,
       languages: {
+        "x-default": `https://deepcalm-ai.com/zh/library/${slug}`,
         zh: `https://deepcalm-ai.com/zh/library/${slug}`, en: `https://deepcalm-ai.com/en/library/${slug}`, ms: `https://deepcalm-ai.com/ms/library/${slug}`,
         ja: `https://deepcalm-ai.com/ja/library/${slug}`, ko: `https://deepcalm-ai.com/ko/library/${slug}`, th: `https://deepcalm-ai.com/th/library/${slug}`, es: `https://deepcalm-ai.com/es/library/${slug}`,
       },

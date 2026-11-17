@@ -97,6 +97,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       canonical: `https://deepcalm-ai.com/${locale}`,
       languages: {
         zh: "https://deepcalm-ai.com/zh",
+        "x-default": "https://deepcalm-ai.com/zh",
         en: "https://deepcalm-ai.com/en",
         ms: "https://deepcalm-ai.com/ms",
         ja: "https://deepcalm-ai.com/ja",
