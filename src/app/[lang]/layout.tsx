@@ -1,6 +1,7 @@
 import AudioFloatingTray from "@/components/AudioFloatingTray";
 import BackgroundLayer from "@/components/BackgroundLayer";
 import CookieConsent from "@/components/CookieConsent";
+import FloatingCounselor from "@/components/FloatingCounselor";
 import Header from "@/components/Header";
 import MedicalDisclaimer from "@/components/MedicalDisclaimer";
 import SitemapFooter from "@/components/SitemapFooter";
@@ -51,6 +52,7 @@ export default function LangLayout({
           {children}
           <SitemapFooter />
           <MedicalDisclaimer locale={safeLocale} />
+          <FloatingCounselor />
           <ThemeSwitcher />
           <CookieConsent locale={safeLocale} />
           <AudioFloatingTray />

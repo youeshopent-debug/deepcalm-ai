@@ -81,7 +81,7 @@ function loadMemory(): MemoryData | null {
 
 /* ── Main Component ── */
 
-export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?: string; onClose?: () => void }) {
+export default function AiCounselor({ initialPrompt, onClose, compact = false }: { initialPrompt?: string; onClose?: () => void; compact?: boolean }) {
   const { tt, locale } = useLanguage()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
@@ -106,7 +106,8 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
 
   /** Auto-scroll */
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    const scroller = messagesEndRef.current?.parentElement
+    scroller?.scrollTo({ top: scroller.scrollHeight, behavior: "smooth" })
   }, [messages])
 
   /* ── Handle Send ── */
@@ -218,7 +219,9 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
         className={`
           relative z-10 flex flex-col
           w-full
-          ${drawerOpen
+          ${compact
+            ? "h-full min-h-0"
+            : drawerOpen
             ? "fixed inset-0 z-50 h-[100dvh] bg-[#132723] [--dc-text:#f4faf6] [--dc-muted:#d6e8df]"
             : "max-w-5xl mx-auto min-h-[28rem] max-h-[85vh]"
           }
@@ -233,12 +236,14 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
             </h2>
           </div>
           <div className="flex items-center gap-2">
-            {drawerOpen && (
+            {(compact || drawerOpen) && (
               <button
                 onClick={() => {
                   setDrawerOpen(false)
                   onClose?.()
                 }}
+                type="button"
+                aria-label={locale === "zh" ? "关闭聊天" : "Close chat"}
                 className="p-2 rounded-full hover:bg-dc-accent/10 transition-colors"
               >
                 <X className="w-5 h-5 text-dc-muted" />
@@ -255,23 +260,23 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
 
         {/* Messages Area */}
         <div
-          className="flex-1 overflow-y-auto px-4 sm:px-6 pb-2 space-y-4 scrollbar-thin"
+          className="min-h-0 flex-1 overflow-y-auto px-4 sm:px-6 pb-2 space-y-4 scrollbar-thin"
           style={{ scrollBehavior: "smooth" }}
         >
           {showWelcome && messages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-center space-y-6 py-12">
-              <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-[#6c9a8a] bg-[#29473d]">
+            <div className={`flex min-h-full flex-col items-center justify-center text-center ${compact ? "space-y-3 py-3" : "space-y-6 py-12"}`}>
+              {!compact && <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-[#6c9a8a] bg-[#29473d]">
                 <span className="absolute inset-0 rounded-full bg-[#bdebd8] motion-safe:animate-breath-orb-4-7 motion-reduce:hidden" />
                 {returnVisitor ? (
                   <Sparkles className="relative h-8 w-8 text-[#bdebd8]" />
                 ) : (
                   <Heart className="relative h-8 w-8 text-[#bdebd8]" />
                 )}
-              </div>
+              </div>}
               <div className="max-w-3xl space-y-3">
                 {returnVisitor ? (
                   <>
-                    <p className="text-xl sm:text-2xl font-medium text-dc-text">
+                    <p className={`font-medium text-dc-text ${compact ? "text-base" : "text-xl sm:text-2xl"}`}>
                       {(() => {
                         const tmpl = WELCOME_BACK_TEMPLATES[locale] || WELCOME_BACK_TEMPLATES.en
                         const tagKey = returnVisitor.emotionTags[0]
@@ -285,7 +290,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
                   </>
                 ) : (
                   <>
-                    <p className="text-xl sm:text-2xl font-medium text-dc-text">
+                    <p className={`font-medium text-dc-text ${compact ? "text-base" : "text-xl sm:text-2xl"}`}>
                       {tt("aiCounselor.welcome")}
                     </p>
                     <p className="mx-auto max-w-lg text-base leading-relaxed text-dc-muted sm:text-lg">
@@ -300,7 +305,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
                     key={t}
                     onClick={() => {
                       setInput(tt(`aiCounselor.topic_${t}` as any))
-                      setDrawerOpen(true)
+                      if (!compact) setDrawerOpen(true)
                     }}
                     className="px-4 py-2.5 text-sm bg-dc-surface/60 hover:bg-dc-accent/10 border border-dc-border hover:border-dc-accent/30 text-dc-muted hover:text-dc-text rounded-xl transition-all duration-300"
                   >
@@ -390,7 +395,7 @@ export default function AiCounselor({ initialPrompt, onClose }: { initialPrompt?
               }}
               placeholder={tt("aiCounselor.placeholder")}
               className="min-w-0 flex-1 bg-transparent text-base text-[#f4faf6] placeholder:text-[#c5dbd1] outline-none sm:text-xl"
-              onClick={() => setDrawerOpen(true)}
+              onClick={compact ? undefined : () => setDrawerOpen(true)}
             />
             <button
               onClick={() => handleSend()}
