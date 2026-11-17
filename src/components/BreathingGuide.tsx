@@ -116,12 +116,12 @@ export default function BreathingGuide({ onClose }: { onClose: () => void }) {
       }`}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-dc-deep/85 backdrop-blur-xl" onClick={handleManualClose} />
+      <div className="absolute inset-0 bg-[#132723]/95 backdrop-blur-xl" onClick={handleManualClose} />
 
       {/* Close button */}
       <button
         onClick={handleManualClose}
-        className="absolute top-6 right-6 z-10 p-2 rounded-full bg-dc-surface/40 hover:bg-dc-surface/60 text-dc-muted hover:text-dc-text transition-all"
+        className="absolute top-6 right-6 z-10 p-2 rounded-full border border-[#91b9ab] bg-[#203b33] text-[#f4faf6] hover:bg-[#25443a] transition-all"
         aria-label="Close"
       >
         <X className="w-5 h-5" />
@@ -130,7 +130,7 @@ export default function BreathingGuide({ onClose }: { onClose: () => void }) {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center px-6 max-w-sm w-full">
         {/* Phase indicator text */}
-        <p className="text-dc-accent/80 text-xs uppercase tracking-[0.15em] mb-8 font-medium">
+        <p className="text-[#c2f4df] text-xs uppercase tracking-[0.15em] mb-8 font-medium">
           {phase === "done" ? "" : `${round} / ${TOTAL_ROUNDS}`}
         </p>
 
@@ -190,13 +190,13 @@ export default function BreathingGuide({ onClose }: { onClose: () => void }) {
 
         {/* Done message */}
         {phase === "done" && (
-          <p className="text-center text-dc-text/80 text-sm leading-relaxed animate-fade-in-glow">
+          <p className="text-center text-[#f4faf6] text-sm leading-relaxed animate-fade-in-glow">
             {labels.done}
           </p>
         )}
 
         {/* Hint */}
-        <p className="mt-10 text-dc-muted/30 text-[10px] tracking-wide">
+        <p className="mt-10 text-[#d6e8df] text-[10px] tracking-wide">
           {locale === "zh" ? "点击任意位置可关闭" : "Tap anywhere to close"}
         </p>
       </div>

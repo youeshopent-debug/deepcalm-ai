@@ -62,22 +62,22 @@ export default function ThemeSwitcher() {
       <button
         ref={btnRef}
         onClick={() => setOpen(!open)}
-        className="w-11 h-11 rounded-full glass flex items-center justify-center
+        className="w-11 h-11 rounded-full border border-[#91b9ab] bg-[#132723] flex items-center justify-center
           hover:scale-110 active:scale-95 transition-all duration-300
           shadow-lg hover:shadow-xl"
         aria-label="切换主题"
       >
-        <Palette className="w-5 h-5 text-dc-accent" />
+        <Palette className="w-5 h-5 text-[#c2f4df]" />
       </button>
 
       {open && (
         <div
           ref={panelRef}
           className="absolute bottom-full right-0 mb-3 w-52 py-2 px-1
-            bg-dc-surface/90 backdrop-blur-xl border border-dc-border/60
+            bg-[#132723] border border-[#91b9ab]
             rounded-xl shadow-2xl animate-fade-in-up"
         >
-          <p className="px-3 py-1.5 text-xs text-dc-muted tracking-wider uppercase">
+          <p className="px-3 py-1.5 text-xs text-[#d6e8df] tracking-wider uppercase">
             氛围选择
           </p>
           {themes.map((t) => {
@@ -94,8 +94,8 @@ export default function ThemeSwitcher() {
                 }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg transition-all duration-200
                   ${active
-                    ? "bg-dc-accent-soft text-dc-accent"
-                    : "text-dc-muted hover:text-dc-text hover:bg-white/5"
+                    ? "bg-[#25443a] text-[#c2f4df]"
+                    : "text-[#f4faf6] hover:bg-[#203b33]"
                   }`}
               >
                 <span
@@ -104,7 +104,7 @@ export default function ThemeSwitcher() {
                 />
                 <Icon className="w-4 h-4 flex-shrink-0" />
                 <span className="flex-1 text-left">{t.label}</span>
-                {active && <span className="w-1.5 h-1.5 rounded-full bg-dc-accent" />}
+                {active && <span className="w-1.5 h-1.5 rounded-full bg-[#c2f4df]" />}
               </button>
             )
           })}
