@@ -65,6 +65,7 @@ export default function SitemapFooter() {
             <Link href={`/${locale}`} className={linkStyle}>{tt("sitemap.home")}</Link>
             <Link href={`/${locale}/tools?tool=checkin#healing-toolbox`} className={linkStyle}>{tt("sitemap.dailyCheckin")}</Link>
             {compact && <Link href={`/${locale}/sanctuary`} className={linkStyle}>{locale === "zh" ? "心灵庇护所" : "Sanctuary"}</Link>}
+            <Link href={`/${locale}/editorial-policy`} className={linkStyle}>{locale === "zh" ? "编辑政策" : "Editorial policy"}</Link>
             <Link href={`/${locale}/privacy`} className={linkStyle}>{tt("sitemap.privacy")}</Link>
             <Link href={`/${locale}/terms`} className={linkStyle}>{tt("sitemap.terms")}</Link>
             <Link href={`/${locale}/about`} className={linkStyle}>{tt("sitemap.about")}</Link>
