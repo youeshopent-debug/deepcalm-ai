@@ -49,26 +49,25 @@ export default async function PrivacyPage({ params }: { params: Promise<{ lang: 
   ]
 
   return (
-    <div className="min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-16">
-        <div className="glass rounded-2xl p-6 sm:p-8 border border-dc-border/40">
-          <div className="flex items-center gap-3 mb-4">
-            <Shield className="w-7 h-7 text-dc-accent" />
-            <h1 className="text-3xl sm:text-4xl font-bold text-dc-text">{p.title}</h1>
+    <main className="relative min-h-screen px-4 py-10 sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-4xl overflow-hidden rounded-[2rem] border border-[#c9d9d0] bg-[#f8fcf9] text-[#172a24] shadow-xl">
+        <header className="bg-gradient-to-br from-[#143a30] to-[#224e43] px-6 py-8 text-[#f5fcf7] sm:px-12 sm:py-12">
+          <div className="mb-5 inline-flex rounded-2xl border border-[#77a898] bg-[#285548] p-3 text-[#daf5e7]">
+            <Shield aria-hidden="true" className="h-7 w-7" />
           </div>
-          <p className="text-sm text-dc-muted/70 mb-6">{p.updated}</p>
-          <p className="text-dc-muted/80 leading-relaxed">{p.intro}</p>
-        </div>
-
-        <div className="space-y-8 mt-10">
-          {sections.map((s, i) => (
-            <div key={i} className="glass rounded-2xl p-6 border border-dc-border/40">
-              <h2 className="text-xl font-semibold text-dc-text mb-3">{s.title}</h2>
-              <p className="text-dc-muted/80 leading-relaxed">{s.desc}</p>
-            </div>
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-5xl">{p.title}</h1>
+          <p className="mt-3 text-sm text-[#cae7dc]">{p.updated}</p>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#ecf7ef]">{p.intro}</p>
+        </header>
+        <div className="divide-y divide-[#d6e3db] px-6 sm:px-12">
+          {sections.map(({ title, desc }) => (
+            <section key={title} className="py-6 sm:py-8">
+              <h2 className="text-lg font-semibold sm:text-xl">{title}</h2>
+              <p className="mt-2 whitespace-pre-line text-base leading-relaxed text-[#354c42]">{desc}</p>
+            </section>
           ))}
         </div>
       </div>
-    </div>
+    </main>
   )
 }

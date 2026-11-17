@@ -1,68 +1,66 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { ShieldCheck } from "lucide-react"
+import { useEffect, useState } from "react"
+import type { Locale } from "@/types"
 
 const CONSENT_KEY = "deepcalm-cookie-consent"
+type Choice = "accepted" | "rejected"
+type Notice = [title: string, description: string, policy: string, reject: string, accept: string]
 
-type ConsentStatus = "accepted" | "rejected" | null
+const notices: Record<Locale, Notice> = {
+  zh: ["Cookie 与隐私", "本站使用 Cookie，Google AdSense 也可能使用 Cookie 来个性化广告。", "隐私政策", "拒绝", "接受"],
+  en: ["Cookies and privacy", "This site uses cookies. Google AdSense may use cookies to personalize ads.", "Privacy Policy", "Reject", "Accept"],
+  ms: ["Kuki dan privasi", "Laman ini menggunakan kuki. Google AdSense mungkin menggunakan kuki untuk memperibadikan iklan.", "Dasar Privasi", "Tolak", "Terima"],
+  ja: ["Cookie とプライバシー", "このサイトでは Cookie を使用します。Google AdSense が広告のパーソナライズに Cookie を使用する場合があります。", "プライバシーポリシー", "拒否", "同意"],
+  ko: ["쿠키 및 개인정보 보호", "이 사이트는 쿠키를 사용합니다. Google AdSense는 광고 개인 맞춤설정에 쿠키를 사용할 수 있습니다.", "개인정보 처리방침", "거부", "동의"],
+  th: ["คุกกี้และความเป็นส่วนตัว", "เว็บไซต์นี้ใช้คุกกี้ และ Google AdSense อาจใช้คุกกี้เพื่อปรับโฆษณาให้เหมาะกับคุณ", "นโยบายความเป็นส่วนตัว", "ปฏิเสธ", "ยอมรับ"],
+  es: ["Cookies y privacidad", "Este sitio usa cookies. Google AdSense puede usar cookies para personalizar anuncios.", "Política de privacidad", "Rechazar", "Aceptar"],
+}
 
-export default function CookieConsent() {
-  const [consent, setConsent] = useState<ConsentStatus>(null)
-  const [mounted, setMounted] = useState(false)
+const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#c2f4df]"
+const button = `min-h-11 rounded-xl border border-[#91b9ab] bg-[#203b33] px-4 text-sm font-semibold hover:bg-[#2b4a40] ${focus}`
+
+export default function CookieConsent({ locale }: { locale: Locale }) {
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-    const stored = localStorage.getItem(CONSENT_KEY) as ConsentStatus | null
-    if (stored === "accepted" || stored === "rejected") {
-      setConsent(stored)
+    try {
+      const stored = localStorage.getItem(CONSENT_KEY)
+      setVisible(stored !== "accepted" && stored !== "rejected")
+    } catch {
+      setVisible(true)
     }
   }, [])
 
-  function handleAccept() {
-    localStorage.setItem(CONSENT_KEY, "accepted")
-    setConsent("accepted")
+  function save(choice: Choice) {
+    try {
+      localStorage.setItem(CONSENT_KEY, choice)
+    } catch {
+      // Allow dismissal for this page if storage is unavailable.
+    }
+    setVisible(false)
   }
 
-  function handleReject() {
-    localStorage.setItem(CONSENT_KEY, "rejected")
-    setConsent("rejected")
-  }
-
-  // Don't render until hydration to avoid flash; hide if already decided
-  if (!mounted || consent !== null) return null
+  if (!visible) return null
+  const [title, description, privacy, reject, accept] = notices[locale]
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[9999] p-3 sm:p-4">
-      <div className="mx-auto max-w-3xl rounded-2xl border border-dc-border/30 bg-dc-surface/95 backdrop-blur-xl shadow-2xl p-4 sm:p-5">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-          <p className="text-xs sm:text-sm text-dc-text/80 leading-relaxed flex-1">
-            This site uses cookies to improve your experience and support ad personalization via Google AdSense.
-            By clicking "Accept", you consent to the use of all cookies.
-            <a
-              href="/en/privacy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-1 text-dc-accent hover:text-dc-accent/80 underline transition-colors"
-            >
-              Privacy Policy
-            </a>
-          </p>
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={handleReject}
-              className="px-3 py-1.5 text-xs font-medium text-dc-text/60 hover:text-dc-text border border-dc-border/30 rounded-lg hover:border-dc-border/60 transition-all"
-            >
-              Reject
-            </button>
-            <button
-              onClick={handleAccept}
-              className="px-4 py-1.5 text-xs font-semibold text-white bg-dc-accent hover:bg-dc-accent/90 rounded-lg transition-all"
-            >
-              Accept
-            </button>
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[9999] px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-5">
+      <section aria-labelledby="cookie-notice-title" className="pointer-events-auto mx-auto flex max-w-4xl flex-col gap-4 rounded-3xl border border-[#53746b] bg-[#132723] p-4 text-[#f4faf6] shadow-2xl sm:flex-row sm:items-center sm:p-5">
+        <div className="flex min-w-0 flex-1 items-start gap-3">
+          <span className="hidden rounded-xl bg-[#25443a] p-2.5 text-[#c2f4df] min-[360px]:inline-flex"><ShieldCheck aria-hidden="true" size={22} /></span>
+          <div className="min-w-0">
+            <h2 id="cookie-notice-title" className="text-base font-semibold leading-snug">{title}</h2>
+            <p className="mt-1 text-sm leading-relaxed text-[#d6e8df]">{description}</p>
+            <a href={`/${locale}/privacy`} className={`mt-1 inline-flex min-h-8 items-center rounded-sm text-sm font-semibold text-[#c2f4df] underline underline-offset-4 hover:text-white ${focus}`}>{privacy}</a>
           </div>
         </div>
-      </div>
+        <div className="grid grid-cols-2 gap-2 sm:shrink-0">
+          <button type="button" onClick={() => save("rejected")} className={button}>{reject}</button>
+          <button type="button" onClick={() => save("accepted")} className={button}>{accept}</button>
+        </div>
+      </section>
     </div>
   )
 }
