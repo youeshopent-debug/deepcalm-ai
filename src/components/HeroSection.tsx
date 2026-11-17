@@ -65,20 +65,20 @@ export default function HeroSection({
           </p>
 
           <div className={`mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <button
+              onClick={() => setShowBreathing(true)}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#6e9888] bg-[#c2f4df] px-7 py-3 text-sm font-semibold text-[#132723] shadow-lg transition-colors hover:bg-[#d8f9eb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#377458]" />
+              {RELAX_LABELS[locale] || RELAX_LABELS.en}
+            </button>
+
             <a
               href="#ai-counselor"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-dc-accent text-dc-deep font-semibold text-sm hover:bg-dc-accent/90 transition-all duration-300 shadow-lg shadow-dc-accent/20"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[#789588] bg-[#f8fcf9] px-6 py-3 text-sm font-semibold text-[#172a24] transition-colors hover:bg-[#e5f2e9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               {ctaText}
             </a>
-
-            <button
-              onClick={() => setShowBreathing(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass border border-dc-border/40 text-dc-text text-sm font-medium hover:bg-dc-accent/10 hover:border-dc-accent/30 transition-all duration-300 group"
-            >
-              <span className="w-2 h-2 rounded-full bg-dc-accent/60 group-hover:bg-dc-accent animate-pulse-soft transition-colors" />
-              {RELAX_LABELS[locale] || RELAX_LABELS.en}
-            </button>
           </div>
 
           {/* Theme selector */}

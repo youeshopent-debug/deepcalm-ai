@@ -45,7 +45,7 @@ export default function GlobeLangSwitcher() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors text-sm"
+        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[#d6e8df] hover:text-white hover:bg-white/10 transition-colors text-sm"
         aria-label="Switch language"
       >
         <Globe className="w-4 h-4" />
@@ -53,15 +53,15 @@ export default function GlobeLangSwitcher() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-1.5 w-48 py-1.5 bg-dc-surface/90 backdrop-blur-xl border border-dc-border rounded-xl shadow-2xl z-[200]">
+        <div className="absolute right-0 top-full mt-1.5 w-48 py-1.5 bg-[#132723] border border-[#53746b] rounded-xl shadow-2xl z-[200]">
           {locales.map((l) => (
             <button
               key={l.code}
               onClick={() => switchTo(l.code)}
               className={`flex items-center gap-3 w-full px-3 py-2 text-sm transition-colors ${
                 locale === l.code
-                  ? "text-dc-accent bg-dc-accent/10"
-                  : "text-dc-text/70 hover:text-dc-text hover:bg-white/5"
+                  ? "text-[#c2f4df] bg-[#25443a]"
+                  : "text-[#d6e8df] hover:text-white hover:bg-white/10"
               }`}
             >
               <span className="text-base leading-none">{l.flag}</span>
