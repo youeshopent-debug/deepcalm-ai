@@ -91,11 +91,11 @@ export default function TechArchSection({ dict }: { dict: any }) {
 
         {/* Flow Diagram */}
         <div className={`mb-20 transition-all duration-1000 delay-400 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0">
+          <ol className="grid grid-cols-1 gap-8 lg:grid-cols-4">
             {flowSteps.map((step, i) => (
-              <div key={step.num} className="flex-1 w-full">
-                <div className="glass rounded-xl p-5 text-center">
-                  <div className="text-2xl mb-2">{step.icon}</div>
+              <li key={step.num} className="relative min-w-0">
+                <div className="glass h-full rounded-xl p-5 text-center">
+                  <div aria-hidden="true" className="text-2xl mb-2">{step.icon}</div>
                   <div className="w-7 h-7 rounded-full bg-dc-accent/20 flex items-center justify-center mx-auto mb-3">
                     <span className="text-xs font-bold text-dc-accent">{step.num}</span>
                   </div>
@@ -107,13 +107,13 @@ export default function TechArchSection({ dict }: { dict: any }) {
                   </p>
                 </div>
                 {i < flowSteps.length - 1 && (
-                  <div className="hidden md:flex justify-center py-2">
-                    <span className="text-dc-accent/40 text-2xl">→</span>
+                  <div aria-hidden="true" className="pointer-events-none absolute left-0 top-full flex h-8 w-full items-center justify-center text-xl leading-none text-dc-accent lg:left-full lg:top-1/2 lg:w-8 lg:-translate-y-1/2">
+                    <span className="rotate-90 lg:rotate-0">→</span>
                   </div>
                 )}
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
 
         {/* Tech Highlights */}
