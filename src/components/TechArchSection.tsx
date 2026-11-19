@@ -43,9 +43,9 @@ export default function TechArchSection({ dict }: { dict: any }) {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title + Subtitle */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <h2 className="text-2xl sm:text-3xl font-bold text-dc-text mb-4">{a.tech_arch_title}</h2>
-          <p className="text-base sm:text-lg text-dc-muted leading-relaxed max-w-3xl mx-auto">{a.tech_arch_subtitle}</p>
+        <div className={`mb-12 rounded-2xl border border-white/15 bg-[#11251e] px-5 py-7 text-center shadow-lg transition-all sm:px-8 sm:py-9 duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">{a.tech_arch_title}</h2>
+          <p className="text-base sm:text-lg text-[#e7f0eb] leading-relaxed max-w-3xl mx-auto">{a.tech_arch_subtitle}</p>
         </div>
 
         {/* Model Grid */}
