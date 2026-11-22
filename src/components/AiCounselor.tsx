@@ -227,6 +227,7 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
   return (
     <>
       <div
+        data-chat-expanded={drawerOpen && !compact ? "" : undefined}
         className={`
           relative z-10 flex flex-col
           w-full
@@ -397,13 +398,16 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
         )}
 
         {/* Input Area */}
-        <div className="shrink-0 px-4 sm:px-6 py-4 sm:py-5">
+        <div className={drawerOpen && !compact
+          ? "mx-auto w-full max-w-3xl shrink-0 px-4 pt-2 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6"
+          : "shrink-0 px-4 py-4 sm:px-6 sm:py-5"}
+        >
           <button
             type="button"
             aria-pressed={listenOnly}
             disabled={isAnalyzing}
             onClick={() => setListenOnly((enabled) => !enabled)}
-            className={`mb-2 min-h-10 rounded-full border px-4 text-sm font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bdebd8] disabled:cursor-wait ${listenOnly ? "border-[#bdebd8] bg-[#bdebd8] text-[#132723]" : "border-[#719486] bg-[#203b33] text-[#f4faf6] hover:bg-[#29473d]"}`}
+            className={`mb-1.5 min-h-9 rounded-full border px-3 text-sm font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bdebd8] disabled:cursor-wait ${listenOnly ? "border-[#bdebd8] bg-[#bdebd8] text-[#132723]" : "border-[#719486] bg-[#203b33] text-[#f4faf6] hover:bg-[#29473d]"}`}
           >
             {LISTEN_LABELS[locale] ?? LISTEN_LABELS.en}
           </button>
