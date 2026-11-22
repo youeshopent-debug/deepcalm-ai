@@ -46,16 +46,18 @@ export default function LangLayout({
   return (
     <LanguageProvider initialLocale={safeLocale} key={lang}>
       <ThemeProvider>
-        <div className="dark min-h-screen bg-white/90 text-gray-900 has-[>main.short-home]:flex has-[>main.short-home]:min-h-dvh has-[>main.short-home]:flex-col">
+        <div className="dark min-h-screen bg-white/90 text-gray-900 has-[>main.short-home]:flex has-[>main.short-home]:min-h-dvh has-[>main.short-home]:flex-col [&:has([data-chat-expanded])_.chat-page-floaters]:hidden">
           <BackgroundLayer />
           <Header />
           {children}
           <SitemapFooter />
           <MedicalDisclaimer locale={safeLocale} />
-          <FloatingCounselor />
-          <ThemeSwitcher />
           <CookieConsent locale={safeLocale} />
-          <AudioFloatingTray />
+          <div className="chat-page-floaters">
+            <FloatingCounselor />
+            <ThemeSwitcher />
+            <AudioFloatingTray />
+          </div>
         </div>
       </ThemeProvider>
     </LanguageProvider>
