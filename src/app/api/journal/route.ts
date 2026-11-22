@@ -43,7 +43,7 @@ async function handle(req: NextRequest) {
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : ""
     if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return reply({ error: "invalid" }, 400)
     const verify = body.action === "verify"
-    if (verify && (typeof body.code !== "string" || !/^\d{6}$/.test(body.code))) return reply({ error: "invalid" }, 400)
+    if (verify && (typeof body.code !== "string" || !/^\d{8}$/.test(body.code))) return reply({ error: "invalid" }, 400)
     const result = await upstream(verify ? "/auth/v1/verify" : "/auth/v1/otp", {
       method: "POST",
       body: JSON.stringify(verify ? { email, token: body.code, type: "email" } : { email, create_user: true }),
