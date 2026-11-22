@@ -66,5 +66,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const dict = getDict(locale)
 
   const heroTitle = tt(dict, "hero.title") || "DeepCalm AI"
-  return <ShortHome title={heroTitle} />
+  const journalAvailable = Boolean(process.env.JOURNAL_SUPABASE_URL && process.env.JOURNAL_SUPABASE_PUBLIC_KEY)
+  return <ShortHome title={heroTitle} journalAvailable={journalAvailable} />
 }
