@@ -68,6 +68,26 @@ async function handle(req: NextRequest) {
   }
   if (!token) return reply({ error: "login" }, 401)
 
+  if (req.nextUrl.searchParams.has("reminders")) {
+    const zone = req.nextUrl.searchParams.get("zone") || ""
+    if (zone.length > 100 || !/^[A-Za-z0-9_+/-]+$/.test(zone)) return reply({ error: "invalid" }, 400)
+    if (method !== "GET" && method !== "PATCH") return reply({ error: "invalid" }, 405)
+    if (method === "PATCH" && (
+      (body.frequency !== "off" && body.frequency !== "daily" && body.frequency !== "weekdays") ||
+      typeof body.time !== "string" || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(body.time) ||
+      (body.language !== "zh" && body.language !== "en")
+    )) return reply({ error: "invalid" }, 400)
+    const result = await upstream("/rest/v1/rpc/mood_reminder_settings", {
+      method: "POST",
+      body: JSON.stringify(method === "GET" ? { p_zone: zone } : {
+        p_zone: zone, p_frequency: body.frequency, p_time: body.time, p_language: body.language,
+      }),
+    })
+    if (result.status === 401) return reply({ error: "login" }, 401)
+    if (!result.ok) return reply({ error: "unavailable" }, 503)
+    return reply(await result.json())
+  }
+
   const params = new URLSearchParams({ select: FIELDS })
   if (method === "GET") {
     const offset = Number(req.nextUrl.searchParams.get("offset") || 0)
