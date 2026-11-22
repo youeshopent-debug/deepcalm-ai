@@ -70,24 +70,28 @@ export default async function LibraryPage({ params }: { params: Promise<{ lang: 
         <div className="absolute inset-0 bg-gradient-to-b from-nord-card/50 via-nord-bg to-nord-bg pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Breadcrumb
-            items={[{ label: "Library", href: `/${locale}/library` }]}
-            locale={locale}
-          />
+          <div className="mb-8 rounded-2xl border border-white/15 bg-[#11251e] px-5 py-6 shadow-lg sm:px-8 sm:py-8">
+            <div className="[&_ol]:flex-wrap [&_ol]:text-[#e7f0eb] [&_a:hover]:text-white [&_a:hover]:underline">
+              <Breadcrumb
+                items={[{ label: locale === "zh" ? "深夜智慧馆" : "Library", href: `/${locale}/library` }]}
+                locale={locale}
+              />
+            </div>
 
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-nord-accent uppercase tracking-widest mb-3">
-              <BookOpen className="w-3.5 h-3.5" />
-              {locale === "zh" ? "深夜智慧馆" : locale === "ms" ? "Perpustakaan" : locale === "ja" ? "深夜の知恵" : locale === "ko" ? "심야 지혜" : locale === "th" ? "คลังปัญญา" : locale === "es" ? "Biblioteca" : "Midnight Wisdom Library"}
-            </span>
-            <h1 className="text-3xl sm:text-4xl font-bold text-nord-text mb-4">
-              {locale === "zh" ? "44 个科学主题，陪你探索内心世界" : "44 science-backed topics for inner exploration"}
-            </h1>
-            <p className="text-nord-text/50 max-w-2xl mx-auto leading-relaxed">
-              {locale === "zh"
-                ? "每一篇文章都融合了睡眠科学、认知行为疗法（CBT）与正念研究的真知灼见，帮助你理解自己，找到平静。"
-                : "Every article blends sleep science, Cognitive Behavioral Therapy (CBT), and mindfulness research to help you understand yourself and find calm."}
-            </p>
+            <header className="text-center">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#b6e4cc] uppercase tracking-widest mb-3">
+                <BookOpen className="w-3.5 h-3.5" />
+                {locale === "zh" ? "深夜智慧馆" : locale === "ms" ? "Perpustakaan" : locale === "ja" ? "深夜の知恵" : locale === "ko" ? "심야 지혜" : locale === "th" ? "คลังปัญญา" : locale === "es" ? "Biblioteca" : "Midnight Wisdom Library"}
+              </span>
+              <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                {locale === "zh" ? "44 个科学主题，陪你探索内心世界" : "44 science-backed topics for inner exploration"}
+              </h1>
+              <p className="text-[#e7f0eb] max-w-2xl mx-auto leading-relaxed">
+                {locale === "zh"
+                  ? "每一篇文章都融合了睡眠科学、认知行为疗法（CBT）与正念研究的真知灼见，帮助你理解自己，找到平静。"
+                  : "Every article blends sleep science, Cognitive Behavioral Therapy (CBT), and mindfulness research to help you understand yourself and find calm."}
+              </p>
+            </header>
           </div>
 
           <LibraryFilterableGrid
