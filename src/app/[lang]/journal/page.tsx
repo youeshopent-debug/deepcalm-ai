@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import JournalReminder from "@/components/JournalReminder"
 import { useEffect, useState, type FormEvent } from "react"
 
 type Draft = { mood: string; note: string; next_step: string }
@@ -93,6 +94,7 @@ export default function Journal({ params }: { params: { lang: string } }) {
       setDraft(empty)
       setEditing(null)
       setNotice(label("已保存", "Saved"))
+      window.dispatchEvent(new Event("deepcalm:journal-changed"))
     })
   }
 
@@ -123,7 +125,8 @@ export default function Journal({ params }: { params: { lang: string } }) {
             await request("POST", { action: "logout" })
             setEntries([]); setDraft(empty); setEditing(null); setDeleting(null); setEmail(""); setStage("email")
           })}>{label("退出登录", "Sign out")}</button>
-          <form onSubmit={save} className="space-y-4">
+          <JournalReminder lang={params.lang} settings />
+          <form id="write-entry" onSubmit={save} className="space-y-4">
             <fieldset disabled={busy} className="space-y-4">
               <legend className="font-semibold">{editing ? label("编辑日记", "Edit entry") : label("写一条日记", "New entry")}</legend>
               <label className="block">{label("此刻的心情", "How do you feel?")}
@@ -159,6 +162,7 @@ export default function Journal({ params }: { params: { lang: string } }) {
                     if (editing === entry.id) { setEditing(null); setDraft(empty) }
                     setDeleting(null)
                     setNotice(label("已删除", "Deleted"))
+                    window.dispatchEvent(new Event("deepcalm:journal-changed"))
                   })}>{label("确认删除", "Confirm delete")}</button>
                   <button disabled={busy} className="underline" onClick={() => setDeleting(null)}>{label("取消", "Cancel")}</button>
                 </> : <>
