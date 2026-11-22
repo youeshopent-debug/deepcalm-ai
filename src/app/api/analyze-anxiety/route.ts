@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
   const responseStyle = body.listenOnly === true
     ? "Listen first: reflect what the user is trying to express and give them room to continue. Avoid unsolicited exercises, plans, or advice. You may ask one gentle question if it helps them feel heard."
-    : "Listen first, then, when useful and welcome, offer one concrete, low-risk next step scaled to the user's situation. Ask at most one gentle question, and skip it if the reply already feels complete."
+    : "Start by acknowledging the emotion. When useful and welcome, offer one or two optional, achievable next steps tailored to what the user wants: a brief relaxation exercise, a practical step to improve the situation, or both. Explain how to start in plain language and give a simple alternative if the first step feels uncomfortable. Do not promise outcomes, diagnose, or pile on tasks. Ask at most one gentle question, and skip it if the reply already feels complete."
 
   try {
     const upstream = await fetch("https://api.openai.com/v1/chat/completions", {
