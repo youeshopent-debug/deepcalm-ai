@@ -3,7 +3,7 @@ import { getTopics, getTopicsByCategory } from "@/content/topics"
 import { getDict, tt } from "@/lib/getDict"
 import Breadcrumb from "@/components/Breadcrumb"
 import LibraryFilterableGrid from "@/components/LibraryFilterableGrid"
-import { CATEGORY_ORDER, CATEGORY_NAMES, CATEGORY_INTROS, categoryIcon } from "@/lib/library-constants"
+import { CATEGORY_ORDER, CATEGORY_NAMES, categoryIcon } from "@/lib/library-constants"
 import { BookOpen } from "lucide-react"
 
 export function generateStaticParams() {
@@ -16,17 +16,18 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const locale = lang as Locale
   const dict = getDict(locale)
   const en = getDict("en")
+  const topicCount = getTopics(locale).length
   const localeTitles: Record<Locale, string> = {
-    zh: "心理健康百科 | 44 篇科学文章 - DeepCalm AI",
-    en: "Mental Health Encyclopedia | 44 Science-Backed Articles - DeepCalm AI",
-    ms: "Ensiklopedia Kesihatan Mental | 44 Artikel Saintifik - DeepCalm AI",
-    ja: "メンタルヘルス百科 | 44の科学記事 - DeepCalm AI",
-    ko: "정신 건강 백과 | 44개의 과학 기사 - DeepCalm AI",
-    th: "สารานุกรมสุขภาพจิต | 44 บทความวิทยาศาสตร์ - DeepCalm AI",
-    es: "Enciclopedia de Salud Mental | 44 Artículos Científicos - DeepCalm AI",
+    zh: `心理健康百科 | ${topicCount} 篇科学文章 - DeepCalm AI`,
+    en: `Mental Health Encyclopedia | ${topicCount} Science-Backed Articles - DeepCalm AI`,
+    ms: `Ensiklopedia Kesihatan Mental | ${topicCount} Artikel Saintifik - DeepCalm AI`,
+    ja: `メンタルヘルス百科 | ${topicCount}の科学記事 - DeepCalm AI`,
+    ko: `정신 건강 백과 | ${topicCount}개의 과학 기사 - DeepCalm AI`,
+    th: `สารานุกรมสุขภาพจิต | ${topicCount} บทความวิทยาศาสตร์ - DeepCalm AI`,
+    es: `Enciclopedia de Salud Mental | ${topicCount} Artículos Científicos - DeepCalm AI`,
   }
   const title = tt(dict, "library.title") || localeTitles[locale] || localeTitles.en
-  const desc = tt(dict, "library.desc") || tt(en, "library.desc") || "Explore 44 science-backed articles on sleep, anxiety, mindfulness, and emotional health."
+  const desc = tt(dict, "library.desc") || tt(en, "library.desc") || `Explore ${topicCount} science-backed articles on sleep, anxiety, mindfulness, and emotional health.`
   return {
     title,
     description: desc,
@@ -48,6 +49,7 @@ export default async function LibraryPage({ params }: { params: Promise<{ lang: 
   const dict = getDict(locale)
 
   const allTopics = getTopics(locale)
+  const topicCount = allTopics.length
   const categoriesWithTopics = CATEGORY_ORDER
     .map((cat) => ({ cat, topics: getTopicsByCategory(cat, locale) }))
     .filter(({ topics }) => topics.length > 0)
@@ -84,7 +86,7 @@ export default async function LibraryPage({ params }: { params: Promise<{ lang: 
                 {locale === "zh" ? "深夜智慧馆" : locale === "ms" ? "Perpustakaan" : locale === "ja" ? "深夜の知恵" : locale === "ko" ? "심야 지혜" : locale === "th" ? "คลังปัญญา" : locale === "es" ? "Biblioteca" : "Midnight Wisdom Library"}
               </span>
               <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                {locale === "zh" ? "44 个科学主题，陪你探索内心世界" : "44 science-backed topics for inner exploration"}
+                {locale === "zh" ? `${topicCount} 个科学主题，陪你探索内心世界` : `${topicCount} science-backed topics for inner exploration`}
               </h1>
               <p className="text-[#e7f0eb] max-w-2xl mx-auto leading-relaxed">
                 {locale === "zh"
