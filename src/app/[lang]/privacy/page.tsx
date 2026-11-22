@@ -38,6 +38,14 @@ export default async function PrivacyPage({ params }: { params: Promise<{ lang: 
   const { lang } = await params
   const dict = await getDict(lang as Locale)
   const p = dict.privacy
+  const zh = lang === "zh"
+  const journalAvailable = process.env.JOURNAL_SUPABASE_URL && process.env.JOURNAL_SUPABASE_PUBLIC_KEY
+  const journalNotice = zh
+    ? "使用情绪小日记时，你的登录邮箱、日记记录和提醒设置会储存在 Supabase。Resend 使用你的邮箱发送验证码和你主动开启的提醒。提醒邮件不含日记内容，日记也不会提供给 AI 聊天或用于生成海报。你可在日记页面删除记录、关闭邮件提醒。"
+    : "If you use Mood Journal, Supabase stores your sign-in email, journal entries and reminder preferences. Resend uses your email address to deliver sign-in codes and any reminders you choose to receive. Reminder emails contain no journal content. Journal entries are kept separate from AI chat and poster generation. You can delete entries and turn off reminders in the journal."
+  const journalExceptions = zh
+    ? "下文关于邮箱和第三方服务的一般说明，适用于情绪小日记以外的功能。"
+    : "The general statements below about email addresses and service providers apply to features outside Mood Journal."
 
   const sections = [
     { title: p.section1_title, desc: p.section1_desc },
@@ -60,6 +68,13 @@ export default async function PrivacyPage({ params }: { params: Promise<{ lang: 
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#ecf7ef]">{p.intro}</p>
         </header>
         <div className="divide-y divide-[#d6e3db] px-6 sm:px-12">
+          {journalAvailable && (
+            <section className="py-6 sm:py-8">
+              <h2 className="text-lg font-semibold sm:text-xl">{zh ? "情绪小日记与邮件提醒" : "Mood Journal and email reminders"}</h2>
+              <p className="mt-2 text-base leading-relaxed text-[#354c42]">{journalNotice}</p>
+              <p className="mt-2 text-base leading-relaxed text-[#354c42]">{journalExceptions}</p>
+            </section>
+          )}
           {sections.map(({ title, desc }) => (
             <section key={title} className="py-6 sm:py-8">
               <h2 className="text-lg font-semibold sm:text-xl">{title}</h2>

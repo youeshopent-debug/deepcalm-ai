@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import JournalReminder from "@/components/JournalReminder"
 import { useEffect, useState } from "react"
 import { ArrowRight, BedDouble, BookOpen, MessageCircleHeart } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
@@ -17,7 +18,7 @@ const COPY = {
   es: ["Relájate antes de dormir y tómate un momento para ti.", "Relájate en 1 minuto", "Hablemos", "Calculadora de sueño"],
 } as const
 
-export default function ShortHome({ title }: { title: string }) {
+export default function ShortHome({ title, journalAvailable }: { title: string; journalAvailable?: boolean }) {
   const { locale, tt } = useLanguage()
   const [relaxing, setRelaxing] = useState(false)
   const [intro, relax, talk, sleep] = COPY[locale] || COPY.en
@@ -66,6 +67,7 @@ export default function ShortHome({ title }: { title: string }) {
           </Link>
         ))}
       </nav>
+      {journalAvailable && <div className="mt-4 empty:hidden"><JournalReminder lang={locale} /></div>}
       {relaxing && <BreathingGuide onClose={() => setRelaxing(false)} />}
     </main>
   )
