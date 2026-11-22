@@ -1,7 +1,7 @@
 "use client"
 
 import { useLanguage } from "@/context/LanguageContext"
-import { toPng } from "html-to-image"
+import { renderHealingPoster } from "@/lib/healing-poster"
 import {
   Heart,
   ImageDown,
@@ -100,11 +100,12 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [showWelcome, setShowWelcome] = useState(true)
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const [showShareSuccess, setShowShareSuccess] = useState(false)
+  const [posterUrl, setPosterUrl] = useState<string | null>(null)
+  const [posterError, setPosterError] = useState(false)
   const [returnVisitor, setReturnVisitor] = useState<MemoryData | null>(null)
   const memorySavedRef = useRef(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const shareRef = useRef<HTMLDivElement>(null)
+  const posterDialogRef = useRef<HTMLDialogElement>(null)
   const initialPromptConsumedRef = useRef(false)
 
   /** Load memory on mount */
@@ -129,7 +130,6 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
     setInput("")
     setChatUnavailable(false)
     setShowWelcome(false)
-    setShowShareSuccess(false)
 
     const userMsg: Message = { role: "user", content: text }
     setMessages((prev) => [...prev, userMsg])
@@ -179,50 +179,24 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPrompt])
 
-  /* ── Share (existing) ── */
+  const posterLabel = tt("common.healPoster")
+  const downloadLabel = locale === "zh" ? "下载 PNG" : "Download PNG"
+  const closePosterLabel = locale === "zh" ? "关闭预览" : "Close preview"
 
-  const handleShare = async () => {
-    const lastCounselorMsg = [...messages].reverse().find((m) => m.role === "counselor")
-    if (!lastCounselorMsg) return
-    if (!shareRef.current) return
+  function handleShare() {
+    const dialog = posterDialogRef.current
+    if (!dialog || dialog.open) return
 
+    setPosterError(false)
     try {
-      shareRef.current.style.display = "block"
-      await new Promise((r) => setTimeout(r, 100))
-
-      const dataUrl = await toPng(shareRef.current, {
-        quality: 0.95,
-        pixelRatio: 2,
-        backgroundColor: "#0a0e1a",
-      })
-
-      shareRef.current.style.display = "none"
-
-      const blob = await (await fetch(dataUrl)).blob()
-      const file = new File([blob], `deepcalm-healing-${Date.now()}.png`, { type: "image/png" })
-
-      if (navigator.share && navigator.canShare?.({ files: [file] })) {
-        try {
-          await navigator.share({ files: [file], title: "DeepCalm Healing" })
-          setShowShareSuccess(true)
-          setTimeout(() => setShowShareSuccess(false), 3000)
-          return
-        } catch {}
-      }
-
-      const link = document.createElement("a")
-      link.download = file.name
-      link.href = dataUrl
-      link.click()
-
-      setShowShareSuccess(true)
-      setTimeout(() => setShowShareSuccess(false), 3000)
+      const lastReply = [...messages].reverse().find((message) => message.role === "counselor")
+      setPosterUrl(renderHealingPoster(lastReply?.content, locale))
+      dialog.showModal()
     } catch {
-      if (shareRef.current) shareRef.current.style.display = "none"
+      setPosterUrl(null)
+      setPosterError(true)
     }
   }
-
-  const lastCounselorMsg = [...messages].reverse().find((m) => m.role === "counselor")
 
   return (
     <>
@@ -370,26 +344,21 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
           )}
         </div>
 
-        {/* Share actions */}
-        {!showWelcome && lastCounselorMsg && (
-          <div className="px-4 sm:px-6 pb-1 shrink-0">
-            <div className="flex items-center gap-2 justify-center flex-wrap">
-              <button
-                onClick={handleShare}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-dc-muted hover:text-dc-accent bg-dc-surface/40 hover:bg-dc-accent/10 rounded-full transition-all duration-300"
-              >
-                <ImageDown className="w-3.5 h-3.5" />
-                <span>{tt("common.healPoster")}</span>
-              </button>
-
-              {showShareSuccess && (
-                <span className="text-xs text-emerald-400 animate-fade-in-glow">
-                  ✅ {tt("common.healPosterSaved")}
-                </span>
-              )}
-            </div>
-          </div>
-        )}
+        <div className="shrink-0 px-4 pb-1 text-center sm:px-6">
+          <button
+            type="button"
+            onClick={handleShare}
+            className="mx-auto inline-flex min-h-10 items-center gap-2 rounded-full border border-[#719486] bg-[#203b33] px-4 text-sm font-medium text-[#f4faf6] transition-colors hover:bg-[#29473d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bdebd8]"
+          >
+            <ImageDown aria-hidden="true" className="h-4 w-4" />
+            {posterLabel}
+          </button>
+          {posterError && (
+            <p role="alert" className="mt-2 text-sm text-dc-text">
+              {locale === "zh" ? "海报暂时生成失败，请再试一次。" : "The poster could not be generated. Please try again."}
+            </p>
+          )}
+        </div>
 
         {chatUnavailable && (
           <p role="status" className="px-4 text-sm text-dc-muted sm:px-6">
@@ -436,89 +405,32 @@ export default function AiCounselor({ initialPrompt, onClose, compact = false }:
         </div>
       </div>
 
-      {/* Share Poster (hidden) */}
-      <div
-        ref={shareRef}
-        className="hidden fixed"
-        style={{
-          width: "480px",
-          padding: "32px",
-          background: "linear-gradient(135deg, #0a0e1a 0%, #111827 50%, #1a2238 100%)",
-          borderRadius: "24px",
-          left: "-9999px",
-          top: "0",
-        }}
+      <dialog
+        ref={posterDialogRef}
+        onClose={() => setPosterUrl(null)}
+        aria-label={posterLabel}
+        className="m-auto max-h-[calc(100dvh-2rem)] w-[min(26rem,calc(100%-2rem))] max-w-none overflow-y-auto rounded-2xl border border-[#719486] bg-[#132723] p-4 text-[#f4faf6] shadow-2xl backdrop:bg-black/70 sm:p-5"
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(ellipse at 50% 0%, rgba(126,184,255,0.06), transparent 70%)",
-            borderRadius: "24px",
-            pointerEvents: "none",
-          }}
-        />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              marginBottom: "24px",
-            }}
-          >
-            <div
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, rgba(126,184,255,0.3), transparent)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span style={{ fontSize: "20px" }}>🌙</span>
-            </div>
-            <span style={{ color: "#7EB8FF", fontSize: "14px", fontWeight: 600, letterSpacing: "0.5px" }}>
-              DeepCalm · Healing
-            </span>
-          </div>
-          <p
-            style={{
-              color: "#E8EDF5",
-              fontSize: "22px",
-              lineHeight: 1.7,
-              fontWeight: 400,
-              fontStyle: "italic",
-              marginBottom: "32px",
-            }}
-          >
-            &ldquo;{lastCounselorMsg?.content || ""}&rdquo;
-          </p>
-          <div
-            style={{
-              width: "48px",
-              height: "3px",
-              background: "linear-gradient(90deg, #7EB8FF, transparent)",
-              borderRadius: "2px",
-              marginBottom: "20px",
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <span style={{ color: "rgba(180,200,230,0.5)", fontSize: "13px" }}>
-              deepcalm-ai.com/{locale}
-            </span>
-            <span style={{ color: "rgba(126,184,255,0.4)", fontSize: "20px" }}>✦</span>
-          </div>
+        <div className="mb-3 flex items-center justify-between gap-4">
+          <h2 className="text-base font-semibold">{locale === "zh" ? "治愈海报预览" : "Healing poster preview"}</h2>
+          <form method="dialog">
+            <button type="submit" aria-label={closePosterLabel} className="grid h-10 w-10 place-items-center rounded-full hover:bg-[#29473d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#bdebd8]">
+              <X aria-hidden="true" className="h-5 w-5" />
+            </button>
+          </form>
         </div>
-      </div>
+        {posterUrl && (
+          <>
+            {/* The image is a local Canvas export. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={posterUrl} width={1080} height={1350} alt={locale === "zh" ? "DeepCalm 治愈海报" : "DeepCalm healing poster"} className="mx-auto h-auto max-h-[58dvh] w-auto max-w-full rounded-lg object-contain" />
+            <a href={posterUrl} download="deepcalm-healing-poster.png" className="mt-4 flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#bdebd8] px-4 text-sm font-semibold text-[#132723] hover:bg-[#d4f3e6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bdebd8]">
+              <ImageDown aria-hidden="true" className="h-4 w-4" />
+              {downloadLabel}
+            </a>
+          </>
+        )}
+      </dialog>
     </>
   )
 }
