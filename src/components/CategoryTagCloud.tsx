@@ -27,6 +27,10 @@ const ALL_LABEL: Record<Locale, string> = {
   es: "Todas",
 }
 
+const BUTTON_CLASS = "inline-flex items-center gap-1.5 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+const ACTIVE_CLASS = "border-[#b6e4cc] bg-[#183d2f] text-white"
+const INACTIVE_CLASS = "border-[#d8e5dd] bg-[#f5faf7] text-[#17382b] hover:border-[#a6d1ba] hover:bg-[#dcefe4]"
+
 export default function CategoryTagCloud({ categories, activeCategory, onChange, locale }: CategoryTagCloudProps) {
   const allLabel = ALL_LABEL[locale] || ALL_LABEL.en
 
@@ -37,11 +41,8 @@ export default function CategoryTagCloud({ categories, activeCategory, onChange,
     <div className="flex flex-wrap justify-center gap-2 mb-12">
       <button
         onClick={handleAll}
-        className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all border ${
-          activeCategory === null
-            ? "bg-nord-accent text-white border-nord-accent shadow-lg shadow-nord-accent/20"
-            : "bg-nord-card/50 text-nord-text/50 border-nord-border/20 hover:border-nord-accent/30 hover:text-nord-text/70"
-        }`}
+        aria-pressed={activeCategory === null}
+        className={`${BUTTON_CLASS} ${activeCategory === null ? ACTIVE_CLASS : INACTIVE_CLASS}`}
       >
         {allLabel}
       </button>
@@ -52,15 +53,12 @@ export default function CategoryTagCloud({ categories, activeCategory, onChange,
           <button
             key={cat.slug}
             onClick={() => handleCategory(cat.slug)}
-            className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all border ${
-              isActive
-                ? "bg-nord-accent text-white border-nord-accent shadow-lg shadow-nord-accent/20"
-                : "bg-nord-card/50 text-nord-text/50 border-nord-border/20 hover:border-nord-accent/30 hover:text-nord-text/70"
-            }`}
+            aria-pressed={isActive}
+            className={`${BUTTON_CLASS} ${isActive ? ACTIVE_CLASS : INACTIVE_CLASS}`}
           >
             <span className="text-base leading-none">{cat.icon}</span>
             <span>{cat.name}</span>
-            <span className={`text-xs ml-0.5 ${isActive ? "text-white/70" : "text-gray-400"}`}>
+            <span className="ml-0.5 text-xs">
               ({cat.count})
             </span>
           </button>
