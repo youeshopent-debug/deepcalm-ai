@@ -73,14 +73,16 @@ export default function LibraryFilterableGrid({
           const intro = CATEGORY_INTROS[cat]?.[locale] || ""
           return (
             <div key={cat} id={`cat-${cat}`}>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-xl">{icon}</span>
-                <h2 className="text-xl font-bold text-nord-text">{catName}</h2>
-                <span className="text-xs text-nord-text/30 font-mono">({topics.length})</span>
-              </div>
-              {intro && (
-                <p className="text-sm text-nord-text/40 mb-6 ml-9 max-w-2xl">{intro}</p>
-              )}
+              <header className="mb-5 rounded-xl bg-[#11251e] px-4 py-3 text-[#e7f0eb] sm:px-5">
+                <div className="flex items-center gap-3">
+                  <span aria-hidden="true" className="text-xl">{icon}</span>
+                  <h2 className="text-xl font-bold text-white">{catName}</h2>
+                  <span className="text-xs font-mono">({topics.length})</span>
+                </div>
+                {intro && (
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed">{intro}</p>
+                )}
+              </header>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {topics.map((topic) => (
                   <LibraryCard
