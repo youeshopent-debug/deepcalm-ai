@@ -107,7 +107,7 @@ export default function LibrarySearchBar({ topics, locale }: LibrarySearchBarPro
   return (
     <div ref={containerRef} className="relative w-full max-w-xl mx-auto mb-10">
       <div className="relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-nord-text/30 pointer-events-none" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#40564b] pointer-events-none" />
         <input
           ref={inputRef}
           type="text"
@@ -115,13 +115,13 @@ export default function LibrarySearchBar({ topics, locale }: LibrarySearchBarPro
           onChange={handleChange}
           onFocus={handleFocus}
           placeholder={placeholder}
-          className="w-full h-12 pl-11 pr-10 bg-nord-card/80 border border-nord-border/30 rounded-xl text-sm text-nord-text placeholder:text-nord-text/25 outline-none focus:border-nord-accent/50 focus:bg-nord-card transition-all"
+          className="w-full h-12 pl-11 pr-10 bg-[#f5faf7] border border-[#aac1b4] rounded-xl text-sm text-[#17382b] placeholder:text-[#40564b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all"
           aria-label={placeholder}
         />
         {query && (
           <button
             onClick={handleClear}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-nord-text/30 hover:text-nord-text/60 hover:bg-nord-bg/50 transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-[#40564b] hover:text-[#17382b] hover:bg-nord-bg/50 transition-colors"
             aria-label="Clear search"
           >
             <X className="w-4 h-4" />
@@ -130,12 +130,12 @@ export default function LibrarySearchBar({ topics, locale }: LibrarySearchBarPro
       </div>
 
       {showResults && query.trim() && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-nord-card border border-nord-border/30 rounded-xl shadow-2xl shadow-black/20 backdrop-blur-xl z-50 max-h-[70vh] overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-[#f5faf7] border border-[#aac1b4] rounded-xl shadow-2xl shadow-black/20 backdrop-blur-xl z-50 max-h-[70vh] overflow-y-auto">
           {results.length > 0 ? (
             <div className="p-4 space-y-3">
               <div className="flex items-center gap-2 mb-2">
                 <BookOpen className="w-3.5 h-3.5 text-nord-accent/60" />
-                <span className="text-xs text-nord-text/40">
+                <span className="text-xs text-[#40564b]">
                   {results.length}
                   {locale === "zh" ? " 个结果" : locale === "ja" ? " 件見つかりました" : ` result${results.length !== 1 ? "s" : ""}`}
                 </span>
@@ -155,7 +155,7 @@ export default function LibrarySearchBar({ topics, locale }: LibrarySearchBarPro
             </div>
           ) : (
             <div className="p-8 text-center">
-              <p className="text-sm text-nord-text/40">{noResultsText}</p>
+              <p className="text-sm text-[#40564b]">{noResultsText}</p>
             </div>
           )}
         </div>
