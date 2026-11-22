@@ -111,8 +111,8 @@ export default function Journal({ params }: { params: { lang: string } }) {
             <label className="block">{label("邮箱", "Email")}
               <input className={field} type="email" required readOnly={stage === "code"} autoComplete="email" maxLength={254} value={email} onChange={e => setEmail(e.target.value)} />
             </label>
-            {stage === "code" && <label className="block">{label("六位验证码", "Six-digit code")}
-              <input className={field} inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" required maxLength={6} value={code} onChange={e => setCode(e.target.value)} />
+            {stage === "code" && <label className="block">{label("八位验证码", "Eight-digit code")}
+              <input className={field} inputMode="numeric" pattern="[0-9]{8}" autoComplete="one-time-code" required maxLength={8} value={code} onChange={e => setCode(e.target.value)} />
             </label>}
             <button className={button} disabled={busy}>{stage === "email" ? label("发送验证码", "Send code") : label("验证并登录", "Verify and sign in")}</button>
             {stage === "code" && <button type="button" className="ml-4 underline" disabled={busy} onClick={() => { setStage("email"); setCode(""); setNotice(""); setError("") }}>{label("返回邮箱步骤", "Back to email")}</button>}
